@@ -2913,26 +2913,67 @@ function renderPadletPosts() {
 }
 
 window.tempPadletFile = null;
-function handlePadletFileSelect(e) {
+
+// Kompresi gambar client-side agar upload ringan, cepat, dan tidak memenuhi kuota
+function compressImageFile(file, maxWidth = 1000, quality = 0.75) {
+  return new Promise((resolve) => {
+    if (!file || !file.type || !file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (e) => resolve({ dataUrl: e.target.result, size: file.size });
+      reader.onerror = () => resolve({ dataUrl: '', size: 0 });
+      reader.readAsDataURL(file);
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        let w = img.width;
+        let h = img.height;
+        if (w > maxWidth || h > maxWidth) {
+          if (w > h) {
+            h = Math.round((h * maxWidth) / w);
+            w = maxWidth;
+          } else {
+            w = Math.round((w * maxWidth) / h);
+            h = maxWidth;
+          }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        const dataUrl = canvas.toDataURL('image/jpeg', quality);
+        const approxSize = Math.round((dataUrl.length * 3) / 4);
+        resolve({ dataUrl, size: approxSize });
+      };
+      img.onerror = () => resolve({ dataUrl: event.target.result, size: file.size });
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+async function handlePadletFileSelect(e) {
   const file = e.target.files[0];
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(evt) {
-    window.tempPadletFile = {
-      name: file.name,
-      dataUrl: evt.target.result
-    };
-    const prev = document.getElementById('padlet-file-preview');
-    const thumb = document.getElementById('padlet-preview-thumb');
-    const nameEl = document.getElementById('padlet-file-name');
-    if (prev && thumb && nameEl) {
-      thumb.src = evt.target.result;
-      nameEl.innerText = file.name;
-      prev.classList.remove('hidden');
-    }
-    window.soundManager.playPop();
+
+  const { dataUrl, size } = await compressImageFile(file, 900, 0.75);
+  window.tempPadletFile = {
+    name: file.name,
+    dataUrl: dataUrl,
+    size: size
   };
-  reader.readAsDataURL(file);
+  const prev = document.getElementById('padlet-file-preview');
+  const thumb = document.getElementById('padlet-preview-thumb');
+  const nameEl = document.getElementById('padlet-file-name');
+  if (prev && thumb && nameEl) {
+    thumb.src = dataUrl;
+    nameEl.innerText = file.name;
+    prev.classList.remove('hidden');
+  }
+  window.soundManager.playPop();
 }
 
 function openNewPostModal(defaultGroup) {
@@ -3660,46 +3701,45 @@ function closeImageLightbox(e) {
 
 window.tempKaryaUpload = null;
 
-function handleKaryaFileSelect(e) {
+async function handleKaryaFileSelect(e) {
   const file = e.target.files[0];
   if (!file) return;
 
-  const reader = new FileReader();
-  reader.onload = function(event) {
-    const sizeKB = Math.round(file.size / 1024);
-    const sizeStr = sizeKB > 1024 ? `${(sizeKB / 1024).toFixed(1)} MB` : `${sizeKB} KB`;
+  const btn = document.getElementById('btn-submit-karya');
+  const btnText = document.getElementById('btn-submit-karya-text');
+  if (btn) btn.disabled = true;
+  if (btnText) btnText.innerText = '⏳ Mengoptimalkan foto...';
 
-    window.tempKaryaUpload = {
-      file: file,
-      name: file.name,
-      dataUrl: event.target.result,
-      size: file.size,
-      sizeStr: sizeStr,
-      type: file.type || 'image/jpeg'
-    };
+  const { dataUrl, size } = await compressImageFile(file, 1000, 0.75);
+  const sizeKB = Math.round(size / 1024);
+  const sizeStr = sizeKB > 1024 ? `${(sizeKB / 1024).toFixed(1)} MB` : `${sizeKB} KB`;
 
-    const previewContainer = document.getElementById('karya-preview-container');
-    const previewImg = document.getElementById('karya-preview-img');
-    const nameEl = document.getElementById('karya-file-name');
-    const sizeEl = document.getElementById('karya-file-size');
-    const notifEl = document.getElementById('karya-submitted-notification');
-
-    if (previewContainer && previewImg) {
-      previewImg.src = event.target.result;
-      if (nameEl) nameEl.innerText = file.name;
-      if (sizeEl) sizeEl.innerText = sizeStr;
-      previewContainer.classList.remove('hidden');
-      if (notifEl) notifEl.classList.add('hidden');
-      window.soundManager.playPop();
-
-      // Reset button state
-      const btn = document.getElementById('btn-submit-karya');
-      const btnText = document.getElementById('btn-submit-karya-text');
-      if (btn) btn.disabled = false;
-      if (btnText) btnText.innerText = 'Submit / Kirim Foto Karyaku ke Database';
-    }
+  window.tempKaryaUpload = {
+    file: file,
+    name: file.name,
+    dataUrl: dataUrl,
+    size: size,
+    sizeStr: sizeStr,
+    type: 'image/jpeg'
   };
-  reader.readAsDataURL(file);
+
+  const previewContainer = document.getElementById('karya-preview-container');
+  const previewImg = document.getElementById('karya-preview-img');
+  const nameEl = document.getElementById('karya-file-name');
+  const sizeEl = document.getElementById('karya-file-size');
+  const notifEl = document.getElementById('karya-submitted-notification');
+
+  if (previewContainer && previewImg) {
+    previewImg.src = dataUrl;
+    if (nameEl) nameEl.innerText = file.name;
+    if (sizeEl) sizeEl.innerText = sizeStr;
+    previewContainer.classList.remove('hidden');
+    if (notifEl) notifEl.classList.add('hidden');
+    window.soundManager.playPop();
+
+    if (btn) btn.disabled = false;
+    if (btnText) btnText.innerText = 'Submit / Kirim Foto Karyaku ke Database';
+  }
 }
 
 // Alias untuk kompatibilitas
@@ -4720,5 +4760,86 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Update DB status badge saat inisialisasi
+  updateDbStatusBadge();
 });
+
+/* ============================================================
+   SUPABASE CLOUD DATABASE DIAGNOSTIC MODAL & BADGE
+   ============================================================ */
+function updateDbStatusBadge() {
+  const pill = document.getElementById('supabase-status-pill');
+  const text = document.getElementById('supabase-status-text');
+  const modalStatus = document.getElementById('modal-db-status');
+  if (!pill) return;
+
+  const connected = window.RBC_SUPABASE && window.RBC_SUPABASE.isConnected();
+  if (connected) {
+    pill.className = 'btn-playful flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800 shadow-sm hover:bg-emerald-100 transition-colors';
+    if (text) text.innerText = 'Cloud DB Aktif';
+    if (modalStatus) {
+      modalStatus.className = 'px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-black';
+      modalStatus.innerText = 'Aktif & Terhubung ✅';
+    }
+  } else {
+    pill.className = 'btn-playful flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl bg-amber-50 border border-amber-200 text-xs font-bold text-amber-800 shadow-sm hover:bg-amber-100 transition-colors';
+    if (text) text.innerText = 'Mode Lokal';
+    if (modalStatus) {
+      modalStatus.className = 'px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-black';
+      modalStatus.innerText = 'Lokal / Offline ⚠️';
+    }
+  }
+}
+
+window.updateDbStatusBadge = updateDbStatusBadge;
+
+function openDbStatusModal() {
+  updateDbStatusBadge();
+  const modal = document.getElementById('supabase-status-modal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeDbStatusModal() {
+  const modal = document.getElementById('supabase-status-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+async function pingSupabaseDb() {
+  const resultBox = document.getElementById('modal-ping-result');
+  const pingBtn = document.getElementById('btn-ping-db');
+  if (pingBtn) pingBtn.disabled = true;
+  if (resultBox) {
+    resultBox.classList.remove('hidden');
+    resultBox.className = 'p-3 rounded-2xl text-xs font-medium bg-sky-50 text-sky-800 border border-sky-200 animate-pulse';
+    resultBox.innerHTML = '⏳ Menghubungi Supabase Cloud (udhoqefwcrxesvuoxlyq)...';
+  }
+
+  if (window.RBC_SUPABASE) {
+    const res = await window.RBC_SUPABASE.testConnection();
+    if (res.success) {
+      resultBox.className = 'p-3 rounded-2xl text-xs font-medium bg-emerald-50 text-emerald-900 border border-emerald-300';
+      resultBox.innerHTML = `
+        <div class="font-bold flex items-center gap-1.5 text-emerald-900 pb-1">
+          <span>✅</span> <span>Koneksi Supabase Sukses!</span>
+        </div>
+        <p>${res.message}</p>
+        <div class="mt-1 text-[11px] text-emerald-700">Setiap form yang kamu submit akan langsung tersimpan ke cloud.</div>
+      `;
+      window.soundManager.playCorrect();
+    } else {
+      resultBox.className = 'p-3 rounded-2xl text-xs font-medium bg-rose-50 text-rose-900 border border-rose-300';
+      resultBox.innerHTML = `
+        <div class="font-bold flex items-center gap-1.5 text-rose-900 pb-1">
+          <span>❌</span> <span>Koneksi Belum Berhasil</span>
+        </div>
+        <p>${res.message}</p>
+      `;
+      window.soundManager.playWrong();
+    }
+  }
+  if (pingBtn) pingBtn.disabled = false;
+  updateDbStatusBadge();
+}
+
 

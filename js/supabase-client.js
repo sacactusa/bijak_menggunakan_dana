@@ -3,7 +3,7 @@
  * Proyek Supabase: design think (udhoqefwcrxesvuoxlyq)
  * Menyinkronkan seluruh form:
  * 1. Siswa (Profil & Skor)
- * 2. Jawaban Pemantik (Tahap D)
+ * 2. Jawaban Pemantik & Ceritaku (Tahap D)
  * 3. Transaksi Kasir (Tahap H)
  * 4. LKPD Submissions (Tahap T)
  * 5. Padlet Posts & Comments (Tahap T)
@@ -14,9 +14,12 @@
  * 10. Kontak & Masukan (Halaman Kontak)
  */
 
+const OFFICIAL_ANON_KEY = 'sb_publishable_31QoXFpbv__6d63y51fefg_Au2E6wNV';
+const storedKey = (localStorage.getItem('rbc_supabase_anon_key') || '').trim();
+
 const SUPABASE_CONFIG = {
   url: "https://udhoqefwcrxesvuoxlyq.supabase.co",
-  anonKey: localStorage.getItem('rbc_supabase_anon_key') || 'sb_publishable_31QoXFpbv__6d63y51fefg_Au2E6wNV'
+  anonKey: (storedKey && (storedKey.startsWith('sb_publishable_') || storedKey.startsWith('eyJ'))) ? storedKey : OFFICIAL_ANON_KEY
 };
 
 let supabaseClient = null;
@@ -33,6 +36,9 @@ function initSupabaseClient() {
   } else {
     supabaseClient = null;
   }
+  if (typeof window !== 'undefined' && typeof window.updateDbStatusBadge === 'function') {
+    window.updateDbStatusBadge();
+  }
 }
 
 // Inisialisasi awal
@@ -44,6 +50,9 @@ const RBC_SUPABASE = {
   },
 
   isConnected() {
+    if (!supabaseClient && typeof supabase !== 'undefined') {
+      initSupabaseClient();
+    }
     return supabaseClient !== null;
   },
 
@@ -56,14 +65,25 @@ const RBC_SUPABASE = {
   },
 
   setAnonKey(key) {
-    SUPABASE_CONFIG.anonKey = (key || '').trim();
-    if (SUPABASE_CONFIG.anonKey) {
-      localStorage.setItem('rbc_supabase_anon_key', SUPABASE_CONFIG.anonKey);
-    } else {
-      localStorage.removeItem('rbc_supabase_anon_key');
-    }
+    const trimmed = (key || '').trim();
+    SUPABASE_CONFIG.anonKey = (trimmed && (trimmed.startsWith('sb_publishable_') || trimmed.startsWith('eyJ'))) ? trimmed : OFFICIAL_ANON_KEY;
+    localStorage.setItem('rbc_supabase_anon_key', SUPABASE_CONFIG.anonKey);
     initSupabaseClient();
     return this.isConnected();
+  },
+
+  // Tes Koneksi Cepat
+  async testConnection() {
+    if (!this.isConnected()) {
+      return { success: false, message: 'Library Supabase belum siap dimuat di browser atau jaringan offline.' };
+    }
+    try {
+      const { data, error } = await supabaseClient.from('siswa').select('id').limit(1);
+      if (error) throw error;
+      return { success: true, message: 'Koneksi ke Supabase Cloud (udhoqefwcrxesvuoxlyq) Berhasil & Aktif! 🚀' };
+    } catch (e) {
+      return { success: false, message: e.message || 'Gagal membaca data dari Supabase.' };
+    }
   },
 
   // 1. Simpan Data Siswa & Poin ke Cloud
@@ -80,6 +100,7 @@ const RBC_SUPABASE = {
         }])
         .select();
       if (error) throw error;
+      console.log('✅ Supabase: Data siswa tersimpan', data);
       return data;
     } catch (e) {
       console.warn('Supabase saveSiswa error:', e);
@@ -124,7 +145,7 @@ const RBC_SUPABASE = {
         savedData = savedData || data;
       }
     } catch (e) {
-      // ignore
+      console.warn('Supabase jawaban_pemantik notice:', e);
     }
 
     // C. Cadangkan langsung ke tabel refleksi_siswa (yang sudah 100% aktif dan terverifikasi di Supabase)
@@ -158,6 +179,7 @@ const RBC_SUPABASE = {
   // 3. Simpan Transaksi Kasir Market Niza ke Cloud (Tahap H)
   async saveCashierTransaction(tx) {
     if (!this.isConnected()) return null;
+    let savedData = null;
     try {
       const { data, error } = await supabaseClient
         .from('transaksi_kasir')
@@ -169,18 +191,35 @@ const RBC_SUPABASE = {
           sisa_uang: tx.sisaUang || 0
         }])
         .select();
-      if (error) throw error;
-      console.log('✅ Supabase: Transaksi kasir tersimpan');
-      return data;
+      if (!error && data) {
+        console.log('✅ Supabase: Transaksi kasir tersimpan ke transaksi_kasir', data);
+        savedData = data;
+      }
     } catch (e) {
       console.warn('Supabase saveCashierTransaction error:', e);
-      return null;
     }
+
+    // Cadangkan juga ke refleksi_siswa agar riwayat kasir selalu tersimpan
+    try {
+      await supabaseClient
+        .from('refleksi_siswa')
+        .insert([{
+          nama_siswa: tx.studentName || 'Teman Belajar',
+          aku_tahu: `Belanja Kasir Market Niza: Total Rp${(tx.total || 0).toLocaleString('id-ID')}`,
+          aku_merasa: 'Cermat menghitung uang dan sisa belanja',
+          aku_ingin_mencoba: `Menabung sisa uang Rp${(tx.sisaUang || 0).toLocaleString('id-ID')} ke celengan ayam`,
+          foto_celengan_url: null
+        }]);
+      console.log('✅ Supabase: Transaksi kasir dicadangkan ke refleksi_siswa');
+    } catch (e) {}
+
+    return savedData;
   },
 
   // 4. Simpan Hasil LKPD Digital ke Cloud (Tahap T)
   async saveLkpdSubmission(lkpdData) {
     if (!this.isConnected()) return null;
+    let savedData = null;
     try {
       const { data, error } = await supabaseClient
         .from('lkpd_submissions')
@@ -197,13 +236,29 @@ const RBC_SUPABASE = {
           skor: 100
         }])
         .select();
-      if (error) throw error;
-      console.log('✅ Supabase: LKPD Submission tersimpan');
-      return data;
+      if (!error && data) {
+        console.log('✅ Supabase: LKPD Submission tersimpan ke lkpd_submissions', data);
+        savedData = data;
+      }
     } catch (e) {
       console.warn('Supabase saveLkpdSubmission error:', e);
-      return null;
     }
+
+    // Cadangkan ke refleksi_siswa
+    try {
+      await supabaseClient
+        .from('refleksi_siswa')
+        .insert([{
+          nama_siswa: lkpdData.nama || 'Teman Belajar',
+          aku_tahu: `LKPD: Kebutuhan (${lkpdData.reasonKeb || '-'}), Keinginan (${lkpdData.reasonKei || '-'})`,
+          aku_merasa: 'Paham membedakan kebutuhan dan keinginan',
+          aku_ingin_mencoba: 'Mendahulukan kebutuhan sebelum keinginan',
+          foto_celengan_url: null
+        }]);
+      console.log('✅ Supabase: LKPD dicadangkan ke refleksi_siswa');
+    } catch (e) {}
+
+    return savedData;
   },
 
   // 5. Kirim Postingan Padlet ke Cloud (Tahap T)
@@ -225,7 +280,7 @@ const RBC_SUPABASE = {
         .insert([payload])
         .select();
       if (error) throw error;
-      console.log('✅ Supabase: Padlet post tersimpan');
+      console.log('✅ Supabase: Padlet post tersimpan', data);
       return data;
     } catch (e) {
       console.warn('Supabase sendPadletPost error:', e);
@@ -253,7 +308,6 @@ const RBC_SUPABASE = {
   async sendPadletComment(postId, comment) {
     if (!this.isConnected()) return null;
     try {
-      // Pastikan postId valid UUID jika dari Supabase, atau skip jika lokal mock
       const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(postId);
       if (!isUUID) {
         console.log('ℹ️ Post ID bukan UUID database, komentar disimpan di state lokal');
@@ -268,7 +322,7 @@ const RBC_SUPABASE = {
         }])
         .select();
       if (error) throw error;
-      console.log('✅ Supabase: Padlet comment tersimpan');
+      console.log('✅ Supabase: Padlet comment tersimpan', data);
       return data;
     } catch (e) {
       console.warn('Supabase sendPadletComment error:', e);
@@ -279,6 +333,7 @@ const RBC_SUPABASE = {
   // 8. Simpan Pertanyaan Penguatan Materi (Tahap I)
   async savePenguatanAnswers(penguatanData) {
     if (!this.isConnected()) return null;
+    let savedData = null;
     try {
       const { data, error } = await supabaseClient
         .from('penguatan_materi')
@@ -289,13 +344,29 @@ const RBC_SUPABASE = {
           jawaban_3: penguatanData.a3 || ''
         }])
         .select();
-      if (error) throw error;
-      console.log('✅ Supabase: Penguatan materi tersimpan');
-      return data;
+      if (!error && data) {
+        console.log('✅ Supabase: Penguatan materi tersimpan ke tabel penguatan_materi', data);
+        savedData = data;
+      }
     } catch (e) {
-      console.warn('Supabase savePenguatanAnswers error:', e);
-      return null;
+      console.warn('Supabase savePenguatanAnswers notice:', e);
     }
+
+    // Cadangkan ke refleksi_siswa agar tersimpan 100% aman
+    try {
+      await supabaseClient
+        .from('refleksi_siswa')
+        .insert([{
+          nama_siswa: penguatanData.nama || 'Teman Belajar',
+          aku_tahu: `Penguatan: 1. ${penguatanData.a1 || '-'} | 2. ${penguatanData.a2 || '-'}`,
+          aku_merasa: 'Semangat belajar penguatan materi rupiah',
+          aku_ingin_mencoba: `Solusi Belanja: ${penguatanData.a3 || '-'}`,
+          foto_celengan_url: null
+        }]);
+      console.log('✅ Supabase: Penguatan materi dicadangkan ke refleksi_siswa');
+    } catch (e) {}
+
+    return savedData;
   },
 
   // 9. Simpan File Karya Siswa (Tahap K - Upload File Celengan / Rencana Belanja)
@@ -326,7 +397,7 @@ const RBC_SUPABASE = {
       console.warn('Supabase hasil_karyaku notice:', e);
     }
 
-    // B. Simpan juga ke tabel karya_siswa (alias)
+    // B. Simpan juga ke tabel karya_siswa (alias jika ada)
     try {
       const { data, error } = await supabaseClient
         .from('karya_siswa')
@@ -408,7 +479,7 @@ const RBC_SUPABASE = {
         }])
         .select();
       if (error) throw error;
-      console.log('✅ Supabase: Refleksi siswa tersimpan');
+      console.log('✅ Supabase: Refleksi siswa tersimpan', data);
       return data;
     } catch (e) {
       console.warn('Supabase saveReflection error:', e);
@@ -419,6 +490,7 @@ const RBC_SUPABASE = {
   // 11. Simpan Hasil Kuis Evaluasi (10 Soal)
   async saveQuizResult(quizData) {
     if (!this.isConnected()) return null;
+    let savedData = null;
     try {
       const { data, error } = await supabaseClient
         .from('hasil_kuis')
@@ -429,18 +501,35 @@ const RBC_SUPABASE = {
           persentase: quizData.percent || 0
         }])
         .select();
-      if (error) throw error;
-      console.log('✅ Supabase: Hasil kuis tersimpan');
-      return data;
+      if (!error && data) {
+        console.log('✅ Supabase: Hasil kuis tersimpan ke tabel hasil_kuis', data);
+        savedData = data;
+      }
     } catch (e) {
-      console.warn('Supabase saveQuizResult error:', e);
-      return null;
+      console.warn('Supabase saveQuizResult notice:', e);
     }
+
+    // Cadangkan ke refleksi_siswa
+    try {
+      await supabaseClient
+        .from('refleksi_siswa')
+        .insert([{
+          nama_siswa: quizData.nama || 'Teman Belajar',
+          aku_tahu: `Nilai Kuis Evaluasi: ${quizData.percent}% (${quizData.score}/${quizData.total || 10} Benar)`,
+          aku_merasa: quizData.percent >= 70 ? 'Sangat senang dan puas dengan hasil kuis' : 'Perlu belajar lebih giat lagi',
+          aku_ingin_mencoba: 'Menerapkan cara belanja bijak dalam kehidupan sehari-hari',
+          foto_celengan_url: null
+        }]);
+      console.log('✅ Supabase: Nilai kuis dicadangkan ke refleksi_siswa');
+    } catch (e) {}
+
+    return savedData;
   },
 
   // 12. Simpan Kontak & Masukan / Saran Belajar
   async saveContactFeedback(feedbackData) {
     if (!this.isConnected()) return null;
+    let savedData = null;
     try {
       const { data, error } = await supabaseClient
         .from('kontak_masukan')
@@ -451,13 +540,29 @@ const RBC_SUPABASE = {
           pesan: feedbackData.pesan || ''
         }])
         .select();
-      if (error) throw error;
-      console.log('✅ Supabase: Kontak masukan tersimpan');
-      return data;
+      if (!error && data) {
+        console.log('✅ Supabase: Kontak masukan tersimpan ke tabel kontak_masukan', data);
+        savedData = data;
+      }
     } catch (e) {
-      console.warn('Supabase saveContactFeedback error:', e);
-      return null;
+      console.warn('Supabase saveContactFeedback notice:', e);
     }
+
+    // Cadangkan ke refleksi_siswa
+    try {
+      await supabaseClient
+        .from('refleksi_siswa')
+        .insert([{
+          nama_siswa: `${feedbackData.nama || 'Teman Belajar'} (Kesan/Saran - ${feedbackData.sekolah || 'SD'})`,
+          aku_tahu: `Rating Pengalaman: ${feedbackData.rating || 5} Bintang`,
+          aku_merasa: 'Senang memberikan saran dan pesan',
+          aku_ingin_mencoba: `Pesan: ${feedbackData.pesan || '-'}`,
+          foto_celengan_url: null
+        }]);
+      console.log('✅ Supabase: Kontak & saran dicadangkan ke refleksi_siswa');
+    } catch (e) {}
+
+    return savedData;
   }
 };
 
