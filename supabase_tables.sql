@@ -14,7 +14,14 @@ CREATE TABLE IF NOT EXISTS siswa (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 2. Tabel Pertanyaan Pemantik (Tahap D)
+-- 2. Tabel Ceritaku / Jawaban Pemantik (Tahap D)
+CREATE TABLE IF NOT EXISTS ceritaku (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    nama_siswa TEXT NOT NULL,
+    cerita TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 CREATE TABLE IF NOT EXISTS jawaban_pemantik (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nama_siswa TEXT NOT NULL,
@@ -158,7 +165,11 @@ ALTER TABLE siswa ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Akses publik siswa" ON siswa;
 CREATE POLICY "Akses publik siswa" ON siswa FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
 
--- 2. Jawaban Pemantik
+-- 2. Ceritaku & Jawaban Pemantik
+ALTER TABLE ceritaku ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Akses publik ceritaku" ON ceritaku;
+CREATE POLICY "Akses publik ceritaku" ON ceritaku FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
+
 ALTER TABLE jawaban_pemantik ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Akses publik jawaban_pemantik" ON jawaban_pemantik;
 CREATE POLICY "Akses publik jawaban_pemantik" ON jawaban_pemantik FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);

@@ -1,0 +1,17 @@
+# Environment & Local Secrets
+.env
+*.env.local
+
+# Antigravity Assistant Config & Cache
+.antigravity/
+
+# Temporary Previews and Test Outputs
+preview*.png
+navbar*.png
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+

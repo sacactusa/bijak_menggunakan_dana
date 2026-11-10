@@ -644,19 +644,19 @@ async function submitPemantikAnswer() {
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2 text-emerald-900 font-black text-sm">
             <span class="text-xl">🎉</span>
-            <span>NOTIFIKASI: Jawaban Pemantik Berhasil Tersubmit!</span>
+            <span>NOTIFIKASI: Ceritaku Berhasil Tersubmit!</span>
           </div>
           <span class="text-[10px] px-2.5 py-1 rounded-full bg-emerald-200 text-emerald-950 font-bold">Tersimpan di Supabase ✅</span>
         </div>
         <p class="text-xs text-slate-700 italic bg-white/80 p-3 rounded-xl border border-emerald-200">" ${val} "</p>
         <div class="text-xs text-amber-900 font-semibold flex items-center gap-2 pt-1">
           <span>⭐</span>
-          <span>Ciko: "Keren sekali, ${AppState.studentName}! Pengamatanmu sangat teliti dan datamu sudah sukses tersimpan ke database!"</span>
+          <span>Ciko: "Keren sekali, ${AppState.studentName}! Cerita pengalamanmu sangat menarik dan telah sukses tersimpan ke database!"</span>
         </div>
       </div>
     `;
   }
-  AppState.showToast('✅ Jawaban pemantik berhasil tersubmit ke database!');
+  AppState.showToast('✅ Ceritaku berhasil tersubmit ke database!');
 }
 
 function checkIdentifikasiD(qNum, isCorrect, btnEl) {
