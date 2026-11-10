@@ -1,0 +1,1307 @@
+
+IPAS KELAS 3
+BAB 5 - BIJAK BERBELANJA KEBUTUHAN 
+
+Peta Kebutuhan Media
+Pijakan Masalah (Analisis Empiris dan Teoritis) kebutuhan Media
+Pendidikan literasi finansial merupakan aspek penting yang perlu diperkenalkan sejak jenjang sekolah dasar. Pada tahap ini, peserta didik mulai terlibat dalam aktivitas keuangan sederhana, seperti mengelola uang saku, membeli jajanan, dan menentukan pilihan barang yang akan dibeli. Peserta didik perlu memahami jenis dan nilai uang Rupiah, fungsi uang, serta cara menggunakannya secara tepat. Pemahaman tersebut juga perlu disertai kemampuan membedakan kebutuhan dan keinginan agar peserta didik dapat menentukan prioritas dalam menggunakan uang.
+Dalam pembelajaran, peserta didik perlu memahami bahwa uang memiliki nilai dan fungsi yang berbeda sesuai dengan penggunaannya. Mereka juga perlu berlatih menggunakan komputeruang untuk membayar barang sesuai harga, menghitung jumlah pembayaran, serta mempertimbangkan barang yang sebaiknya dibeli. Namun, pemahaman mengenai konsep-konsep tersebut tidak akan optimal jika hanya berfokus pada hafalan jenis uang atau penjelasan fungsi uang secara tekstual. Peserta didik membutuhkan kesempatan nyata untuk menerapkan pengetahuannya dalam situasi yang menyerupai kehidupan sehari-hari, seperti simulasi jual-beli dan pemilihan barang berdasarkan skala kebutuhan.
+Permasalahan tersebut didukung oleh penelitian Erlangga dkk. (2026), yang menemukan bahwa sebagian besar siswa belum memiliki kebiasaan menabung dan uang saku mereka habis digunakan untuk top up game. Sementara itu, Syasalbilah dkk. (2026) menunjukkan bahwa pemahaman mengenai pengelolaan keuangan dasar harus dikembangkan melalui pendekatan pembelajaran yang berulang dan konkret. Kedua temuan tersebut memperlihatkan pentingnya pembelajaran literasi finansial yang tidak hanya sekedar mengenali uang secara fisik, melainkan juga memahami esensi penggunaannya serta mampu mempertimbangkan keputusan secara bijak sebelum membelanjakannya.
+Kebutuhan terhadap media pembelajaran yang konkret menurut teori perkembangan kognitif Jean Piaget, yaitu Anak usia sekitar 7–11 tahun berada pada tahap operasional konkret. Pada tahap ini, peserta didik mulai mampu berpikir logis, tetapi penalaran mereka masih bergantung pada objek nyata untuk memahami suatu konsep. Oleh karena itu, materi tentang jenis, nilai, fungsi uang, serta pengelolaan keuangan akan jauh lebih mudah dipelajari apabila disajikan melalui contoh yang dekat dengan keseharian mereka, seperti mengamati visualisasi uang Rupiah, mengenali harga barang, dan melakukan simulasi transaksi langsung. 
+Hal tersebut sejalan dengan teori belajar Jerome Bruner yang menjelaskan bahwa pemahaman dapat dikembangkan melalui tiga tahapan representasi, yaitu enaktif, ikonik, dan simbolik. Tahap enaktif dapat diterapkan melalui praktik aktivitas jual-beli sederhana; tahap ikonik dihadirkan melalui gambar visual uang serta barang; sedangkan tahap simbolik difasilitasi melalui penggunaan angka nominal, perhitungan nilai mata uang, dan penalaran bahasa saat menentukan pilihan pengeluaran. Penerapan ketiga tahapan Bruner secara terpadu ini dapat membantu peserta didik memahami materi secara bertahap, mulai dari pengenalan objek hingga level penerapan dan penalaran sederhana.
+Berdasarkan analisis tersebut, diperlukan sebuah media pembelajaran inovatif yang dapat memfasilitasi peserta didik untuk mempelajari jenis dan nilai uang Rupiah, memahami fungsi uang, menerapkan penggunaan uang dalam kegiatan jual-beli, membedakan kebutuhan dan keinginan, serta menentukan pilihan penggunaan uang secara bijak. Media pembelajaran yang dikembangkan harus menyediakan sajian visual yang akurat (akomodasi tahap ikonik) dan aktivitas interaktif (akomodasi tahap enaktif serta simbolik) agar peserta didik dapat mengamati, mencoba, membandingkan, dan mengevaluasi pilihan finansial dalam situasi simulasi yang aman. Dengan demikian, media ini diharapkan dapat mendukung ketercapaian tujuan pembelajaran sekaligus membantu peserta didik menghubungkan materi kelas dengan realitas pengalaman hidup sehari-hari.
+
+Penemuan Penyebab Masalah
+Berdasarkan analisis empiris dan teoritis di atas, penyebab utama belum optimalnya pemahaman peserta didik kelas III SD terhadap konsep kebutuhan dan keinginan meliputi:
+Kesulitan Memahami Nilai Uang: Pembelajaran verbal membuat peserta didik sulit membedakan bentuk fisik dan nominal pecahan uang Rupiah.
+Fungsi Uang Belum Kontekstual: Pemahaman uang sebagai alat tukar hanya sebatas hafalan, belum terhubung dengan realitas kehidupan sehari-hari.
+Kurangnya Latihan Transaksi: Terbatasnya ruang simulasi membuat peserta didik bingung mencocokkan harga barang dengan uang yang harus dibayarkan.
+Sulit Membedakan Kebutuhan vs Keinginan: Peserta didik cenderung impulsif dan belum mampu menyusun skala prioritas saat membelanjakan uang saku.
+Minimnya Ruang Pengambilan Keputusan: Peserta didik jarang dilatih mandiri untuk mengelola dan mengevaluasi alokasi pengeluaran mereka.
+
+Kebutuhan Pengembangan Media
+Bertolak dari berbagai penyebab masalah tersebut, maka pengembangan media pembelajaran memiliki urgensi sebagai berikut:
+Media yang dikembangkan harus mampu menjembatani karakteristik anak usia konkret melalui sajian gambar, ikon, atau simulasi digital agar materi yang semula abstrak menjadi lebih nyata dan mudah dipahami.
+Ilustrasi Fungsi Uang: Menyajikan contoh aktivitas harian agar peserta didik memahami kegunaan uang secara nyata.
+Fitur Simulasi Jual-Beli: Menyediakan aktivitas interaktif memilih barang dan menghitung jumlah pembayaran/kembalian.
+Latihan Klasifikasi Urgensi: Memuat permainan atau cerita untuk mengelompokkan barang berdasarkan kategori kebutuhan dan keinginan.
+Stimulasi Keputusan Finansial secara Bijak: Menghadirkan skenario yang menantang peserta didik menentukan prioritas belanja dan menyisihkan tabungan.
+Pembelajaran yang Konkret dan Interaktif: Menggabungkan unsur visual (ikonik) dan praktik langsung (enaktif) sesuai tahap perkembangan kognitif anak.
+
+
+
+CP + TP + ATP
+Capaian Pembelajaran
+Peserta didik mampu menjelaskan nilai mata uang dan fungsinya, serta cara mengelola keuangan secara bijak. 
+Tujuan Pembelajaran
+No
+TP
+Level taksonomi bloom
+1
+Melalui pengamatan gambar berbagai uang rupiah (C), murid (A) dapat menyebutkan (B) jenis uang rupiah, yaitu uang kertas dan uang logam, beserta nilai pecahannya dengan benar (D)
+C1 – Mengingat
+
+2
+Melalui kegiatan tanya jawab dan pengamatan media gambar (C),  murid (A) dapat menjelaskan (B) fungsi uang dalam kehidupan sehari-hari dengan tepat (D)
+C2 – Memahami
+3
+Melalui permainan jual beli sederhana (C), murid (A) dapat menerapkan (B) nilai uang rupiah untuk membayar barang sesuai harganya dengan tepat (D) 
+C3 – Menerapkan
+
+4
+Melalui games dan pengerjaan LKPD (C), murid (A) dapat menganalisis (B) barang yang termasuk kebutuhan dan keinginan berdasarkan gambar atau cerita sederhana dengan tepat (D)
+C4 – Analisis
+
+5
+Melalui kegiatan menghias celengan sederhana (C), murid (A) dapat membuat (B) celengan kreatif sebagai tempat menyimpan uang untuk membiasakan perilaku hemat dengan baik (D).
+C5 – Evaluasi
+
+
+Alur Tujuan Pembelajaran
+No
+ATP
+Materi
+1
+Murid mengenal jenis uang rupiah, yaitu uang kertas dan uang logam, beserta nilai pecahannya.
+Jenis uang rupiah (uang kertas dan uang logam). 
+2
+Murid memahami fungsi uang dalam kehidupan sehari-hari.
+Fungsi Uang
+3
+Murid menggunakan nilai uang rupiah dalam kegiatan jual beli sederhana sesuai harga barang.
+Penggunaan Uang dalam Jual Beli
+4
+Murid mengidentifikasi dan menganalisis barang yang termasuk kebutuhan dan keinginan dalam kehidupan sehari-hari.
+Kebutuhan dan Keinginan
+5
+Murid menentukan pilihan penggunaan uang yang lebih tepat antara kebutuhan dan keinginan serta mengemukakan alasannya.
+Mengelola Uang secara Bijak
+Urutan Pembelajaran
+Mengenal jenis dan nilai uang rupiah → memahami fungsi uang → menggunakan uang dalam kegiatan jual beli → membedakan kebutuhan dan keinginan → menggunakan uang secara bijak.
+
+  
+Modul Ajar, LKPD, Instrumen
+
+MODUL AJAR 
+INFORMASI UMUM
+INDENTITAS MODUL
+Nama penyusun 
+Kelompok 4
+Tahun pelajaran 
+2026
+Jenjang sekolah
+Sekolah Dasar
+Kelas/Fase
+3/Fase B
+Mata Pelajaran
+IPAS
+Bab 
+5 - Bijak Berbelanja Kebutuhan
+Topik
+Kebutuhan dan Keinginan
+KOMPETENSI AWAL
+Peserta didik telah memiliki pengalaman menggunakan uang dalam kehidupan sehari-hari, seperti membeli makanan di kantin, membeli alat tulis, atau melakukan transaksi sederhana bersama keluarga.
+DIMENSI PROFIL LULUSAN
+Bernalar kritis: Peserta didik mengamati dan mengidentifikasi jenis serta nilai uang rupiah.
+Mandiri: Peserta didik mencoba menggunakan uang untuk membayar barang sesuai harga.\Bergotong royong: Peserta didik bekerja sama dalam permainan jual beli sederhana.
+SARANA DAN PRASARANA
+Website pembelajaran DHETIK.
+Laptop, komputer, tablet, atau telepon pintar.
+Proyektor dan layar.
+Gambar uang kertas dan uang logam rupiah.
+Gambar barang beserta daftar harganya.
+LKPD digital.
+TARGET PESERTA DIDIK
+Peserta didik diharapkan telah memiliki pengalaman menggunakan uang dalam kehidupan sehari-hari serta mampu mengikuti kegiatan pembelajaran melalui pengamatan, diskusi, pengerjaan LKPD, simulasi jual beli, dan pembuatan karya sederhana dengan bimbingan guru sesuai kebutuhan.
+MODEL PEBELAJARAN
+Model Pembelajaran: DHETIK
+Metode Pembelajaran: Tanya jawab, pengamatan gambar, diskusi, simulasi, dan presentasi.
+KOMPONEN INTI
+Capaian Pembelajaran 
+Peserta didik mampu menjelaskan nilai mata uang dan fungsinya, serta cara mengelola keuangan secara bijak.
+Pemahaman Bermakna
+Uang memiliki nilai dan fungsi yang membantu manusia memenuhi kebutuhan sehari-hari. Pemahaman mengenai jenis, nilai, dan penggunaan uang dapat membantu peserta didik melakukan kegiatan jual beli sederhana secara tepat.
+Pertanyaan Pemantik 
+Apakah kalian pernah menggunakan uang untuk membeli sesuatu?
+Apa perbedaan uang kertas dan uang logam?
+Mengapa kita harus membayar ketika membeli barang?
+Bagaimana cara mengetahui bahwa uang yang kita gunakan sudah sesuai dengan harga barang?
+Kegiatan Pembelajaran 
+Sintaks Dhetik
+
+Sintaks 1 : Tahap D – Dekatkan
+(Membangun ketertarikan peserta didik terhadap materi melalui fenomena yang dekat dengan kehidupan sehari-hari serta menggali pengetahuan awal mengenai uang rupiah).
+Guru membuka pembelajaran dengan mengucapkan salam, menyapa peserta didik, dan menanyakan kabar.
+Guru melakukan apersepsi dengan mengulas kembali materi yang telah dipelajari pada pertemuan sebelumnya serta mengaitkannya dengan materi yang akan dipelajari hari ini.
+Guru menyampaikan tujuan pembelajaran dan memberikan gambaran singkat mengenai materi yang akan dipelajari.
+Guru menampilkan video pembelajaran tentang pengenalan uang untuk menarik perhatian dan membangun pemahaman awal peserta didik.
+(https://youtu.be/AmBTrtYAyTE?si=dXDyn1cRC45DMW_d)
+(https://youtu.be/KhmQWn390gw?si=9VYVoYg8f_p31NiH )
+Guru mengajak peserta didik mengamati video dan memberikan pertanyaan pemantik terkait uang yang sering dijumpai dalam kehidupan sehari-hari.
+peserta didik dan mengarahkan mereka untuk mengakses website DHETIK, kemudian peserta didik membuka halaman "Ayo Mulai".
+Guru menampilkan gambar berbagai pecahan uang rupiah, meliputi uang kertas dan uang logam, kemudian peserta didik mengamati gambar tersebut.
+Guru mengajukan pertanyaan pemantik mengenai pengalaman menggunakan uang dan perbedaan uang kertas dengan uang logam, kemudian peserta didik mengidentifikasi gambar dan menjawab pertanyaan berdasarkan pengetahuan awal mereka.
+Guru memberikan kesempatan kepada beberapa peserta didik untuk menyampaikan pengalaman menggunakan uang dalam kehidupan sehari-hari, kemudian peserta didik berbagi pengalaman berdasarkan situasi yang pernah mereka alami.
+Guru menyampaikan gambaran kegiatan dan tujuan pembelajaran, kemudian peserta didik menyimak penjelasan serta mempersiapkan diri mengikuti kegiatan berikutnya.
+Hasil yang diharapkan: Peserta didik tertarik mempelajari materi uang rupiah dan mulai mengenali jenis uang berdasarkan bentuk dan nilai pecahannya. 
+
+Sintaks 2 : Tahap H – Hubungkan 
+(Menghubungkan pengetahuan peserta didik mengenai uang dengan pengalaman nyata dalam kehidupan sehari-hari serta memahami fungsi uang).
+Guru menampilkan ilustrasi kegiatan jual beli di kantin sekolah melalui halaman "Hubungkan dengan Hidupku", kemudian peserta didik mengamati ilustrasi tersebut.
+Guru menyajikan cerita singkat tentang seorang anak yang membeli makanan dan minuman menggunakan uang rupiah, kemudian peserta didik membaca atau menyimak cerita tersebut.
+Guru mengajukan pertanyaan mengenai pengalaman membeli barang di kantin, alasan menggunakan uang untuk memperoleh barang, dan contoh penggunaan uang lainnya, kemudian peserta didik menjawab berdasarkan pengalaman masing-masing.
+Guru mengarahkan peserta didik untuk mengidentifikasi kegunaan uang dalam situasi yang ditampilkan, kemudian peserta didik menyampaikan contoh fungsi uang dalam kehidupan sehari-hari.
+Guru memberikan penguatan dengan menjelaskan fungsi uang sebagai alat tukar dan alat pembayaran, kemudian peserta didik menyimak dan menyimpulkan fungsi uang berdasarkan ilustrasi dan penjelasan guru.
+Hasil yang diharapkan: Peserta didik mampu menghubungkan penggunaan uang dengan kehidupan sehari-hari dan memahami fungsi uang dalam kegiatan transaksi.
+
+Sintaks 3 : Tahap E – Eksplorasi 
+(Memberikan kesempatan kepada peserta didik untuk mengeksplorasi jenis dan nilai pecahan uang rupiah serta menerapkannya melalui aktivitas jual beli sederhana).
+Aktivitas Pembelajaran (Guru dan Peserta Didik):
+Guru mengarahkan peserta didik membuka halaman "Ayo Menjelajah" pada website DHETIK, kemudian peserta didik mengakses halaman tersebut.
+Guru menyajikan materi interaktif mengenai jenis uang rupiah, yaitu uang kertas dan uang logam beserta nilai pecahannya, kemudian peserta didik mengamati dan mengidentifikasi jenis serta nilai uang yang ditampilkan. 
+Guru memberikan contoh penggunaan beberapa pecahan uang untuk membayar barang sesuai harganya, kemudian peserta didik mengamati cara menentukan uang yang sesuai dengan harga barang.
+Guru membagikan LKPD digital dan menjelaskan petunjuk pengerjaannya, kemudian peserta didik membuka serta membaca petunjuk LKPD sebelum mengerjakan aktivitas.
+Guru mengarahkan peserta didik mengerjakan aktivitas identifikasi jenis dan nilai uang dalam LKPD digital, kemudian peserta didik menyebutkan jenis uang dan mencocokkan pecahan uang dengan nilainya.
+Guru menyiapkan gambar barang, daftar harga, dan uang rupiah tiruan atau simulasi jual beli digital serta memberikan arahan permainan, kemudian peserta didik melakukan permainan jual beli dengan memilih uang yang sesuai untuk membayar barang.
+Guru membimbing peserta didik yang mengalami kesulitan dan memantau pengerjaan LKPD, kemudian peserta didik menyelesaikan tugas secara mandiri atau berkelompok sesuai arahan.
+Guru memberikan umpan balik terhadap hasil pekerjaan peserta didik, kemudian peserta didik memeriksa kembali jawaban dan memperbaiki kesalahan yang ditemukan.
+Hasil yang diharapkan: Peserta didik mampu menyebutkan jenis uang rupiah beserta nilai pecahannya dan menerapkan nilai uang untuk membayar barang sesuai harganya melalui permainan jual beli sederhana.
+
+Sintaks 4 : Tahap T – Tukar Gagasan (Memberikan ruang bagi peserta didik untuk berbagi temuan, berdiskusi, dan menanggapi pendapat teman mengenai kebutuhan dan keinginan).
+Guru mengarahkan peserta didik membuka halaman “Ruang Diskusi” pada website DHETIK, kemudian peserta didik mengakses halaman tersebut.
+Guru menyampaikan aturan diskusi santun, yaitu mendengarkan teman, menanggapi dengan bahasa yang baik, dan menghargai perbedaan pendapat, kemudian peserta didik menyimak dan menyepakati aturan tersebut.
+Guru menampilkan gambar dan cerita sederhana tentang beberapa barang, seperti nasi, buku tulis, mainan, dan jajanan, kemudian peserta didik mengamatinya.
+Guru membagi peserta didik ke dalam kelompok kecil dan membagikan LKPD digital tentang kebutuhan dan keinginan, kemudian peserta didik berdiskusi mengelompokkan barang ke dalam kategori kebutuhan atau keinginan berdasarkan gambar atau cerita.
+Guru membimbing kelompok dengan pertanyaan penuntun, seperti “Apa yang terjadi jika barang ini tidak dibeli?” dan “Apakah barang ini wajib dimiliki atau hanya diinginkan?”, kemudian peserta didik menganalisis setiap barang dan menuliskan alasannya.
+Guru mengarahkan setiap kelompok mengunggah hasil diskusi pada Padlet yang tersemat di halaman, kemudian peserta didik mengunggah hasil pengelompokan beserta alasannya.
+Guru meminta peserta didik membaca hasil kelompok lain dan memberi tanggapan atau pertanyaan pada Padlet, kemudian peserta didik menanggapi dengan bahasa santun.
+Guru memandu pembahasan jawaban yang berbeda antarkelompok, kemudian peserta didik menjelaskan alasan pilihannya dan memperbaiki pengelompokan jika ada yang kurang tepat.
+Hasil yang diharapkan: Peserta didik mampu menganalisis barang yang termasuk kebutuhan dan keinginan berdasarkan gambar atau cerita, serta menyampaikan alasan dan menanggapi pendapat teman secara santun.
+
+Sintaks 5 : Tahap I – Ikat Konsep (Menyimpulkan materi, meluruskan miskonsepsi, dan mengaitkan seluruh konsep yang telah dipelajari).
+Guru mengarahkan peserta didik membuka halaman “Ikat Ilmuku” pada website DHETIK, kemudian peserta didik mengakses halaman tersebut.
+Guru menampilkan peta konsep tentang jenis uang, fungsi uang, jual beli, serta kebutuhan dan keinginan, kemudian peserta didik mengamati keterkaitan antarkonsep.
+Guru mengajukan pertanyaan penguatan, seperti “Apa saja jenis uang rupiah?”, “Untuk apa kita menggunakan uang?”, dan “Bagaimana membedakan kebutuhan dan keinginan?”, kemudian peserta didik menjawab dengan bahasa sendiri.
+Guru meluruskan miskonsepsi yang muncul selama pembelajaran, misalnya anggapan bahwa semua barang yang disukai adalah kebutuhan atau bahwa nilai uang ditentukan oleh ukurannya, kemudian peserta didik menyimak dan memperbaiki pemahamannya.
+Guru menayangkan infografis atau video rangkuman tentang bijak menggunakan uang, kemudian peserta didik menyimak dan mencatat hal-hal penting.
+Guru membimbing peserta didik menyimpulkan materi bersama-sama, kemudian peserta didik menyampaikan kesimpulan tentang jenis, fungsi, dan penggunaan uang secara bijak.
+Guru mengarahkan peserta didik mengerjakan kuis konsep interaktif pada halaman yang sama, kemudian peserta didik menjawab soal kuis secara mandiri.
+Guru memberikan umpan balik atas hasil kuis, kemudian peserta didik memeriksa jawaban dan memperbaiki bagian yang masih keliru.
+Hasil yang diharapkan : Peserta didik mampu menyimpulkan keterkaitan antara jenis uang, fungsi uang, penggunaan uang dalam jual beli, serta perbedaan kebutuhan dan keinginan, dan tidak lagi memiliki miskonsepsi.
+
+Sintaks 6 : Tahap K – Karya & Refleksi  
+(Mendorong peserta didik membuat karya nyata yang menerapkan pemahamannya, lalu merefleksikan pros
+es belajar).
+Guru mengarahkan peserta didik membuka halaman “Karyaku” pada website DHETIK, kemudian peserta didik mengakses halaman tersebut.
+Guru menyampaikan tugas karya, yaitu membuat “Rencana Belanja Bijakku” berupa gambar atau tabel sederhana berisi daftar barang yang ingin dibeli dengan uang saku tertentu, kemudian peserta didik menyimak tujuan dan petunjuk tugas.
+Guru menyampaikan rubrik penilaian karya, yang mencakup ketepatan memilih kebutuhan, kesesuaian harga dengan uang, dan alasan pilihan, kemudian peserta didik memahami kriteria yang dinilai.
+Guru membimbing peserta didik menentukan barang yang akan dibeli dengan mempertimbangkan kebutuhan dan keinginan, kemudian peserta didik menyusun renc ana belanja dan menuliskan alasan pilihannya.
+Guru memantau proses pembuatan karya dan memberikan bimbingan kepada peserta didik yang mengalami kesulitan, kemudian peserta didik menyempurnakan karyanya.
+Guru mengarahkan peserta didik mengunggah karya pada halaman Karyaku, kemudian peserta didik mengunggah karya masing-masing.
+Guru memberi kesempatan beberapa peserta didik mempresentasikan karyanya, kemudian peserta didik menjelaskan pilihan penggunaan uangnya, dan teman lain memberi tanggapan.
+Guru memandu refleksi dengan kalimat “Aku tahu…, aku merasa…, aku ingin mencoba…”, kemudian peserta didik mengisi refleksi tentang hal yang dipelajari, perasaannya, dan rencana menerapkannya.
+Guru memberikan penguatan dan apresiasi, kemudian peserta didik menyimak dan menutup pembelajaran dengan doa.
+Hasil yang diharapkan: Peserta didik mampu menilai pilihan penggunaan uang yang lebih baik antara kebutuhan dan keinginan, menyampaikan alasannya, dan merefleksikan pembelajarannya.
+INSTRUMEN  DAN RUBRIK PENILAIAN
+Instrumen Penilaian Sikap
+No
+Nama Peserta Didik
+Aspek yang Dinilai
+n
+Ns
+
+
+Percaya Diri
+Mandiri
+Tanggung Jawab
+Disiplin
+
+
+
+
+1
+2
+3
+4
+1
+2
+3
+4
+1
+2
+3
+4
+1
+2
+3
+4
+
+
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ns = n / 12 x 100 = ….
+Keterangan:
+n = total penilaian (jumlah skor)
+Ns = Nilai untuk masing-masing siswa
+
+Rubrik Penilaian
+No
+Aspek
+Kriteria Penilaian
+
+
+1 (Baru Memulai)
+2
+(Berkembang)
+3
+(Cakap)
+4
+(Mahir)
+1
+Percaya Diri
+Belum berani menyampaikan alasan pilihan atau hasil diskusi di depan kelas.
+Mulai berani menyampaikan alasan pilihan dengan bantuan guru atau teman.
+Berani menyampaikan alasan pilihan barang dan hasil karya di depan kelas.
+Sangat percaya diri saat menyampaikan alasan pilihan dan menanggapi pertanyaan teman.
+2
+Mandiri
+Belum mampu mengerjakan LKPD atau permainan jual beli tanpa dibantu terus-menerus.
+Mulai mengerjakan LKPD, tetapi masih sering dibimbing guru.
+Mampu menyelesaikan LKPD dan permainan jual beli dengan cukup mandiri.
+Sangat mandiri menyelesaikan LKPD dan karya tanpa bantuan.
+3
+Tanggung Jawab
+Belum menunjukkan tanggung jawab dalam mengikuti kegiatan pembelajaran dan menyelesaikan tugas.
+Mulai menunjukkan tanggung jawab, tetapi masih perlu sering diingatkan guru.
+Menyelesaikan tugas dengan cukup baik dan bertanggung jawab.
+Sangat bertanggung jawab dalam mengikuti kegiatan dan menyelesaikan tugas tanpa diingatkan.
+4
+Disiplin
+Sering tidak mengikuti aturan pembelajaran dan aturan diskusi santun.
+Mengikuti aturan jika diingatkan guru.
+Mengikuti aturan pembelajaran dan diskusi santun dengan baik.
+Sangat disiplin dan menjadi contoh bagi teman selama kegiatan berlangsung.
+
+Instrumen Penilaian Keterampilan
+No
+Nama Peserta Didik
+Aspek yang Dinilai
+n
+Ns
+
+
+Menganalisis Informasi
+Menyampaikan Hasil Diskusi
+Kolaborasi
+
+
+
+
+1
+2
+3
+4
+1
+2
+3
+4
+1
+2
+3
+4
+
+
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ns = n / 12 x 100 = ….
+Keterangan:
+n = total penilaian (jumlah skor)
+Ns = Nilai untuk masing-masing siswa
+
+Rubrik Penilaian
+No
+Aspek
+Kriteria Penilaian
+
+
+1 (Baru Memulai)
+2
+(Berkembang)
+3
+(Cakap)
+4
+(Mahir)
+1
+Menganalisis Informasi
+Belum mampu membedakan barang kebutuhan dan keinginan dari gambar atau cerita.
+Mulai membedakan kebutuhan dan keinginan, tetapi masih memerlukan bantuan guru.
+Mampu mengelompokkan barang ke dalam kebutuhan dan keinginan dengan cukup tepat disertai alasan.
+Sangat mampu mengelompokkan semua barang dengan tepat dan memberi alasan yang rinci.
+2
+Menyampaikan Hasil Diskusi
+Belum berani menyampaikan hasil diskusi atau alasan pilihan di depan kelas.
+Mulai menyampaikan hasil diskusi dengan bantuan guru atau teman.
+Mampu menyampaikan hasil diskusi dan alasan pilihan dengan cukup jelas dan percaya diri.
+Sangat percaya diri dan mampu menjelaskan hasil diskusi serta alasan pilihan dengan runtut dan jelas.
+3
+Kolaborasi
+Belum mampu bekerja sama dengan teman saat diskusi kelompok dan permainan.
+Mulai bekerja sama, tetapi masih perlu diingatkan.
+Mampu bekerja sama dengan baik dan menanggapi pendapat teman dengan bahasa santun.
+Sangat aktif membantu dan bekerja sama dengan teman kelompok serta memberi tanggapan yang membangun
+
+
+
+Instrumen Penilaian Produk
+No
+Nama Peserta Didik
+Aspek yang Dinilai
+n
+Ns
+
+
+Ketepatan Memilihin Kebutuhan
+Kesesuaian Harga dengan Uang
+Alasan Memilih Produk
+
+
+
+
+1
+2
+3
+4
+1
+2
+3
+4
+1
+2
+3
+4
+
+
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ns = n / 12 x 100 = ….
+Keterangan:
+n = total penilaian (jumlah skor)
+Ns = Nilai untuk masing-masing siswa
+
+Rubrik Penilaian
+No
+Aspek
+Kriteria Penilaian
+
+
+1 (Baru Memulai)
+2
+(Berkembang)
+3
+(Cakap)
+4
+(Mahir)
+1
+Ketepatan Memilih Kebutuhan
+Belum ada barang kebutuhan yang dipilih.
+
+
+
+Sebagian kecil barang yang dipilih adalah kebutuhan.
+Sebagian besar barang yang dipilih adalah kebutuhan.
+Semua barang yang dipilih tepat dan kebutuhan didahulukan sebelum keinginan. 
+2
+Kesesuaian Harga dengan Uang
+Total harga barang jauh melebihi uang saku dan belum dihitung.
+Total harga dihitung, tetapi masih melebihi atau kurang tepat dengan uang saku.
+
+Total harga dihitung dengan benar dan tidak melebihi uang saku.
+Total harga dan sisa uang dihitung dengan benar, serta ada uang yang disisihkan untuk menabung.
+3
+Alasan Pilihan Produk
+Belum menuliskan alasan pilihan.
+Menuliskan alasan, tetapi kurang sesuai.
+Menuliskan alasan yang cukup sesuai untuk sebagian besar pilihan.
+Menuliskan alasan yang tepat dan jelas untuk setiap pilihan.
+
+
+Instrumen Penilaian Pengetahuan
+No
+Nama Peserta Didik
+Aspek yang Dinilai
+n
+Ns
+
+
+Soal 1
+Soal 2
+Soal 3
+Soal 4
+Soal 5
+
+
+
+
+1
+2
+3
+4
+1
+2
+3
+4
+1
+2
+3
+4
+1
+2
+3
+4
+1
+2
+3
+4
+
+
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ns = n / 12 x 100 = ….
+Keterangan:
+n = total penilaian (jumlah skor)
+Ns = Nilai untuk masing-masing siswa
+
+Rubrik Penilaian
+No
+Aspek
+Kriteria Penilaian
+
+
+1 (Baru Memulai)
+2
+(Berkembang)
+3
+(Cakap)
+4
+(Mahir)
+1
+Mengelompokkan jenis uang dan nilainya
+Belum mampu mengelompokkan uang kertas dan logam.
+Mengelompokkan sebagian uang dengan tepat, nilainya masih banyak yang keliru.
+Mengelompokkan jenis uang dengan benar, tetapi masih ada 1–2 nilai pecahan yang keliru.
+Mengelompokkan semua jenis uang dan menyebutkan nilai pecahannya
+
+2
+Menjelaskan fungsi uang
+Belum mampu menjelaskan fungsi uang.
+Menyebutkan fungsi uang, tetapi kurang tepat atau tanpa contoh.
+Menjelaskan fungsi uang dengan cukup benar dan memberikan satu contoh.
+Menjelaskan fungsi uang sebagai alat tukar dan alat pembayaran dengan tepat disertai contoh yang sesuai.
+3
+Menggunakan uang dalam jual beli
+Belum mampu menghitung total maupun kembalian. 
+Salah satu perhitungan benar, tetapi caranya belum tepat. 
+Kedua perhitungan benar, tetapi langkah penyelesaian kurang runtut. 
+Kedua perhitungan benar dengan langkah penyelesaian yang runtut.
+4
+Menganalisis kebutuhan dan keinginan
+Belum mampu membedakan kebutuhan dan keinginan.
+Mengelompokkan sebagian barang dengan tepat, tanpa alasan.
+Mengelompokkan sebagian besar barang dengan tepat dan memberikan alasan sederhana.
+Mengelompokkan semua barang dengan tepat dan memberikan alasan yang jelas.
+5
+Menilai pilihan penggunaan uang
+Belum mampu menentukan pilihan dan alasannya.
+
+Menentukan pilihan, tetapi alasan kurang tepat atau sisa uang keliru.
+
+Menentukan pilihan dengan alasan cukup logis dan sisa uang benar.
+Menentukan pilihan dengan alasan tepat dan logis serta sisa uang benar.
+
+LKPD DAN EVALUASI
+Link LKPD Digital (https://canva.link/8wkobv2whf7taj6)
+
+
+
+
+
+
+
+
+
+Naskah Program Media
+Pemetaan Tujuan Pembelajaran 
+Tahap
+Tujuan Pembelajaran 
+Materi 
+D - Dekatkan 
+TP 1 (C1)
+Jenis dan Nilai Uang Rupiah
+H - Hubungkan 
+TP 2 (C2)
+Fungsi Uang
+E - Eksplorasi 
+TP 1 (C1) dan TP 3 (C3)
+Jenis, nilai yang dan penggunaan uang dalam jual beli
+T - Tukar Gagasan
+TP 4 (C4) dan TP 5 (C5)
+Kebutuhan dan Keinginan
+I - Ikat Konsep
+TP 1-5 (Penguatan)
+Rangkuman jenis, Fungsi, dan Penggunaan uang
+K - Karya & Refleksi
+TP 5 (C5)
+Mengelola uang secara bijak
+
+Matriks Naskah Program media dan strategi
+Tahap DHETIK
+Media
+Strategi Pembelajaran
+D – Dekatkan 
+(Ayo Mulai) 
+Website DHETIK, gambar berbagai pecahan uang rupiah (uang kertas dan uang logam), serta ilustrasi penggunaan uang dalam kehidupan sehari-hari. 
+Pemberian stimulus visual melalui pengamatan gambar dan tanya jawab untuk menarik perhatian serta menggali pengetahuan awal peserta didik. 
+H – Hubungkan (Hubungkan dengan Hidupku)
+Website DHETIK, gambar berbagai pecahan uang rupiah (uang kertas dan uang logam), serta ilustrasi penggunaan uang dalam kehidupan sehari-hari. 
+Pembelajaran kontekstual dengan mengaitkan materi fungsi uang dengan pengalaman sehari-hari melalui tanya jawab dan diskusi. 
+E – Eksplorasi (Ayo Menjelajah) 
+Website DHETIK, materi interaktif jenis dan nilai uang rupiah, LKPD digital, gambar barang beserta daftar harga, dan uang rupiah tiruan atau simulasi jual beli. 
+Eksplorasi terbimbing melalui pengamatan materi interaktif, latihan pada LKPD digital, demonstrasi, dan simulasi permainan jual beli sederhana. 
+T – Tukar Gagasan (Ruang Diskusi)
+Website DHETIK, Padlet tersemat, LKPD digital, gambar barang 
+Diskusi kelompok kolaboratif dan klasifikasi kebutuhan–keinginan 
+I – Ikat Konsep (Ikat Ilmuku) 
+Website DHETIK, peta konsep, infografis, video rangkuman, kuis interaktif 
+Penyimpulan terbimbing dan pelurusan miskonsepsi 
+K – Karya & Refleksi (Karyaku) 
+Website DHETIK, lembar unggah karya, rubrik, form refleksi 
+Pembelajaran berbasis produk, presentasi, dan refleksi 
+
+A. Tahap D – Dekatkan 
+Fokus : Membangun ketertarikan peserta didik terhadap materi uang rupiah dan menggali pengetahuan awal mereka. 
+Aktivitas Guru 
+Aktivitas Siswa
+Membuka pembelajaran dengan menyapa peserta didik dan mengarahkan mereka mengakses halaman Ayo Mulai pada website DHETIK. 
+Membuka website DHETIK dan mengakses halaman Ayo Mulai. 
+Menampilkan gambar berbagai pecahan uang rupiah, meliputi uang kertas dan uang logam. 
+Mengamati gambar berbagai pecahan uang rupiah yang ditampilkan. 
+Mengajukan pertanyaan pemantik, seperti "Apakah kalian pernah menggunakan uang tersebut?", "Apa perbedaan uang kertas dan uang logam?", dan "Apakah setiap uang memiliki nilai yang sama?". 
+Menjawab pertanyaan berdasarkan hasil pengamatan dan pengalaman menggunakan uang dalam kehidupan sehari-hari. 
+Memberikan kesempatan kepada peserta didik untuk menyampaikan hasil pengamatan dan pengalaman mereka. 
+Menyampaikan hasil pengamatan serta pengalaman menggunakan uang di lingkungan sekitar. 
+Menyampaikan tujuan dan gambaran kegiatan pembelajaran yang akan dilakukan. 
+Menyimak penjelasan guru dan mempersiapkan diri mengikuti mengikuti kegiatan pembelajaran
+
+B. Tahap H – Hubungkan 
+Fokus: Menghubungkan materi fungsi uang dengan pengalaman peserta didik dalam kehidupan sehari-hari. 
+Aktivitas Guru 
+Aktivitas siswa
+Menampilkan ilustrasi kegiatan jual beli di kantin sekolah atau warung melalui halaman. 
+Mengamati ilustrasi kegiatan jual beli yang ditampilkan. 
+Menyajikan cerita singkat tentang seorang anak yang membeli makanan dan minuman menggunakan uang rupiah. 
+Membaca atau menyimak cerita yang disajikan. 
+Mengajukan pertanyaan penghubung, seperti "Apa yang biasanya kalian beli di kantin?", "Mengapa kita menggunakan uang untuk mendapatkan barang?", dan "Selain membeli makanan, uang dapat digunakan untuk apa lagi?". 
+Menghubungkan cerita dengan pengalaman pribadi dan menjawab pertanyaan berdasarkan pengalaman masing-masing. 
+Membimbing peserta didik mengidentifikasi kegunaan uang berdasarkan ilustrasi dan cerita yang disajikan. 
+Menyampaikan berbagai contoh penggunaan uang dalam kehidupan sehari-hari. 
+Memberikan penguatan mengenai fungsi uang sebagai alat tukar dan alat pembayaran. 
+Menyimak penjelasan dan menyimpulkan fungsi uang dalam kehidupan sehari-hari. 
+
+C. Tahap E – Eksplorasi
+Fokus: Memberikan pengalaman langsung kepada peserta didik untuk mengenali jenis dan nilai uang rupiah serta menerapkannya dalam kegiatan jual beli 
+Aktivitas Guru 
+Aktivitas siswa
+Mengarahkan peserta didik mengakses halaman Ayo Menjelajah pada website DHETIK. 
+Membuka halaman Ayo Menjelajah pada website DHETIK. 
+Menyajikan materi interaktif mengenai jenis uang rupiah, yaitu uang kertas dan uang logam beserta nilai pecahannya. 
+Mengamati materi interaktif dan mengidentifikasi jenis serta nilai pecahan uang rupiah. 
+Memberikan contoh cara menggunakan beberapa pecahan uang untuk membayar barang sesuai harganya. 
+Mengamati contoh penggunaan uang dan memahami cara menentukan jumlah uang yang sesuai dengan harga barang. 
+Membagikan LKPD digital dan menjelaskan petunjuk pengerjaannya. 
+Membuka LKPD digital dan menyimak petunjuk pengerjaan. 
+Membimbing peserta didik mengerjakan latihan identifikasi jenis dan nilai pecahan uang rupiah dalam LKPD digital. 
+Mengerjakan latihan dengan mengidentifikasi jenis uang dan mencocokkan gambar uang dengan nilai pecahannya. 
+Menyiapkan gambar barang, daftar harga, dan uang rupiah tiruan atau simulasi jual beli digital serta menjelaskan aturan permainan. 
+Melakukan permainan jual beli sederhana dengan memilih pecahan uang yang sesuai untuk membayar barang berdasarkan harganya. 
+Memantau proses pengerjaan LKPD dan pelaksanaan permainan jual beli serta memberikan bimbingan apabila peserta didik mengalami kesulitan. 
+Menyelesaikan aktivitas LKPD dan permainan jual beli sesuai petunjuk yang diberikan. 
+
+D. Tahap T – Tukar Gagasan 
+Fokus: Memberikan ruang bagi peserta didik untuk berbagi temuan, berdiskusi, dan menanggapi pendapat teman mengenai kebutuhan dan keinginan.
+Aktivitas Guru 
+Aktivitas siswa
+Mengarahkan peserta didik mengakses halaman Ruang Diskusi pada website DHETIK. 
+Membuka halaman Ruang Diskusi pada website DHETIK. 
+Menyampaikan aturan diskusi santun, yaitu mendengarkan teman, menanggapi dengan bahasa yang baik, dan menghargai perbedaan pendapat. 
+Menyimak dan menyepakati aturan diskusi santun. 
+Menampilkan gambar dan cerita sederhana tentang beberapa barang, seperti nasi, buku tulis, mainan, dan jajanan. 
+Mengamati gambar dan cerita barang yang ditampilkan. 
+Membagi peserta didik ke dalam kelompok kecil dan membagikan LKPD digital tentang kebutuhan dan keinginan. 
+Berdiskusi dalam kelompok untuk mengelompokkan barang ke dalam kategori kebutuhan atau keinginan. 
+Membimbing kelompok dengan pertanyaan penuntun, seperti “Apa yang terjadi jika barang ini tidak dibeli?” dan “Apakah barang ini wajib dimiliki atau hanya diinginkan?”. 
+Menganalisis setiap barang dan menuliskan alasan pengelompokannya. 
+Menyiapkan gambar barang, daftar harga, dan uang rupiah tiruan atau simulasi jual Mengarahkan setiap kelompok mengunggah hasil diskusi pada Padlet yang tersemat di halaman. digital serta menjelaskan aturan permainan. 
+Mengunggah hasil pengelompokan beserta alasannya pada Padlet. 
+Meminta peserta didik membaca hasil kelompok lain dan memberi tanggapan atau pertanyaan pada Padlet. 
+Membaca hasil kelompok lain dan menanggapi dengan bahasa santun. 
+Memandu pembahasan jawaban yang berbeda antarkelompok. 
+Menjelaskan alasan pilihan dan memperbaiki pengelompokan jika ada yang kurang tepat. 
+
+E. Tahap I – Ikat Konsep
+Fokus: Menyimpulkan materi, meluruskan miskonsepsi, dan mengaitkan seluruh konsep yang telah dipelajari.
+Aktivitas Guru 
+Aktivitas siswa
+Mengarahkan peserta didik mengakses halaman Ikat Ilmuku pada website DHETIK. 
+Membuka halaman Ikat Ilmuku pada website DHETIK. 
+Menampilkan peta konsep tentang jenis uang, fungsi uang, jual beli, serta kebutuhan dan keinginan. 
+Mengamati peta konsep dan keterkaitan antar konsep. 
+Mengajukan pertanyaan penguatan, seperti “Apa saja jenis uang rupiah?”, “Untuk apa kita menggunakan uang?”, dan “Bagaimana membedakan kebutuhan dan keinginan?”. 
+Menjawab pertanyaan dengan bahasa sendiri. 
+Meluruskan miskonsepsi yang muncul, misalnya anggapan bahwa semua barang yang disukai adalah kebutuhan atau bahwa nilai uang ditentukan oleh ukurannya. 
+Menyimak penjelasan dan memperbaiki pemahaman. 
+Menayangkan infografis atau video rangkuman tentang bijak menggunakan uang. 
+Menyimak tayangan dan mencatat hal-hal penting. 
+Membimbing peserta didik menyimpulkan materi bersama-sama. 
+Menyampaikan kesimpulan tentang jenis, fungsi, dan penggunaan uang secara bijak. 
+Mengarahkan peserta didik mengerjakan kuis konsep interaktif pada halaman yang sama. 
+Mengerjakan soal kuis secara mandiri. 
+Memberikan umpan balik atas hasil kuis. 
+Memeriksa jawaban dan memperbaiki bagian yang masih keliru. 
+
+F. Tahap K – Karya & Refleksi
+Fokus: Mendorong peserta didik membuat karya nyata yang menerapkan pemahamannya tentang penggunaan uang secara bijak, lalu merefleksikan proses belajarnya. 
+Aktivitas Guru 
+Aktivitas siswa
+Mengarahkan peserta didik mengakses halaman Karyaku pada website DHETIK. 
+Membuka halaman Karyaku pada website DHETIK. 
+Menyampaikan tugas karya “Rencana Belanja Bijakku” berupa gambar atau tabel sederhana berisi daftar barang yang ingin dibeli dengan uang saku tertentu. 
+Menyimak tujuan dan petunjuk tugas. 
+Menyampaikan rubrik penilaian karya, yaitu ketepatan memilih kebutuhan, kesesuaian harga dengan uang, dan alasan pilihan. 
+Memahami kriteria yang akan dinilai. 
+Membimbing peserta didik menentukan barang yang akan dibeli dengan mempertimbangkan kebutuhan dan keinginan. 
+Menyusun rencana belanja dan menuliskan alasan pilihannya. 
+Memantau proses pembuatan karya dan memberikan bimbingan kepada peserta didik yang mengalami kesulitan. 
+Menyempurnakan karya sesuai arahan. 
+Mengarahkan peserta didik mengunggah karya pada halaman Karyaku. 
+Mengunggah karya masing-masing. 
+Memberi kesempatan beberapa peserta didik mempresentasikan karyanya. 
+Mempresentasikan karya dan menjelaskan pilihan penggunaan uangnya, sementara teman lain memberi tanggapan. 
+Memandu refleksi dengan kalimat “Aku tahu…, aku merasa…, aku ingin mencoba…”. 
+Mengisi refleksi tentang hal yang dipelajari, perasaannya, dan rencana menerapkannya. 
+Memberikan penguatan dan apresiasi, lalu menutup pembelajaran. 
+Menyimak penguatan dan menutup pembelajaran dengan doa. 
+
+BAB VII
+LANGKAH 3A: MERANCANG TAHAP D — DEKATKAN
+
+Capaian Bab 
+Detik Pembuka
+Uraian Konsep
+Langkah/Prosedur
+Kriteria
+Contoh
+Format KerjaProduk Website
+Refleksi dan Latihan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+RUJUKAN
+
+Erlangga, B., NovitaSyahfitri, A., & Ledyawati, L. (2026). Membangun Kebiasaan Menabung Melalui Literasi Keuangan Siswa SD Negeri 50 Kota Bengkulu. Aksi Kita: Jurnal Pengabdian kepada Masyarakat, 2(5), 3921-3928.
+Syasalbilah, N., Amanda, W. S., Athaya, S., & Zulham. (2026). Edukasi Literasi Keuangan bagi Siswa Sekolah Dasar sebagai Upaya Meningkatkan Kesadaran Mengelola Keuangan Sejak Dini. SANTRI: Jurnal Ekonomi dan Keuangan Islam, 4(5), 176-189. 
+Kusumawardhani, A., Fatimah, K., & Setianingsih, N. I. (2025). Panduan Guru Ilmu Pengetahuan Alam dan Sosial untuk SD/MI Kelas III (Edisi Revisi). Kementerian Pendidikan Dasar dan Menengah. https://buku.kemendikdasmen.go.id 
+
+Kartu Galeri Website
+
+Unsur
+Isi
+Judul Website
+
+Pengembang
+Ines Khaerunisa
+Nasrun Nur hakim
+Nur Afifah Handayani
+Zidna
+Fase / Kelas / Mata Pelajaran
+B / III / IPAS
+Topik dan Tujuan Pembelajaran
+Topik: Kebutuhan dan Keinginan
+Tujuan Pembelajaran:
+Melalui pengamatan gambar berbagai uang rupiah (C), murid (A) dapat menyebutkan (B) jenis uang rupiah, yaitu uang kertas dan uang logam, beserta nilai pecahannya dengan benar (D)
+Melalui kegiatan tanya jawab dan pengamatan media gambar (C),  murid (A) dapat menjelaskan (B) fungsi uang dalam kehidupan sehari-hari dengan tepat (D)
+Melalui permainan jual beli sederhana (C), murid (A) dapat menerapkan (B) nilai uang rupiah untuk membayar barang sesuai harganya dengan tepat (D) 
+Melalui pengerjaan LKPD (C), murid (A) dapat menganalisis (B) barang yang termasuk kebutuhan dan keinginan berdasarkan gambar atau cerita sederhana dengan tepat (D)
+Melalui kegiatan diskusi dan presentasi (C), murid (A) dapat menilai (B) pilihan penggunaan uang yang lebih baik antara kebutuhan dan keinginan serta menyampaikan alasannya dengan benar (D)
+Tautan dan QR Code
+
+Tangkapan Layar
+
+Ringkasan Tahap DHETIK
+
+Kecakapan Hidup dan Kearifan Lokal
+
+Skor SUS
+
+
+
+System Usability Scale (SUS) 
+
+
+Buat website media pembelajaran interaktif menggunakan Gemini Canvas bernama (“Ruang Belajar Ceria”) dengan desain menarik (simple tapi elegan), dilengkapi dengan gambar dan ilustrasi kartun lucu yang sesuai, warna cerah, animasi ringan, dan tampilan responsif yang menarik bagi anak 3 SD.
+
+IDENTITAS PEMBELAJARAN:
+- Tim Pengembang: (Ines Khaerunisa, Nasrun Nur Hakim, Nur Afifah Handayani, Zidna Syifanadia Impian Pragita Mariannisa)
+
+
+- Mata Pelajaran: (Ilmu Pengetahuan Alam dan Sosial)
+- Kelas/Fase: (3/B)
+- Materi: (BIJAK BERBELANJA KEBUTUHAN)
+
+Sediakan bagian Tujuan Pembelajaran dan Materi yang dapat disesuaikan berdasarkan data yang dimasukkan.
+ALUR PEMBELAJARAN:
+Beranda → D - Dekatkan  → H - Hubungkan  → E - Eksplorasi  → T - Tukar Gagasan → I - Ikat Konsep → K - Karya & Refleksi → Kontak 
+FITUR WEBSITE:
+Beranda → D - Dekatkan  → H - Hubungkan  → E - Eksplorasi  → T - Tukar Gagasan → I - Ikat Konsep → K - Karya & Refleksi → Kontak 
+di dalamnya tersedia materi interaktif, video pembelajaran, LKPD digital, latihan soal, kuis dengan skor otomatis dan pembahasan, tombol navigasi sebelumnya/selanjutnya, refleksi siswa, serta halaman hasil belajar atau sertifikat setelah pembelajaran selesai.
+Pada tiap tahapannya berisi:
+Pengalaman menggunakan uang dalam kehidupan sehari-hari
+
+
+D - Dekatkan 
+Tujuan Pembelajaran : cp - Peserta didik mampu menjelaskan nilai mata uang dan fungsinya, serta cara mengelola keuangan secara bijak. 
+Pertanyaan Pemantik :  pertanyaan pemantik mengenai pengalaman menggunakan uang dan perbedaan uang kertas dengan uang logam, 
+Vidio pembelajaran: - uang coin
+https://youtu.be/AmBTrtYAyTE?si=dXDyn1cRC45DMW_d
+- uang kertas
+https://youtu.be/KhmQWn390gw?si=9VYVoYg8f_p31NiH
+Mengidentifikasi : mengidentifikasi vidio yang telah di tonton (sesuai link di atas) dan menjawab pertanyaan 
+ Catatan penting urutannya:
+Tujuan Pembelajaran
+Pertanyaan Pemantik
+Kolom jawaban pertanyaan pemantik
+Video Pembelajaran
+Soal identifikasi mengidentifikasi vidio yang telah di tonton (sesuai link di atas) dan menjawab pertanyaan 
+
+
+H - Hubungkan
+Pada tahap H, ini kegiatan yang akan dilakukan
+(Menghubungkan pengetahuan peserta didik mengenai uang dengan pengalaman nyata dalam kehidupan sehari-hari serta memahami fungsi uang).
+Web belajar menampilkan infografis mengenai uang dan penggunaannya dalam kehidupan sehari-hari, seperti membeli makanan, minuman, alat tulis, dan kebutuhan lainnya. Peserta didik mengamati informasi dan ilustrasi yang disajikan dalam infografis.
+Setelah mengamati infografis, peserta didik membaca narasi penghubung berikut:
+"Wah, Sekarang kalian sudah mengenal berbagai pecahan mata uang rupiah dan mengetahui nilai setiap uang. Uang dapat digunakan untuk membeli berbagai barang yang kita perlukan. Namun, dalam menggunakan uang, kita harus bisa menentukan barang yang benar-benar dibutuhkan dan barang yang hanya kita inginkan. Nah, mari kita pelajari lebih lanjut tentang perbedaan kebutuhan dan keinginan agar kita dapat menggunakan uang dengan bijak!"
+3. Peserta didik menyimak video pembelajaran mengenai perbedaan kebutuhan dan keinginan dalam kegiatan berbelanja. : https://youtu.be/BCrFOo2-pOA?si=0qhhy7Ij32U975k_ 
+4. Setelah menyimak video, peserta didik mengidentifikasi perbedaan kebutuhan dan keinginan serta contoh barang yang termasuk ke dalam kedua kategori tersebut.5. Peserta didik memahami pentingnya menggunakan uang secara bijak dengan mendahulukan kebutuhan daripada keinginan.
+Hasil yang diharapkan: Peserta didik mampu menghubungkan penggunaan uang dengan kehidupan sehari-hari dan memahami fungsi uang dalam kegiatan transaksi. Catatan penting urutannya:
+Infografis
+Narasi
+Vidio pembelajaran
+Mengidentifikasi perbedaann
+Penjelasan pentingnya menggunakan uang secara bijak
+
+
+E - Eksplorasi  
+Pada tahap E, ini kegiatan yang akan dilakukan
+(Memberikan kesempatan kepada peserta didik untuk mengeksplorasi jenis dan nilai pecahan uang rupiah serta menerapkannya melalui aktivitas jual beli sederhana).
+Aktivitas Pembelajaran (Guru dan Peserta Didik):
+Setelah mengamati materi, peserta didik membaca narasi penghubung berikut sekarang mari kita mencoba menggunakan uang dalam kegiatan berbelanja melalui permainan Belanja Pintar!"
+Web belajar menampilkan permainan simulasi jual beli “market niza” yang menyajikan berbagai pilihan barang menarik bagi peserta didik, seperti pensil, penghapus, buku, rubik, ciki, minuman, roti, clay/slime, stiker, dan barang lainnya yang dilengkapi gambar serta harga, kemudian peserta didik mengamati pilihan barang dan melakukan simulasi berbelanja dengan anggaran maksimal Rp20.000 melalui kegiatan memilih barang sesuai kebutuhan dan keinginan, menghitung total harga, menentukan pecahan uang untuk pembayaran, serta memastikan jumlah belanja tidak melebihi anggaran yang tersedia. 
+Peserta didik membaca petunjuk permainan yang ditampilkan pada web belajar mengenai cara menyelesaikan setiap misi, seperti mengelompokkan gambar uang, memasangkan uang dengan nilai nominalnya, mengurutkan nilai uang, serta memilih dan memindahkan gambar uang sesuai dengan jumlah yang diminta.
+Peserta didik mulai mengerjakan misi pertama hingga keempat dengan mengelompokkan jenis uang, memasangkan gambar uang dengan nilai nominalnya, mengurutkan pecahan uang berdasarkan nilainya, serta mencocokkan beberapa pecahan uang untuk memperoleh jumlah tertentu.
+Peserta didik melanjutkan misi kelima hingga ketujuh dengan memilih dan memindahkan gambar pecahan uang untuk membayar barang berupa roti, susu, dan buku sesuai dengan harga yang tertera pada masing-masing barang.
+Selama menyelesaikan ketujuh misi, peserta didik mendapatkan bimbingan melalui arahan dan pertanyaan pemantik yang membantu mereka mengenali nilai pecahan uang, menentukan kombinasi uang, serta menghitung kesesuaian jumlah uang dengan harga barang.
+Peserta didik mampu mengenali jenis dan nilai pecahan uang rupiah, mengurutkan nilai uang, mengkombinasikan beberapa pecahan uang, serta menentukan jumlah uang yang sesuai untuk melakukan transaksi jual beli sederhana.
+Point penting urutannya:
+Materi interaktif pengenalan jenis dan nilai pecahan uang rupiah.
+Simulasi jual beli melalui permainan Market Niza.
+Mengamati pilihan barang dan harga serta memahami batas anggaran maksimal Rp20.000.
+Membaca petunjuk dan memahami aturan penyelesaian tujuh misi.
+Mengerjakan misi 1–4: mengelompokkan uang, memasangkan nilai uang, mengurutkan nilai uang, dan mencocokkan jumlah uang.
+Mengerjakan misi 5–7: membayar roti, susu, dan buku menggunakan pecahan uang yang sesuai.
+
+
+
+
+T - Tukar Gagasan
+(Memberikan ruang bagi peserta didik untuk berbagi temuan, berdiskusi, dan menanggapi pendapat teman mengenai kebutuhan dan keinginan).
+Web belajar menampilkan halaman “Ruang Diskusi” pada website DHETIK, kemudian peserta didik mengakses halaman tersebut.
+Web belajar menyajikan aturan diskusi santun, seperti mendengarkan pendapat teman, menggunakan bahasa yang baik, dan menghargai perbedaan pendapat. Peserta didik membaca dan memahami aturan tersebut sebelum memulai diskusi.
+Web belajar menampilkan gambar dan cerita sederhana mengenai beberapa barang, seperti nasi, buku tulis, mainan, dan jajanan. Peserta didik mengamati gambar dan membaca cerita yang disajikan.
+Peserta didik mengakses LKPD digital tentang kebutuhan dan keinginan yang tersedia pada halaman web belajar, kemudian mengerjakan LKPD secara individu dengan mengelompokkan barang ke dalam kategori kebutuhan atau keinginan berdasarkan gambar dan cerita. (https://canva.link/9qvvwyerlogq0i1)
+Peserta didik melakukan lima kegiatan, yaitu (1) Ayo Amati Barang! dengan mengamati berbagai gambar barang sehari-hari; (2) Ayo Kelompokkan! dengan mengelompokkan barang ke dalam kategori kebutuhan dan keinginan; (3) Mengapa Kamu Memilihnya? dengan menganalisis setiap barang menggunakan pertanyaan penuntun dan menuliskan alasan pengelompokan; (4) Ayo Berpikir! dengan menganalisis cerita bergambar dan menentukan barang yang perlu diprioritaskan; serta (5) Ayo Simpulkan! dengan melengkapi kalimat tentang kebutuhan dan keinginan serta menentukan prioritas.
+Setelah menyelesaikan LKPD, peserta didik diarahkan untuk berbagi hasil pekerjaan melalui Padlet yang tersemat pada halaman diskusi. Setiap peserta didik mengunggah hasil pengelompokan beserta alasannya.
+Peserta didik membaca hasil pekerjaan teman dan memberikan tanggapan atau pertanyaan melalui kolom komentar Padlet dengan menggunakan bahasa yang santun.
+Peserta didik bersama-sama membahas perbedaan jawaban, menyampaikan alasan dari hasil pengelompokan, serta memperbaiki pemahaman apabila terdapat kekeliruan.
+Hasil yang diharapkan: Peserta didik mampu menganalisis barang yang termasuk kebutuhan dan keinginan berdasarkan gambar atau cerita, serta menyampaikan alasan dan menanggapi pendapat teman secara santun.
+Poin penting : 
+Mengerjakan LKPD digital melalui lima kegiatan: Ayo Amati Barang, Ayo Kelompokkan, Mengapa Kamu Memilihnya, Ayo Berpikir, dan Ayo Simpulkan. ((https://canva.link/9qvvwyerlogq0i1)
+Mengunggah hasil pengerjaan LKPD melalui Padlet yang tersedia pada halaman diskusi.
+Membaca dan memberikan tanggapan terhadap hasil pekerjaan teman menggunakan bahasa yang santun.
+
+
+
+
+I - Ikat Konsep
+Tahap I – Ikat Konsep (Menyimpulkan materi, meluruskan miskonsepsi, dan mengaitkan seluruh konsep yang telah dipelajari).
+Web belajar menampilkan peta konsep mengenai jenis dan nilai uang, fungsi uang, penggunaan uang dalam jual beli, serta kebutuhan dan keinginan. Peserta didik mengamati keterkaitan antar konsep yang telah dipelajari.
+Peserta didik menjawab pertanyaan penguatan, seperti “Apa saja jenis uang rupiah?”, “Untuk apa uang digunakan?”, dan “Bagaimana cara membedakan kebutuhan dan keinginan?” berdasarkan pemahaman masing-masing.
+Peserta didik menyimak penjelasan penguatan mengenai beberapa pemahaman yang sering keliru, seperti anggapan bahwa semua barang yang disukai merupakan kebutuhan atau bahwa nilai uang ditentukan oleh ukurannya.
+Web belajar menampilkan infografis atau video rangkuman mengenai cara menggunakan uang secara bijak. Peserta didik menyimak dan memahami kembali materi yang telah dipelajari.
+Peserta didik menyampaikan kesimpulan mengenai jenis dan fungsi uang, penggunaan uang dalam kegiatan jual beli, serta pentingnya membedakan kebutuhan dan keinginan.
+Catatan penting urutanya : 
+Peta konsep
+Pertanyaan penguatan
+Kolom jawaban penguatan
+Penguatan materi (ppt: https://canva.link/e0arf658n2yoz1b)
+ Kolom diskusi/ refleksi
+Hasil yang diharapkan : Peserta didik mampu menyimpulkan keterkaitan antara jenis uang, fungsi uang, penggunaan uang dalam jual beli, serta perbedaan kebutuhan dan keinginan, dan tidak lagi memiliki miskonsepsi.
+
+
+K - Karya & Refleksi
+
+ Tahap K – Karya & Refleksi  
+(Mendorong peserta didik membuat karya nyata yang menerapkan pemahamannya, lalu merefleksikan proses belajar).
+Guru mengarahkan peserta didik membuka halaman “Karyaku” pada website DHETIK, kemudian peserta didik mengakses halaman tersebut.
+Guru menyampaikan tugas karya, yaitu membuat “Rencana Belanja Bijakku” berupa gambar atau tabel sederhana berisi daftar barang yang ingin dibeli dengan uang saku tertentu, kemudian peserta didik menyimak tujuan dan petunjuk tugas.
+Guru menyampaikan rubrik penilaian karya, yang mencakup ketepatan memilih kebutuhan, kesesuaian harga dengan uang, dan alasan pilihan, kemudian peserta didik memahami kriteria yang dinilai.
+Guru membimbing peserta didik menentukan barang yang akan dibeli dengan mempertimbangkan kebutuhan dan keinginan, kemudian peserta didik menyusun renc ana belanja dan menuliskan alasan pilihannya.
+Guru memantau proses pembuatan karya dan memberikan bimbingan kepada peserta didik yang mengalami kesulitan, kemudian peserta didik menyempurnakan karyanya.
+Guru mengarahkan peserta didik mengunggah karya pada halaman Karyaku, kemudian peserta didik mengunggah karya masing-masing.
+Guru memberi kesempatan beberapa peserta didik mempresentasikan karyanya, kemudian peserta didik menjelaskan pilihan penggunaan uangnya, dan teman lain memberi tanggapan.
+Guru memandu refleksi dengan kalimat “Aku tahu…, aku merasa…, aku ingin mencoba…”, kemudian peserta didik mengisi refleksi tentang hal yang dipelajari, perasaannya, dan rencana menerapkannya.
+Guru memberikan penguatan dan apresiasi, kemudian peserta didik menyimak dan menutup pembelajaran dengan doa.
+Hasil yang diharapkan: Peserta didik mampu menilai pilihan penggunaan uang yang lebih baik antara kebutuhan dan keinginan, menyampaikan alasannya, dan merefleksikan pembelajarannya.
+
+
+DESAIN DAN FUNGSIONALITAS:
+Gunakan bahasa Indonesia yang sederhana dan sesuai usia anak SD. Buat dashboard guru untuk mengelola konten dan fitur berbagi link agar siswa dapat mengakses pembelajaran dengan mudah. Pastikan setiap tombol berfungsi, jawaban kuis dinilai dengan benar, dan progres belajar ditampilkan secara jelas.
+Buat website yang benar-benar interaktif, bukan sekadar mockup. Gunakan data contoh yang bisa diedit, serta penyimpanan data yang sesuai dengan kemampuan platform. Jangan mengklaim fitur sudah berfungsi jika belum diimplementasikan.
+Langsung bangun website melalui Gemini Canvas dengan hasil yang menarik, edukatif, mudah digunakan, dan siap dikembangkan sesuai kebutuhan guru.validasi fitur dan pengelolaan data,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Langkah - prosedur dan kriteria 
+
+
+
+
+
+
+PROMPT PEMBUATAN WEBSITE MEDIA PEMBELAJARAN INTERAKTIF
+"RUANG BELAJAR CERIA"
+Buatlah sebuah website media pembelajaran interaktif untuk siswa Sekolah Dasar kelas 3 (Fase B) dengan nama "Ruang Belajar Ceria". Website ini bertujuan untuk membantu siswa belajar secara mandiri melalui materi pembelajaran yang menarik, menyenangkan, interaktif, dan mudah dipahami.
+Website harus memiliki desain modern, elegan, ceria, penuh warna, serta dilengkapi ilustrasi kartun yang lucu dan ramah anak untuk kelas 3 SD
+Sediakan bagian Tujuan Pembelajaran dan Materi yang dapat disesuaikan berdasarkan data yang dimasukkan.
+ALUR PEMBELAJARAN:
+Beranda → D - Dekatkan  → H - Hubungkan  → E - Eksplorasi  → T - Tukar Gagasan → I - Ikat Konsep → K - Karya & Refleksi → Kontak 
+FITUR WEBSITE:
+Beranda → D - Dekatkan  → H - Hubungkan  → E - Eksplorasi  → T - Tukar Gagasan → I - Ikat Konsep → K - Karya & Refleksi → Kontak 
+1. KONSEP DAN DESAIN WEBSITE
+Gunakan konsep desain fun, colorful, educational, and playful dengan ketentuan:
+GUNAKAN WARNA pastel cerah seperti biru langit, kuning, hijau mint, peach, dan ungu muda.
+Tampilan bersih
+Gunakan font yang bulat, menarik, dan mudah dibaca anak-anak.
+Tambahkan ilustrasi kartun anak sekolah, buku, pensil, awan, bintang, pelangi, hewan lucu, dan karakter maskot.
+Gunakan ikon yang mudah dikenali untuk setiap menu.
+Tambahkan animasi ringan seperti hover effect, floating animation, transisi halaman, dan efek saat siswa menjawab soal.
+Gunakan sudut elemen membulat (rounded corners), bayangan lembut, dan tata letak yang rapi.
+Pastikan website responsif dan nyaman digunakan melalui laptop, tablet, maupun smartphone.
+Buat maskot utama berupa karakter kartun lucu yang menjadi teman belajar siswa dan dapat muncul di beberapa bagian website untuk memberikan motivasi.
+2. HALAMAN BERANDA (HOME)
+Buat halaman utama yang menarik dengan komponen berikut:
+Logo upi dan nama website "Ruang Belajar Ceria".
+Navbar berisi menu Beranda, D - Dekatkan, H - Hubungkan, E - Eksplorasi, T - Tukar Gagasan, I - Ikat Konsep, K - Karya & Refleksi, dan Tentang.
+Hero section dengan judul: "Halo, Teman Belajar! 👋" "Yuk, Belajar Sambil Bermain di Ruang Belajar Ceria!"
+Subjudul yang mengajak siswa untuk belajar dengan cara menyenangkan.
+Ilustrasi kartun anak-anak yang sedang belajar.
+Tombol utama "Mulai Belajar".
+Langsung masuk ke materi IPAS Bijak Berbelaja Kebutuhan
+3. HALAMAN TAHAPAN DHETIK
+Materi IPAS (bijak berbelanja kebutuhan)
+Tahap D - Dekatkan
+Tujuan Pembelajaran : cp - Peserta didik mampu menjelaskan nilai mata uang dan fungsinya, serta cara mengelola keuangan secara bijak. 
+Pertanyaan Pemantik :  pertanyaan pemantik mengenai pengalaman menggunakan uang dan perbedaan uang kertas dengan uang logam.
+Sediakan kolom komentar dibawah pertanyaan pemantik untuk anak menjawab pertanyaan pemantik yang diberikan.
+Vidio pembelajaran: - uang coin: https://youtu.be/AmBTrtYAyTE?si=dXDyn1cRC45DMW_d
+- uang kertas: https://youtu.be/KhmQWn390gw?si=9VYVoYg8f_p31NiH
+Mengidentifikasi : mengidentifikasi gambar dan menjawab pertanyaan berdasarkan pengetahuan awal mereka.
+Catatan penting urutannya:
+Tujuan Pembelajaran
+Pertanyaan Pemantik
+Kolom jawaban pertanyaan pemantik
+Video Pembelajaran
+Soal identifikasi mengidentifikasi vidio yang telah di tonton (sesuai link di atas) dan menjawab pertanyaan 
+
+
+Tahap H - Hubungkan
+Pada tahap H, ini kegiatan yang akan dilakukan
+(Menghubungkan pengetahuan peserta didik mengenai uang dengan pengalaman nyata dalam kehidupan sehari-hari serta memahami fungsi uang).
+Web belajar menampilkan infografis mengenai uang dan penggunaannya dalam kehidupan sehari-hari, seperti membeli makanan, minuman, alat tulis, dan kebutuhan lainnya. Peserta didik mengamati informasi dan ilustrasi yang disajikan dalam infografis.
+Setelah mengamati infografis, peserta didik membaca narasi penghubung berikut: "Wah, Sekarang kalian sudah mengenal berbagai pecahan mata uang rupiah dan mengetahui nilai setiap uang. Uang dapat digunakan untuk membeli berbagai barang yang kita perlukan. Namun, dalam menggunakan uang, kita harus bisa menentukan barang yang benar-benar dibutuhkan dan barang yang hanya kita inginkan. Nah, mari kita pelajari lebih lanjut tentang perbedaan kebutuhan dan keinginan agar kita dapat menggunakan uang dengan bijak!"
+Peserta didik menyimak video pembelajaran mengenai perbedaan kebutuhan dan keinginan dalam kegiatan berbelanja. : https://youtu.be/BCrFOo2-pOA?si=0qhhy7Ij32U975k_ 
+Setelah menyimak video, peserta didik mengidentifikasi perbedaan kebutuhan dan keinginan serta contoh barang yang termasuk ke dalam kedua kategori tersebut.
+Peserta didik memahami pentingnya menggunakan uang secara bijak dengan mendahulukan kebutuhan daripada keinginan.
+Hasil yang diharapkan: Peserta didik mampu menghubungkan penggunaan uang dengan kehidupan sehari-hari dan memahami fungsi uang dalam kegiatan transaksi. Catatan penting urutannya:
+Infografis
+Narasi
+Vidio pembelajaran
+Mengidentifikasi perbedaann
+Penjelasan pentingnya menggunakan uang secara bijak
+
+Tahap E - Eksplorasi
+Pada tahap E, ini kegiatan yang akan dilakukan
+(Memberikan kesempatan kepada peserta didik untuk mengeksplorasi jenis dan nilai pecahan uang rupiah serta menerapkannya melalui aktivitas jual beli sederhana).
+Aktivitas Pembelajaran (Guru dan Peserta Didik):
+Setelah mengamati materi, peserta didik membaca narasi penghubung berikut sekarang mari kita mencoba menggunakan uang dalam kegiatan berbelanja melalui permainan Belanja Pintar!"
+Web belajar menampilkan permainan simulasi jual beli “market niza” yang menyajikan berbagai pilihan barang menarik bagi peserta didik, seperti pensil, penghapus, buku, rubik, ciki, minuman, roti, clay/slime, stiker, dan barang lainnya yang dilengkapi gambar serta harga, kemudian peserta didik mengamati pilihan barang dan melakukan simulasi berbelanja dengan anggaran maksimal Rp20.000 melalui kegiatan memilih barang sesuai kebutuhan dan keinginan, menghitung total harga, menentukan pecahan uang untuk pembayaran, serta memastikan jumlah belanja tidak melebihi anggaran yang tersedia. 
+Peserta didik membaca petunjuk permainan yang ditampilkan pada web belajar mengenai cara menyelesaikan setiap misi, seperti mengelompokkan gambar uang, memasangkan uang dengan nilai nominalnya, mengurutkan nilai uang, serta memilih dan memindahkan gambar uang sesuai dengan jumlah yang diminta.
+Peserta didik mulai mengerjakan misi pertama hingga keempat dengan mengelompokkan jenis uang, memasangkan gambar uang dengan nilai nominalnya, mengurutkan pecahan uang berdasarkan nilainya, serta mencocokkan beberapa pecahan uang untuk memperoleh jumlah tertentu.
+Peserta didik melanjutkan misi kelima hingga ketujuh dengan memilih dan memindahkan gambar pecahan uang untuk membayar barang berupa roti, susu, dan buku sesuai dengan harga yang tertera pada masing-masing barang.
+Selama menyelesaikan ketujuh misi, peserta didik mendapatkan bimbingan melalui arahan dan pertanyaan pemantik yang membantu mereka mengenali nilai pecahan uang, menentukan kombinasi uang, serta menghitung kesesuaian jumlah uang dengan harga barang.
+Peserta didik mampu mengenali jenis dan nilai pecahan uang rupiah, mengurutkan nilai uang, mengkombinasikan beberapa pecahan uang, serta menentukan jumlah uang yang sesuai untuk melakukan transaksi jual beli sederhana.
+Point penting urutannya:
+Materi interaktif pengenalan jenis dan nilai pecahan uang rupiah.
+Simulasi jual beli melalui permainan Market Niza.
+Mengamati pilihan barang dan harga serta memahami batas anggaran maksimal Rp20.000.
+Membaca petunjuk dan memahami aturan penyelesaian tujuh misi.
+Mengerjakan misi 1–4: mengelompokkan uang, memasangkan nilai uang, mengurutkan nilai uang, dan mencocokkan jumlah uang.
+Mengerjakan misi 5–7: membayar roti, susu, dan buku menggunakan pecahan uang yang sesuai.
+
+Tahap T - Tukar Gagasan
+
+
+
+Tahap I - Ikat Konsep
+Tahap I – Ikat Konsep (Menyimpulkan materi, meluruskan miskonsepsi, dan mengaitkan seluruh konsep yang telah dipelajari).
+Web belajar menampilkan peta konsep mengenai jenis dan nilai uang, fungsi uang, penggunaan uang dalam jual beli, serta kebutuhan dan keinginan. Peserta didik mengamati keterkaitan antar konsep yang telah dipelajari.
+Peserta didik menjawab pertanyaan penguatan, seperti “Apa saja jenis uang rupiah?”, “Untuk apa uang digunakan?”, dan “Bagaimana cara membedakan kebutuhan dan keinginan?” berdasarkan pemahaman masing-masing.
+Peserta didik menyimak penjelasan penguatan mengenai beberapa pemahaman yang sering keliru, seperti anggapan bahwa semua barang yang disukai merupakan kebutuhan atau bahwa nilai uang ditentukan oleh ukurannya.
+Web belajar menampilkan infografis atau video rangkuman mengenai cara menggunakan uang secara bijak. Peserta didik menyimak dan memahami kembali materi yang telah dipelajari.
+Peserta didik menyampaikan kesimpulan mengenai jenis dan fungsi uang, penggunaan uang dalam kegiatan jual beli, serta pentingnya membedakan kebutuhan dan keinginan.
+Catatan penting urutanya : 
+Peta konsep
+Pertanyaan penguatan
+Kolom jawaban penguatan
+Penguatan materi (ppt: https://canva.link/e0arf658n2yoz1b)
+ Kolom diskusi/ refleksi
+Hasil yang diharapkan : Peserta didik mampu menyimpulkan keterkaitan antara jenis uang, fungsi uang, penggunaan uang dalam jual beli, serta perbedaan kebutuhan dan keinginan, dan tidak lagi memiliki miskonsepsi.
+
+Tahap K - Karya dan Refleksi
+
+
+
+Setiap halaman harus dilengkapi dengan:
+Judul materi.
+Tujuan pembelajaran.
+Penjelasan menggunakan bahasa sederhana yang mudah dipahami anak kelas 3 SD.
+Gambar dan ilustrasi pendukung.
+Contoh dalam kehidupan sehari-hari.
+Rangkuman materi.
+Tombol "Materi Selanjutnya".
+Materi dikemas dalam bentuk semenarik mungkin 
+4. HALAMAN VIDEO PEMBELAJARAN
+Buat halaman khusus video pembelajaran dengan:
+Tampilan video berbentuk kartu.
+Thumbnail video yang menarik.
+Judul dan deskripsi video.
+Kategori berdasarkan mata pelajaran.
+Tombol putar video.
+Fitur video yang dapat ditonton langsung jika tersedia sumber video yang valid.
+Jika belum tersedia video asli, gunakan placeholder video yang menarik dan sediakan tempat untuk menambahkan tautan YouTube.
+5. HALAMAN KUIS INTERAKTIF
+Buat kuis interaktif untuk menguji pemahaman siswa setelah mempelajari materi.
+Fitur kuis:
+Pilihan ganda dengan 4 pilihan jawaban.
+Pertanyaan disesuaikan dengan materi kelas 3 SD.
+Setiap soal memiliki ilustrasi pendukung jika sesuai.
+Siswa dapat memilih jawaban dengan mengeklik kartu jawaban.
+Berikan feedback secara langsung setelah siswa menjawab.
+Jika benar, tampilkan pesan "Hebat! Jawabanmu Benar! 🎉".
+Jika salah, tampilkan pesan "Jangan Menyerah! Yuk, Coba Lagi! 💪".
+Tampilkan pembahasan singkat untuk setiap jawaban.
+Sistem skor otomatis.
+Tampilkan jumlah jawaban benar dan salah.
+Tampilkan hasil akhir dengan animasi dan pesan motivasi.
+Sediakan tombol "Ulangi Kuis" dan "Kembali ke Materi".
+Pastikan kuis benar-benar berfungsi dan skor dihitung secara otomatis.
+6. HALAMAN GAME EDUKASI
+Buat beberapa permainan edukatif sederhana yang dapat dimainkan langsung di website.
+Jenis permainan:
+Tebak Gambar: Siswa menebak nama benda, hewan, atau tumbuhan berdasarkan gambar.
+Susun Kata: Siswa menyusun huruf acak menjadi kata yang benar.
+Petualangan Matematika: Siswa menyelesaikan soal matematika untuk mendapatkan bintang.
+Pasangkan Jawaban: Siswa mencocokkan pertanyaan dengan jawaban yang benar.
+Benar atau Salah: Siswa memilih apakah suatu pernyataan benar atau salah.
+Setiap permainan harus memiliki:
+Petunjuk permainan yang jelas.
+Tampilan visual menarik.
+Interaksi yang mudah digunakan.
+Sistem poin.
+Feedback benar atau salah.
+Animasi sederhana ketika berhasil menyelesaikan permainan.
+7. FITUR REWARD DAN MOTIVASI
+Tambahkan sistem penghargaan agar siswa semakin semangat belajar.
+Fitur:
+Poin setiap menyelesaikan materi dan kuis.
+Koleksi bintang sebagai penghargaan.
+Badge atau lencana pencapaian.
+Pesan motivasi yang bervariasi.
+Progress belajar yang menunjukkan materi yang telah diselesaikan.
+Tampilan pencapaian siswa.
+Contoh badge:
+🌟 Bintang Pintar
+🏆 Juara Matematika
+📚 Si Rajin Membaca
+🎯 Jago Kuis
+🚀 Petualang Hebat
+Simpan progres belajar menggunakan localStorage agar tetap tersimpan ketika halaman dibuka kembali pada perangkat yang sama.
+8. HALAMAN TENTANG
+Buat halaman informasi website yang berisi:
+Nama website: Ruang Belajar Ceria:
+Ruang Belajar Ceria merupakan media pembelajaran digital interaktif yang dirancang untuk menciptakan pengalaman belajar yang menyenangkan, menarik, dan bermakna bagi peserta didik sekolah dasar. 
+Tim Pengembang
+ Website Ruang Belajar Ceria dikembangkan oleh: 
+Ines Khairunisa, Nasrun Nurhakim, Nur Afifah Handayani, Zidna Syifanadia Impian Pragita Mariannisa
+Deskripsi dan tujuan pengembangan website: Ruang Belajar Ceria merupakan website media pembelajaran interaktif yang dikembangkan sebagai sarana pendukung kegiatan pembelajaran Ilmu Pengetahuan Alam dan Sosial (IPAS) kelas III SD/Fase B, khususnya pada materi Bab 5 – Bijak Berbelanja Kebutuhan.
+Website ini dirancang dengan memadukan materi pembelajaran, gambar ilustrasi, video edukatif, LKPD digital, permainan edukasi, kuis interaktif, serta kegiatan refleksi yang dikemas dalam tampilan menarik dan ramah anak. Proses pembelajaran disusun menggunakan model DHETIK (Dekatkan, Hubungkan, Eksplorasi, Tukar Gagasan, Ikat Konsep, serta Karya dan Refleksi).
+Tujuan pengembangan website ini adalah untuk membantu peserta didik memahami materi tentang jenis dan nilai uang rupiah, fungsi uang, kegiatan jual beli, perbedaan kebutuhan dan keinginan, serta cara menggunakan uang secara bijak melalui pengalaman belajar yang aktif, interaktif, dan dekat dengan kehidupan sehari-hari.
+Selain itu, website ini bertujuan meningkatkan motivasi belajar, kemandirian, kemampuan berpikir kritis, kreativitas, serta keterlibatan peserta didik dalam proses pembelajaran.
+Sasaran pengguna: siswa kelas 3 SD.
+Manfaat media pembelajaran: 
+Bagi Peserta Didik:
+Membantu memahami materi pembelajaran melalui gambar, ilustrasi, video, dan aktivitas interaktif.
+Meningkatkan minat dan motivasi belajar melalui permainan edukatif dan kuis.
+Melatih kemampuan mengenali nilai uang dan menggunakannya dalam kegiatan jual beli sederhana.
+Membantu membedakan kebutuhan dan keinginan serta membiasakan perilaku berbelanja secara bijak.
+Melatih kemandirian, kemampuan berpikir kritis, dan keterampilan memecahkan masalah.
+Memberikan kesempatan kepada peserta didik untuk belajar dan mengulang materi sesuai kebutuhan.
+Bagi Guru:
+Membantu menyampaikan materi pembelajaran secara lebih menarik dan variatif.
+Menyediakan alternatif media pembelajaran digital yang mudah digunakan.
+Mendukung pelaksanaan pembelajaran menggunakan model DHETIK.
+Mempermudah pemberian latihan, kuis, LKPD, dan evaluasi pembelajaran.
+Membantu memantau progres dan hasil belajar peserta didik sesuai fitur yang tersedia.
+Bagi Proses Pembelajaran:
+Menciptakan suasana belajar yang aktif, menyenangkan, dan tidak monoton.
+Menghubungkan materi pembelajaran dengan pengalaman nyata dalam kehidupan sehari-hari.
+Mendorong interaksi, diskusi, kolaborasi, dan refleksi.
+Mendukung pemanfaatan teknologi digital dalam kegiatan pembelajaran di sekolah dasar.
+Informasi bahwa website merupakan media pembelajaran digital yang mendukung pembelajaran mandiri dan menyenangkan.
+Tambahkan teks ini dipaling bawah 
+"Belajar Jadi Lebih Seru, Belanja Jadi Lebih Bijak!"
+Ruang Belajar Ceria – Teman Belajar, Petualangan Menyenangkan!
+9. FITUR TAMBAHAN
+Tambahkan fitur berikut untuk meningkatkan pengalaman pengguna:
+Navigasi yang mudah dipahami anak.
+Tombol kembali ke halaman sebelumnya.
+Tombol beranda yang selalu mudah ditemukan.
+Progress bar pembelajaran.
+Efek suara sederhana saat menjawab kuis (dapat diaktifkan atau dinonaktifkan).
+Dark mode tidak perlu diutamakan; prioritaskan tampilan cerah dan nyaman.
+Loading animation yang lucu dan ringan.
+Tampilan notifikasi saat siswa berhasil menyelesaikan aktivitas.
+10. TEKNIS PENGEMBANGAN WEBSITE
+Bangun website dengan ketentuan teknis berikut:
+Gunakan HTML, CSS, dan JavaScript atau framework modern yang sesuai.
+Pastikan seluruh navigasi dan tombol berfungsi.
+Buat desain komponen yang konsisten di setiap halaman.
+Gunakan struktur kode yang rapi, modular, dan mudah dikembangkan.
+Pastikan seluruh fitur interaktif dapat digunakan tanpa error.
+Gunakan gambar dan ilustrasi yang relevan, berkualitas, dan ramah anak.
+Optimalkan kecepatan loading website.
+Pastikan responsivitas pada berbagai ukuran layar.
+Gunakan data contoh yang realistis untuk materi, kuis, dan permainan.
+Jangan membuat tombol atau fitur yang hanya menjadi hiasan tanpa fungsi.
+11. PENGALAMAN PENGGUNA (USER EXPERIENCE)
+Website harus memberikan pengalaman belajar yang:
+Menyenangkan dan tidak membosankan.
+Mudah digunakan oleh anak usia sekitar 8–9 tahun.
+Menggunakan bahasa Indonesia yang sederhana dan komunikatif.
+Memiliki petunjuk yang jelas pada setiap aktivitas.
+Memberikan penghargaan dan motivasi positif.
+Tidak menampilkan terlalu banyak teks dalam satu halaman.
+Mengutamakan visual, ilustrasi, dan interaksi langsung.
+12. HASIL AKHIR YANG DIHARAPKAN
+Buat website "Ruang Belajar Ceria" menjadi media pembelajaran digital yang lengkap, menarik, dan interaktif, bukan sekadar website statis atau halaman presentasi.
+Prioritaskan:
+Desain visual yang profesional, ceria, dan ramah anak.
+Navigasi yang sederhana dan mudah digunakan.
+Materi pembelajaran yang sesuai dengan siswa kelas 3 SD.
+Kuis dan game edukasi yang benar-benar berfungsi.
+Sistem skor, reward, dan progress belajar.
+Tampilan responsif untuk laptop, tablet, dan smartphone.
+Instruksi penting: Langsung buat dan tampilkan website yang dapat dijalankan di Gemini Canvas. Jangan hanya memberikan penjelasan, rancangan, atau contoh kode. Bangun seluruh tampilan dan fitur secara utuh, dengan konten awal yang sudah terisi dan seluruh interaksi utama dapat dicoba langsung.
+
+https://sites.google.com/d/1Jes17GP_tpsVIvZcIgEJMifPE6vQ1RGw/p/1WuwnY_0ZuaMMoMyd2tTvQSvuaRwdJbF3/edit 

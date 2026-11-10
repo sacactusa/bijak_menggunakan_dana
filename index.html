@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruang Belajar Ceria - IPAS Kelas 3 SD (Model DHETIK)</title>
+  
+  <!-- Google Fonts: Fredoka & Quicksand -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            title: ['Fredoka', 'sans-serif'],
+            sans: ['Quicksand', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              sky: '#38BDF8',
+              mint: '#34D399',
+              sun: '#FBBF24',
+              peach: '#FB923C',
+              lilac: '#A855F7',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col selection:bg-amber-200 selection:text-amber-900">
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+  <!-- Toast Notification Container -->
+  <div id="global-toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 opacity-0 pointer-events-none translate-y-4"></div>
+
+  <!-- Top Announcement Bar (Header Identity UPI Cibiru sesuai Storyboard) -->
+  <header class="bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 text-white text-xs font-bold py-2 px-4 shadow-sm">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span>🎓 KAMPUS UPI DI CIBIRU</span>
+        <span class="opacity-60">•</span>
+        <span class="tracking-wider">PGSD 2026</span>
+        <span class="opacity-60">•</span>
+        <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider">#dHeTik</span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px]">
+        <span>IPAS KELAS 3 SD (FASE B)</span>
+        <span class="opacity-60">•</span>
+        <span>BAB 5: BIJAK BERBELANJA KEBUTUHAN</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Enhanced 2-Tier Clean Navbar with Beautiful Vector SVG Icons -->
+  <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-2 border-slate-100 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Tier 1: Brand Logo & User Action Controls -->
+      <div class="flex items-center justify-between h-16 py-2 gap-4 border-b border-slate-100/80">
+        
+        <!-- Logo & Title -->
+        <div onclick="switchTab('beranda')" class="cursor-pointer flex items-center gap-3 flex-shrink-0 group">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 p-1 shadow-md group-hover:scale-105 transition-transform flex items-center justify-center text-white font-black">
+            <!-- Cute Vector Coin SVG in Brand -->
+            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" fill="#FACC15" stroke="#FFFFFF" stroke-width="1.8"/>
+              <circle cx="12" cy="12" r="7" stroke="#CA8A04" stroke-width="1.2" stroke-dasharray="2 2"/>
+              <text x="12" y="15" font-size="7.5" font-weight="black" fill="#713F12" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-title text-xl md:text-2xl font-black text-slate-800 tracking-tight">Ruang Belajar Ceria</span>
+              <span class="text-amber-500 text-base">✨</span>
+            </div>
+            <p class="text-[10px] font-bold tracking-widest text-sky-600 uppercase">Petualangan Belajar IPAS Ceria</p>
+          </div>
+        </div>
+
+        <!-- Student Stats & Action Controls -->
+        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+          
+          <!-- Student Profile Pill (Clickable) -->
+          <button id="stat-name-widget" title="Klik untuk mengganti nama siswa" class="btn-playful flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-sky-50 border border-sky-200 hover:bg-sky-100 transition-colors">
+            <!-- User Avatar SVG -->
+            <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="8" r="4.5" fill="#FED7AA" stroke="#EA580C" stroke-width="1.5"/>
+              <path d="M4 20C4 16.5 7.5 14 12 14C16.5 14 20 16.5 20 20" fill="#BAE6FD" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <span id="stat-name" class="font-bold text-xs text-sky-900 whitespace-nowrap">Teman Ceria</span>
+          </button>
+
+          <!-- Bintang Counter Badge -->
+          <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-amber-50 border border-amber-200" title="Bintang yang kamu kumpulkan">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#F59E0B">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <span id="stat-stars" class="font-black text-xs text-amber-900">8</span>
+          </div>
+
+          <!-- Poin Counter Badge -->
+          <div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-emerald-50 border border-emerald-200" title="Poin belajarmu">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" fill="#FACC15" stroke="#CA8A04" stroke-width="1.8"/>
+              <text x="12" y="15.5" font-size="8" font-weight="black" fill="#713F12" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
+            </svg>
+            <span id="stat-points" class="font-black text-xs text-emerald-900">25</span>
+          </div>
+
+          <!-- Sound Toggle Button with Speaker SVG -->
+          <button id="sound-toggle-btn" class="btn-playful w-9 h-9 rounded-2xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition-colors" title="Nyalakan/Matikan Suara">
+            <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#E0F2FE"/>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            </svg>
+          </button>
+
+          <!-- Dashboard Guru Button -->
+          <button onclick="openTeacherDashboard()" class="btn-playful px-3 py-1.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm" title="Akses Dashboard Guru">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="4" width="18" height="12" rx="2" fill="#DCFCE7" stroke="#FFFFFF" stroke-width="1.8"/>
+              <path d="M8 20L12 16L16 20" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M7 8.5H13M7 11.5H11" stroke="#15803D" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="17" cy="8.5" r="1.5" fill="#FACC15"/>
+            </svg>
+            <span class="hidden md:inline">Dashboard Guru</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tier 2: Navigation Menu Bar with Custom SVG Icons -->
+      <div class="flex items-center gap-1 sm:gap-1.5 overflow-x-auto py-2.5 text-xs font-bold no-scrollbar">
+        
+        <!-- 1. Beranda -->
+        <button data-tab="beranda" onclick="switchTab('beranda')" class="nav-link px-3.5 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-amber-400 text-slate-900 border border-amber-500 shadow-sm transform scale-105">
+          <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
+            <path d="M3 10.5L12 3L21 10.5V20C21 20.6 20.6 21 20 21H15C14.4 21 14 20.6 14 20V15C14 14.4 13.6 14 13 14H11C10.4 14 10 14.4 10 15V20C10 20.6 9.6 21 9 21H4C3.4 21 3 20.6 3 20V10.5Z" fill="#FEF08A" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="10" y="14" width="4" height="7" rx="1" fill="#F59E0B"/>
+            <path d="M18 7V4H15" stroke="#D97706" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <span>Beranda</span>
+        </button>
+
+        <!-- 2. D - Dekatkan -->
+        <button data-tab="d" onclick="switchTab('d')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-sky-50 hover:border-sky-300 hover:text-sky-800 shadow-2xs">
+          <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
+            <circle cx="10" cy="10" r="7" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+            <path d="M15.5 15.5L21 21" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="10" cy="10" r="4.2" fill="#FACC15" stroke="#CA8A04" stroke-width="1.2"/>
+            <text x="10" y="12" font-size="4.5" font-weight="bold" fill="#713F12" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
+          </svg>
+          <span>D - Dekatkan</span>
+        </button>
+
+        <!-- 3. H - Hubungkan -->
+        <button data-tab="h" onclick="switchTab('h')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-800 shadow-2xs">
+          <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="7" width="10" height="10" rx="5" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
+            <rect x="12" y="7" width="10" height="10" rx="5" fill="#A7F3D0" stroke="#047857" stroke-width="2"/>
+            <circle cx="12" cy="12" r="2.2" fill="#10B981"/>
+          </svg>
+          <span>H - Hubungkan</span>
+        </button>
+
+        <!-- 4. E - Eksplorasi -->
+        <button data-tab="e" onclick="switchTab('e')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-amber-50 hover:border-amber-300 hover:text-amber-800 shadow-2xs">
+          <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
+            <path d="M4 8H20L18 19C18 20.1 17.1 21 16 21H8C6.9 21 6 20.1 6 19L4 8Z" fill="#FFEDD5" stroke="#EA580C" stroke-width="2"/>
+            <path d="M8 8V6C8 3.8 9.8 2 12 2C14.2 2 16 3.8 16 6V8" stroke="#EA580C" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="14" r="2.5" fill="#F97316"/>
+          </svg>
+          <span>E - Eksplorasi</span>
+        </button>
+
+        <!-- 5. T - Tukar Gagasan -->
+        <button data-tab="t" onclick="switchTab('t')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-purple-50 hover:border-purple-300 hover:text-purple-800 shadow-2xs">
+          <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
+            <path d="M19 12.5C19 15.8 15.9 18.5 12 18.5C10.7 18.5 9.5 18.2 8.4 17.6L4 19L5.4 15.1C4.5 14.3 4 13.4 4 12.5C4 9.2 7.1 6.5 11 6.5C14.9 6.5 19 9.2 19 12.5Z" fill="#EDE9FE" stroke="#7C3AED" stroke-width="1.8" stroke-linejoin="round"/>
+            <circle cx="8.5" cy="12.5" r="1.2" fill="#6D28D9"/>
+            <circle cx="11.5" cy="12.5" r="1.2" fill="#6D28D9"/>
+            <circle cx="14.5" cy="12.5" r="1.2" fill="#6D28D9"/>
+          </svg>
+          <span>T - Tukar Gagasan</span>
+        </button>
+
+        <!-- 6. I - Ikat Konsep -->
+        <button data-tab="i" onclick="switchTab('i')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-rose-50 hover:border-rose-300 hover:text-rose-800 shadow-2xs">
+          <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
+            <path d="M9 18H15M10 21H14M12 2C7.6 2 4 5.6 4 10C4 12.8 5.4 15.2 7.6 16.6C8.2 17 8.6 17.7 8.7 18.4L8.7 18.5H15.3L15.3 18.4C15.4 17.7 15.8 17 16.4 16.6C18.6 15.2 20 12.8 20 10C20 5.6 16.4 2 12 2Z" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 10L14 10" stroke="#EAB308" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span>I - Ikat Konsep</span>
+        </button>
+
+        <!-- 7. K - Karyaku -->
+        <button data-tab="k" onclick="switchTab('k')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-indigo-50 hover:border-indigo-300 hover:text-indigo-800 shadow-2xs">
+          <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C13.1 22 14 21.1 14 20C14 19.5 13.8 19 13.5 18.6C13.2 18.2 13 17.7 13 17.2C13 16.1 13.9 15.2 15 15.2H17C19.8 15.2 22 13 22 10.2C22 5.7 17.5 2 12 2Z" fill="#E0E7FF" stroke="#4F46E5" stroke-width="1.8"/>
+            <circle cx="7.5" cy="10" r="1.5" fill="#EF4444"/>
+            <circle cx="11.5" cy="6.5" r="1.5" fill="#F59E0B"/>
+            <circle cx="16.5" cy="8.5" r="1.5" fill="#10B981"/>
+            <circle cx="17.5" cy="12.5" r="1.5" fill="#3B82F6"/>
+          </svg>
+          <span>K - Karyaku</span>
+        </button>
+
+        <!-- Separator -->
+        <span class="w-px h-6 bg-slate-200 mx-1 flex-shrink-0"></span>
+
+        <!-- 8. Kontak -->
+        <button data-tab="kontak" onclick="switchTab('kontak')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-sky-50 hover:border-sky-300 hover:text-sky-800 shadow-2xs">
+          <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="5" width="18" height="14" rx="3" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.8"/>
+            <path d="M3 8L12 14L21 8" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="12" cy="10.5" r="1.5" fill="#EF4444"/>
+          </svg>
+          <span>Kontak</span>
+        </button>
+
+        <!-- 9. Tentang -->
+        <button data-tab="tentang" onclick="switchTab('tentang')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-slate-300 hover:text-slate-800 shadow-2xs">
+          <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
+            <path d="M4 19.5V5C4 3.9 4.9 3 6 3H20V21H6C4.9 21 4 20.1 4 19.5Z" fill="#F1F5F9" stroke="#475569" stroke-width="1.8"/>
+            <circle cx="12" cy="13" r="3" fill="#6366F1"/>
+            <path d="M12 11.5V13M12 14.5H12.01" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <span>Tentang</span>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Global Learning Progress Bar -->
+    <div class="w-full bg-slate-200 h-1.5">
+      <div id="global-progress-bar" class="bg-gradient-to-r from-sky-400 via-amber-400 to-emerald-400 h-1.5 transition-all duration-500" style="width: 15%"></div>
+    </div>
+  </nav>
+
+  <!-- Main View Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div id="main-content-view">
+      <!-- Dynamic View Component Loaded Here -->
+    </div>
+  </main>
+
+  <!-- Floating Mascot Assistant Button (Ciko) -->
+  <div class="fixed bottom-6 right-6 z-40">
+    <div id="ciko-assistant-bubble" class="hidden absolute bottom-16 right-0 w-72 p-4 bg-white rounded-3xl border-3 border-amber-300 shadow-2xl space-y-2 animate-bounce-gentle">
+      <div class="flex items-center justify-between pb-1 border-b border-amber-100">
+        <span class="text-xs font-bold text-amber-900 flex items-center gap-1">
+          <span>💡</span> <span>Tips Ciko si Kancil</span>
+        </span>
+        <button onclick="toggleCikoBubble()" class="text-slate-400 hover:text-slate-600 font-bold text-xs">✕</button>
+      </div>
+      <p id="ciko-bubble-text" class="text-xs text-slate-700 leading-relaxed font-medium">
+        Hai! Jangan lupa teliti membaca setiap pertanyaan ya. Setiap aktivitas memberimu Bintang & Poin berharga!
+      </p>
+    </div>
+    
+    <button onclick="toggleCikoBubble()" class="btn-playful w-14 h-14 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-300 border-3 border-white shadow-xl flex items-center justify-center p-1 relative group" title="Tanya Ciko!">
+      <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 border-2 border-white animate-ping"></span>
+      <span class="text-2xl group-hover:scale-110 transition-transform">🦌</span>
+    </button>
+  </div>
+
+  <!-- Dashboard Guru Modal -->
+  <div id="teacher-dashboard-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl border-4 border-emerald-300 space-y-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-4 border-b">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl">
+            👩‍🏫
+          </div>
+          <div>
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Fitur Pengajar</span>
+            <h3 class="text-xl md:text-2xl font-black text-slate-800">Dashboard Pengelolaan Guru</h3>
+          </div>
+        </div>
+        <button onclick="closeTeacherDashboard()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 font-bold">✕</button>
+      </div>
+
+      <!-- Tab Dashboard Guru: Kelola Materi / Data Siswa / Bagikan Link -->
+      <div class="flex gap-2 border-b pb-2 text-xs font-bold">
+        <button onclick="switchTeacherTab('materi')" id="ttab-materi" class="px-4 py-2 rounded-xl bg-emerald-600 text-white">⚙️ Kelola Materi & CP</button>
+        <button onclick="switchTeacherTab('laporan')" id="ttab-laporan" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">📊 Laporan & Hasil Siswa</button>
+        <button onclick="switchTeacherTab('share')" id="ttab-share" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">🔗 Bagikan Link</button>
+      </div>
+
+      <!-- Sub-view 1: Edit Capaian & Materi -->
+      <div id="teacher-view-materi" class="space-y-4 text-xs md:text-sm">
+        <p class="text-slate-600 text-xs">
+          Sesuaikan data Capaian Pembelajaran dan Topik Materi di bawah ini. Perubahan akan langsung tersimpan dan tampil di seluruh halaman website:
+        </p>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Capaian Pembelajaran (CP Fase B):</label>
+          <textarea id="edit-cp-text" rows="2" class="w-full p-3 rounded-xl border border-slate-300 font-medium"></textarea>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Mata Pelajaran & Materi Pokok:</label>
+          <input type="text" id="edit-topic-text" class="w-full p-2.5 rounded-xl border border-slate-300 font-medium"/>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Anggaran Belanja Market Niza (Rp):</label>
+          <input type="number" id="edit-budget-num" value="20000" class="w-full p-2.5 rounded-xl border border-slate-300 font-medium"/>
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button onclick="saveTeacherMateri()" class="btn-playful px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md">
+            Simpan Perubahan Materi ✨
+          </button>
+        </div>
+      </div>
+
+      <!-- Sub-view 2: Laporan Hasil Siswa -->
+      <div id="teacher-view-laporan" class="hidden space-y-4 text-xs md:text-sm">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-center">
+          <div class="p-3 bg-amber-50 rounded-2xl border border-amber-200">
+            <span class="text-xs text-amber-700 font-bold block">Nama Siswa Aktif</span>
+            <span id="td-student-name" class="font-black text-slate-800 text-base">Siswa Ceria</span>
+          </div>
+          <div class="p-3 bg-emerald-50 rounded-2xl border border-emerald-200">
+            <span class="text-xs text-emerald-700 font-bold block">Skor Kuis</span>
+            <span id="td-student-quiz" class="font-black text-emerald-800 text-base">Belum Mengerjakan</span>
+          </div>
+          <div class="p-3 bg-purple-50 rounded-2xl border border-purple-200">
+            <span class="text-xs text-purple-700 font-bold block">Tahap Selesai</span>
+            <span id="td-student-stages" class="font-black text-purple-800 text-base">0 / 6 Tahap</span>
+          </div>
+        </div>
+
+        <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+          <h5 class="font-bold text-slate-800 text-xs">Jawaban Pemantik Siswa (Tahap D):</h5>
+          <p id="td-pemantik-answer" class="text-xs text-slate-600 italic">Belum ada catatan.</p>
+        </div>
+
+        <div class="p-4 bg-slate-50 rounded-2xl border space-y-2">
+          <h5 class="font-bold text-slate-800 text-xs">Refleksi Mandiri Siswa (Tahap K):</h5>
+          <div id="td-reflection-content" class="text-xs text-slate-600 space-y-1">
+            <p>Belum ada catatan refleksi.</p>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button onclick="resetAllStudentData()" class="px-4 py-2 rounded-xl text-rose-600 font-bold text-xs hover:bg-rose-50">
+            🗑️ Bersihkan / Reset Data Siswa
+          </button>
+          <button onclick="window.print()" class="btn-playful px-5 py-2.5 bg-sky-600 text-white font-bold rounded-xl text-xs">
+            🖨️ Cetak Laporan Hasil
+          </button>
+        </div>
+      </div>
+
+      <!-- Sub-view 3: Bagikan Link -->
+      <div id="teacher-view-share" class="hidden space-y-4 text-xs md:text-sm">
+        <p class="text-slate-600 text-xs leading-relaxed">
+          Salin tautan website di bawah ini untuk dibagikan kepada peserta didik melalui grup WhatsApp kelas, Google Classroom, atau proyektor di depan kelas:
+        </p>
+        <div class="flex gap-2">
+          <input type="text" id="share-link-input" readonly value="https://ruangbelajarceria.upi.edu" class="w-full p-2.5 rounded-xl border border-slate-300 font-mono text-xs bg-slate-50"/>
+          <button onclick="copyShareLink()" class="btn-playful px-4 py-2 bg-emerald-600 text-white font-bold rounded-xl text-xs flex-shrink-0">
+            Salin Link 📋
+          </button>
+        </div>
+        <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-medium space-y-1">
+          <span class="font-bold block">💡 Petunjuk Guru:</span>
+          <span>Peserta didik dapat langsung membuka website tanpa perlu mendaftar akun. Seluruh progres belajar, bintang, kuis, dan simulasi toko tersimpan langsung di perangkat masing-masing!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section sesuai Storyboard & Prompt Requirement -->
+  <footer class="bg-white border-t-2 border-slate-200 mt-16 pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <!-- Top Footer Banner / Tagline Wajib -->
+      <div class="p-6 md:p-8 rounded-3xl bg-gradient-to-r from-sky-100 via-amber-100 to-emerald-100 border-2 border-amber-300 text-center space-y-2">
+        <h3 class="text-xl md:text-3xl font-black text-slate-800">
+          "Belajar Jadi Lebih Seru, Belanja Jadi Lebih Bijak!"
+        </h3>
+        <p class="text-sm md:text-base font-bold text-amber-900">
+          Ruang Belajar Ceria – Teman Belajar, Petualangan Menyenangkan!
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 text-sm">
+        <!-- Brand Info -->
+        <div class="md:col-span-5 space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">🪙</span>
+            <span class="font-title text-xl font-black text-slate-800">Ruang Belajar Ceria</span>
+          </div>
+          <p class="text-slate-600 text-xs md:text-sm leading-relaxed">
+            Media pembelajaran digital interaktif IPAS Kelas 3 SD Fase B Bab 5: Bijak Berbelanja Kebutuhan. Disusun menggunakan model pembelajaran inovatif <strong>DHETIK</strong>.
+          </p>
+          <div class="flex items-center gap-3 pt-2">
+            <span class="px-3 py-1 rounded-full bg-red-100 text-red-800 text-[11px] font-bold">PGSD UPI CIBIRU 2026</span>
+            <span class="px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-[11px] font-bold">#dHeTik</span>
+          </div>
+        </div>
+
+        <!-- Alur DHETIK Quick Links -->
+        <div class="md:col-span-3 space-y-2">
+          <h4 class="font-bold text-slate-800 text-sm">Alur DHETIK:</h4>
+          <ul class="text-xs space-y-1.5 text-slate-600">
+            <li><a href="javascript:void(0)" onclick="switchTab('d')" class="hover:text-sky-600">D - Dekatkan (Ayo Mulai)</a></li>
+            <li><a href="javascript:void(0)" onclick="switchTab('h')" class="hover:text-emerald-600">H - Hubungkan dengan Hidupku</a></li>
+            <li><a href="javascript:void(0)" onclick="switchTab('e')" class="hover:text-amber-600">E - Eksplorasi (Market Niza)</a></li>
+            <li><a href="javascript:void(0)" onclick="switchTab('t')" class="hover:text-violet-600">T - Tukar Gagasan (Diskusi)</a></li>
+            <li><a href="javascript:void(0)" onclick="switchTab('i')" class="hover:text-rose-600">I - Ikat Konsep (Ikat Ilmuku)</a></li>
+            <li><a href="javascript:void(0)" onclick="switchTab('k')" class="hover:text-indigo-600">K - Karya & Refleksi</a></li>
+            <li><a href="javascript:void(0)" onclick="switchTab('kontak')" class="hover:text-sky-600">Kontak & Saran</a></li>
+          </ul>
+        </div>
+
+        <!-- Tim Pengembang -->
+        <div class="md:col-span-4 space-y-2">
+          <h4 class="font-bold text-slate-800 text-sm">Tim Pengembang:</h4>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Ines Khairunisa, Nasrun Nurhakim, Nur Afifah Handayani, Zidna Syifanadia Impian Pragita Mariannisa.
+          </p>
+          <div class="pt-2 text-xs text-slate-500 space-y-1">
+            <p>Universitas Pendidikan Indonesia - Kampus di Cibiru</p>
+            <p class="font-mono text-[11px]">Designer by: demon_info • © 2026</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL LIGHTBOX LIHAT GAMBAR PENUH -->
+  <div id="image-lightbox-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden" onclick="closeImageLightbox(event)">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-4 md:p-6 shadow-2xl space-y-4 animate-bounce-gentle" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🖼️</span>
+          <div>
+            <h3 id="lightbox-title" class="font-black text-slate-800 text-base md:text-lg">Foto Karyaku</h3>
+            <span id="lightbox-author" class="text-xs text-indigo-600 font-bold">Karya Siswa</span>
+          </div>
+        </div>
+        <button onclick="closeImageLightbox()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold flex items-center justify-center">✕</button>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden bg-slate-900/5 border border-slate-200 flex items-center justify-center p-2 max-h-[70vh]">
+        <img id="lightbox-img" src="" alt="Foto Penuh" class="max-w-full max-h-[65vh] object-contain rounded-xl shadow-inner"/>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs">
+        <span class="text-slate-400 font-medium">Klik di luar gambar atau tombol ✕ untuk menutup</span>
+        <div class="flex items-center gap-2">
+          <a id="lightbox-download-btn" href="#" download="karya_celengan.jpg" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold flex items-center gap-1.5 shadow-md">
+            <span>💾 Unduh Foto</span>
+          </a>
+          <button onclick="closeImageLightbox()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold">
+            Tutup
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/mascot.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
