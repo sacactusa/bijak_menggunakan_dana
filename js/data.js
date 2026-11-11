@@ -95,12 +95,12 @@ const RBC_DATA = {
     }
   ],
 
-  // Data Uang Rupiah (Flashcards)
+  // Data Uang Rupiah (Flashcards - Emisi Terbaru)
   rupiahCoins: [
-    { value: 100, label: "Rp100", name: "Seratus Rupiah", type: "logam", material: "Aluminium", color: "#94a3b8", desc: "Koin aluminium bergambar Burung Kakaktua Raja." },
-    { value: 200, label: "Rp200", name: "Dua Ratus Rupiah", type: "logam", material: "Aluminium", color: "#94a3b8", desc: "Koin aluminium bergambar Burung Jalak Bali." },
-    { value: 500, label: "Rp500", name: "Lima Ratus Rupiah", type: "logam", material: "Aluminium", color: "#cbd5e1", desc: "Koin aluminium bergambar Bunga Melati / Letjen TNI T.B. Simatupang." },
-    { value: 1000, label: "Rp1.000", name: "Seribu Rupiah Logam", type: "logam", material: "Nikel/Baja", color: "#e2e8f0", desc: "Koin logam bergambar pahlawan Mr. I Gusti Ketut Pudja." }
+    { value: 100, label: "Rp100", name: "Seratus Rupiah", type: "logam", material: "Aluminium", hero: "Prof. Dr. Ir. Herman Johannes", color: "#94a3b8", desc: "Uang logam aluminium Emisi 2016 bergambar Pahlawan Nasional Prof. Dr. Ir. Herman Johannes dan lambang Garuda Pancasila." },
+    { value: 200, label: "Rp200", name: "Dua Ratus Rupiah", type: "logam", material: "Aluminium", hero: "Dr. Tjiptomangunkusumo", color: "#94a3b8", desc: "Uang logam aluminium Emisi 2016 bergambar Pahlawan Nasional Dr. Tjiptomangunkusumo dan lambang Garuda Pancasila." },
+    { value: 500, label: "Rp500", name: "Lima Ratus Rupiah", type: "logam", material: "Aluminium", hero: "Letjen TNI T.B. Simatupang", color: "#cbd5e1", desc: "Uang logam aluminium Emisi 2016 bergambar Pahlawan Nasional Letjen TNI T.B. Simatupang dan lambang Garuda Pancasila." },
+    { value: 1000, label: "Rp1.000", name: "Seribu Rupiah Logam", type: "logam", material: "Nikel/Baja", hero: "Mr. I Gusti Ketut Pudja", color: "#e2e8f0", desc: "Uang logam baja berlapis nikel Emisi 2016 bergambar Pahlawan Nasional Mr. I Gusti Ketut Pudja dan lambang Garuda Pancasila." }
   ],
 
   rupiahBanknotes: [

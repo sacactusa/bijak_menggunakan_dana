@@ -1141,8 +1141,8 @@ function renderTahapEView() {
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             ${RBC_DATA.rupiahBanknotes.map(note => `
               <div onclick="showMoneyDetailModal('kertas', ${note.value})" class="cursor-pointer p-3.5 rounded-3xl bg-white border-2 border-slate-200 hover:border-violet-400 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between space-y-3 group hover:-translate-y-1">
-                <div class="rounded-xl overflow-hidden shadow-md bg-slate-100/60 p-0.5">
-                  ${RBC_ICONS.rupiahBanknote(note.value, 'w-full h-auto drop-shadow-sm')}
+                <div class="w-full">
+                  ${RBC_ICONS.rupiahBanknote(note.value, 'w-full')}
                 </div>
                 <div class="px-1 space-y-1">
                   <div class="flex items-center justify-between">
@@ -1731,18 +1731,34 @@ function showMoneyDetailModal(type, value) {
   const featuresEl = document.getElementById('money-modal-features');
 
   if (type === 'koin') {
-    const coin = RBC_DATA.rupiahCoins.find(c => c.value === value) || { value: value, name: 'Uang Logam', label: `Rp${value}`, material: 'Aluminium', desc: 'Uang logam rupiah resmi.' };
+    const coin = RBC_DATA.rupiahCoins.find(c => c.value === value) || { value: value, name: 'Uang Logam', label: `Rp${value}`, material: 'Aluminium', hero: 'Pahlawan Nasional', desc: 'Uang logam rupiah resmi Emisi 2016.' };
     if (titleEl) titleEl.innerText = `Pecahan Uang Logam: ${coin.label}`;
-    if (illuEl) illuEl.innerHTML = RBC_ICONS.rupiahCoin(coin.value, 'w-32 h-32 mx-auto drop-shadow-xl');
+    if (illuEl) {
+      illuEl.innerHTML = `
+        <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+          <div class="text-center space-y-1.5">
+            ${RBC_ICONS.rupiahCoin(coin.value, 'w-28 h-28 sm:w-32 sm:h-32 mx-auto', 'depan')}
+            <span class="text-[11px] font-bold text-slate-600 block">Sisi Depan (Nominal)</span>
+          </div>
+          <div class="text-center space-y-1.5">
+            ${RBC_ICONS.rupiahCoin(coin.value, 'w-28 h-28 sm:w-32 sm:h-32 mx-auto', 'belakang')}
+            <span class="text-[11px] font-bold text-slate-600 block">Sisi Belakang (Pahlawan)</span>
+          </div>
+        </div>`;
+    }
     if (nominalEl) nominalEl.innerText = `${coin.label} (${coin.name})`;
-    if (materialEl) materialEl.innerText = `${coin.material} (Bentuk Bulat Relief Timbul)`;
-    if (heroBox) heroBox.classList.add('hidden');
-    if (featuresEl) featuresEl.innerText = `${coin.desc} Terdapat tulisan BANK INDONESIA melengkung, angka nominal timbul, dan teks RUPIAH.`;
+    if (materialEl) materialEl.innerText = `${coin.material} (Uang Logam Asli Emisi 2016)`;
+    if (heroBox) {
+      heroBox.classList.remove('hidden');
+      if (heroNameEl) heroNameEl.innerText = coin.hero || 'Pahlawan Nasional';
+      if (heroStoryEl) heroStoryEl.innerText = coin.desc;
+    }
+    if (featuresEl) featuresEl.innerText = `Ciri Uang Logam Emisi 2016: Sisi depan bertuliskan BANK INDONESIA, angka nominal timbul (${coin.label}), dan RUPIAH 2016. Sisi belakang bergambar Garuda Pancasila dan pahlawan ${coin.hero || ''}.`;
     window.soundManager.playCoin();
   } else {
     const note = RBC_DATA.rupiahBanknotes.find(n => n.value === value) || { value: value, name: 'Uang Kertas', label: `Rp${value}`, hero: 'Pahlawan Nasional', desc: 'Uang kertas resmi.' };
     if (titleEl) titleEl.innerText = `Pecahan Uang Kertas: ${note.label}`;
-    if (illuEl) illuEl.innerHTML = RBC_ICONS.rupiahBanknote(note.value, 'w-80 max-w-full h-auto mx-auto drop-shadow-2xl');
+    if (illuEl) illuEl.innerHTML = RBC_ICONS.rupiahBanknote(note.value, 'w-full max-w-sm mx-auto drop-shadow-2xl');
     if (nominalEl) nominalEl.innerText = `${note.label} (${note.name})`;
     if (materialEl) materialEl.innerText = `Serat Kapas Khusus dengan Benang Pengaman Hologram`;
     if (heroBox) {
@@ -2010,24 +2026,35 @@ function renderTahapTView() {
           </div>
         </div>
 
-        <!-- Slot Diskusi Bersama Terhubung ke Padlet -->
-        <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-100 via-yellow-50 to-orange-100 border-2 border-amber-300 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div class="space-y-1.5">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-200 text-amber-950 text-[10px] font-black uppercase tracking-wider">
-              💬 Slot Diskusi Bersama
+        <!-- Slot Diskusi Bersama Terhubung ke Padlet (Highlight Besar) -->
+        <div class="p-5 sm:p-7 rounded-3xl bg-gradient-to-r from-amber-100 via-yellow-50 to-orange-100 border-4 border-amber-400 ring-4 ring-amber-200/60 shadow-xl space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-500 text-white text-xs sm:text-sm font-black uppercase tracking-wider shadow-sm">
+              <span>💬</span> <span>SLOT DISKUSI BERSAMA • LINK KOLABORASI</span>
             </span>
-            <h3 class="font-black text-slate-800 text-sm sm:text-base">
+            <span class="text-xs font-black text-amber-900 bg-white px-3 py-1 rounded-full border border-amber-300 animate-pulse">
+              🔥 Ayo Diskusi di Sini!
+            </span>
+          </div>
+
+          <div class="space-y-1.5">
+            <h3 class="font-black text-slate-900 text-lg sm:text-2xl">
               Mari Berdiskusi Tentang 4 Barang di Atas!
             </h3>
-            <p class="text-xs text-slate-700 leading-relaxed">
-              Setelah mengamati gambar dan membaca cerita sederhana di atas, ayo tuliskan pendapatmu dan berdiskusi bersama teman-teman melalui ruang diskusi Padlet berikut:
+            <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+              Setelah mengamati gambar dan membaca cerita sederhana di atas, ayo tuliskan pendapatmu dan berdiskusi bersama teman-teman melalui link Padlet berikut:
             </p>
-            <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="inline-block text-[11px] font-bold text-amber-900 underline break-all hover:text-amber-700">
-              https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg
-            </a>
           </div>
-          <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="btn-playful w-full sm:w-auto px-5 py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md flex-shrink-0">
-            <span>💬 Buka Slot Diskusi Bersama ↗️</span>
+
+          <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="block w-full p-3.5 sm:p-4 rounded-2xl bg-white border-2 border-amber-400 hover:border-orange-500 hover:bg-amber-50/70 transition-all shadow-sm group">
+            <span class="text-[11px] font-extrabold uppercase tracking-wider text-amber-700 block mb-1">🔗 KLIK TAUTAN DISKUSI BERSAMA (PADLET):</span>
+            <span class="text-xs sm:text-base font-black text-amber-950 underline break-all group-hover:text-orange-700">
+              https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg
+            </span>
+          </a>
+
+          <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="btn-playful w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:from-amber-600 hover:to-red-600 text-white font-black text-sm sm:text-lg flex items-center justify-center gap-2.5 shadow-xl">
+            <span>💬 BUKA SLOT DISKUSI BERSAMA SEKARANG ↗️</span>
           </a>
         </div>
       </section>
@@ -2268,19 +2295,30 @@ function renderTahapTView() {
                 </button>
               </div>
 
-              <!-- Link Upload Alasan Analisis ke Padlet -->
-              <div class="p-3.5 sm:p-4 rounded-2xl bg-white border-2 border-dashed border-amber-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                <div class="space-y-1">
-                  <p class="text-xs font-black text-amber-900 flex items-center gap-1.5">
-                    <span>📌</span>
-                    <span>Simpan alasan analisis dan unggah pada link yang disediakan</span>
-                  </p>
-                  <a href="https://padlet.com/nurafifahn16/lkpdkebutuhandankeinginan" target="_blank" rel="noopener noreferrer" class="text-[11px] font-bold text-sky-700 underline break-all hover:text-sky-900 block">
-                    https://padlet.com/nurafifahn16/lkpdkebutuhandankeinginan
-                  </a>
+              <!-- Link Upload Alasan Analisis ke Padlet (Highlight Besar) -->
+              <div class="p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-sky-100 via-cyan-50 to-indigo-100 border-4 border-sky-400 ring-4 ring-sky-200/60 shadow-xl space-y-3.5">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-sky-600 text-white text-xs sm:text-sm font-black uppercase tracking-wider shadow-sm">
+                    <span>📌</span> <span>LINK KOLABORASI LKPD • PENTING</span>
+                  </span>
+                  <span class="text-xs font-black text-sky-900 bg-white px-3 py-1 rounded-full border border-sky-300">
+                    📤 Wajib Diunggah
+                  </span>
                 </div>
-                <a href="https://padlet.com/nurafifahn16/lkpdkebutuhandankeinginan" target="_blank" rel="noopener noreferrer" class="btn-playful w-full sm:w-auto px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm flex-shrink-0">
-                  <span>📤 Unggah di Link Padlet ↗️</span>
+
+                <p class="text-base sm:text-xl font-black text-sky-950 leading-snug">
+                  Simpan alasan analisis dan unggah pada link yang disediakan
+                </p>
+
+                <a href="https://padlet.com/nurafifahn16/lkpdkebutuhandankeinginan" target="_blank" rel="noopener noreferrer" class="block w-full p-3.5 sm:p-4 rounded-2xl bg-white border-2 border-sky-400 hover:border-indigo-500 hover:bg-sky-50/70 transition-all shadow-sm group">
+                  <span class="text-[11px] font-extrabold uppercase tracking-wider text-sky-700 block mb-1">🔗 KLIK LINK PADLET LKPD KEBUTUHAN & KEINGINAN:</span>
+                  <span class="text-xs sm:text-base font-black text-sky-900 underline break-all group-hover:text-indigo-700">
+                    https://padlet.com/nurafifahn16/lkpdkebutuhandankeinginan
+                  </span>
+                </a>
+
+                <a href="https://padlet.com/nurafifahn16/lkpdkebutuhandankeinginan" target="_blank" rel="noopener noreferrer" class="btn-playful w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white font-black text-sm sm:text-lg flex items-center justify-center gap-2.5 shadow-xl">
+                  <span>📤 UNGGAH ALASAN ANALISIS DI LINK PADLET ↗️</span>
                 </a>
               </div>
             </div>
@@ -2432,16 +2470,35 @@ function renderTahapTView() {
           </div>
         </div>
 
-        <!-- Tautan Langsung Padlet Kolaborasi Terpadu -->
-        <div class="p-3.5 rounded-2xl bg-violet-50 border border-violet-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 text-xs">
-          <div class="flex flex-wrap items-center gap-1.5 text-violet-950 font-semibold">
-            <span>🔗 <strong>Link Diskusi Kolaborasi Terpadu:</strong></span>
-            <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="text-violet-700 underline font-bold break-all hover:text-violet-900">
-              https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg
-            </a>
+        <!-- Tautan Langsung Padlet Kolaborasi Terpadu (Highlight Besar) -->
+        <div class="p-5 sm:p-7 rounded-3xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white border-4 border-violet-300 ring-4 ring-purple-200 shadow-2xl space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-violet-900 text-xs sm:text-sm font-black uppercase tracking-wider shadow-sm">
+              <span>🌐</span> <span>LINK UTAMA KOLABORASI TERPADU (PADLET)</span>
+            </span>
+            <span class="text-xs font-black text-amber-950 bg-amber-300 px-3 py-1 rounded-full shadow-sm animate-pulse">
+              ✨ Diskusi Kelas Aktif
+            </span>
           </div>
-          <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-bold text-[11px] flex-shrink-0">
-            Buka Padlet ↗️
+
+          <div class="space-y-1">
+            <h3 class="font-black text-lg sm:text-2xl text-white">
+              Klik untuk Masuk ke Ruang Kolaborasi Padlet Bersama!
+            </h3>
+            <p class="text-xs sm:text-sm text-purple-100 font-medium">
+              Unggah temuan diskusimu dan berikan tanggapan santun untuk hasil karya teman-temanmu pada tautan resmi berikut:
+            </p>
+          </div>
+
+          <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="block w-full p-3.5 sm:p-4 rounded-2xl bg-white text-violet-950 border-2 border-amber-300 hover:bg-amber-50 transition-all shadow-md group">
+            <span class="text-[11px] font-extrabold uppercase tracking-wider text-purple-700 block mb-1">🔗 LINK PADLET MARI BERDISKUSI:</span>
+            <span class="text-xs sm:text-base font-black underline break-all group-hover:text-fuchsia-700">
+              https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg
+            </span>
+          </a>
+
+          <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="btn-playful w-full px-6 py-4 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm sm:text-lg flex items-center justify-center gap-2.5 shadow-xl">
+            <span>🚀 BUKA PADLET KOLABORASI TERPADU SEKARANG ↗️</span>
           </a>
         </div>
 
@@ -3574,18 +3631,30 @@ function renderTahapKView() {
               </div>
             </div>
 
-            <!-- Link Upload Padlet Produk Celengan Kreatif -->
-            <div class="mt-4 p-4 rounded-2xl bg-gradient-to-r from-rose-50 via-pink-50 to-indigo-50 border-2 border-rose-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
-              <div class="space-y-1">
-                <p class="text-xs sm:text-sm font-black text-rose-900">
-                  jangan lupa upload karyamu disini juga ya❤️
-                </p>
-                <a href="https://padlet.com/nurafifahn16/produkcelengankreatif" target="_blank" rel="noopener noreferrer" class="text-[11px] font-bold text-indigo-700 underline break-all hover:text-indigo-900 block">
-                  https://padlet.com/nurafifahn16/produkcelengankreatif
-                </a>
+            <!-- Link Upload Padlet Produk Celengan Kreatif (Highlight Besar) -->
+            <div class="mt-5 p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-rose-500 via-pink-500 to-fuchsia-600 text-white border-4 border-rose-300 ring-4 ring-rose-200/70 shadow-2xl space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-rose-900 text-xs sm:text-sm font-black uppercase tracking-wider shadow-sm">
+                  <span>❤️</span> <span>LINK KOLABORASI PAMERAN KARYA</span>
+                </span>
+                <span class="text-xs font-black text-slate-900 bg-amber-300 px-3 py-1 rounded-full shadow-sm animate-pulse">
+                  🎨 Wajib Upload!
+                </span>
               </div>
-              <a href="https://padlet.com/nurafifahn16/produkcelengankreatif" target="_blank" rel="noopener noreferrer" class="btn-playful w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm flex-shrink-0">
-                <span>🎨 Upload Karya ke Padlet ↗️</span>
+
+              <p class="text-lg sm:text-2xl font-black text-white leading-snug">
+                jangan lupa upload karyamu disini juga ya❤️
+              </p>
+
+              <a href="https://padlet.com/nurafifahn16/produkcelengankreatif" target="_blank" rel="noopener noreferrer" class="block w-full p-3.5 sm:p-4 rounded-2xl bg-white text-rose-950 border-2 border-amber-300 hover:bg-rose-50 transition-all shadow-md group">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider text-rose-700 block mb-1">🔗 KLIK LINK PADLET PRODUK CELENGAN KREATIF:</span>
+                <span class="text-xs sm:text-base font-black underline break-all group-hover:text-indigo-700">
+                  https://padlet.com/nurafifahn16/produkcelengankreatif
+                </span>
+              </a>
+
+              <a href="https://padlet.com/nurafifahn16/produkcelengankreatif" target="_blank" rel="noopener noreferrer" class="btn-playful w-full px-6 py-4 rounded-2xl bg-amber-300 hover:bg-amber-200 text-slate-950 font-black text-sm sm:text-lg flex items-center justify-center gap-2.5 shadow-xl">
+                <span>🎨 UPLOAD KARYAMU KE PADLET SEKARANG ↗️</span>
               </a>
             </div>
 
