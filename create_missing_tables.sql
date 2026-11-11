@@ -69,3 +69,4 @@ CREATE POLICY "Akses publik kontak_masukan" ON kontak_masukan FOR ALL TO anon, a
 ALTER TABLE karya_siswa ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Akses publik karya_siswa" ON karya_siswa;
 CREATE POLICY "Akses publik karya_siswa" ON karya_siswa FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
+

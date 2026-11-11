@@ -46,16 +46,22 @@
   <div id="global-toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 opacity-0 pointer-events-none translate-y-4"></div>
 
   <!-- Top Announcement Bar (Header Identity UPI Cibiru sesuai Storyboard) -->
-  <header class="bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 text-white text-xs font-bold py-2 px-4 shadow-sm">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-      <div class="flex items-center gap-2">
+  <header class="bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 text-white py-1.5 px-3 sm:px-4 shadow-xs">
+    <div class="max-w-7xl mx-auto flex items-center justify-between text-xs font-bold gap-2">
+      <!-- Mobile View (Compact Single Line) -->
+      <div class="flex sm:hidden items-center justify-between w-full text-[11px]">
+        <span class="flex items-center gap-1 font-black truncate">🎓 UPI CIBIRU • IPAS KELAS 3 SD</span>
+        <span class="bg-white/20 px-2 py-0.5 rounded-full text-[9px] uppercase tracking-wider flex-shrink-0">#dHeTik</span>
+      </div>
+      <!-- Desktop & Tablet View -->
+      <div class="hidden sm:flex items-center gap-2">
         <span>🎓 KAMPUS UPI DI CIBIRU</span>
         <span class="opacity-60">•</span>
         <span class="tracking-wider">PGSD 2026</span>
         <span class="opacity-60">•</span>
         <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider">#dHeTik</span>
       </div>
-      <div class="flex items-center gap-4 text-[11px]">
+      <div class="hidden sm:flex items-center gap-4 text-[11px]">
         <span>IPAS KELAS 3 SD (FASE B)</span>
         <span class="opacity-60">•</span>
         <span>BAB 5: BIJAK BERBELANJA KEBUTUHAN</span>
@@ -65,59 +71,59 @@
 
   <!-- Enhanced 2-Tier Clean Navbar with Beautiful Vector SVG Icons -->
   <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-2 border-slate-100 shadow-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       
       <!-- Tier 1: Brand Logo & User Action Controls -->
-      <div class="flex items-center justify-between h-16 py-2 gap-4 border-b border-slate-100/80">
+      <div class="flex items-center justify-between h-14 sm:h-16 py-1.5 sm:py-2 gap-2 sm:gap-4 border-b border-slate-100/80">
         
         <!-- Logo & Title -->
-        <div onclick="switchTab('beranda')" class="cursor-pointer flex items-center gap-3 flex-shrink-0 group">
-          <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 p-1 shadow-md group-hover:scale-105 transition-transform flex items-center justify-center text-white font-black">
+        <div onclick="switchTab('beranda')" class="cursor-pointer flex items-center gap-2 sm:gap-3 flex-shrink min-w-0 group">
+          <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 p-0.5 sm:p-1 shadow-md group-hover:scale-105 transition-transform flex items-center justify-center text-white font-black flex-shrink-0">
             <!-- Cute Vector Coin SVG in Brand -->
-            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
+            <svg class="w-5 h-5 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="12" r="10" fill="#FACC15" stroke="#FFFFFF" stroke-width="1.8"/>
               <circle cx="12" cy="12" r="7" stroke="#CA8A04" stroke-width="1.2" stroke-dasharray="2 2"/>
               <text x="12" y="15" font-size="7.5" font-weight="black" fill="#713F12" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
             </svg>
           </div>
-          <div>
-            <div class="flex items-center gap-1.5">
-              <span class="font-title text-xl md:text-2xl font-black text-slate-800 tracking-tight">Ruang Belajar Ceria</span>
-              <span class="text-amber-500 text-base">✨</span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1">
+              <span class="font-title text-base sm:text-xl md:text-2xl font-black text-slate-800 tracking-tight truncate">Ruang Belajar Ceria</span>
+              <span class="text-amber-500 text-xs sm:text-base flex-shrink-0">✨</span>
             </div>
-            <p class="text-[10px] font-bold tracking-widest text-sky-600 uppercase">Petualangan Belajar IPAS Ceria</p>
+            <p class="hidden sm:block text-[10px] font-bold tracking-widest text-sky-600 uppercase">Petualangan Belajar IPAS Ceria</p>
           </div>
         </div>
 
         <!-- Student Stats & Action Controls -->
-        <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+        <div class="flex items-center gap-1 sm:gap-2.5 flex-shrink-0">
           
           <!-- Cloud Database Status Indicator Pill -->
-          <button id="supabase-status-pill" onclick="openDbStatusModal()" class="btn-playful flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800 shadow-sm hover:bg-emerald-100 transition-colors" title="Status Database Cloud Supabase (Klik untuk cek info)">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="supabase-status-text" class="hidden md:inline">Cloud DB Aktif</span>
-            <span class="md:hidden">DB ✅</span>
+          <button id="supabase-status-pill" onclick="openDbStatusModal()" class="btn-playful flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-[11px] sm:text-xs font-bold text-emerald-800 shadow-xs hover:bg-emerald-100 transition-colors" title="Status Database Cloud Supabase">
+            <span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span id="supabase-status-text" class="hidden sm:inline">Cloud DB Aktif</span>
+            <span class="sm:hidden text-[10px]">Cloud</span>
           </button>
 
           <!-- Student Profile Pill (Clickable) -->
-          <button id="stat-name-widget" title="Klik untuk mengganti nama siswa" class="btn-playful flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-sky-50 border border-sky-200 hover:bg-sky-100 transition-colors">
+          <button id="stat-name-widget" title="Klik untuk mengganti nama siswa" class="btn-playful hidden xs:flex items-center gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-2xl bg-sky-50 border border-sky-200 hover:bg-sky-100 transition-colors">
             <!-- User Avatar SVG -->
-            <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
+            <svg class="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="8" r="4.5" fill="#FED7AA" stroke="#EA580C" stroke-width="1.5"/>
               <path d="M4 20C4 16.5 7.5 14 12 14C16.5 14 20 16.5 20 20" fill="#BAE6FD" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
-            <span id="stat-name" class="font-bold text-xs text-sky-900 whitespace-nowrap">Teman Ceria</span>
+            <span id="stat-name" class="font-bold text-[11px] sm:text-xs text-sky-900 truncate max-w-[70px] sm:max-w-[120px]">Teman Ceria</span>
           </button>
 
           <!-- Bintang Counter Badge -->
-          <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-amber-50 border border-amber-200" title="Bintang yang kamu kumpulkan">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#F59E0B">
+          <div class="flex items-center gap-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-2xl bg-amber-50 border border-amber-200" title="Bintang yang kamu kumpulkan">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="#F59E0B">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
-            <span id="stat-stars" class="font-black text-xs text-amber-900">8</span>
+            <span id="stat-stars" class="font-black text-[11px] sm:text-xs text-amber-900">8</span>
           </div>
 
-          <!-- Poin Counter Badge -->
+          <!-- Poin Counter Badge (Desktop & Tablet) -->
           <div class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-emerald-50 border border-emerald-200" title="Poin belajarmu">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="12" r="10" fill="#FACC15" stroke="#CA8A04" stroke-width="1.8"/>
@@ -127,28 +133,37 @@
           </div>
 
           <!-- Sound Toggle Button with Speaker SVG -->
-          <button id="sound-toggle-btn" class="btn-playful w-9 h-9 rounded-2xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition-colors" title="Nyalakan/Matikan Suara">
-            <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <button id="sound-toggle-btn" class="btn-playful w-8 h-8 sm:w-9 sm:h-9 rounded-2xl bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition-colors flex-shrink-0" title="Nyalakan/Matikan Suara">
+            <svg class="w-4 h-4 sm:w-4.5 sm:h-4.5" viewBox="0 0 24 24" fill="none" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="#E0F2FE"/>
               <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/>
             </svg>
           </button>
 
-          <!-- Dashboard Guru Button -->
-          <button onclick="openTeacherDashboard()" class="btn-playful px-3 py-1.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm" title="Akses Dashboard Guru">
+          <!-- Mobile Menu Drawer Toggle Button (Hamburger) -->
+          <button onclick="toggleMobileMenuDrawer()" class="btn-playful md:hidden w-8 h-8 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-900 flex items-center justify-center font-black shadow-xs flex-shrink-0" title="Buka Menu Pembelajaran">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+
+          <!-- Dashboard Guru Button (Desktop) -->
+          <button onclick="openTeacherDashboard()" class="hidden md:flex btn-playful px-3 py-1.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs items-center gap-1.5 shadow-sm" title="Akses Dashboard Guru">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
               <rect x="3" y="4" width="18" height="12" rx="2" fill="#DCFCE7" stroke="#FFFFFF" stroke-width="1.8"/>
               <path d="M8 20L12 16L16 20" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round"/>
               <path d="M7 8.5H13M7 11.5H11" stroke="#15803D" stroke-width="1.5" stroke-linecap="round"/>
               <circle cx="17" cy="8.5" r="1.5" fill="#FACC15"/>
             </svg>
-            <span class="hidden md:inline">Dashboard Guru</span>
+            <span>Dashboard Guru</span>
           </button>
         </div>
       </div>
 
-      <!-- Tier 2: Navigation Menu Bar with Custom SVG Icons -->
-      <div class="flex items-center gap-1 sm:gap-1.5 overflow-x-auto py-2.5 text-xs font-bold no-scrollbar">
+      <!-- Tier 2: Navigation Menu Bar with Custom SVG Icons (Horizontal Scrollable on Mobile) -->
+      <div id="tier2-nav-scroll" class="flex items-center gap-1 sm:gap-1.5 overflow-x-auto py-2 text-xs font-bold no-scrollbar scroll-smooth">
         
         <!-- 1. Beranda -->
         <button data-tab="beranda" onclick="switchTab('beranda')" class="nav-link px-3.5 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-amber-400 text-slate-900 border border-amber-500 shadow-sm transform scale-105">
@@ -256,35 +271,157 @@
   </nav>
 
   <!-- Main View Container -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 pb-28 md:pb-12">
     <div id="main-content-view">
       <!-- Dynamic View Component Loaded Here -->
     </div>
   </main>
 
-  <!-- Floating Mascot Assistant Button (Ciko) -->
-  <div class="fixed bottom-6 right-6 z-40">
-    <div id="ciko-assistant-bubble" class="hidden absolute bottom-16 right-0 w-72 p-4 bg-white rounded-3xl border-3 border-amber-300 shadow-2xl space-y-2 animate-bounce-gentle">
+  <!-- Modern Mobile Bottom Navigation Bar (md:hidden) -->
+  <nav id="mobile-bottom-nav" class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t-2 border-slate-200/80 shadow-2xl px-2 py-1.5 flex justify-around items-center md:hidden safe-area-bottom">
+    <button onclick="switchTab('beranda')" data-bottom-tab="beranda" class="bottom-nav-item active">
+      <span class="text-lg">🏠</span>
+      <span>Beranda</span>
+    </button>
+    <button onclick="toggleMobileMenuDrawer()" data-bottom-tab="dhetik" class="bottom-nav-item">
+      <span class="text-lg">🧩</span>
+      <span>DHETIK</span>
+    </button>
+    <button onclick="switchTab('e')" data-bottom-tab="e" class="bottom-nav-item">
+      <span class="text-lg">🏪</span>
+      <span>Pasar</span>
+    </button>
+    <button onclick="switchTab('kuis')" data-bottom-tab="kuis" class="bottom-nav-item">
+      <span class="text-lg">🎯</span>
+      <span>Kuis</span>
+    </button>
+    <button onclick="switchTab('game')" data-bottom-tab="game" class="bottom-nav-item">
+      <span class="text-lg">🎮</span>
+      <span>Game</span>
+    </button>
+  </nav>
+
+  <!-- Mobile DHETIK & Menu Drawer / Bottom Sheet (md:hidden) -->
+  <div id="mobile-menu-drawer" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex flex-col justify-end md:hidden animate-fade-in" onclick="handleDrawerBackdropClick(event)">
+    <div class="bg-white rounded-t-3xl max-h-[85vh] w-full p-4 sm:p-5 shadow-2xl flex flex-col border-t-4 border-amber-400 space-y-4 overflow-y-auto animate-slide-up" onclick="event.stopPropagation()">
+      
+      <!-- Drawer Header with Student Profile Info -->
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-200 to-yellow-100 flex items-center justify-center text-xl shadow-xs">
+            🧒
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span id="drawer-student-name" class="font-black text-sm text-slate-800">Teman Ceria</span>
+              <button onclick="promptChangeName()" class="text-[11px] text-sky-600 font-bold underline">Ubah</button>
+            </div>
+            <p class="text-[11px] text-slate-500 font-medium">⭐ <span id="drawer-stars">8</span> Bintang • 🪙 <span id="drawer-points">25</span> Poin</p>
+          </div>
+        </div>
+        <button onclick="toggleMobileMenuDrawer()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-sm">✕</button>
+      </div>
+
+      <!-- Quick Switcher to 6 DHETIK Stages -->
+      <div>
+        <span class="text-[11px] font-black uppercase tracking-wider text-sky-700 block mb-2">🎯 6 Tahap Belajar Model DHETIK:</span>
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="switchTabFromDrawer('d')" class="p-2.5 rounded-2xl border-2 border-sky-200 bg-sky-50 text-left hover:bg-sky-100 flex items-center gap-2 transition-all">
+            <span class="w-7 h-7 rounded-xl bg-sky-500 text-white font-black text-xs flex items-center justify-center flex-shrink-0">D</span>
+            <div class="min-w-0">
+              <span class="font-bold text-xs text-sky-950 block truncate">1. Dekatkan</span>
+              <span class="text-[10px] text-sky-700 block truncate">Video & Ceritaku</span>
+            </div>
+          </button>
+          <button onclick="switchTabFromDrawer('h')" class="p-2.5 rounded-2xl border-2 border-emerald-200 bg-emerald-50 text-left hover:bg-emerald-100 flex items-center gap-2 transition-all">
+            <span class="w-7 h-7 rounded-xl bg-emerald-500 text-white font-black text-xs flex items-center justify-center flex-shrink-0">H</span>
+            <div class="min-w-0">
+              <span class="font-bold text-xs text-emerald-950 block truncate">2. Hubungkan</span>
+              <span class="text-[10px] text-emerald-700 block truncate">Pilah Kebutuhan</span>
+            </div>
+          </button>
+          <button onclick="switchTabFromDrawer('e')" class="p-2.5 rounded-2xl border-2 border-amber-200 bg-amber-50 text-left hover:bg-amber-100 flex items-center gap-2 transition-all">
+            <span class="w-7 h-7 rounded-xl bg-amber-500 text-white font-black text-xs flex items-center justify-center flex-shrink-0">E</span>
+            <div class="min-w-0">
+              <span class="font-bold text-xs text-amber-950 block truncate">3. Eksplorasi</span>
+              <span class="text-[10px] text-amber-700 block truncate">Pasar Market Niza</span>
+            </div>
+          </button>
+          <button onclick="switchTabFromDrawer('t')" class="p-2.5 rounded-2xl border-2 border-purple-200 bg-purple-50 text-left hover:bg-purple-100 flex items-center gap-2 transition-all">
+            <span class="w-7 h-7 rounded-xl bg-purple-500 text-white font-black text-xs flex items-center justify-center flex-shrink-0">T</span>
+            <div class="min-w-0">
+              <span class="font-bold text-xs text-purple-950 block truncate">4. Tukar Gagasan</span>
+              <span class="text-[10px] text-purple-700 block truncate">LKPD & Padlet</span>
+            </div>
+          </button>
+          <button onclick="switchTabFromDrawer('i')" class="p-2.5 rounded-2xl border-2 border-rose-200 bg-rose-50 text-left hover:bg-rose-100 flex items-center gap-2 transition-all">
+            <span class="w-7 h-7 rounded-xl bg-rose-500 text-white font-black text-xs flex items-center justify-center flex-shrink-0">I</span>
+            <div class="min-w-0">
+              <span class="font-bold text-xs text-rose-950 block truncate">5. Ikat Konsep</span>
+              <span class="text-[10px] text-rose-700 block truncate">Peta & Penguatan</span>
+            </div>
+          </button>
+          <button onclick="switchTabFromDrawer('k')" class="p-2.5 rounded-2xl border-2 border-indigo-200 bg-indigo-50 text-left hover:bg-indigo-100 flex items-center gap-2 transition-all">
+            <span class="w-7 h-7 rounded-xl bg-indigo-500 text-white font-black text-xs flex items-center justify-center flex-shrink-0">K</span>
+            <div class="min-w-0">
+              <span class="font-bold text-xs text-indigo-950 block truncate">6. Karyaku</span>
+              <span class="text-[10px] text-indigo-700 block truncate">Celengan & Refleksi</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Fitur Pendukung Lainnya -->
+      <div class="pt-2 border-t border-slate-100 space-y-2">
+        <span class="text-[11px] font-black uppercase tracking-wider text-slate-500 block">Fitur & Media Lainnya:</span>
+        <div class="grid grid-cols-2 gap-2 text-xs font-bold">
+          <button onclick="switchTabFromDrawer('video')" class="p-2.5 rounded-xl bg-slate-50 border hover:bg-slate-100 text-slate-700 flex items-center gap-2">
+            <span>🎬</span> <span>Video Materi</span>
+          </button>
+          <button onclick="switchTabFromDrawer('kuis')" class="p-2.5 rounded-xl bg-slate-50 border hover:bg-slate-100 text-slate-700 flex items-center gap-2">
+            <span>🎯</span> <span>Kuis Evaluasi</span>
+          </button>
+          <button onclick="switchTabFromDrawer('game')" class="p-2.5 rounded-xl bg-slate-50 border hover:bg-slate-100 text-slate-700 flex items-center gap-2">
+            <span>🎮</span> <span>Game Edukasi</span>
+          </button>
+          <button onclick="openTeacherDashboard(); toggleMobileMenuDrawer();" class="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 text-emerald-800 flex items-center gap-2">
+            <span>👩‍🏫</span> <span>Dashboard Guru</span>
+          </button>
+          <button onclick="switchTabFromDrawer('kontak')" class="p-2.5 rounded-xl bg-slate-50 border hover:bg-slate-100 text-slate-700 flex items-center gap-2">
+            <span>💌</span> <span>Kontak / Saran</span>
+          </button>
+          <button onclick="switchTabFromDrawer('tentang')" class="p-2.5 rounded-xl bg-slate-50 border hover:bg-slate-100 text-slate-700 flex items-center gap-2">
+            <span>ℹ️</span> <span>Tentang Media</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Floating Mascot Assistant Button (Ciko) - Positioned Above Mobile Bottom Nav -->
+  <div class="fixed bottom-20 md:bottom-6 right-3 sm:right-6 z-40">
+    <div id="ciko-assistant-bubble" class="hidden absolute bottom-16 right-0 w-[calc(100vw-2.5rem)] max-w-xs p-4 bg-white rounded-3xl border-3 border-amber-300 shadow-2xl space-y-2 animate-bounce-gentle">
       <div class="flex items-center justify-between pb-1 border-b border-amber-100">
         <span class="text-xs font-bold text-amber-900 flex items-center gap-1">
           <span>💡</span> <span>Tips Ciko si Kancil</span>
         </span>
-        <button onclick="toggleCikoBubble()" class="text-slate-400 hover:text-slate-600 font-bold text-xs">✕</button>
+        <button onclick="toggleCikoBubble()" class="text-slate-400 hover:text-slate-600 font-bold text-xs p-1">✕</button>
       </div>
       <p id="ciko-bubble-text" class="text-xs text-slate-700 leading-relaxed font-medium">
         Hai! Jangan lupa teliti membaca setiap pertanyaan ya. Setiap aktivitas memberimu Bintang & Poin berharga!
       </p>
     </div>
     
-    <button onclick="toggleCikoBubble()" class="btn-playful w-14 h-14 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-300 border-3 border-white shadow-xl flex items-center justify-center p-1 relative group" title="Tanya Ciko!">
-      <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 border-2 border-white animate-ping"></span>
-      <span class="text-2xl group-hover:scale-110 transition-transform">🦌</span>
+    <button onclick="toggleCikoBubble()" class="btn-playful w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-300 border-3 border-white shadow-xl flex items-center justify-center p-1 relative group" title="Tanya Ciko!">
+      <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-rose-500 border-2 border-white animate-ping"></span>
+      <span class="text-xl sm:text-2xl group-hover:scale-110 transition-transform">🦌</span>
     </button>
   </div>
 
   <!-- Dashboard Guru Modal -->
   <div id="teacher-dashboard-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 md:p-8 shadow-2xl border-4 border-emerald-300 space-y-6 max-h-[90vh] overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-4 sm:p-6 md:p-8 shadow-2xl border-4 border-emerald-300 space-y-6 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between pb-4 border-b">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl">
@@ -299,10 +436,10 @@
       </div>
 
       <!-- Tab Dashboard Guru: Kelola Materi / Data Siswa / Bagikan Link -->
-      <div class="flex gap-2 border-b pb-2 text-xs font-bold">
-        <button onclick="switchTeacherTab('materi')" id="ttab-materi" class="px-4 py-2 rounded-xl bg-emerald-600 text-white">⚙️ Kelola Materi & CP</button>
-        <button onclick="switchTeacherTab('laporan')" id="ttab-laporan" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">📊 Laporan & Hasil Siswa</button>
-        <button onclick="switchTeacherTab('share')" id="ttab-share" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">🔗 Bagikan Link</button>
+      <div class="flex gap-2 border-b pb-2 text-xs font-bold overflow-x-auto whitespace-nowrap no-scrollbar flex-nowrap">
+        <button onclick="switchTeacherTab('materi')" id="ttab-materi" class="flex-shrink-0 px-4 py-2 rounded-xl bg-emerald-600 text-white">⚙️ Kelola Materi & CP</button>
+        <button onclick="switchTeacherTab('laporan')" id="ttab-laporan" class="flex-shrink-0 px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">📊 Laporan & Hasil Siswa</button>
+        <button onclick="switchTeacherTab('share')" id="ttab-share" class="flex-shrink-0 px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200">🔗 Bagikan Link</button>
       </div>
 
       <!-- Sub-view 1: Edit Capaian & Materi -->

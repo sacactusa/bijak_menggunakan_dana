@@ -164,6 +164,14 @@ const AppState = {
     if (pointEl) pointEl.innerText = this.points;
     if (nameEl) nameEl.innerText = this.studentName;
 
+    // Mobile Drawer Sync
+    const drawerName = document.getElementById('drawer-student-name');
+    const drawerStars = document.getElementById('drawer-stars');
+    const drawerPoints = document.getElementById('drawer-points');
+    if (drawerName) drawerName.innerText = this.studentName;
+    if (drawerStars) drawerStars.innerText = this.stars;
+    if (drawerPoints) drawerPoints.innerText = this.points;
+
     const percent = Math.min(100, Math.round((this.completedStages.length / 6) * 100));
     if (progressEl) progressEl.style.width = `${percent}%`;
     if (progressTxt) progressTxt.innerText = `${percent}% Selesai`;
@@ -180,13 +188,32 @@ function switchTab(tabId) {
   // Scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // Update Nav pills style
+  // Update Nav pills style (Desktop & Tier 2)
   document.querySelectorAll('.nav-link').forEach(btn => {
     const target = btn.getAttribute('data-tab');
     if (target === tabId) {
-      btn.className = 'nav-link px-3.5 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 bg-amber-400 text-slate-900 border border-amber-500 shadow-sm transform scale-105';
+      btn.className = 'nav-link px-3.5 py-1.5 sm:py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 bg-amber-400 text-slate-900 border border-amber-500 shadow-sm transform scale-105';
     } else {
-      btn.className = 'nav-link px-3 py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-amber-50 hover:border-amber-300 hover:text-amber-900 shadow-2xs';
+      btn.className = 'nav-link px-3 py-1.5 sm:py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-amber-50 hover:border-amber-300 hover:text-amber-900 shadow-2xs';
+    }
+  });
+
+  // Smooth scroll active nav tab into view in horizontal scroller
+  const activeNavBtn = document.querySelector(`.nav-link[data-tab="${tabId}"]`);
+  if (activeNavBtn) {
+    activeNavBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+
+  // Update Mobile Bottom Nav active state
+  document.querySelectorAll('.bottom-nav-item').forEach(btn => {
+    const bTab = btn.getAttribute('data-bottom-tab');
+    const isDhetikStage = ['d', 'h', 'e', 't', 'i', 'k'].includes(tabId);
+    if (bTab === tabId || (bTab === 'dhetik' && isDhetikStage && tabId !== 'e')) {
+      btn.classList.add('active');
+    } else if (bTab === 'e' && tabId === 'e') {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
     }
   });
 
@@ -249,25 +276,62 @@ function switchTab(tabId) {
 window.switchTab = switchTab;
 
 /* ============================================================
+   MOBILE DRAWER & NAVIGATION HELPERS
+   ============================================================ */
+function toggleMobileMenuDrawer() {
+  const drawer = document.getElementById('mobile-menu-drawer');
+  if (!drawer) return;
+  drawer.classList.toggle('hidden');
+  if (!drawer.classList.contains('hidden')) {
+    AppState.updateStatsUI();
+  }
+}
+window.toggleMobileMenuDrawer = toggleMobileMenuDrawer;
+
+function handleDrawerBackdropClick(e) {
+  if (e.target && e.target.id === 'mobile-menu-drawer') {
+    toggleMobileMenuDrawer();
+  }
+}
+window.handleDrawerBackdropClick = handleDrawerBackdropClick;
+
+function switchTabFromDrawer(tabId) {
+  toggleMobileMenuDrawer();
+  switchTab(tabId);
+}
+window.switchTabFromDrawer = switchTabFromDrawer;
+
+function promptChangeName() {
+  const newName = prompt('Hai teman! Siapa nama panggilanmu?', AppState.studentName);
+  if (newName && newName.trim()) {
+    AppState.studentName = newName.trim();
+    AppState.save();
+    AppState.updateStatsUI();
+    AppState.showToast(`Halo, ${AppState.studentName}! Selamat belajar!`);
+  }
+}
+window.promptChangeName = promptChangeName;
+
+/* ============================================================
    VIEW 1: BERANDA (HOME)
    ============================================================ */
 function renderBerandaView() {
   const dhetikCards = RBC_DATA.dhetikStages.map(s => {
     const isDone = AppState.completedStages.includes(s.id);
     return `
-      <div onclick="switchTab('${s.id}')" class="group cursor-pointer bg-white rounded-3xl p-6 border-3 border-slate-100 hover:border-sky-300 shadow-sm hover:shadow-xl transition-all transform hover:-translate-y-1.5 flex flex-col justify-between">
+      <div onclick="switchTab('${s.id}')" class="group cursor-pointer bg-white rounded-3xl p-4 sm:p-6 border-3 border-slate-100 hover:border-sky-300 shadow-sm hover:shadow-xl transition-all transform hover:-translate-y-1.5 flex flex-col justify-between">
         <div>
-          <div class="flex items-center justify-between mb-4">
-            <span class="w-12 h-12 rounded-2xl flex items-center justify-center ${s.badgeColor} font-black text-xl shadow-inner">
+          <div class="flex items-center justify-between mb-3 sm:mb-4">
+            <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center ${s.badgeColor} font-black text-lg sm:text-xl shadow-inner">
               ${s.code}
             </span>
-            ${isDone ? '<span class="text-xs font-bold px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full flex items-center gap-1">✓ Selesai</span>' : '<span class="text-xs font-bold px-3 py-1 bg-slate-100 text-slate-600 rounded-full">Ayo Coba</span>'}
+            ${isDone ? '<span class="text-xs font-bold px-2.5 py-0.5 sm:px-3 sm:py-1 bg-emerald-100 text-emerald-800 rounded-full flex items-center gap-1">✓ Selesai</span>' : '<span class="text-xs font-bold px-2.5 py-0.5 sm:px-3 sm:py-1 bg-slate-100 text-slate-600 rounded-full">Ayo Coba</span>'}
           </div>
-          <h3 class="text-xl font-bold text-slate-800 mb-1 group-hover:text-sky-600 transition-colors">${s.name}</h3>
-          <p class="text-xs font-semibold text-sky-600 uppercase tracking-wider mb-2">${s.label}</p>
-          <p class="text-slate-600 text-sm leading-relaxed">${s.desc}</p>
+          <h3 class="text-lg sm:text-xl font-bold text-slate-800 mb-1 group-hover:text-sky-600 transition-colors">${s.name}</h3>
+          <p class="text-[11px] sm:text-xs font-semibold text-sky-600 uppercase tracking-wider mb-1.5 sm:mb-2">${s.label}</p>
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">${s.desc}</p>
         </div>
-        <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-sky-600">
+        <div class="mt-4 sm:mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-sky-600">
           <span>Buka Tahap Ini</span>
           <span class="group-hover:translate-x-1 transition-transform">➔</span>
         </div>
@@ -276,50 +340,50 @@ function renderBerandaView() {
   }).join('');
 
   return `
-    <div class="space-y-12 animate-fade-in">
+    <div class="space-y-8 sm:space-y-12 animate-fade-in">
       <!-- Hero Section -->
-      <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-sky-100 via-yellow-50 to-emerald-100 p-8 md:p-12 border-4 border-white shadow-xl">
+      <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-sky-100 via-yellow-50 to-emerald-100 p-5 sm:p-8 md:p-12 border-4 border-white shadow-xl">
         <div class="absolute -top-12 -right-12 w-64 h-64 bg-yellow-200/50 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-12 -left-12 w-64 h-64 bg-sky-200/50 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div class="lg:col-span-7 space-y-5">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-sky-200 shadow-sm">
-              <span class="text-sky-600 font-bold text-xs uppercase tracking-wider">🌟 IPAS KELAS 3 SD / FASE B</span>
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+          <div class="lg:col-span-7 space-y-4 sm:space-y-5">
+            <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-white/90 border border-sky-200 shadow-xs">
+              <span class="text-sky-600 font-bold text-[11px] sm:text-xs uppercase tracking-wider">🌟 IPAS KELAS 3 SD / FASE B</span>
               <span class="text-slate-400">•</span>
-              <span class="text-slate-700 font-semibold text-xs">Model DHETIK</span>
+              <span class="text-slate-700 font-semibold text-[11px] sm:text-xs">Model DHETIK</span>
             </div>
 
-            <h1 class="text-3xl md:text-5xl font-black text-slate-800 tracking-tight leading-tight">
+            <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-slate-800 tracking-tight leading-snug">
               Halo, Teman Belajar! 👋<br/>
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-amber-600 to-emerald-600">
                 Yuk, Belajar Sambil Bermain di Ruang Belajar Ceria!
               </span>
             </h1>
 
-            <p class="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
+            <p class="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed font-medium">
               Ayo berpetualang mengenal mata uang Rupiah, memahami cara kerja jual beli, membedakan kebutuhan dan keinginan, serta belajar menjadi anak hebat yang bijak berbelanja!
             </p>
 
-            <div class="flex flex-wrap gap-4 pt-2">
-              <button onclick="switchTab('d')" class="btn-playful px-7 py-3.5 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-bold text-base rounded-2xl flex items-center gap-2.5 shadow-lg shadow-sky-300/50 hover:from-sky-600 hover:to-blue-700">
+            <div class="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-4 pt-1 sm:pt-2">
+              <button onclick="switchTab('d')" class="btn-playful w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-3.5 bg-gradient-to-r from-sky-500 to-blue-600 text-white font-bold text-sm sm:text-base rounded-2xl flex items-center justify-center gap-2.5 shadow-lg shadow-sky-300/50 hover:from-sky-600 hover:to-blue-700">
                 <span>🚀 Mulai Belajar Sekarang</span>
               </button>
-              <button onclick="switchTab('game')" class="btn-playful px-6 py-3.5 bg-white border-2 border-amber-300 text-amber-900 font-bold text-base rounded-2xl flex items-center gap-2 shadow-sm hover:bg-amber-50">
+              <button onclick="switchTab('game')" class="btn-playful w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3.5 bg-white border-2 border-amber-300 text-amber-900 font-bold text-sm sm:text-base rounded-2xl flex items-center justify-center gap-2 shadow-xs hover:bg-amber-50">
                 <span>🎮 Main Game Edukasi</span>
               </button>
-              <button onclick="switchTab('video')" class="btn-playful px-5 py-3.5 bg-white border-2 border-emerald-300 text-emerald-900 font-bold text-base rounded-2xl flex items-center gap-2 shadow-sm hover:bg-emerald-50">
+              <button onclick="switchTab('video')" class="btn-playful w-full sm:w-auto px-4 sm:px-5 py-2.5 sm:py-3.5 bg-white border-2 border-emerald-300 text-emerald-900 font-bold text-sm sm:text-base rounded-2xl flex items-center justify-center gap-2 shadow-xs hover:bg-emerald-50">
                 <span>🎬 Nonton Video</span>
               </button>
             </div>
           </div>
 
-          <div class="lg:col-span-5 flex flex-col items-center justify-center text-center">
+          <div class="lg:col-span-5 flex flex-col items-center justify-center text-center mt-2 sm:mt-0">
             <div class="relative">
-              <div class="w-56 h-56 md:w-64 md:h-64 rounded-full bg-gradient-to-tr from-amber-300 via-yellow-200 to-sky-200 flex items-center justify-center p-4 shadow-2xl animate-float">
-                ${RBC_MASCOT.render('cheering', 'w-44 h-44 md:w-52 md:h-52')}
+              <div class="w-36 h-36 sm:w-52 sm:h-52 md:w-64 md:h-64 rounded-full bg-gradient-to-tr from-amber-300 via-yellow-200 to-sky-200 flex items-center justify-center p-3 sm:p-4 shadow-xl sm:shadow-2xl animate-float">
+                ${RBC_MASCOT.render('cheering', 'w-28 h-28 sm:w-44 sm:h-44 md:w-52 md:h-52')}
               </div>
-              <div class="absolute -bottom-4 bg-white px-5 py-2 rounded-2xl shadow-lg border-2 border-amber-200 text-xs md:text-sm font-bold text-amber-900 flex items-center gap-2 animate-bounce-gentle">
+              <div class="absolute -bottom-3 sm:-bottom-4 bg-white px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-2xl shadow-lg border-2 border-amber-200 text-xs sm:text-sm font-bold text-amber-900 flex items-center gap-1.5 sm:gap-2 animate-bounce-gentle">
                 <span>⭐ Hai, aku Ciko si Kancil!</span>
               </div>
             </div>
@@ -328,42 +392,42 @@ function renderBerandaView() {
       </section>
 
       <!-- Learning Objectives Accordion & Info -->
-      <section class="card-pastel p-6 md:p-8 border-2 border-sky-100">
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+      <section class="card-pastel p-4 sm:p-6 md:p-8 border-2 border-sky-100">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
           <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center text-2xl font-bold">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center text-xl sm:text-2xl font-bold flex-shrink-0">
               🎯
             </div>
             <div>
-              <h2 class="text-2xl font-bold text-slate-800">Tujuan Pembelajaran Kita</h2>
-              <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Capaian Pembelajaran Fase B (Kelas 3 SD)</p>
+              <h2 class="text-xl sm:text-2xl font-bold text-slate-800">Tujuan Pembelajaran Kita</h2>
+              <p class="text-[10px] sm:text-xs font-semibold text-slate-500 uppercase tracking-wider">Capaian Pembelajaran Fase B (Kelas 3 SD)</p>
             </div>
           </div>
-          <span class="px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+          <span class="px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] sm:text-xs font-bold">
             Bab 5: Bijak Berbelanja Kebutuhan
           </span>
         </div>
 
-        <div class="p-5 rounded-2xl bg-sky-50/70 border border-sky-200 mb-6">
-          <p class="text-slate-800 text-base md:text-lg font-bold leading-relaxed">
+        <div class="p-3.5 sm:p-5 rounded-2xl bg-sky-50/70 border border-sky-200 mb-4 sm:mb-6">
+          <p class="text-slate-800 text-sm sm:text-base md:text-lg font-bold leading-relaxed">
             "${RBC_DATA.learningObjective.cp}"
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           ${RBC_DATA.learningObjective.indicators.map((ind, idx) => `
-            <div class="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
-              <span class="w-7 h-7 rounded-full bg-amber-100 text-amber-800 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+            <div class="flex items-start gap-2.5 sm:gap-3 p-3 sm:p-4 bg-white rounded-2xl border border-slate-100 shadow-xs">
+              <span class="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-amber-100 text-amber-800 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
                 ${idx + 1}
               </span>
-              <span class="text-slate-700 text-sm font-medium leading-relaxed">${ind}</span>
+              <span class="text-slate-700 text-xs sm:text-sm font-medium leading-relaxed">${ind}</span>
             </div>
           `).join('')}
         </div>
       </section>
 
       <!-- Interactive DHETIK Path -->
-      <section class="space-y-6">
+      <section class="space-y-4 sm:space-y-6">
         <div class="text-center max-w-2xl mx-auto space-y-2">
           <span class="px-4 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wider">
             Alur Belajar Asyik
@@ -380,27 +444,27 @@ function renderBerandaView() {
       </section>
 
       <!-- LKPD Digital Preview Highlight -->
-      <section class="p-8 rounded-3xl bg-gradient-to-r from-violet-100 via-fuchsia-50 to-pink-100 border-3 border-violet-200">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div class="lg:col-span-7 space-y-4">
+      <section class="p-5 sm:p-8 rounded-3xl bg-gradient-to-r from-violet-100 via-fuchsia-50 to-pink-100 border-3 border-violet-200">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+          <div class="lg:col-span-7 space-y-3 sm:space-y-4">
             <span class="px-3.5 py-1 rounded-full bg-violet-200 text-violet-900 text-xs font-bold uppercase">
               Lembar Kerja Interaktif
             </span>
-            <h2 class="text-3xl font-bold text-slate-800">LKPD IPAS Digital Kelas 3 SD</h2>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">LKPD IPAS Digital Kelas 3 SD</h2>
             <p class="text-slate-600 leading-relaxed text-sm md:text-base font-medium">
               Kerjakan aktivitas menarik seperti mengelompokkan uang rupiah, misi belanja kantin, dan detektif kebutuhan vs keinginan langsung di website ini!
             </p>
-            <div class="flex flex-wrap gap-3 pt-2">
-              <button onclick="switchTab('e')" class="btn-playful px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-2xl text-sm flex items-center gap-2">
+            <div class="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3 pt-2">
+              <button onclick="switchTab('e')" class="btn-playful w-full sm:w-auto px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-2xl text-sm flex items-center justify-center gap-2">
                 <span>Buka LKPD di Tahap Eksplorasi ➔</span>
               </button>
-              <button onclick="switchTab('kuis')" class="btn-playful px-5 py-3 bg-white text-violet-700 border-2 border-violet-300 font-bold rounded-2xl text-sm">
+              <button onclick="switchTab('kuis')" class="btn-playful w-full sm:w-auto px-5 py-3 bg-white text-violet-700 border-2 border-violet-300 font-bold rounded-2xl text-sm flex items-center justify-center gap-2">
                 <span>Coba Kuis Interaktif 🎯</span>
               </button>
             </div>
           </div>
           <div class="lg:col-span-5 flex justify-center">
-            <img src="assets/images/lkpd-cover.jpg" alt="LKPD Cover" class="w-64 rounded-2xl shadow-xl border-4 border-white transform hover:rotate-1 transition-transform" onerror="this.src='docx_media/image3.jpg'"/>
+            <img src="assets/images/lkpd-cover.jpg" alt="LKPD Cover" class="w-44 sm:w-64 rounded-2xl shadow-xl border-4 border-white transform hover:rotate-1 transition-transform" onerror="this.src='docx_media/image3.jpg'"/>
           </div>
         </div>
       </section>
@@ -423,20 +487,20 @@ function initBerandaView() {
    ============================================================ */
 function renderTahapDView() {
   return `
-    <div class="space-y-10 animate-fade-in">
+    <div class="space-y-6 sm:space-y-10 animate-fade-in">
       <!-- Banner Area sesuai Storyboard -->
-      <div class="rounded-3xl bg-gradient-to-r from-sky-400 via-sky-500 to-blue-500 p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="space-y-2">
+      <div class="rounded-3xl bg-gradient-to-r from-sky-400 via-sky-500 to-blue-500 p-4 sm:p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+        <div class="space-y-2 text-center md:text-left">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">
             <span>Tahap 1 dari 6</span> • <span>D - DEKATKAN</span>
           </div>
-          <h1 class="text-3xl md:text-4xl font-black">AYO MULAI: Mengenal Uang Rupiah</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-black">AYO MULAI: Mengenal Uang Rupiah</h1>
           <p class="text-sky-100 text-sm md:text-base font-medium max-w-xl">
             Mengingat pengalaman sehari-hari kita dalam melihat, memegang, dan menggunakan uang rupiah.
           </p>
         </div>
         <div class="flex-shrink-0">
-          ${RBC_MASCOT.render('happy', 'w-24 h-24 md:w-28 md:h-28')}
+          ${RBC_MASCOT.render('happy', 'w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28')}
         </div>
       </div>
 
@@ -598,11 +662,11 @@ function renderTahapDView() {
         </div>
 
         <!-- Navigation Buttons -->
-        <div class="mt-8 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
-          <button onclick="switchTab('beranda')" class="btn-playful px-5 py-3 rounded-2xl border-2 border-slate-200 text-slate-700 font-bold text-sm flex items-center gap-2 hover:bg-slate-50">
+        <div class="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+          <button onclick="switchTab('beranda')" class="btn-playful w-full sm:w-auto px-5 py-3 rounded-2xl border-2 border-slate-200 text-slate-700 font-bold text-sm flex items-center justify-center gap-2 hover:bg-slate-50">
             <span>⬅️ Kembali ke Beranda</span>
           </button>
-          <button onclick="completeStageDAndNext()" class="btn-playful px-7 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-emerald-200">
+          <button onclick="completeStageDAndNext()" class="btn-playful w-full sm:w-auto px-7 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-200">
             <span>Selesai Tahap D & Lanjut ke Tahap H ➔</span>
           </button>
         </div>
@@ -695,20 +759,20 @@ function completeStageDAndNext() {
    ============================================================ */
 function renderTahapHView() {
   return `
-    <div class="space-y-10 animate-fade-in">
+    <div class="space-y-6 sm:space-y-10 animate-fade-in">
       <!-- Banner Area sesuai Storyboard -->
-      <div class="rounded-3xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="space-y-2">
+      <div class="rounded-3xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 p-4 sm:p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+        <div class="space-y-2 text-center md:text-left">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">
             <span>Tahap 2 dari 6</span> • <span>H - HUBUNGKAN</span>
           </div>
-          <h1 class="text-3xl md:text-4xl font-black">HUBUNGKAN DENGAN HIDUPKU</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-black">HUBUNGKAN DENGAN HIDUPKU</h1>
           <p class="text-emerald-100 text-sm md:text-base font-medium max-w-xl">
             Menghubungkan fungsi uang dengan kehidupan nyata serta membedakan antara kebutuhan dan keinginan.
           </p>
         </div>
         <div class="flex-shrink-0">
-          ${RBC_MASCOT.render('happy', 'w-24 h-24 md:w-28 md:h-28')}
+          ${RBC_MASCOT.render('happy', 'w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28')}
         </div>
       </div>
 
@@ -966,11 +1030,11 @@ function renderTahapHView() {
         </div>
 
         <!-- Navigation Buttons -->
-        <div class="mt-8 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
-          <button onclick="switchTab('d')" class="btn-playful px-5 py-3 rounded-2xl border-2 border-slate-200 text-slate-700 font-bold text-sm flex items-center gap-2 hover:bg-slate-50">
+        <div class="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+          <button onclick="switchTab('d')" class="btn-playful w-full sm:w-auto px-5 py-3 rounded-2xl border-2 border-slate-200 text-slate-700 font-bold text-sm flex items-center justify-center gap-2 hover:bg-slate-50">
             <span>⬅️ Kembali ke Tahap D</span>
           </button>
-          <button onclick="completeStageHAndNext()" class="btn-playful px-7 py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-amber-200">
+          <button onclick="completeStageHAndNext()" class="btn-playful w-full sm:w-auto px-7 py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-200">
             <span>Selesai Tahap H & Lanjut ke Tahap E ➔</span>
           </button>
         </div>
@@ -1014,20 +1078,20 @@ function completeStageHAndNext() {
    ============================================================ */
 function renderTahapEView() {
   return `
-    <div class="space-y-10 animate-fade-in">
+    <div class="space-y-6 sm:space-y-10 animate-fade-in">
       <!-- Banner Area sesuai Storyboard -->
-      <div class="rounded-3xl bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="space-y-2">
+      <div class="rounded-3xl bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-500 p-4 sm:p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+        <div class="space-y-2 text-center md:text-left">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">
             <span>Tahap 3 dari 6</span> • <span>E - EKSPLORASI</span>
           </div>
-          <h1 class="text-3xl md:text-4xl font-black">AYO MENJELAJAH: Market Niza</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-black">AYO MENJELAJAH: Market Niza</h1>
           <p class="text-amber-100 text-sm md:text-base font-medium max-w-xl">
             Eksplorasi nilai uang Rupiah dan bermain simulasi jual beli dengan batas anggaran Rp20.000!
           </p>
         </div>
         <div class="flex-shrink-0">
-          ${RBC_MASCOT.render('cheering', 'w-24 h-24 md:w-28 md:h-28')}
+          ${RBC_MASCOT.render('cheering', 'w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28')}
         </div>
       </div>
 
@@ -1108,7 +1172,7 @@ function renderTahapEView() {
             </div>
           </div>
           <!-- Dompet Siswa Anggaran Max Rp20.000 -->
-          <div class="p-3 px-5 rounded-2xl bg-amber-100 border-2 border-amber-300 flex items-center gap-3">
+          <div class="p-3 px-4 sm:px-5 rounded-2xl bg-amber-100 border-2 border-amber-300 flex items-center justify-between sm:justify-start gap-3 w-full sm:w-auto">
             <span class="text-2xl">👛</span>
             <div>
               <span class="text-xs font-bold text-amber-800 block">Sisa Anggaran Belanjamu:</span>
@@ -1122,7 +1186,7 @@ function renderTahapEView() {
         </p>
 
         <!-- Rak Barang Market Niza -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4 mb-8">
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 mb-8">
           ${RBC_DATA.marketNizaItems.map(item => {
             const iconHtml = (item.icon === 'clayWarna') ? RBC_ICONS.clayWarna('w-10 h-10 inline-block') : `<span class="text-3xl">${item.icon}</span>`;
             return `
@@ -1160,18 +1224,18 @@ function renderTahapEView() {
             <p class="text-slate-400 text-sm italic py-2">Keranjang masih kosong. Ayo pilih barang di rak atas!</p>
           </div>
 
-          <div class="pt-4 border-t-2 border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div class="flex items-center gap-6">
+          <div class="pt-4 border-t-2 border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+            <div class="grid grid-cols-2 gap-3 sm:flex sm:items-center sm:gap-6 bg-slate-50 sm:bg-transparent p-3 sm:p-0 rounded-2xl">
               <div>
-                <span class="text-[11px] text-slate-500 font-bold uppercase tracking-wider block">TOTAL BELANJA:</span>
-                <span id="niza-total-display" class="text-2xl font-black text-slate-800">Rp0</span>
+                <span class="text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider block">TOTAL BELANJA:</span>
+                <span id="niza-total-display" class="text-xl sm:text-2xl font-black text-slate-800">Rp0</span>
               </div>
-              <div class="border-l-2 border-slate-200 pl-6">
-                <span class="text-[11px] text-slate-500 font-bold uppercase tracking-wider block">SISA UANG / KEMBALIAN:</span>
-                <span id="niza-remaining-display" class="text-2xl font-black text-emerald-600">Rp20.000</span>
+              <div class="border-l-2 border-slate-200 pl-3 sm:pl-6">
+                <span class="text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider block">SISA UANG / KEMBALIAN:</span>
+                <span id="niza-remaining-display" class="text-xl sm:text-2xl font-black text-emerald-600">Rp20.000</span>
               </div>
             </div>
-            <button onclick="checkoutNizaCart()" class="btn-playful px-7 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black text-sm rounded-2xl shadow-lg shadow-emerald-200 flex items-center gap-2">
+            <button onclick="checkoutNizaCart()" class="btn-playful w-full sm:w-auto px-7 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black text-sm rounded-2xl shadow-lg shadow-emerald-200 flex items-center justify-center gap-2">
               <span>Bayar di Kasir Niza 💵</span>
             </button>
           </div>
@@ -1208,9 +1272,9 @@ function renderTahapEView() {
         </p>
 
         <!-- Mission Selector Tabs -->
-        <div class="flex flex-wrap gap-2 mb-6" id="mission-tabs">
+        <div class="flex gap-2 mb-6 overflow-x-auto pb-2 no-scrollbar" id="mission-tabs">
           ${[1, 2, 3, 4, 5, 6, 7].map(num => `
-            <button onclick="loadNizaMission(${num})" id="tab-mission-${num}" class="px-3.5 py-1.5 rounded-xl font-bold text-xs border ${num === 1 ? 'bg-purple-600 text-white border-purple-600' : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'}">
+            <button onclick="loadNizaMission(${num})" id="tab-mission-${num}" class="flex-shrink-0 px-3.5 py-1.5 rounded-xl font-bold text-xs border ${num === 1 ? 'bg-purple-600 text-white border-purple-600' : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'}">
               Misi ${num}
             </button>
           `).join('')}
@@ -1222,11 +1286,11 @@ function renderTahapEView() {
         </div>
 
         <!-- Navigation Buttons -->
-        <div class="mt-8 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
-          <button onclick="switchTab('h')" class="btn-playful px-5 py-3 rounded-2xl border-2 border-slate-200 text-slate-700 font-bold text-sm flex items-center gap-2 hover:bg-slate-50">
+        <div class="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+          <button onclick="switchTab('h')" class="btn-playful w-full sm:w-auto px-5 py-3 rounded-2xl border-2 border-slate-200 text-slate-700 font-bold text-sm flex items-center justify-center gap-2 hover:bg-slate-50">
             <span>⬅️ Kembali ke Tahap H</span>
           </button>
-          <button onclick="completeStageEAndNext()" class="btn-playful px-7 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-purple-200">
+          <button onclick="completeStageEAndNext()" class="btn-playful w-full sm:w-auto px-7 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-purple-200">
             <span>Selesai Tahap E & Lanjut ke Tahap T ➔</span>
           </button>
         </div>
@@ -1235,7 +1299,7 @@ function renderTahapEView() {
 
     <!-- MODAL STRUK KASIR MARKET NIZA -->
     <div id="niza-receipt-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-      <div class="bg-white rounded-3xl max-w-md w-full p-6 md:p-8 shadow-2xl border-4 border-emerald-300 space-y-4 animate-bounce-gentle">
+      <div class="bg-white rounded-3xl max-w-md w-full p-4 sm:p-6 md:p-8 shadow-2xl border-4 border-emerald-300 space-y-4 animate-bounce-gentle max-h-[90vh] overflow-y-auto">
         <div class="text-center pb-3 border-b-2 border-dashed border-slate-200">
           <span class="text-3xl">🏪</span>
           <h3 class="font-black text-slate-800 text-lg mt-1">STRUK RESMI MARKET NIZA</h3>
@@ -1306,7 +1370,7 @@ function renderTahapEView() {
 
     <!-- MODAL DETAIL PECAHAN UANG RUPIAH -->
     <div id="money-detail-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-      <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl border-4 border-amber-300 space-y-4 animate-bounce-gentle">
+      <div class="bg-white rounded-3xl max-w-lg w-full p-4 sm:p-6 md:p-8 shadow-2xl border-4 border-amber-300 space-y-4 animate-bounce-gentle max-h-[90vh] overflow-y-auto">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100">
           <div class="flex items-center gap-2">
             <span class="text-2xl">🔍</span>
@@ -2041,89 +2105,89 @@ function renderTahapTView() {
                 Pilihlah kelompok yang tepat untuk masing-masing barang berdasarkan pengamatanmu:
               </p>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-1">
                 <!-- Item Nasi -->
-                <div class="p-4 bg-white rounded-2xl border border-indigo-100 shadow-sm flex items-center justify-between gap-3">
-                  <div class="flex items-center gap-3">
-                    <span class="text-2xl">🍚</span>
+                <div class="p-3.5 sm:p-4 bg-white rounded-2xl border border-indigo-100 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+                  <div class="flex items-center gap-2.5 sm:gap-3">
+                    <span class="text-2xl sm:text-3xl">🍚</span>
                     <div>
-                      <div class="font-bold text-slate-800 text-sm">Nasi Hangat</div>
+                      <div class="font-bold text-slate-800 text-xs sm:text-sm">Nasi Hangat</div>
                       <div class="text-[11px] text-slate-500">Makanan pokok harian</div>
                     </div>
                   </div>
-                  <div class="flex gap-1.5">
-                    <button onclick="setLkpdGroup('nasi', 'kebutuhan')" id="btn-nasi-keb" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-colors">
+                  <div class="grid grid-cols-2 gap-2 w-full sm:w-auto">
+                    <button onclick="setLkpdGroup('nasi', 'kebutuhan')" id="btn-nasi-keb" class="px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-colors text-center">
                       Kebutuhan
                     </button>
-                    <button onclick="setLkpdGroup('nasi', 'keinginan')" id="btn-nasi-kei" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-amber-50 hover:text-amber-700 transition-colors">
+                    <button onclick="setLkpdGroup('nasi', 'keinginan')" id="btn-nasi-kei" class="px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-amber-50 hover:text-amber-700 transition-colors text-center">
                       Keinginan
                     </button>
                   </div>
                 </div>
 
                 <!-- Item Buku -->
-                <div class="p-4 bg-white rounded-2xl border border-indigo-100 shadow-sm flex items-center justify-between gap-3">
-                  <div class="flex items-center gap-3">
-                    <span class="text-2xl">📖</span>
+                <div class="p-3.5 sm:p-4 bg-white rounded-2xl border border-indigo-100 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+                  <div class="flex items-center gap-2.5 sm:gap-3">
+                    <span class="text-2xl sm:text-3xl">📖</span>
                     <div>
-                      <div class="font-bold text-slate-800 text-sm">Buku Tulis</div>
+                      <div class="font-bold text-slate-800 text-xs sm:text-sm">Buku Tulis</div>
                       <div class="text-[11px] text-slate-500">Peralatan belajar sekolah</div>
                     </div>
                   </div>
-                  <div class="flex gap-1.5">
-                    <button onclick="setLkpdGroup('buku', 'kebutuhan')" id="btn-buku-keb" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-colors">
+                  <div class="grid grid-cols-2 gap-2 w-full sm:w-auto">
+                    <button onclick="setLkpdGroup('buku', 'kebutuhan')" id="btn-buku-keb" class="px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-colors text-center">
                       Kebutuhan
                     </button>
-                    <button onclick="setLkpdGroup('buku', 'keinginan')" id="btn-buku-kei" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-amber-50 hover:text-amber-700 transition-colors">
+                    <button onclick="setLkpdGroup('buku', 'keinginan')" id="btn-buku-kei" class="px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-amber-50 hover:text-amber-700 transition-colors text-center">
                       Keinginan
                     </button>
                   </div>
                 </div>
 
                 <!-- Item Mainan -->
-                <div class="p-4 bg-white rounded-2xl border border-indigo-100 shadow-sm flex items-center justify-between gap-3">
-                  <div class="flex items-center gap-3">
-                    <span class="text-2xl">🚗</span>
+                <div class="p-3.5 sm:p-4 bg-white rounded-2xl border border-indigo-100 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+                  <div class="flex items-center gap-2.5 sm:gap-3">
+                    <span class="text-2xl sm:text-3xl">🚗</span>
                     <div>
-                      <div class="font-bold text-slate-800 text-sm">Mainan Mobil Remot</div>
+                      <div class="font-bold text-slate-800 text-xs sm:text-sm">Mainan Mobil Remot</div>
                       <div class="text-[11px] text-slate-500">Hiburan & kesenangan</div>
                     </div>
                   </div>
-                  <div class="flex gap-1.5">
-                    <button onclick="setLkpdGroup('mainan', 'kebutuhan')" id="btn-mainan-keb" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-colors">
+                  <div class="grid grid-cols-2 gap-2 w-full sm:w-auto">
+                    <button onclick="setLkpdGroup('mainan', 'kebutuhan')" id="btn-mainan-keb" class="px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-colors text-center">
                       Kebutuhan
                     </button>
-                    <button onclick="setLkpdGroup('mainan', 'keinginan')" id="btn-mainan-kei" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-amber-50 hover:text-amber-700 transition-colors">
+                    <button onclick="setLkpdGroup('mainan', 'keinginan')" id="btn-mainan-kei" class="px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-amber-50 hover:text-amber-700 transition-colors text-center">
                       Keinginan
                     </button>
                   </div>
                 </div>
 
                 <!-- Item Jajanan -->
-                <div class="p-4 bg-white rounded-2xl border border-indigo-100 shadow-sm flex items-center justify-between gap-3">
-                  <div class="flex items-center gap-3">
-                    <span class="text-2xl">🍫</span>
+                <div class="p-3.5 sm:p-4 bg-white rounded-2xl border border-indigo-100 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+                  <div class="flex items-center gap-2.5 sm:gap-3">
+                    <span class="text-2xl sm:text-3xl">🍫</span>
                     <div>
-                      <div class="font-bold text-slate-800 text-sm">Jajanan Manis/Ciki</div>
+                      <div class="font-bold text-slate-800 text-xs sm:text-sm">Jajanan Manis/Ciki</div>
                       <div class="text-[11px] text-slate-500">Camilan tambahan</div>
                     </div>
                   </div>
-                  <div class="flex gap-1.5">
-                    <button onclick="setLkpdGroup('jajanan', 'kebutuhan')" id="btn-jajanan-keb" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-colors">
+                  <div class="grid grid-cols-2 gap-2 w-full sm:w-auto">
+                    <button onclick="setLkpdGroup('jajanan', 'kebutuhan')" id="btn-jajanan-keb" class="px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 transition-colors text-center">
                       Kebutuhan
                     </button>
-                    <button onclick="setLkpdGroup('jajanan', 'keinginan')" id="btn-jajanan-kei" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-amber-50 hover:text-amber-700 transition-colors">
+                    <button onclick="setLkpdGroup('jajanan', 'keinginan')" id="btn-jajanan-kei" class="px-3 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-amber-50 hover:text-amber-700 transition-colors text-center">
                       Keinginan
                     </button>
                   </div>
                 </div>
               </div>
 
-              <div class="flex items-center justify-between pt-2">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 pt-2">
                 <span id="grouping-feedback" class="text-xs font-bold text-indigo-800">
                   Pilih kelompok untuk ke-4 barang di atas.
                 </span>
-                <button onclick="checkLkpdGrouping()" class="btn-playful px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm">
+                <button onclick="checkLkpdGrouping()" class="btn-playful w-full sm:w-auto px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm">
                   <span>✨ Periksa Pengelompokan</span>
                 </button>
               </div>
@@ -2174,11 +2238,11 @@ function renderTahapTView() {
                 </div>
               </div>
 
-              <div class="flex items-center justify-between pt-2">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 pt-2">
                 <span id="reason-feedback" class="text-xs font-bold text-amber-900">
                   Simpan alasan analisis untuk disertakan saat mengunggah di Padlet.
                 </span>
-                <button onclick="saveLkpdReasons()" class="btn-playful px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm">
+                <button onclick="saveLkpdReasons()" class="btn-playful w-full sm:w-auto px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm">
                   <span>💾 Simpan Alasan Analisis</span>
                 </button>
               </div>
@@ -2234,11 +2298,11 @@ function renderTahapTView() {
                 </div>
               </div>
 
-              <div class="flex items-center justify-between pt-1">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 pt-1">
                 <span id="priority-feedback" class="text-xs font-bold text-sky-800">
                   Pilih salah satu opsi prioritas di atas.
                 </span>
-                <button onclick="checkPriorityDecision()" class="btn-playful px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm">
+                <button onclick="checkPriorityDecision()" class="btn-playful w-full sm:w-auto px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm">
                   <span>🎯 Kunci Jawaban Prioritas</span>
                 </button>
               </div>
@@ -2294,11 +2358,11 @@ function renderTahapTView() {
                 </div>
               </div>
 
-              <div class="flex items-center justify-between pt-2">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 pt-2">
                 <span id="concl-feedback" class="text-xs font-bold text-rose-800">
                   Lengkapi ketiga kalimat rumpang di atas.
                 </span>
-                <button onclick="checkLkpdConclusions()" class="btn-playful px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-600 text-white font-black text-xs flex items-center gap-2 shadow-md">
+                <button onclick="checkLkpdConclusions()" class="btn-playful w-full sm:w-auto px-5 py-3 rounded-xl bg-gradient-to-r from-rose-500 to-pink-600 text-white font-black text-xs flex items-center justify-center gap-2 shadow-md">
                   <span>🎉 Selesaikan LKPD & Buka Papan Diskusi</span>
                 </button>
               </div>
@@ -2493,11 +2557,11 @@ function renderTahapTView() {
       </div>
 
       <!-- Navigation Buttons -->
-      <div class="mt-8 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
-        <button onclick="switchTab('e')" class="btn-playful px-5 py-3 rounded-2xl border-2 border-slate-200 text-slate-700 font-bold text-sm flex items-center gap-2 hover:bg-slate-50 transition-colors">
+      <div class="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+        <button onclick="switchTab('e')" class="btn-playful w-full sm:w-auto px-5 py-3 rounded-2xl border-2 border-slate-200 text-slate-700 font-bold text-sm flex items-center justify-center gap-2 hover:bg-slate-50 transition-colors">
           <span>⬅️ Kembali ke Tahap E</span>
         </button>
-        <button onclick="completeStageTAndNext()" class="btn-playful px-7 py-3.5 rounded-2xl bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-black text-sm flex items-center gap-2 shadow-lg shadow-violet-200 transition-all">
+        <button onclick="completeStageTAndNext()" class="btn-playful w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-black text-sm flex items-center justify-center gap-2 shadow-lg shadow-violet-200 transition-all">
           <span>Selesai Tahap T & Lanjut ke Tahap I ➔</span>
         </button>
       </div>
@@ -2505,7 +2569,7 @@ function renderTahapTView() {
 
     <!-- MODAL UNGGAH HASIL LKPD KE PADLET -->
     <div id="padlet-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-      <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl border-4 border-violet-200 space-y-5 animate-bounce-gentle">
+      <div class="bg-white rounded-3xl max-w-lg w-full p-4 sm:p-6 md:p-8 shadow-2xl border-4 border-violet-200 space-y-5 animate-bounce-gentle max-h-[90vh] overflow-y-auto">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100">
           <div class="flex items-center gap-2">
             <span class="text-2xl">📝</span>
@@ -3125,20 +3189,20 @@ function completeStageTAndNext() {
    ============================================================ */
 function renderTahapIView() {
   return `
-    <div class="space-y-10 animate-fade-in">
+    <div class="space-y-6 sm:space-y-10 animate-fade-in">
       <!-- Banner Area sesuai Storyboard -->
-      <div class="rounded-3xl bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="space-y-2">
+      <div class="rounded-3xl bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 p-4 sm:p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+        <div class="space-y-2 text-center md:text-left">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">
             <span>Tahap 5 dari 6</span> • <span>I - IKAT KONSEP</span>
           </div>
-          <h1 class="text-3xl md:text-4xl font-black">IKAT ILMUKU: Mengikat Seluruh Konsep</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-black">IKAT ILMUKU: Mengikat Seluruh Konsep</h1>
           <p class="text-rose-100 text-sm md:text-base font-medium max-w-xl">
             Menyimpulkan materi, meluruskan pemahaman yang keliru, dan mengaitkan konsep yang telah dipelajari.
           </p>
         </div>
         <div class="flex-shrink-0">
-          ${RBC_MASCOT.render('thinking', 'w-24 h-24 md:w-28 md:h-28')}
+          ${RBC_MASCOT.render('thinking', 'w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28')}
         </div>
       </div>
 
@@ -3270,12 +3334,12 @@ function renderTahapIView() {
 
         <!-- Canva Slide Presentation Embed & Link -->
         <div class="p-6 rounded-2xl bg-gradient-to-r from-sky-50 to-blue-50 border-2 border-sky-200 space-y-3">
-          <div class="flex items-center justify-between">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
               <span class="text-xs font-bold text-sky-700 uppercase">Slide Materi Guru</span>
               <h4 class="font-bold text-slate-800 text-base">Presentasi Canva: Bijak Berbelanja Kebutuhan</h4>
             </div>
-            <a href="${RBC_DATA.appInfo.canvaUrl}" target="_blank" rel="noopener noreferrer" class="btn-playful px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 shadow-sm">
+            <a href="${RBC_DATA.appInfo.canvaUrl}" target="_blank" rel="noopener noreferrer" class="btn-playful w-full sm:w-auto px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-sm">
               <span>Buka Slide Canva ➔</span>
             </a>
           </div>
@@ -3291,17 +3355,17 @@ function renderTahapIView() {
         <p class="text-slate-600 text-sm leading-relaxed mb-4">
           Sekarang kita semua paham bahwa uang adalah alat tukar yang berharga. Kita harus pintar mendahulukan kebutuhan dan menyisihkan uang saku untuk menabung!
         </p>
-        <button onclick="switchTab('kuis')" class="btn-playful px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl flex items-center gap-2 shadow-md">
+        <button onclick="switchTab('kuis')" class="btn-playful w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 shadow-md">
           <span>Uji Pemahamanmu di Kuis Interaktif 🎯</span>
         </button>
       </div>
 
       <!-- Navigation Buttons -->
-      <div class="mt-8 pt-6 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4">
-        <button onclick="switchTab('t')" class="btn-playful px-5 py-3 rounded-2xl border-2 border-slate-200 text-slate-700 font-bold text-sm flex items-center gap-2 hover:bg-slate-50">
+      <div class="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+        <button onclick="switchTab('t')" class="btn-playful w-full sm:w-auto px-5 py-3 rounded-2xl border-2 border-slate-200 text-slate-700 font-bold text-sm flex items-center justify-center gap-2 hover:bg-slate-50">
           <span>⬅️ Kembali ke Tahap T</span>
         </button>
-        <button onclick="completeStageIAndNext()" class="btn-playful px-7 py-3 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-rose-200">
+        <button onclick="completeStageIAndNext()" class="btn-playful w-full sm:w-auto px-7 py-3 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-rose-200">
           <span>Selesai Tahap I & Lanjut ke Tahap K ➔</span>
         </button>
       </div>
@@ -3369,20 +3433,20 @@ function completeStageIAndNext() {
    ============================================================ */
 function renderTahapKView() {
   return `
-    <div class="space-y-10 animate-fade-in">
+    <div class="space-y-6 sm:space-y-10 animate-fade-in">
       <!-- Banner Area sesuai Storyboard -->
-      <div class="rounded-3xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="space-y-2">
+      <div class="rounded-3xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-4 sm:p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+        <div class="space-y-2 text-center md:text-left">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">
             <span>Tahap 6 dari 6</span> • <span>K - KARYA & REFLEKSI</span>
           </div>
-          <h1 class="text-3xl md:text-4xl font-black">KARYAKU: Celengan Kreatif & Refleksi</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-black">KARYAKU: Celengan Kreatif & Refleksi</h1>
           <p class="text-indigo-100 text-sm md:text-base font-medium max-w-xl">
             Membuat karya nyata menghias celengan, menyusun rencana belanja bijak, dan merefleksikan proses belajar.
           </p>
         </div>
         <div class="flex-shrink-0">
-          ${RBC_MASCOT.render('happy', 'w-24 h-24 md:w-28 md:h-28')}
+          ${RBC_MASCOT.render('happy', 'w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28')}
         </div>
       </div>
 
@@ -3483,8 +3547,8 @@ function renderTahapKView() {
             <h4 class="font-bold text-slate-800 text-sm mb-3 flex items-center gap-2">
               <span>📋 Rubrik Penilaian Karya</span>
             </h4>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left text-xs border-collapse">
+            <div class="overflow-x-auto -mx-2 px-2 pb-2">
+              <table class="w-full text-left text-xs border-collapse min-w-[380px]">
                 <thead>
                   <tr class="bg-indigo-50 text-indigo-900 border-b border-indigo-200">
                     <th class="p-2 font-bold">Kriteria</th>
@@ -3553,7 +3617,7 @@ function renderTahapKView() {
 
       <!-- SERTIFIKAT KELULUSAN (Hidden until claimed, printable) -->
       <div id="certificate-section" class="hidden pt-6">
-        <div id="certificate-print-area" class="card-pastel p-8 md:p-12 border-8 border-amber-300 bg-gradient-to-br from-amber-50 via-white to-sky-50 text-center relative overflow-hidden shadow-2xl">
+        <div id="certificate-print-area" class="card-pastel p-4 sm:p-8 md:p-12 border-4 sm:border-8 border-amber-300 bg-gradient-to-br from-amber-50 via-white to-sky-50 text-center relative overflow-hidden shadow-2xl">
           <div class="absolute top-4 left-4 text-3xl">⭐</div>
           <div class="absolute top-4 right-4 text-3xl">⭐</div>
           <div class="absolute bottom-4 left-4 text-3xl">🪙</div>
@@ -3565,11 +3629,11 @@ function renderTahapKView() {
             </div>
 
             <span class="text-xs font-black tracking-widest uppercase text-amber-700 block">UNIVERSITAS PENDIDIKAN INDONESIA - KAMPUS DI CIBIRU</span>
-            <h2 class="text-3xl md:text-4xl font-black text-slate-800">SERTIFIKAT PENGHARGAAN</h2>
-            <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest">Diberikan Dengan Penuh Rasa Bangga Kepada:</p>
+            <h2 class="text-2xl sm:text-4xl font-black text-slate-800">SERTIFIKAT PENGHARGAAN</h2>
+            <p class="text-[11px] sm:text-xs font-semibold text-slate-500 uppercase tracking-widest">Diberikan Dengan Penuh Rasa Bangga Kepada:</p>
             
             <div class="py-2 border-b-2 border-amber-400">
-              <h3 id="cert-student-name" class="text-3xl font-black text-sky-700 font-title">${AppState.studentName}</h3>
+              <h3 id="cert-student-name" class="text-2xl sm:text-3xl font-black text-sky-700 font-title">${AppState.studentName}</h3>
             </div>
 
             <p class="text-slate-600 text-sm leading-relaxed font-medium">
@@ -3594,7 +3658,7 @@ function renderTahapKView() {
         </div>
 
         <div class="flex justify-center gap-4 mt-6">
-          <button onclick="window.print()" class="btn-playful px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl text-sm flex items-center gap-2 shadow-md">
+          <button onclick="window.print()" class="btn-playful w-full sm:w-auto px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl text-sm flex items-center justify-center gap-2 shadow-md">
             <span>🖨️ Cetak / Simpan Sertifikat</span>
           </button>
         </div>
@@ -3888,17 +3952,17 @@ async function submitStudentReflection() {
    ============================================================ */
 function renderVideoView() {
   return `
-    <div class="space-y-8 animate-fade-in">
-      <div class="rounded-3xl bg-gradient-to-r from-red-500 via-rose-500 to-pink-500 p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
+    <div class="space-y-6 sm:space-y-8 animate-fade-in">
+      <div class="rounded-3xl bg-gradient-to-r from-red-500 via-rose-500 to-pink-500 p-4 sm:p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+        <div class="space-y-2 text-center md:text-left">
           <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">Pojok Nonton</span>
-          <h1 class="text-3xl md:text-4xl font-black mt-2">Video Pembelajaran Ceria</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-black mt-2">Video Pembelajaran Ceria</h1>
           <p class="text-rose-100 text-sm md:text-base font-medium max-w-xl">
             Tonton kumpulan video edukasi menarik tentang uang rupiah, fungsi uang, dan cara cerdas berbelanja.
           </p>
         </div>
         <div class="flex-shrink-0">
-          ${RBC_MASCOT.render('cheering', 'w-24 h-24 md:w-28 md:h-28')}
+          ${RBC_MASCOT.render('cheering', 'w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28')}
         </div>
       </div>
 
@@ -3938,17 +4002,17 @@ function initVideoView() {}
    ============================================================ */
 function renderKuisView() {
   return `
-    <div class="space-y-8 animate-fade-in">
-      <div class="rounded-3xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600 p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
+    <div class="space-y-6 sm:space-y-8 animate-fade-in">
+      <div class="rounded-3xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600 p-4 sm:p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+        <div class="space-y-2 text-center md:text-left">
           <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">Uji Pemahaman</span>
-          <h1 class="text-3xl md:text-4xl font-black mt-2">Kuis Interaktif IPAS Kelas 3 SD</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-black mt-2">Kuis Interaktif IPAS Kelas 3 SD</h1>
           <p class="text-amber-100 text-sm md:text-base font-medium max-w-xl">
             Jawab 10 soal pilihan ganda tentang uang rupiah dan bijak berbelanja untuk mendapatkan Bintang & Skor Tertinggi!
           </p>
         </div>
         <div class="flex-shrink-0">
-          ${RBC_MASCOT.render('cheering', 'w-24 h-24 md:w-28 md:h-28')}
+          ${RBC_MASCOT.render('cheering', 'w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28')}
         </div>
       </div>
 
@@ -4005,11 +4069,11 @@ function renderCurrentQuizQuestion() {
         <p class="text-slate-600 text-sm max-w-md mx-auto">
           ${score >= 80 ? 'Kamu sudah memahami materi jenis uang, fungsi uang, dan bijak berbelanja dengan sangat baik!' : 'Jangan menyerah! Kamu bisa mengulang kuis untuk mendapatkan nilai 100!'}
         </p>
-        <div class="flex justify-center gap-4 pt-4">
-          <button onclick="initKuisView()" class="btn-playful px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl text-sm">
+        <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 pt-4">
+          <button onclick="initKuisView()" class="btn-playful w-full sm:w-auto px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl text-sm flex items-center justify-center gap-2">
             🔄 Ulangi Kuis
           </button>
-          <button onclick="switchTab('beranda')" class="btn-playful px-6 py-3 bg-white border-2 border-slate-200 text-slate-700 font-bold rounded-2xl text-sm">
+          <button onclick="switchTab('beranda')" class="btn-playful w-full sm:w-auto px-6 py-3 bg-white border-2 border-slate-200 text-slate-700 font-bold rounded-2xl text-sm flex items-center justify-center gap-2">
             Kembali ke Materi
           </button>
         </div>
@@ -4026,24 +4090,24 @@ function renderCurrentQuizQuestion() {
   const total = RBC_DATA.quizQuestions.length;
 
   container.innerHTML = `
-    <div class="card-pastel p-6 md:p-8 border-2 border-amber-200 space-y-6">
+    <div class="card-pastel p-4 sm:p-6 md:p-8 border-2 border-amber-200 space-y-4 sm:space-y-6">
       <div class="flex items-center justify-between text-xs font-bold text-slate-500">
         <span>SOAL ${AppState.quizIndex + 1} DARI ${total}</span>
-        <span class="text-amber-600">Skor Saat Ini: ${AppState.quizScore * 10}</span>
+        <span class="text-amber-600">Skor: ${AppState.quizScore * 10}</span>
       </div>
 
       <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
         <div class="bg-amber-500 h-2.5 rounded-full transition-all" style="width: ${((AppState.quizIndex + 1) / total) * 100}%"></div>
       </div>
 
-      <h3 class="text-xl md:text-2xl font-bold text-slate-800 leading-snug">
+      <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-slate-800 leading-snug">
         ${q.question}
       </h3>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="quiz-options-container">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3" id="quiz-options-container">
         ${q.options.map((opt, idx) => `
-          <button onclick="answerQuizOption(${idx})" class="p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-white hover:bg-amber-50/50 text-left font-bold text-slate-800 text-sm transition-all flex items-center gap-3 group">
-            <span class="w-8 h-8 rounded-xl bg-slate-100 group-hover:bg-amber-200 text-slate-700 flex items-center justify-center text-xs flex-shrink-0">
+          <button onclick="answerQuizOption(${idx})" class="p-3.5 sm:p-4 rounded-2xl border-2 border-slate-200 hover:border-amber-400 bg-white hover:bg-amber-50/50 text-left font-bold text-slate-800 text-xs sm:text-sm transition-all flex items-center gap-3 group">
+            <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-slate-100 group-hover:bg-amber-200 text-slate-700 flex items-center justify-center text-xs flex-shrink-0">
               ${['A', 'B', 'C', 'D'][idx]}
             </span>
             <span class="flex-1">${opt}</span>
@@ -4052,11 +4116,11 @@ function renderCurrentQuizQuestion() {
       </div>
 
       <!-- Feedback & Discussion Box -->
-      <div id="quiz-feedback-box" class="hidden p-4 rounded-2xl text-sm font-medium space-y-2"></div>
+      <div id="quiz-feedback-box" class="hidden p-4 rounded-2xl text-xs sm:text-sm font-medium space-y-2"></div>
 
-      <div id="quiz-next-btn-container" class="hidden flex justify-end">
-        <button onclick="nextQuizQuestion()" class="btn-playful px-6 py-2.5 bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm rounded-xl">
-          Soal Selanjutnya ➔
+      <div id="quiz-next-btn-container" class="hidden flex justify-stretch sm:justify-end">
+        <button onclick="nextQuizQuestion()" class="btn-playful w-full sm:w-auto px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2">
+          <span>Soal Selanjutnya ➔</span>
         </button>
       </div>
     </div>
@@ -4134,45 +4198,45 @@ function nextQuizQuestion() {
    ============================================================ */
 function renderGameView() {
   return `
-    <div class="space-y-8 animate-fade-in">
-      <div class="rounded-3xl bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-600 p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
-        <div>
+    <div class="space-y-6 sm:space-y-8 animate-fade-in">
+      <div class="rounded-3xl bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-600 p-4 sm:p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+        <div class="space-y-2 text-center md:text-left">
           <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">Bermain Sambil Belajar</span>
-          <h1 class="text-3xl md:text-4xl font-black mt-2">Pojok Game Edukasi Ceria</h1>
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-black mt-2">Pojok Game Edukasi Ceria</h1>
           <p class="text-emerald-100 text-sm md:text-base font-medium max-w-xl">
             Pilih 5 permainan edukasi seru di bawah ini untuk mengasah ketangkasan dan pengetahuan finansialmu!
           </p>
         </div>
         <div class="flex-shrink-0">
-          ${RBC_MASCOT.render('happy', 'w-24 h-24 md:w-28 md:h-28')}
+          ${RBC_MASCOT.render('happy', 'w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28')}
         </div>
       </div>
 
-      <!-- Game Selector Buttons -->
-      <div class="grid grid-cols-2 sm:grid-cols-5 gap-3" id="game-selector-tabs">
-        <button onclick="switchGameView('tebak')" class="p-3 rounded-2xl font-bold text-xs border border-emerald-500 bg-emerald-500 text-white shadow-sm flex flex-col items-center gap-1">
+      <!-- Game Selector Buttons (Swipeable on Mobile) -->
+      <div class="flex sm:grid sm:grid-cols-5 gap-2 sm:gap-3 overflow-x-auto pb-2 no-scrollbar" id="game-selector-tabs">
+        <button onclick="switchGameView('tebak')" class="flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-emerald-500 bg-emerald-500 text-white shadow-sm flex flex-col items-center gap-1">
           <span class="text-xl">🖼️</span>
           <span>1. Tebak Gambar</span>
         </button>
-        <button onclick="switchGameView('susun')" class="p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1">
+        <button onclick="switchGameView('susun')" class="flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1">
           <span class="text-xl">🔤</span>
           <span>2. Susun Kata</span>
         </button>
-        <button onclick="switchGameView('matematika')" class="p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1">
+        <button onclick="switchGameView('matematika')" class="flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1">
           <span class="text-xl">🧮</span>
           <span>3. Matematika</span>
         </button>
-        <button onclick="switchGameView('pasang')" class="p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1">
+        <button onclick="switchGameView('pasang')" class="flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1">
           <span class="text-xl">🧩</span>
           <span>4. Pasangkan</span>
         </button>
-        <button onclick="switchGameView('benarsalah')" class="p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1">
+        <button onclick="switchGameView('benarsalah')" class="flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1">
           <span class="text-xl">⚖️</span>
           <span>5. Benar / Salah</span>
         </button>
       </div>
 
-      <div id="game-active-container" class="card-pastel p-6 md:p-8 border-2 border-emerald-200">
+      <div id="game-active-container" class="card-pastel p-4 sm:p-6 md:p-8 border-2 border-emerald-200">
         <!-- Filled dynamically -->
       </div>
     </div>
@@ -4189,9 +4253,9 @@ function switchGameView(gameKey) {
 
   document.querySelectorAll('#game-selector-tabs button').forEach(btn => {
     if (btn.innerText.toLowerCase().includes(gameKey)) {
-      btn.className = "p-3 rounded-2xl font-bold text-xs border border-emerald-500 bg-emerald-500 text-white shadow-sm flex flex-col items-center gap-1";
+      btn.className = "flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-emerald-500 bg-emerald-500 text-white shadow-sm flex flex-col items-center gap-1";
     } else {
-      btn.className = "p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1";
+      btn.className = "flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1";
     }
   });
 
@@ -4344,13 +4408,13 @@ function checkGameAnswer(isCorrect, msg) {
    ============================================================ */
 function renderTentangView() {
   return `
-    <div class="space-y-10 animate-fade-in max-w-4xl mx-auto">
-      <div class="rounded-3xl bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600 p-8 text-white shadow-lg text-center space-y-3">
+    <div class="space-y-6 sm:space-y-10 animate-fade-in max-w-4xl mx-auto">
+      <div class="rounded-3xl bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600 p-5 sm:p-8 text-white shadow-lg text-center space-y-3">
         <div class="flex justify-center mb-2">
-          ${RBC_ICONS.upiLogo('w-20 h-20')}
+          ${RBC_ICONS.upiLogo('w-16 h-16 sm:w-20 sm:h-20')}
         </div>
-        <h1 class="text-3xl md:text-5xl font-black">Ruang Belajar Ceria</h1>
-        <p class="text-sky-100 text-base md:text-lg font-medium max-w-2xl mx-auto">
+        <h1 class="text-2xl sm:text-4xl md:text-5xl font-black">Ruang Belajar Ceria</h1>
+        <p class="text-sky-100 text-sm sm:text-base md:text-lg font-medium max-w-2xl mx-auto">
           Media pembelajaran digital interaktif yang dirancang untuk menciptakan pengalaman belajar yang menyenangkan, menarik, dan bermakna bagi peserta didik sekolah dasar.
         </p>
       </div>
@@ -4456,11 +4520,11 @@ function renderTentangView() {
    ============================================================ */
 function renderKontakView() {
   return `
-    <div class="space-y-8 animate-fade-in max-w-4xl mx-auto">
-      <div class="rounded-3xl bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-600 p-8 text-white shadow-lg text-center space-y-3">
+    <div class="space-y-6 sm:space-y-8 animate-fade-in max-w-4xl mx-auto">
+      <div class="rounded-3xl bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-600 p-5 sm:p-8 text-white shadow-lg text-center space-y-3">
         <span class="px-3.5 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">Ruang Saran & Masukan</span>
-        <h1 class="text-3xl md:text-4xl font-black">Kontak Tim Pengembang</h1>
-        <p class="text-sky-100 text-sm md:text-base font-medium max-w-xl mx-auto">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-black">Kontak Tim Pengembang</h1>
+        <p class="text-sky-100 text-xs sm:text-sm md:text-base font-medium max-w-xl mx-auto">
           Punya pertanyaan, kesan belajar, atau masukan untuk website Ruang Belajar Ceria? Kami senang mendengarnya!
         </p>
       </div>
