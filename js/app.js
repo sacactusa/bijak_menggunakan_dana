@@ -4836,23 +4836,26 @@ function updateDbStatusBadge() {
   const pill = document.getElementById('supabase-status-pill');
   const text = document.getElementById('supabase-status-text');
   const modalStatus = document.getElementById('modal-db-status');
-  if (!pill) return;
 
   const connected = window.RBC_SUPABASE && window.RBC_SUPABASE.isConnected();
-  if (connected) {
-    pill.className = 'btn-playful flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800 shadow-sm hover:bg-emerald-100 transition-colors';
-    if (text) text.innerText = 'Cloud DB Aktif';
-    if (modalStatus) {
+  if (modalStatus) {
+    if (connected) {
       modalStatus.className = 'px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-black';
       modalStatus.innerText = 'Aktif & Terhubung ✅';
-    }
-  } else {
-    pill.className = 'btn-playful flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl bg-amber-50 border border-amber-200 text-xs font-bold text-amber-800 shadow-sm hover:bg-amber-100 transition-colors';
-    if (text) text.innerText = 'Mode Lokal';
-    if (modalStatus) {
+    } else {
       modalStatus.className = 'px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-black';
       modalStatus.innerText = 'Lokal / Offline ⚠️';
     }
+  }
+
+  if (!pill) return;
+
+  if (connected) {
+    pill.className = 'btn-playful flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800 shadow-sm hover:bg-emerald-100 transition-colors';
+    if (text) text.innerText = 'Cloud DB Aktif';
+  } else {
+    pill.className = 'btn-playful flex items-center gap-1.5 px-2.5 py-1.5 rounded-2xl bg-amber-50 border border-amber-200 text-xs font-bold text-amber-800 shadow-sm hover:bg-amber-100 transition-colors';
+    if (text) text.innerText = 'Mode Lokal';
   }
 }
 

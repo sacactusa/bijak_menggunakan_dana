@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ruang Belajar Ceria - IPAS Kelas 3 SD (Model DHETIK)</title>
   
+  <!-- Favicon sesuai Logo Web Ruang Belajar Ceria -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link rel="alternate icon" type="image/png" sizes="64x64" href="assets/images/favicon.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="assets/images/favicon.png" />
+  <meta name="theme-color" content="#F59E0B" />
+  
   <!-- Google Fonts: Fredoka & Quicksand -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -98,13 +105,6 @@
         <!-- Student Stats & Action Controls -->
         <div class="flex items-center gap-1 sm:gap-2.5 flex-shrink-0">
           
-          <!-- Cloud Database Status Indicator Pill -->
-          <button id="supabase-status-pill" onclick="openDbStatusModal()" class="btn-playful flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-[11px] sm:text-xs font-bold text-emerald-800 shadow-xs hover:bg-emerald-100 transition-colors" title="Status Database Cloud Supabase">
-            <span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="supabase-status-text" class="hidden sm:inline">Cloud DB Aktif</span>
-            <span class="sm:hidden text-[10px]">Cloud</span>
-          </button>
-
           <!-- Student Profile Pill (Clickable) -->
           <button id="stat-name-widget" title="Klik untuk mengganti nama siswa" class="btn-playful hidden xs:flex items-center gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-2xl bg-sky-50 border border-sky-200 hover:bg-sky-100 transition-colors">
             <!-- User Avatar SVG -->
