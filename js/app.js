@@ -3625,10 +3625,10 @@ function renderTahapKView() {
 
           <div class="max-w-xl mx-auto space-y-4">
             <div class="flex justify-center mb-2">
-              ${RBC_ICONS.upiLogo('w-16 h-16')}
+              ${RBC_ICONS.upiLogo('w-16 h-16 sm:w-20 sm:h-20')}
             </div>
 
-            <span class="text-xs font-black tracking-widest uppercase text-amber-700 block">UNIVERSITAS PENDIDIKAN INDONESIA - KAMPUS DI CIBIRU</span>
+            <span class="text-xs font-black tracking-widest uppercase text-red-700 block">UNIVERSITAS PENDIDIKAN INDONESIA - KAMPUS DI CIBIRU</span>
             <h2 class="text-2xl sm:text-4xl font-black text-slate-800">SERTIFIKAT PENGHARGAAN</h2>
             <p class="text-[11px] sm:text-xs font-semibold text-slate-500 uppercase tracking-widest">Diberikan Dengan Penuh Rasa Bangga Kepada:</p>
             
@@ -4409,12 +4409,12 @@ function checkGameAnswer(isCorrect, msg) {
 function renderTentangView() {
   return `
     <div class="space-y-6 sm:space-y-10 animate-fade-in max-w-4xl mx-auto">
-      <div class="rounded-3xl bg-gradient-to-r from-sky-500 via-indigo-500 to-purple-600 p-5 sm:p-8 text-white shadow-lg text-center space-y-3">
+      <div class="rounded-3xl bg-gradient-to-r from-red-600 via-rose-600 to-amber-500 p-5 sm:p-8 text-white shadow-lg text-center space-y-3">
         <div class="flex justify-center mb-2">
-          ${RBC_ICONS.upiLogo('w-16 h-16 sm:w-20 sm:h-20')}
+          ${RBC_ICONS.upiLogo('w-20 h-20 sm:w-24 sm:h-24')}
         </div>
         <h1 class="text-2xl sm:text-4xl md:text-5xl font-black">Ruang Belajar Ceria</h1>
-        <p class="text-sky-100 text-sm sm:text-base md:text-lg font-medium max-w-2xl mx-auto">
+        <p class="text-rose-50 text-sm sm:text-base md:text-lg font-medium max-w-2xl mx-auto">
           Media pembelajaran digital interaktif yang dirancang untuk menciptakan pengalaman belajar yang menyenangkan, menarik, dan bermakna bagi peserta didik sekolah dasar.
         </p>
       </div>

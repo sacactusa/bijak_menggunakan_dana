@@ -454,16 +454,11 @@ const RBC_ICONS = {
       </svg>`;
   },
 
-  // UPI Cibiru Emblem
-  upiLogo: (cls = "w-10 h-10") => `
-    <svg class="${cls}" viewBox="0 0 100 100" fill="none">
-      <circle cx="50" cy="50" r="46" fill="#DC2626" stroke="#FEF08A" stroke-width="4"/>
-      <circle cx="50" cy="50" r="38" fill="#F8FAFC"/>
-      <path d="M50 16 L58 35 L78 37 L63 51 L67 71 L50 61 L33 71 L37 51 L22 37 L42 35 Z" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
-      <circle cx="50" cy="46" r="12" fill="#DC2626"/>
-      <text x="50" y="51" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle" font-family="Arial, sans-serif">UPI</text>
-      <path d="M35 77 Q50 85 65 77" stroke="#DC2626" stroke-width="3" fill="none" stroke-linecap="round"/>
-    </svg>`
+  // UPI Cibiru Official Logo
+  upiLogo: (cls = "w-12 h-12") => `
+    <div class="${cls} rounded-full bg-white p-1.5 shadow-md border-2 border-red-200 ring-2 ring-amber-200/60 inline-flex items-center justify-center flex-shrink-0">
+      <img src="assets/images/logo.png" alt="Logo UPI" class="w-full h-full object-contain" />
+    </div>`
 };
 
 window.RBC_ICONS = RBC_ICONS;
