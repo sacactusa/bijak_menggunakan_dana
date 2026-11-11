@@ -1117,11 +1117,11 @@ function renderTahapEView() {
           <h3 class="text-sm md:text-base font-black uppercase text-slate-800 tracking-wider mb-4 flex items-center gap-2">
             <span>🔘 Pecahan Uang Logam (Koin)</span>
           </h3>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
             ${RBC_DATA.rupiahCoins.map(coin => `
-              <div onclick="showMoneyDetailModal('koin', ${coin.value})" class="cursor-pointer p-4 rounded-3xl bg-white hover:bg-amber-50/60 border-2 border-slate-200 hover:border-amber-400 shadow-sm hover:shadow-lg transition-all text-center flex flex-col items-center justify-between space-y-3 group hover:-translate-y-1">
-                <div class="py-2">
-                  ${RBC_ICONS.rupiahCoin(coin.value, 'w-20 h-20 sm:w-24 sm:h-24 mx-auto')}
+              <div onclick="showMoneyDetailModal('koin', ${coin.value})" class="cursor-pointer p-3.5 sm:p-4 rounded-3xl bg-white hover:bg-amber-50/60 border-2 border-slate-200 hover:border-amber-400 shadow-sm hover:shadow-lg transition-all text-center flex flex-col items-center justify-between space-y-2.5 sm:space-y-3 group hover:-translate-y-1">
+                <div class="py-1.5 sm:py-2">
+                  ${RBC_ICONS.rupiahCoin(coin.value, 'w-24 h-24 sm:w-28 sm:h-28 mx-auto drop-shadow-lg')}
                 </div>
                 <div class="w-full pt-2 border-t border-slate-100 space-y-0.5">
                   <span class="text-base sm:text-lg font-black text-slate-800 block">${coin.label}</span>
@@ -1141,8 +1141,8 @@ function renderTahapEView() {
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             ${RBC_DATA.rupiahBanknotes.map(note => `
               <div onclick="showMoneyDetailModal('kertas', ${note.value})" class="cursor-pointer p-3.5 rounded-3xl bg-white border-2 border-slate-200 hover:border-violet-400 shadow-sm hover:shadow-xl transition-all flex flex-col justify-between space-y-3 group hover:-translate-y-1">
-                <div class="rounded-xl overflow-hidden border border-slate-300 shadow-inner">
-                  ${RBC_ICONS.rupiahBanknote(note.value, 'w-full h-auto')}
+                <div class="rounded-xl overflow-hidden shadow-md bg-slate-100/60 p-0.5">
+                  ${RBC_ICONS.rupiahBanknote(note.value, 'w-full h-auto drop-shadow-sm')}
                 </div>
                 <div class="px-1 space-y-1">
                   <div class="flex items-center justify-between">
@@ -2009,6 +2009,27 @@ function renderTahapTView() {
             </div>
           </div>
         </div>
+
+        <!-- Slot Diskusi Bersama Terhubung ke Padlet -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-100 via-yellow-50 to-orange-100 border-2 border-amber-300 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div class="space-y-1.5">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-200 text-amber-950 text-[10px] font-black uppercase tracking-wider">
+              💬 Slot Diskusi Bersama
+            </span>
+            <h3 class="font-black text-slate-800 text-sm sm:text-base">
+              Mari Berdiskusi Tentang 4 Barang di Atas!
+            </h3>
+            <p class="text-xs text-slate-700 leading-relaxed">
+              Setelah mengamati gambar dan membaca cerita sederhana di atas, ayo tuliskan pendapatmu dan berdiskusi bersama teman-teman melalui ruang diskusi Padlet berikut:
+            </p>
+            <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="inline-block text-[11px] font-bold text-amber-900 underline break-all hover:text-amber-700">
+              https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg
+            </a>
+          </div>
+          <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="btn-playful w-full sm:w-auto px-5 py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md flex-shrink-0">
+            <span>💬 Buka Slot Diskusi Bersama ↗️</span>
+          </a>
+        </div>
       </section>
 
       <!-- 4. LKPD DIGITAL: 5 KEGIATAN & TAUTAN CANVA -->
@@ -2246,6 +2267,22 @@ function renderTahapTView() {
                   <span>💾 Simpan Alasan Analisis</span>
                 </button>
               </div>
+
+              <!-- Link Upload Alasan Analisis ke Padlet -->
+              <div class="p-3.5 sm:p-4 rounded-2xl bg-white border-2 border-dashed border-amber-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div class="space-y-1">
+                  <p class="text-xs font-black text-amber-900 flex items-center gap-1.5">
+                    <span>📌</span>
+                    <span>Simpan alasan analisis dan unggah pada link yang disediakan</span>
+                  </p>
+                  <a href="https://padlet.com/nurafifahn16/lkpdkebutuhandankeinginan" target="_blank" rel="noopener noreferrer" class="text-[11px] font-bold text-sky-700 underline break-all hover:text-sky-900 block">
+                    https://padlet.com/nurafifahn16/lkpdkebutuhandankeinginan
+                  </a>
+                </div>
+                <a href="https://padlet.com/nurafifahn16/lkpdkebutuhandankeinginan" target="_blank" rel="noopener noreferrer" class="btn-playful w-full sm:w-auto px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm flex-shrink-0">
+                  <span>📤 Unggah di Link Padlet ↗️</span>
+                </a>
+              </div>
             </div>
 
             <!-- (4) Ayo Berpikir! -->
@@ -2385,9 +2422,27 @@ function renderTahapTView() {
               Setelah menyelesaikan LKPD, peserta didik diarahkan untuk berbagi hasil pekerjaan melalui Padlet yang tersemat pada halaman diskusi. Setiap peserta didik mengunggah hasil pengelompokan beserta alasannya. Peserta didik membaca hasil pekerjaan teman dan memberikan tanggapan atau pertanyaan melalui kolom komentar Padlet dengan menggunakan bahasa yang santun.
             </p>
           </div>
-          <button onclick="openNewPostModal()" class="btn-playful px-5 py-3 rounded-2xl bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-black text-xs md:text-sm flex items-center gap-2 shadow-lg shadow-violet-200 flex-shrink-0">
-            <span>+ Unggah Hasil LKPD ke Padlet 🚀</span>
-          </button>
+          <div class="flex flex-col sm:flex-row gap-2.5 flex-shrink-0 w-full md:w-auto">
+            <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="btn-playful px-4 py-3 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-900 font-black text-xs md:text-sm flex items-center justify-center gap-2 shadow-md transition-all">
+              <span>🌐 Buka Padlet Kolaborasi ↗️</span>
+            </a>
+            <button onclick="openNewPostModal()" class="btn-playful px-5 py-3 rounded-2xl bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-black text-xs md:text-sm flex items-center justify-center gap-2 shadow-lg shadow-violet-200 transition-all">
+              <span>+ Unggah Hasil LKPD ke Padlet 🚀</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tautan Langsung Padlet Kolaborasi Terpadu -->
+        <div class="p-3.5 rounded-2xl bg-violet-50 border border-violet-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 text-xs">
+          <div class="flex flex-wrap items-center gap-1.5 text-violet-950 font-semibold">
+            <span>🔗 <strong>Link Diskusi Kolaborasi Terpadu:</strong></span>
+            <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="text-violet-700 underline font-bold break-all hover:text-violet-900">
+              https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg
+            </a>
+          </div>
+          <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-bold text-[11px] flex-shrink-0">
+            Buka Padlet ↗️
+          </a>
         </div>
 
         <!-- NOTIFIKASI SUBMIT PADLET -->
@@ -3517,6 +3572,21 @@ function renderTahapKView() {
                   </span>
                 </div>
               </div>
+            </div>
+
+            <!-- Link Upload Padlet Produk Celengan Kreatif -->
+            <div class="mt-4 p-4 rounded-2xl bg-gradient-to-r from-rose-50 via-pink-50 to-indigo-50 border-2 border-rose-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+              <div class="space-y-1">
+                <p class="text-xs sm:text-sm font-black text-rose-900">
+                  jangan lupa upload karyamu disini juga ya❤️
+                </p>
+                <a href="https://padlet.com/nurafifahn16/produkcelengankreatif" target="_blank" rel="noopener noreferrer" class="text-[11px] font-bold text-indigo-700 underline break-all hover:text-indigo-900 block">
+                  https://padlet.com/nurafifahn16/produkcelengankreatif
+                </a>
+              </div>
+              <a href="https://padlet.com/nurafifahn16/produkcelengankreatif" target="_blank" rel="noopener noreferrer" class="btn-playful w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 to-pink-600 hover:from-rose-600 hover:to-pink-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm flex-shrink-0">
+                <span>🎨 Upload Karya ke Padlet ↗️</span>
+              </a>
             </div>
 
             <!-- Galeri Karya Siswa -->
