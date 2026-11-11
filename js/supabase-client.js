@@ -86,18 +86,53 @@ const RBC_SUPABASE = {
     }
   },
 
-  // 1. Simpan Data Siswa & Poin ke Cloud
-  async saveSiswa(studentData) {
+  // 1. Ambil & Simpan Data Siswa & Poin per Nama ke Cloud
+  async getSiswaByName(nama) {
     if (!this.isConnected()) return null;
+    const cleanName = (nama || '').trim().replace(/\s+/g, ' ');
+    if (!cleanName) return null;
     try {
       const { data, error } = await supabaseClient
         .from('siswa')
-        .insert([{
-          nama_panggilan: studentData.nama || 'Teman Belajar',
-          poin: studentData.poin || 25,
-          bintang: studentData.bintang || 8,
-          progres_tahap: studentData.progres || []
-        }])
+        .select('id, nama_panggilan, poin, bintang, progres_tahap, created_at')
+        .ilike('nama_panggilan', cleanName)
+        .order('created_at', { ascending: false })
+        .limit(1);
+      if (error) throw error;
+      return data && data.length > 0 ? data[0] : null;
+    } catch (e) {
+      console.warn('Supabase getSiswaByName error:', e);
+      return null;
+    }
+  },
+
+  async saveSiswa(studentData) {
+    if (!this.isConnected()) return null;
+    const cleanName = (studentData && studentData.nama ? String(studentData.nama) : '').trim().replace(/\s+/g, ' ');
+    if (!cleanName || ['Isi Nama Dulu', 'Teman Ceria', 'Teman Belajar'].includes(cleanName)) {
+      return null;
+    }
+    const payload = {
+      nama_panggilan: cleanName,
+      poin: typeof studentData.poin === 'number' ? studentData.poin : 0,
+      bintang: typeof studentData.bintang === 'number' ? studentData.bintang : 0,
+      progres_tahap: Array.isArray(studentData.progres) ? studentData.progres : []
+    };
+    try {
+      const existing = await this.getSiswaByName(cleanName);
+      if (existing && existing.id) {
+        const { data, error } = await supabaseClient
+          .from('siswa')
+          .update(payload)
+          .eq('id', existing.id)
+          .select();
+        if (error) throw error;
+        console.log('✅ Supabase: Data siswa diperbarui', data);
+        return data;
+      }
+      const { data, error } = await supabaseClient
+        .from('siswa')
+        .insert([payload])
         .select();
       if (error) throw error;
       console.log('✅ Supabase: Data siswa tersimpan', data);

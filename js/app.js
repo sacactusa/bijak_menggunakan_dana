@@ -55,18 +55,106 @@ function triggerConfetti() {
 }
 
 // Global App State
+function normalizeStudentKey(name) {
+  return String(name || '').trim().replace(/\s+/g, ' ').toLowerCase();
+}
+
+function escapeHtmlText(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function getStudentProfiles() {
+  try {
+    const raw = JSON.parse(localStorage.getItem('rbc_student_profiles') || '{}');
+    return raw && typeof raw === 'object' ? raw : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveStudentProfiles(profiles) {
+  try {
+    localStorage.setItem('rbc_student_profiles', JSON.stringify(profiles || {}));
+  } catch (e) {}
+}
+
+function computeInitialRewardsForName(displayName, existingProfiles = null) {
+  const key = normalizeStudentKey(displayName);
+  const profiles = existingProfiles || getStudentProfiles();
+
+  let hash1 = 2166136261;
+  let hash2 = 5381;
+  for (let i = 0; i < key.length; i++) {
+    const ch = key.charCodeAt(i);
+    hash1 ^= ch;
+    hash1 = Math.imul(hash1, 16777619) >>> 0;
+    hash2 = ((hash2 * 33) ^ (ch + i * 17)) >>> 0;
+  }
+
+  // Poin awal unik dalam rentang 15..75 (61 kombinasi berbeda)
+  const minPts = 15;
+  const spanPts = 61;
+  let candidatePoints = minPts + (hash1 % spanPts);
+
+  // Hindari poin awal kembar dengan nama siswa lain yang pernah masuk
+  const usedPoints = new Set();
+  Object.keys(profiles).forEach(otherKey => {
+    if (otherKey !== key && profiles[otherKey] && typeof profiles[otherKey].initialPoints === 'number') {
+      usedPoints.add(profiles[otherKey].initialPoints);
+    }
+  });
+
+  if (usedPoints.size < spanPts) {
+    let attempts = 0;
+    while (usedPoints.has(candidatePoints) && attempts < spanPts) {
+      candidatePoints = minPts + ((candidatePoints - minPts + 7) % spanPts);
+      attempts++;
+    }
+    if (usedPoints.has(candidatePoints)) {
+      for (let p = minPts; p < minPts + spanPts; p++) {
+        if (!usedPoints.has(p)) {
+          candidatePoints = p;
+          break;
+        }
+      }
+    }
+  }
+
+  // Bintang awal dalam rentang 4..12
+  const candidateStars = 4 + (hash2 % 9);
+
+  return {
+    initialPoints: candidatePoints,
+    points: candidatePoints,
+    stars: candidateStars
+  };
+}
+
+const _savedSessionConfirmed = sessionStorage.getItem('rbc_session_confirmed') === 'true';
+const _savedStudentName = (localStorage.getItem('rbc_student_name') || '').trim();
+const _reservedNames = ['isi nama', 'isi nama dulu', 'teman ceria', 'teman belajar'];
+const _hasValidSessionStudent = _savedSessionConfirmed && _savedStudentName.length >= 2 && !_reservedNames.includes(_savedStudentName.toLowerCase());
+
 const AppState = {
   activeTab: 'beranda',
-  studentName: localStorage.getItem('rbc_student_name') || 'Teman Ceria',
-  points: parseInt(localStorage.getItem('rbc_points') || '25', 10),
-  stars: parseInt(localStorage.getItem('rbc_stars') || '8', 10),
-  completedStages: JSON.parse(localStorage.getItem('rbc_completed_stages') || '[]'),
-  unlockedBadges: JSON.parse(localStorage.getItem('rbc_badges') || '["bintang-pintar"]'),
+  hasEnteredName: _hasValidSessionStudent,
+  pendingTab: null,
+  studentName: _hasValidSessionStudent ? _savedStudentName : 'Isi Nama Dulu',
+  initialPoints: _hasValidSessionStudent ? parseInt(localStorage.getItem('rbc_initial_points') || localStorage.getItem('rbc_points') || '0', 10) : 0,
+  points: _hasValidSessionStudent ? parseInt(localStorage.getItem('rbc_points') || '0', 10) : 0,
+  stars: _hasValidSessionStudent ? parseInt(localStorage.getItem('rbc_stars') || '0', 10) : 0,
+  completedStages: _hasValidSessionStudent ? JSON.parse(localStorage.getItem('rbc_completed_stages') || '[]') : [],
+  unlockedBadges: _hasValidSessionStudent ? JSON.parse(localStorage.getItem('rbc_badges') || '["bintang-pintar"]') : [],
   
   // Market Niza State
   nizaCart: [],
   nizaMission: 1,
-  nizaWallet: parseInt(localStorage.getItem('rbc_niza_wallet') || '20000', 10),
+  nizaWallet: _hasValidSessionStudent ? parseInt(localStorage.getItem('rbc_niza_wallet') || '20000', 10) : 20000,
   
   // Quiz State
   quizIndex: 0,
@@ -82,11 +170,17 @@ const AppState = {
   padletPosts: JSON.parse(localStorage.getItem('rbc_padlet_posts') || '[]'),
 
   // Refleksi Siswa
-  reflection: JSON.parse(localStorage.getItem('rbc_student_reflection') || '{}'),
+  reflection: _hasValidSessionStudent ? JSON.parse(localStorage.getItem('rbc_student_reflection') || '{}') : {},
 
-  // Save state
+  // Save state per student profile
   save() {
+    if (!this.hasEnteredName || _reservedNames.includes(normalizeStudentKey(this.studentName))) {
+      this.updateStatsUI();
+      return;
+    }
+
     localStorage.setItem('rbc_student_name', this.studentName);
+    localStorage.setItem('rbc_initial_points', this.initialPoints);
     localStorage.setItem('rbc_points', this.points);
     localStorage.setItem('rbc_stars', this.stars);
     localStorage.setItem('rbc_completed_stages', JSON.stringify(this.completedStages));
@@ -94,6 +188,27 @@ const AppState = {
     localStorage.setItem('rbc_padlet_posts', JSON.stringify(this.padletPosts));
     localStorage.setItem('rbc_student_reflection', JSON.stringify(this.reflection));
     localStorage.setItem('rbc_niza_wallet', this.nizaWallet);
+    localStorage.setItem('rbc_name_confirmed', 'true');
+    sessionStorage.setItem('rbc_session_confirmed', 'true');
+
+    // Simpan profil terpisah per nama agar tiap siswa punya poin & progres masing-masing
+    const profiles = getStudentProfiles();
+    const key = normalizeStudentKey(this.studentName);
+    if (key) {
+      profiles[key] = {
+        name: this.studentName,
+        initialPoints: this.initialPoints,
+        points: this.points,
+        stars: this.stars,
+        completedStages: Array.isArray(this.completedStages) ? [...this.completedStages] : [],
+        unlockedBadges: Array.isArray(this.unlockedBadges) ? [...this.unlockedBadges] : ['bintang-pintar'],
+        reflection: this.reflection ? { ...this.reflection } : {},
+        nizaWallet: this.nizaWallet,
+        pemantikAnswer: localStorage.getItem('rbc_pemantik_answer') || ''
+      };
+      saveStudentProfiles(profiles);
+    }
+
     this.updateStatsUI();
 
     if (window.RBC_SUPABASE && window.RBC_SUPABASE.isConnected()) {
@@ -107,6 +222,7 @@ const AppState = {
   },
 
   addReward(p, s, msg) {
+    if (!this.hasEnteredName) return;
     this.points += p;
     this.stars += s;
     this.save();
@@ -115,6 +231,7 @@ const AppState = {
   },
 
   unlockBadge(badgeId) {
+    if (!this.hasEnteredName) return;
     if (!this.unlockedBadges.includes(badgeId)) {
       this.unlockedBadges.push(badgeId);
       this.save();
@@ -128,6 +245,7 @@ const AppState = {
   },
 
   markStageComplete(stageId) {
+    if (!this.hasEnteredName) return;
     if (!this.completedStages.includes(stageId)) {
       this.completedStages.push(stageId);
       this.addReward(20, 5, `Tahap ${stageId.toUpperCase()} selesai!`);
@@ -161,19 +279,20 @@ const AppState = {
     const progressEl = document.getElementById('global-progress-bar');
     const progressTxt = document.getElementById('global-progress-text');
 
+    const displayName = this.hasEnteredName ? this.studentName : 'Isi Nama';
     if (starEl) starEl.innerText = this.stars;
     if (pointEl) pointEl.innerText = this.points;
-    if (nameEl) nameEl.innerText = this.studentName;
+    if (nameEl) nameEl.innerText = displayName;
 
     // Mobile Drawer Sync
     const drawerName = document.getElementById('drawer-student-name');
     const drawerStars = document.getElementById('drawer-stars');
     const drawerPoints = document.getElementById('drawer-points');
-    if (drawerName) drawerName.innerText = this.studentName;
+    if (drawerName) drawerName.innerText = displayName;
     if (drawerStars) drawerStars.innerText = this.stars;
     if (drawerPoints) drawerPoints.innerText = this.points;
 
-    const percent = Math.min(100, Math.round((this.completedStages.length / 6) * 100));
+    const percent = this.hasEnteredName ? Math.min(100, Math.round((this.completedStages.length / 6) * 100)) : 0;
     if (progressEl) progressEl.style.width = `${percent}%`;
     if (progressTxt) progressTxt.innerText = `${percent}% Selesai`;
   }
@@ -181,8 +300,245 @@ const AppState = {
 
 window.AppState = AppState;
 
+// Name Gate Modal & Per-Student Points Logic
+let _isRegisteringName = false;
+
+function openStudentNameModal(allowClose = false) {
+  const modal = document.getElementById('student-name-gate-modal');
+  const closeBtn = document.getElementById('gate-close-btn');
+  const titleEl = document.getElementById('gate-modal-title');
+  const subEl = document.getElementById('gate-modal-subtitle');
+  const inputEl = document.getElementById('gate-student-name-input');
+  const errEl = document.getElementById('gate-error-msg');
+  if (!modal) return;
+
+  modal.dataset.allowClose = allowClose ? 'true' : 'false';
+  if (closeBtn) {
+    closeBtn.classList.toggle('hidden', !allowClose);
+  }
+  if (titleEl) {
+    titleEl.innerText = AppState.hasEnteredName ? 'Masuk / Ganti Nama Siswa' : 'Masukkan Namamu Dulu, Yuk!';
+  }
+  if (subEl) {
+    subEl.innerHTML = AppState.hasEnteredName
+      ? 'Masukkan nama siswa lain atau namamu sendiri untuk berpindah akun & melihat <strong class="text-amber-700">poin awal masing-masing nama</strong>.'
+      : 'Setiap anak yang mengakses web wajib mengisi nama terlebih dahulu untuk mendapatkan <strong class="text-amber-700">poin awal spesial</strong>! Setiap nama memiliki poin awal yang berbeda-beda.';
+  }
+  if (errEl) {
+    errEl.classList.add('hidden');
+    errEl.innerText = '';
+  }
+  if (inputEl) {
+    inputEl.value = allowClose && AppState.hasEnteredName ? AppState.studentName : '';
+  }
+
+  modal.classList.remove('hidden');
+  setTimeout(() => {
+    if (inputEl) {
+      inputEl.focus();
+      inputEl.select();
+    }
+  }, 80);
+}
+window.openStudentNameModal = openStudentNameModal;
+
+function closeStudentNameModal() {
+  const modal = document.getElementById('student-name-gate-modal');
+  if (!modal) return;
+  if (modal.dataset.allowClose !== 'true' && !AppState.hasEnteredName) {
+    return;
+  }
+  modal.classList.add('hidden');
+}
+window.closeStudentNameModal = closeStudentNameModal;
+
+function handleStudentNameBackdropClick(e) {
+  const modal = document.getElementById('student-name-gate-modal');
+  if (e && e.target === modal && modal.dataset.allowClose === 'true') {
+    closeStudentNameModal();
+  }
+}
+window.handleStudentNameBackdropClick = handleStudentNameBackdropClick;
+
+async function registerOrSwitchStudentName(rawName, source = 'modal') {
+  if (_isRegisteringName) return false;
+  const cleanName = String(rawName || '').trim().replace(/\s+/g, ' ');
+  const key = normalizeStudentKey(cleanName);
+
+  const setError = (msg) => {
+    if (source === 'modal') {
+      const errEl = document.getElementById('gate-error-msg');
+      if (errEl) {
+        errEl.innerText = msg;
+        errEl.classList.remove('hidden');
+      }
+    } else {
+      const errEl = document.getElementById('beranda-name-error');
+      if (errEl) {
+        errEl.innerText = msg;
+        errEl.classList.remove('hidden');
+      }
+    }
+    AppState.showToast(`⚠️ ${msg}`);
+  };
+
+  if (cleanName.length < 2) {
+    setError('Tulis nama panggilan atau nama lengkapmu dulu (minimal 2 huruf) ya!');
+    return false;
+  }
+  if (_reservedNames.includes(key)) {
+    setError('Mohon masukkan namamu sendiri, bukan teks contoh ya!');
+    return false;
+  }
+
+  _isRegisteringName = true;
+  const modalBtn = document.getElementById('gate-submit-btn');
+  const prevBtnHtml = modalBtn ? modalBtn.innerHTML : '';
+  if (source === 'modal' && modalBtn) {
+    modalBtn.disabled = true;
+    modalBtn.innerHTML = '<span>⏳ Menyiapkan poin awalmu...</span>';
+  }
+
+  try {
+    const profiles = getStudentProfiles();
+
+    // Simpan dulu progres siswa aktif sebelum berganti ke nama lain
+    if (AppState.hasEnteredName && !_reservedNames.includes(normalizeStudentKey(AppState.studentName))) {
+      const currentKey = normalizeStudentKey(AppState.studentName);
+      profiles[currentKey] = {
+        name: AppState.studentName,
+        initialPoints: AppState.initialPoints,
+        points: AppState.points,
+        stars: AppState.stars,
+        completedStages: Array.isArray(AppState.completedStages) ? [...AppState.completedStages] : [],
+        unlockedBadges: Array.isArray(AppState.unlockedBadges) ? [...AppState.unlockedBadges] : ['bintang-pintar'],
+        reflection: AppState.reflection ? { ...AppState.reflection } : {},
+        nizaWallet: AppState.nizaWallet,
+        pemantikAnswer: localStorage.getItem('rbc_pemantik_answer') || ''
+      };
+      saveStudentProfiles(profiles);
+    }
+
+    let profile = profiles[key] || null;
+    let isNewStudent = false;
+
+    // Jika belum ada di perangkat ini, cek data siswa bernama sama di Supabase
+    if (!profile && window.RBC_SUPABASE && window.RBC_SUPABASE.isConnected() && typeof window.RBC_SUPABASE.getSiswaByName === 'function') {
+      try {
+        const cloudRow = await Promise.race([
+          window.RBC_SUPABASE.getSiswaByName(cleanName),
+          new Promise(resolve => setTimeout(() => resolve(null), 2500))
+        ]);
+        if (cloudRow && typeof cloudRow.poin === 'number') {
+          profile = {
+            name: cleanName,
+            initialPoints: cloudRow.poin,
+            points: cloudRow.poin,
+            stars: typeof cloudRow.bintang === 'number' ? cloudRow.bintang : 4,
+            completedStages: Array.isArray(cloudRow.progres_tahap) ? cloudRow.progres_tahap : [],
+            unlockedBadges: ['bintang-pintar'],
+            reflection: {},
+            nizaWallet: 20000,
+            pemantikAnswer: ''
+          };
+        }
+      } catch (e) {}
+    }
+
+    if (!profile) {
+      const rewards = computeInitialRewardsForName(cleanName, profiles);
+      profile = {
+        name: cleanName,
+        initialPoints: rewards.initialPoints,
+        points: rewards.points,
+        stars: rewards.stars,
+        completedStages: [],
+        unlockedBadges: ['bintang-pintar'],
+        reflection: {},
+        nizaWallet: 20000,
+        pemantikAnswer: ''
+      };
+      isNewStudent = true;
+    }
+
+    // Terapkan state siswa yang aktif
+    AppState.hasEnteredName = true;
+    AppState.studentName = cleanName;
+    AppState.initialPoints = typeof profile.initialPoints === 'number' ? profile.initialPoints : profile.points;
+    AppState.points = typeof profile.points === 'number' ? profile.points : AppState.initialPoints;
+    AppState.stars = typeof profile.stars === 'number' ? profile.stars : 4;
+    AppState.completedStages = Array.isArray(profile.completedStages) ? [...profile.completedStages] : [];
+    AppState.unlockedBadges = Array.isArray(profile.unlockedBadges) && profile.unlockedBadges.length ? [...profile.unlockedBadges] : ['bintang-pintar'];
+    AppState.reflection = profile.reflection && typeof profile.reflection === 'object' ? { ...profile.reflection } : {};
+    AppState.nizaWallet = typeof profile.nizaWallet === 'number' ? profile.nizaWallet : 20000;
+    AppState.nizaCart = [];
+    AppState.quizCompleted = false;
+    AppState.quizScore = 0;
+    AppState.quizIndex = 0;
+    AppState.quizAnswers = [];
+
+    if (profile.pemantikAnswer) {
+      localStorage.setItem('rbc_pemantik_answer', profile.pemantikAnswer);
+    } else {
+      localStorage.removeItem('rbc_pemantik_answer');
+    }
+
+    AppState.save();
+
+    const modal = document.getElementById('student-name-gate-modal');
+    if (modal) modal.classList.add('hidden');
+
+    window.soundManager.playCorrect();
+    if (typeof triggerConfetti === 'function') triggerConfetti();
+
+    if (isNewStudent) {
+      AppState.showToast(`🎉 Halo ${cleanName}! Kamu mendapat Poin Awal ${AppState.initialPoints} Poin & ${AppState.stars} Bintang!`);
+    } else {
+      AppState.showToast(`👋 Selamat datang kembali, ${cleanName}! Poinmu: ${AppState.points} Poin (${AppState.stars} Bintang).`);
+    }
+
+    const nextTab = AppState.pendingTab && AppState.pendingTab !== 'beranda' ? AppState.pendingTab : AppState.activeTab || 'beranda';
+    AppState.pendingTab = null;
+    switchTab(nextTab);
+    return true;
+  } finally {
+    _isRegisteringName = false;
+    if (modalBtn) {
+      modalBtn.disabled = false;
+      modalBtn.innerHTML = prevBtnHtml || '<span>✨ Klaim Poin Awal &amp; Masuk</span>';
+    }
+  }
+}
+window.registerOrSwitchStudentName = registerOrSwitchStudentName;
+
+function submitNameFromModal() {
+  const inputEl = document.getElementById('gate-student-name-input');
+  registerOrSwitchStudentName(inputEl ? inputEl.value : '', 'modal');
+}
+window.submitNameFromModal = submitNameFromModal;
+
+function submitNameFromBeranda() {
+  const inputEl = document.getElementById('beranda-name-input');
+  registerOrSwitchStudentName(inputEl ? inputEl.value : '', 'beranda');
+}
+window.submitNameFromBeranda = submitNameFromBeranda;
+
+function submitSwitchNameFromBeranda() {
+  const inputEl = document.getElementById('beranda-switch-name-input');
+  registerOrSwitchStudentName(inputEl ? inputEl.value : '', 'beranda');
+}
+window.submitSwitchNameFromBeranda = submitSwitchNameFromBeranda;
+
 // Navigation Controller
 function switchTab(tabId) {
+  if (!AppState.hasEnteredName && tabId !== 'beranda') {
+    AppState.pendingTab = tabId;
+    AppState.activeTab = 'beranda';
+    tabId = 'beranda';
+    openStudentNameModal(false);
+    AppState.showToast('✍️ Masukkan namamu dulu untuk mendapatkan poin awal & membuka menu belajar!');
+  }
+
   AppState.activeTab = tabId;
   window.soundManager.playPop();
 
@@ -303,13 +659,11 @@ function switchTabFromDrawer(tabId) {
 window.switchTabFromDrawer = switchTabFromDrawer;
 
 function promptChangeName() {
-  const newName = prompt('Hai teman! Siapa nama panggilanmu?', AppState.studentName);
-  if (newName && newName.trim()) {
-    AppState.studentName = newName.trim();
-    AppState.save();
-    AppState.updateStatsUI();
-    AppState.showToast(`Halo, ${AppState.studentName}! Selamat belajar!`);
+  const drawer = document.getElementById('mobile-menu-drawer');
+  if (drawer && !drawer.classList.contains('hidden')) {
+    drawer.classList.add('hidden');
   }
+  openStudentNameModal(AppState.hasEnteredName);
 }
 window.promptChangeName = promptChangeName;
 
@@ -317,6 +671,66 @@ window.promptChangeName = promptChangeName;
    VIEW 1: BERANDA (HOME)
    ============================================================ */
 function renderBerandaView() {
+  const safeName = escapeHtmlText(AppState.studentName);
+  const nameEntryCard = AppState.hasEnteredName
+    ? `
+      <div id="beranda-name-card" class="rounded-2xl bg-white/95 border-2 border-emerald-300 p-4 sm:p-5 shadow-md space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2.5">
+            <span class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg shadow-2xs">✅</span>
+            <div>
+              <span class="block text-[10px] font-black uppercase tracking-wider text-emerald-700">Siswa Aktif Terdaftar</span>
+              <span class="font-black text-sm sm:text-base text-slate-800">${safeName}</span>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <span class="px-2.5 py-1 rounded-xl bg-amber-50 border border-amber-200 text-[11px] sm:text-xs font-black text-amber-900">🎁 Poin Awal: ${AppState.initialPoints}</span>
+            <span class="px-2.5 py-1 rounded-xl bg-emerald-50 border border-emerald-200 text-[11px] sm:text-xs font-black text-emerald-900">🪙 Poinmu: ${AppState.points}</span>
+            <span class="px-2.5 py-1 rounded-xl bg-sky-50 border border-sky-200 text-[11px] sm:text-xs font-black text-sky-900">⭐ ${AppState.stars}</span>
+          </div>
+        </div>
+        <form onsubmit="event.preventDefault(); submitSwitchNameFromBeranda();" class="pt-2 border-t border-slate-100 flex flex-col sm:flex-row gap-2 items-stretch sm:items-center">
+          <input
+            type="text"
+            id="beranda-switch-name-input"
+            maxlength="40"
+            placeholder="Ganti siswa? Ketik nama lain di sini..."
+            class="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-100 focus:outline-none text-xs sm:text-sm font-bold text-slate-800 bg-slate-50"
+          />
+          <button type="submit" class="btn-playful px-4 py-2 rounded-xl bg-sky-100 hover:bg-sky-200 border border-sky-300 text-sky-900 font-black text-xs whitespace-nowrap">
+            🔄 Cek / Ganti Nama
+          </button>
+        </form>
+        <p id="beranda-name-error" class="hidden text-xs font-bold text-rose-600"></p>
+      </div>
+    `
+    : `
+      <div id="beranda-name-card" class="rounded-2xl bg-white/95 border-3 border-amber-400 p-4 sm:p-5 shadow-lg space-y-3 ring-4 ring-amber-200/50">
+        <div class="flex items-start gap-3">
+          <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl flex-shrink-0">🎁</span>
+          <div>
+            <h2 class="font-black text-sm sm:text-base text-slate-800">Masukkan Namamu Dulu untuk Mendapatkan Poin Awal!</h2>
+            <p class="text-xs text-slate-600 font-medium leading-relaxed">
+              Setiap pengunjung wajib mengisi nama terlebih dahulu sebelum belajar. <strong>Setiap nama memiliki poin awal yang berbeda-beda!</strong>
+            </p>
+          </div>
+        </div>
+        <form onsubmit="event.preventDefault(); submitNameFromBeranda();" class="flex flex-col sm:flex-row gap-2.5">
+          <input
+            type="text"
+            id="beranda-name-input"
+            maxlength="40"
+            placeholder="Ketik namamu di sini (contoh: Aisyah)"
+            class="flex-1 px-4 py-2.5 rounded-xl border-2 border-sky-200 focus:border-amber-400 focus:ring-2 focus:ring-amber-200 focus:outline-none font-bold text-slate-800"
+          />
+          <button type="submit" class="btn-playful px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-slate-950 font-black text-sm shadow-md whitespace-nowrap">
+            ✨ Klaim Poin Awal
+          </button>
+        </form>
+        <p id="beranda-name-error" class="hidden text-xs font-bold text-rose-600"></p>
+      </div>
+    `;
+
   const dhetikCards = RBC_DATA.dhetikStages.map(s => {
     const isDone = AppState.completedStages.includes(s.id);
     return `
@@ -356,11 +770,13 @@ function renderBerandaView() {
             </div>
 
             <h1 class="text-2xl sm:text-4xl md:text-5xl font-black text-slate-800 tracking-tight leading-snug">
-              Halo, Teman Belajar! 👋<br/>
+              Halo, ${AppState.hasEnteredName ? safeName : 'Teman Belajar'}! 👋<br/>
               <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-amber-600 to-emerald-600">
                 Yuk, Belajar Sambil Bermain di Ruang Belajar Ceria!
               </span>
             </h1>
+
+            ${nameEntryCard}
 
             <p class="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed font-medium">
               Ayo berpetualang mengenal mata uang Rupiah, memahami cara kerja jual beli, membedakan kebutuhan dan keinginan, serta belajar menjadi anak hebat yang bijak berbelanja!
@@ -4965,16 +5381,25 @@ function saveTeacherMateri() {
 function resetAllStudentData() {
   if (confirm('Apakah Ibu/Bapak Guru yakin ingin mereset seluruh progres belajar siswa ini?')) {
     localStorage.clear();
-    AppState.points = 25;
-    AppState.stars = 8;
+    sessionStorage.removeItem('rbc_session_confirmed');
+    AppState.hasEnteredName = false;
+    AppState.pendingTab = null;
+    AppState.studentName = 'Isi Nama Dulu';
+    AppState.initialPoints = 0;
+    AppState.points = 0;
+    AppState.stars = 0;
     AppState.completedStages = [];
-    AppState.unlockedBadges = ['bintang-pintar'];
+    AppState.unlockedBadges = [];
+    AppState.reflection = {};
+    AppState.nizaWallet = 20000;
+    AppState.nizaCart = [];
     AppState.quizScore = 0;
     AppState.quizCompleted = false;
-    AppState.save();
+    AppState.updateStatsUI();
     closeTeacherDashboard();
     switchTab('beranda');
-    AppState.showToast('🔄 Seluruh data siswa berhasil direset!');
+    openStudentNameModal(false);
+    AppState.showToast('🔄 Seluruh data siswa berhasil direset! Silakan masukkan nama baru.');
   }
 }
 
@@ -5025,7 +5450,14 @@ document.addEventListener('DOMContentLoaded', () => {
     return validTabs.includes(hash) ? hash : 'beranda';
   };
 
-  switchTab(getTabFromHash());
+  const requestedTab = getTabFromHash();
+  if (!AppState.hasEnteredName) {
+    AppState.pendingTab = requestedTab !== 'beranda' ? requestedTab : null;
+    switchTab('beranda');
+    openStudentNameModal(false);
+  } else {
+    switchTab(requestedTab);
+  }
 
   window.addEventListener('hashchange', () => {
     switchTab(getTabFromHash());
@@ -5045,12 +5477,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const nameWidget = document.getElementById('stat-name-widget');
   if (nameWidget) {
     nameWidget.addEventListener('click', () => {
-      const newName = prompt('Hai teman! Siapa nama panggilanmu?', AppState.studentName);
-      if (newName && newName.trim()) {
-        AppState.studentName = newName.trim();
-        AppState.save();
-        AppState.showToast(`Halo, ${AppState.studentName}! Selamat belajar!`);
-      }
+      openStudentNameModal(AppState.hasEnteredName);
     });
   }
 

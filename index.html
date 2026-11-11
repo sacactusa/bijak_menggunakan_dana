@@ -101,13 +101,13 @@
         <div class="flex items-center gap-1 sm:gap-2.5 flex-shrink-0">
           
           <!-- Student Profile Pill (Clickable) -->
-          <button id="stat-name-widget" title="Klik untuk mengganti nama siswa" class="btn-playful hidden xs:flex items-center gap-1.5 px-2.5 py-1 sm:py-1.5 rounded-2xl bg-sky-50 border border-sky-200 hover:bg-sky-100 transition-colors">
+          <button id="stat-name-widget" title="Klik untuk isi atau ganti nama siswa" class="btn-playful flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-2xl bg-sky-50 border border-sky-200 hover:bg-sky-100 transition-colors">
             <!-- User Avatar SVG -->
             <svg class="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="8" r="4.5" fill="#FED7AA" stroke="#EA580C" stroke-width="1.5"/>
               <path d="M4 20C4 16.5 7.5 14 12 14C16.5 14 20 16.5 20 20" fill="#BAE6FD" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round"/>
             </svg>
-            <span id="stat-name" class="font-bold text-[11px] sm:text-xs text-sky-900 truncate max-w-[70px] sm:max-w-[120px]">Teman Ceria</span>
+            <span id="stat-name" class="font-bold text-[11px] sm:text-xs text-sky-900 truncate max-w-[58px] sm:max-w-[120px]">Isi Nama</span>
           </button>
 
           <!-- Bintang Counter Badge -->
@@ -115,7 +115,7 @@
             <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="#F59E0B">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
-            <span id="stat-stars" class="font-black text-[11px] sm:text-xs text-amber-900">8</span>
+            <span id="stat-stars" class="font-black text-[11px] sm:text-xs text-amber-900">0</span>
           </div>
 
           <!-- Poin Counter Badge (Desktop & Tablet) -->
@@ -124,7 +124,7 @@
               <circle cx="12" cy="12" r="10" fill="#FACC15" stroke="#CA8A04" stroke-width="1.8"/>
               <text x="12" y="15.5" font-size="8" font-weight="black" fill="#713F12" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
             </svg>
-            <span id="stat-points" class="font-black text-xs text-emerald-900">25</span>
+            <span id="stat-points" class="font-black text-xs text-emerald-900">0</span>
           </div>
 
           <!-- Sound Toggle Button with Speaker SVG -->
@@ -261,7 +261,7 @@
 
     <!-- Global Learning Progress Bar -->
     <div class="w-full bg-slate-200 h-1.5">
-      <div id="global-progress-bar" class="bg-gradient-to-r from-sky-400 via-amber-400 to-emerald-400 h-1.5 transition-all duration-500" style="width: 15%"></div>
+      <div id="global-progress-bar" class="bg-gradient-to-r from-sky-400 via-amber-400 to-emerald-400 h-1.5 transition-all duration-500" style="width: 0%"></div>
     </div>
   </nav>
 
@@ -308,10 +308,10 @@
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <span id="drawer-student-name" class="font-black text-sm text-slate-800">Teman Ceria</span>
+              <span id="drawer-student-name" class="font-black text-sm text-slate-800">Isi Nama</span>
               <button onclick="promptChangeName()" class="text-[11px] text-sky-600 font-bold underline">Ubah</button>
             </div>
-            <p class="text-[11px] text-slate-500 font-medium">⭐ <span id="drawer-stars">8</span> Bintang • 🪙 <span id="drawer-points">25</span> Poin</p>
+            <p class="text-[11px] text-slate-500 font-medium">⭐ <span id="drawer-stars">0</span> Bintang • 🪙 <span id="drawer-points">0</span> Poin</p>
           </div>
         </div>
         <button onclick="toggleMobileMenuDrawer()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold flex items-center justify-center text-sm">✕</button>
@@ -670,13 +670,63 @@
     </div>
   </div>
 
+  <!-- Mandatory Welcome Name & Initial Points Modal -->
+  <div id="student-name-gate-modal" class="fixed inset-0 z-50 bg-slate-900/75 backdrop-blur-sm hidden flex items-center justify-center p-4" onclick="handleStudentNameBackdropClick(event)">
+    <div class="bg-white rounded-3xl max-w-md w-full p-5 sm:p-7 shadow-2xl border-4 border-amber-300 space-y-4 sm:space-y-5 relative overflow-hidden animate-bounce-in" onclick="event.stopPropagation()">
+      <div class="flex items-start justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-300 to-yellow-400 border-2 border-amber-500 flex items-center justify-center text-2xl shadow-md flex-shrink-0">
+            🎁
+          </div>
+          <div>
+            <span class="inline-block px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 font-black text-[10px] uppercase tracking-wider mb-1">Selamat Datang di Ruang Belajar Ceria</span>
+            <h3 id="gate-modal-title" class="text-lg sm:text-xl font-black text-slate-800 leading-tight">Masukkan Namamu Dulu, Yuk!</h3>
+          </div>
+        </div>
+        <button id="gate-close-btn" type="button" onclick="closeStudentNameModal()" class="hidden w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold flex items-center justify-center flex-shrink-0" title="Tutup">✕</button>
+      </div>
+
+      <p id="gate-modal-subtitle" class="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+        Setiap anak yang belajar wajib mengisi nama terlebih dahulu untuk mendapatkan <strong class="text-amber-700">poin awal spesial</strong>! Setiap nama memiliki jumlah poin awal dan catatan belajar yang berbeda-beda.
+      </p>
+
+      <div class="p-3 rounded-2xl bg-gradient-to-r from-sky-50 via-amber-50 to-emerald-50 border border-amber-200 text-[11px] sm:text-xs text-slate-700 font-semibold flex items-center gap-2.5">
+        <span class="text-lg flex-shrink-0">🪙</span>
+        <span>Isi nama panggilan atau nama lengkapmu di bawah ini agar bisa klaim poin awal dan membuka seluruh aktivitas DHETIK!</span>
+      </div>
+
+      <form id="gate-name-form" onsubmit="event.preventDefault(); submitNameFromModal();" class="space-y-3">
+        <div>
+          <label for="gate-student-name-input" class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1.5">Nama Siswa:</label>
+          <input
+            type="text"
+            id="gate-student-name-input"
+            maxlength="40"
+            autocomplete="name"
+            placeholder="Contoh: Aisyah Putri / Budi"
+            class="w-full px-4 py-3 rounded-2xl border-2 border-sky-200 focus:border-amber-400 focus:ring-2 focus:ring-amber-200 focus:outline-none font-bold text-slate-800 placeholder:text-slate-400"
+          />
+          <p id="gate-error-msg" class="hidden mt-1.5 text-xs font-bold text-rose-600"></p>
+        </div>
+
+        <button
+          id="gate-submit-btn"
+          type="submit"
+          class="btn-playful w-full py-3 sm:py-3.5 px-5 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500 hover:from-amber-500 hover:to-orange-600 text-slate-950 font-black text-sm sm:text-base shadow-lg shadow-amber-200 flex items-center justify-center gap-2"
+        >
+          <span>✨ Klaim Poin Awal &amp; Masuk</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/audio.js?v=20261110_4"></script>
-  <script src="js/data.js?v=20261110_4"></script>
-  <script src="js/icons.js?v=20261110_4"></script>
-  <script src="js/mascot.js?v=20261110_4"></script>
-  <script src="js/supabase-client.js?v=20261110_4"></script>
-  <script src="js/app.js?v=20261110_4"></script>
+  <script src="js/audio.js?v=20261112_1"></script>
+  <script src="js/data.js?v=20261112_1"></script>
+  <script src="js/icons.js?v=20261112_1"></script>
+  <script src="js/mascot.js?v=20261112_1"></script>
+  <script src="js/supabase-client.js?v=20261112_1"></script>
+  <script src="js/app.js?v=20261112_1"></script>
 </body>
 </html>
