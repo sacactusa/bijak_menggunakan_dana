@@ -158,10 +158,10 @@
       </div>
 
       <!-- Tier 2: Navigation Menu Bar with Custom SVG Icons (Horizontal Scrollable on Mobile) -->
-      <div id="tier2-nav-scroll" class="flex items-center gap-1 sm:gap-1.5 overflow-x-auto py-2 text-xs font-bold no-scrollbar scroll-smooth">
+      <div id="tier2-nav-scroll" class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto py-2 text-xs font-bold no-scrollbar scroll-smooth">
         
         <!-- 1. Beranda -->
-        <button data-tab="beranda" onclick="switchTab('beranda')" class="nav-link px-3.5 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-amber-400 text-slate-900 border border-amber-500 shadow-sm transform scale-105">
+        <button data-tab="beranda" onclick="switchTab('beranda')" title="Beranda" class="nav-link px-3.5 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-amber-400 text-slate-900 border border-amber-500 shadow-sm transform scale-105">
           <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
             <path d="M3 10.5L12 3L21 10.5V20C21 20.6 20.6 21 20 21H15C14.4 21 14 20.6 14 20V15C14 14.4 13.6 14 13 14H11C10.4 14 10 14.4 10 15V20C10 20.6 9.6 21 9 21H4C3.4 21 3 20.6 3 20V10.5Z" fill="#FEF08A" stroke="#D97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             <rect x="10" y="14" width="4" height="7" rx="1" fill="#F59E0B"/>
@@ -170,59 +170,59 @@
           <span>Beranda</span>
         </button>
 
-        <!-- 2. D - Dekatkan -->
-        <button data-tab="d" onclick="switchTab('d')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-sky-50 hover:border-sky-300 hover:text-sky-800 shadow-2xs">
+        <!-- 2. D -->
+        <button data-tab="d" onclick="switchTab('d')" title="D - Dekatkan" class="nav-link px-3.5 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-sky-50 hover:border-sky-300 hover:text-sky-800 shadow-2xs">
           <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
             <circle cx="10" cy="10" r="7" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
             <path d="M15.5 15.5L21 21" stroke="#0284C7" stroke-width="2.5" stroke-linecap="round"/>
             <circle cx="10" cy="10" r="4.2" fill="#FACC15" stroke="#CA8A04" stroke-width="1.2"/>
             <text x="10" y="12" font-size="4.5" font-weight="bold" fill="#713F12" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
           </svg>
-          <span>D - Dekatkan</span>
+          <span>D</span>
         </button>
 
-        <!-- 3. H - Hubungkan -->
-        <button data-tab="h" onclick="switchTab('h')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-800 shadow-2xs">
+        <!-- 3. H -->
+        <button data-tab="h" onclick="switchTab('h')" title="H - Hubungkan" class="nav-link px-3.5 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-800 shadow-2xs">
           <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
             <rect x="2" y="7" width="10" height="10" rx="5" fill="#D1FAE5" stroke="#059669" stroke-width="2"/>
             <rect x="12" y="7" width="10" height="10" rx="5" fill="#A7F3D0" stroke="#047857" stroke-width="2"/>
             <circle cx="12" cy="12" r="2.2" fill="#10B981"/>
           </svg>
-          <span>H - Hubungkan</span>
+          <span>H</span>
         </button>
 
-        <!-- 4. E - Eksplorasi -->
-        <button data-tab="e" onclick="switchTab('e')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-amber-50 hover:border-amber-300 hover:text-amber-800 shadow-2xs">
+        <!-- 4. E -->
+        <button data-tab="e" onclick="switchTab('e')" title="E - Eksplorasi" class="nav-link px-3.5 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-amber-50 hover:border-amber-300 hover:text-amber-800 shadow-2xs">
           <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
             <path d="M4 8H20L18 19C18 20.1 17.1 21 16 21H8C6.9 21 6 20.1 6 19L4 8Z" fill="#FFEDD5" stroke="#EA580C" stroke-width="2"/>
             <path d="M8 8V6C8 3.8 9.8 2 12 2C14.2 2 16 3.8 16 6V8" stroke="#EA580C" stroke-width="2" stroke-linecap="round"/>
             <circle cx="12" cy="14" r="2.5" fill="#F97316"/>
           </svg>
-          <span>E - Eksplorasi</span>
+          <span>E</span>
         </button>
 
-        <!-- 5. T - Tukar Gagasan -->
-        <button data-tab="t" onclick="switchTab('t')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-purple-50 hover:border-purple-300 hover:text-purple-800 shadow-2xs">
+        <!-- 5. T -->
+        <button data-tab="t" onclick="switchTab('t')" title="T - Tukar Gagasan" class="nav-link px-3.5 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-purple-50 hover:border-purple-300 hover:text-purple-800 shadow-2xs">
           <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
             <path d="M19 12.5C19 15.8 15.9 18.5 12 18.5C10.7 18.5 9.5 18.2 8.4 17.6L4 19L5.4 15.1C4.5 14.3 4 13.4 4 12.5C4 9.2 7.1 6.5 11 6.5C14.9 6.5 19 9.2 19 12.5Z" fill="#EDE9FE" stroke="#7C3AED" stroke-width="1.8" stroke-linejoin="round"/>
             <circle cx="8.5" cy="12.5" r="1.2" fill="#6D28D9"/>
             <circle cx="11.5" cy="12.5" r="1.2" fill="#6D28D9"/>
             <circle cx="14.5" cy="12.5" r="1.2" fill="#6D28D9"/>
           </svg>
-          <span>T - Tukar Gagasan</span>
+          <span>T</span>
         </button>
 
-        <!-- 6. I - Ikat Konsep -->
-        <button data-tab="i" onclick="switchTab('i')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-rose-50 hover:border-rose-300 hover:text-rose-800 shadow-2xs">
+        <!-- 6. I -->
+        <button data-tab="i" onclick="switchTab('i')" title="I - Ikat Konsep" class="nav-link px-3.5 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-rose-50 hover:border-rose-300 hover:text-rose-800 shadow-2xs">
           <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
             <path d="M9 18H15M10 21H14M12 2C7.6 2 4 5.6 4 10C4 12.8 5.4 15.2 7.6 16.6C8.2 17 8.6 17.7 8.7 18.4L8.7 18.5H15.3L15.3 18.4C15.4 17.7 15.8 17 16.4 16.6C18.6 15.2 20 12.8 20 10C20 5.6 16.4 2 12 2Z" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M10 10L14 10" stroke="#EAB308" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
-          <span>I - Ikat Konsep</span>
+          <span>I</span>
         </button>
 
-        <!-- 7. K - Karyaku -->
-        <button data-tab="k" onclick="switchTab('k')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-indigo-50 hover:border-indigo-300 hover:text-indigo-800 shadow-2xs">
+        <!-- 7. K -->
+        <button data-tab="k" onclick="switchTab('k')" title="K - Karyaku" class="nav-link px-3.5 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-indigo-50 hover:border-indigo-300 hover:text-indigo-800 shadow-2xs">
           <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
             <path d="M12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22C13.1 22 14 21.1 14 20C14 19.5 13.8 19 13.5 18.6C13.2 18.2 13 17.7 13 17.2C13 16.1 13.9 15.2 15 15.2H17C19.8 15.2 22 13 22 10.2C22 5.7 17.5 2 12 2Z" fill="#E0E7FF" stroke="#4F46E5" stroke-width="1.8"/>
             <circle cx="7.5" cy="10" r="1.5" fill="#EF4444"/>
@@ -230,14 +230,14 @@
             <circle cx="16.5" cy="8.5" r="1.5" fill="#10B981"/>
             <circle cx="17.5" cy="12.5" r="1.5" fill="#3B82F6"/>
           </svg>
-          <span>K - Karyaku</span>
+          <span>K</span>
         </button>
 
         <!-- Separator -->
         <span class="w-px h-6 bg-slate-200 mx-1 flex-shrink-0"></span>
 
         <!-- 8. Kontak -->
-        <button data-tab="kontak" onclick="switchTab('kontak')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-sky-50 hover:border-sky-300 hover:text-sky-800 shadow-2xs">
+        <button data-tab="kontak" onclick="switchTab('kontak')" title="Kontak" class="nav-link px-3.5 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-sky-50 hover:border-sky-300 hover:text-sky-800 shadow-2xs">
           <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
             <rect x="3" y="5" width="18" height="14" rx="3" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.8"/>
             <path d="M3 8L12 14L21 8" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round"/>
@@ -247,7 +247,7 @@
         </button>
 
         <!-- 9. Tentang -->
-        <button data-tab="tentang" onclick="switchTab('tentang')" class="nav-link px-3 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-slate-300 hover:text-slate-800 shadow-2xs">
+        <button data-tab="tentang" onclick="switchTab('tentang')" title="Tentang" class="nav-link px-3.5 py-2 rounded-2xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-slate-300 hover:text-slate-800 shadow-2xs">
           <svg class="w-4.5 h-4.5" viewBox="0 0 24 24" fill="none">
             <path d="M4 19.5V5C4 3.9 4.9 3 6 3H20V21H6C4.9 21 4 20.1 4 19.5Z" fill="#F1F5F9" stroke="#475569" stroke-width="1.8"/>
             <circle cx="12" cy="13" r="3" fill="#6366F1"/>
