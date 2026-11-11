@@ -169,9 +169,9 @@ const AppState = {
   // Diskusi Padlet
   padletPosts: JSON.parse(localStorage.getItem('rbc_padlet_posts') || '[]'),
 
-  // Refleksi Siswa & Tema Sertifikat ('emas' | 'merah100k')
+  // Refleksi Siswa & Tema Sertifikat ('emas' | 'merah')
   reflection: _hasValidSessionStudent ? JSON.parse(localStorage.getItem('rbc_student_reflection') || '{}') : {},
-  certTheme: (localStorage.getItem('rbc_cert_theme') === 'merah100k' || localStorage.getItem('rbc_cert_theme') === 'petualangan') ? 'merah100k' : 'emas',
+  certTheme: (localStorage.getItem('rbc_cert_theme') === 'merah' || localStorage.getItem('rbc_cert_theme') === 'merah100k' || localStorage.getItem('rbc_cert_theme') === 'petualangan') ? 'merah' : 'emas',
 
   // Save state per student profile
   save() {
@@ -4261,31 +4261,31 @@ function renderTahapKView() {
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-center sm:text-left">
             <div>
               <span class="text-[11px] font-black uppercase tracking-wider text-amber-700 block">💰 Pilih Versi Sertifikat Bertema Uangmu</span>
-              <h3 class="text-sm sm:text-base font-black text-slate-800">Tersedia 2 Versi Desain (Emas &amp; Merah Rp100.000) — Pilih Favoritmu!</h3>
+              <h3 class="text-sm sm:text-base font-black text-slate-800">Tersedia 2 Versi Desain (Emas &amp; Merah Uang Rupiah) — Pilih Favoritmu!</h3>
             </div>
             <span class="text-xs font-semibold text-slate-500">Bisa langsung dicetak atau disimpan PDF</span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <button type="button" id="btn-cert-theme-emas" onclick="setCertificateTheme('emas')" class="text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 ${AppState.certTheme !== 'merah100k' ? 'border-amber-500 bg-amber-50/90 ring-2 ring-amber-200 shadow-sm' : 'border-slate-200 bg-slate-50 hover:border-amber-300'}">
+            <button type="button" id="btn-cert-theme-emas" onclick="setCertificateTheme('emas')" class="text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 ${AppState.certTheme !== 'merah' ? 'border-amber-500 bg-amber-50/90 ring-2 ring-amber-200 shadow-sm' : 'border-slate-200 bg-slate-50 hover:border-amber-300'}">
               <span class="w-10 h-10 rounded-xl bg-amber-100 border border-amber-400 flex items-center justify-center text-xl flex-shrink-0">🪙</span>
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between gap-2">
                   <span class="font-black text-xs sm:text-sm text-slate-800">Versi 1: Emas &amp; Dana Berkilau</span>
-                  <span id="badge-cert-emas" class="${AppState.certTheme !== 'merah100k' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-black">Dipilih</span>
+                  <span id="badge-cert-emas" class="${AppState.certTheme !== 'merah' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-black">Dipilih</span>
                 </div>
-                <span class="text-[11px] text-slate-600 font-medium block truncate">Koin emas Rp, batangan emas, kantong dana &amp; celengan</span>
+                <span class="text-[11px] text-slate-600 font-medium block truncate">Koin emas Rp, batangan emas, peti harta &amp; celengan</span>
               </div>
             </button>
 
-            <button type="button" id="btn-cert-theme-merah100k" onclick="setCertificateTheme('merah100k')" class="text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 ${AppState.certTheme === 'merah100k' ? 'border-rose-500 bg-rose-50/90 ring-2 ring-rose-200 shadow-sm' : 'border-slate-200 bg-slate-50 hover:border-rose-300'}">
+            <button type="button" id="btn-cert-theme-merah" onclick="setCertificateTheme('merah')" class="text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 ${AppState.certTheme === 'merah' ? 'border-rose-500 bg-rose-50/90 ring-2 ring-rose-200 shadow-sm' : 'border-slate-200 bg-slate-50 hover:border-rose-300'}">
               <span class="w-10 h-10 rounded-xl bg-rose-100 border border-rose-400 flex items-center justify-center text-xl flex-shrink-0">💵</span>
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between gap-2">
-                  <span class="font-black text-xs sm:text-sm text-slate-800">Versi 2: Merah Uang Rp100.000</span>
-                  <span id="badge-cert-merah100k" class="${AppState.certTheme === 'merah100k' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-black">Dipilih</span>
+                  <span class="font-black text-xs sm:text-sm text-slate-800">Versi 2: Merah Uang Rupiah</span>
+                  <span id="badge-cert-merah" class="${AppState.certTheme === 'merah' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-black">Dipilih</span>
                 </div>
-                <span class="text-[11px] text-slate-600 font-medium block truncate">Merah uang 100k, celengan lucu, dompet &amp; kipas uang</span>
+                <span class="text-[11px] text-slate-600 font-medium block truncate">Uang kertas merah Rp, celengan, dompet &amp; buku tabungan</span>
               </div>
             </button>
           </div>
@@ -4334,6 +4334,20 @@ const CERT_MONEY_ICONS = {
       <text x="49" y="22.5" font-size="6" font-weight="900" fill="#78350F" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
     </svg>
   `,
+  treasureChest: () => `
+    <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
+      <path d="M14 26 C14 15 50 15 50 26 Z" fill="#D97706" stroke="#78350F" stroke-width="2.4" stroke-linejoin="round"/>
+      <circle cx="22" cy="24" r="5" fill="#FDE047" stroke="#B45309" stroke-width="1.6"/>
+      <circle cx="32" cy="22" r="5.5" fill="#FACC15" stroke="#B45309" stroke-width="1.6"/>
+      <circle cx="42" cy="24" r="5" fill="#FDE047" stroke="#B45309" stroke-width="1.6"/>
+      <rect x="12" y="26" width="40" height="26" rx="5" fill="#F59E0B" stroke="#78350F" stroke-width="2.4"/>
+      <rect x="27" y="26" width="10" height="26" fill="#FDE68A" stroke="#78350F" stroke-width="1.8"/>
+      <rect x="28.5" y="30" width="7" height="8" rx="2" fill="#DC2626" stroke="#7F1D1D" stroke-width="1.4"/>
+      <circle cx="20" cy="39" r="1.8" fill="#78350F"/>
+      <circle cx="44" cy="39" r="1.8" fill="#78350F"/>
+      <path d="M29 44 Q32 47 35 44" stroke="#78350F" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  `,
   moneyBag: () => `
     <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
       <path d="M23 14 L26 20 H38 L41 14 Q36 10 32 13 Q28 10 23 14 Z" fill="#FDE68A" stroke="#B45309" stroke-width="2.4" stroke-linejoin="round"/>
@@ -4358,25 +4372,52 @@ const CERT_MONEY_ICONS = {
       <circle cx="49" cy="14" r="2.2" fill="#FDE047"/>
     </svg>
   `,
-  cuteBill100k: () => `
+  piggyBankCeria: () => `
+    <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
+      <circle cx="32" cy="13" r="6" fill="#FACC15" stroke="#B45309" stroke-width="2"/>
+      <text x="32" y="15.2" font-size="5.5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
+      <ellipse cx="33" cy="38" rx="19" ry="14" fill="#FBCFE8" stroke="#BE185D" stroke-width="2.5"/>
+      <path d="M21 26 L18 19 L27 23" fill="#FBCFE8" stroke="#BE185D" stroke-width="2.3" stroke-linejoin="round"/>
+      <ellipse cx="52" cy="38" rx="4.5" ry="6" fill="#F9A8D4" stroke="#BE185D" stroke-width="2.3"/>
+      <rect x="27" y="24" width="10" height="3" rx="1.5" fill="#9D174D"/>
+      <circle cx="41" cy="34.5" r="2" fill="#831843"/>
+      <circle cx="33" cy="34.5" r="2" fill="#831843"/>
+      <path d="M35 39.5 Q37.5 42 40 39.5" stroke="#831843" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M23 50 L23 56 M41 50 L41 56" stroke="#BE185D" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  `,
+  savingsBook: () => `
+    <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
+      <rect x="13" y="10" width="38" height="44" rx="6" fill="#FDE68A" stroke="#B45309" stroke-width="2.5"/>
+      <path d="M20 10 L20 54" stroke="#B45309" stroke-width="2.2"/>
+      <rect x="25" y="16" width="20" height="10" rx="2.5" fill="#FFFFFF" stroke="#D97706" stroke-width="1.5"/>
+      <text x="35" y="23" font-size="6" font-weight="900" fill="#B45309" text-anchor="middle" font-family="'Fredoka', sans-serif">DANA</text>
+      <circle cx="31" cy="34" r="1.8" fill="#78350F"/>
+      <circle cx="41" cy="34" r="1.8" fill="#78350F"/>
+      <path d="M33 38.5 Q36 41.5 39 38.5" stroke="#78350F" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="47" cy="48" r="7" fill="#FACC15" stroke="#92400E" stroke-width="2"/>
+      <text x="47" y="50.5" font-size="6.5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
+    </svg>
+  `,
+  cuteRedBill: () => `
     <svg viewBox="0 0 72 56" fill="none" class="w-full h-full">
       <g transform="rotate(-7 36 28)">
         <rect x="6" y="11" width="60" height="34" rx="5" fill="#FB7185" stroke="#9F1239" stroke-width="2.6"/>
         <rect x="11" y="15.5" width="50" height="25" rx="3" fill="#FFE4E6" stroke="#E11D48" stroke-width="1.3" stroke-dasharray="2.5 2"/>
         <rect x="46" y="15.5" width="6" height="25" fill="#FDE047" opacity="0.65"/>
-        <text x="23" y="25" font-size="8.5" font-weight="900" fill="#9F1239" text-anchor="middle" font-family="'Fredoka', sans-serif">100K</text>
-        <circle cx="33" cy="30" r="1.8" fill="#881337"/>
-        <circle cx="43" cy="30" r="1.8" fill="#881337"/>
-        <path d="M35 34 Q38 36.8 41 34" stroke="#881337" stroke-width="1.8" stroke-linecap="round"/>
-        <circle cx="29.5" cy="32.5" r="2.1" fill="#FDA4AF"/>
-        <circle cx="46.5" cy="32.5" r="2.1" fill="#FDA4AF"/>
+        <text x="20.5" y="26.5" font-size="9.5" font-weight="900" fill="#9F1239" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
+        <circle cx="33" cy="29" r="1.8" fill="#881337"/>
+        <circle cx="43" cy="29" r="1.8" fill="#881337"/>
+        <path d="M35 33.5 Q38 36.5 41 33.5" stroke="#881337" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="29.5" cy="32" r="2.1" fill="#FDA4AF"/>
+        <circle cx="46.5" cy="32" r="2.1" fill="#FDA4AF"/>
       </g>
     </svg>
   `,
   walletDana: () => `
     <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
       <rect x="18" y="12" width="28" height="16" rx="3" transform="rotate(-10 18 12)" fill="#F43F5E" stroke="#9F1239" stroke-width="2.2"/>
-      <text x="31" y="21" font-size="7" font-weight="900" fill="#FFFFFF" text-anchor="middle" font-family="'Fredoka', sans-serif">100K</text>
+      <text x="31" y="21" font-size="7.5" font-weight="900" fill="#FFFFFF" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
       <rect x="10" y="22" width="42" height="29" rx="7" fill="#FB7185" stroke="#881337" stroke-width="2.6"/>
       <rect x="36" y="31" width="18" height="11" rx="5" fill="#FDE047" stroke="#B45309" stroke-width="2"/>
       <circle cx="42" cy="36.5" r="2" fill="#92400E"/>
@@ -4385,104 +4426,120 @@ const CERT_MONEY_ICONS = {
       <path d="M23 39.5 Q25.5 42 28 39.5" stroke="#4C0519" stroke-width="1.8" stroke-linecap="round"/>
     </svg>
   `,
-  fanBills100k: () => `
+  fanRedBills: () => `
     <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
       <rect x="12" y="14" width="38" height="22" rx="4" transform="rotate(-18 31 25)" fill="#FDA4AF" stroke="#BE123C" stroke-width="2.2"/>
       <rect x="14" y="19" width="38" height="22" rx="4" transform="rotate(-4 33 30)" fill="#F43F5E" stroke="#881337" stroke-width="2.2"/>
       <rect x="16" y="25" width="38" height="22" rx="4" transform="rotate(8 35 36)" fill="#FFE4E6" stroke="#9F1239" stroke-width="2.4"/>
-      <text x="34" y="40" font-size="9" font-weight="900" fill="#9F1239" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp100rb</text>
+      <text x="35" y="40" font-size="9" font-weight="900" fill="#9F1239" text-anchor="middle" font-family="'Fredoka', sans-serif">RUPIAH</text>
       <circle cx="17" cy="44" r="7" fill="#FACC15" stroke="#B45309" stroke-width="2"/>
       <text x="17" y="46.5" font-size="6.5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
     </svg>
   `,
-  red100kSeal: () => `
+  redRupiahSeal: () => `
     <svg viewBox="0 0 64 72" fill="none" class="w-full h-full">
       <path d="M22 40 L15 65 L26 59 L31 66 L32 42" fill="#E11D48" stroke="#881337" stroke-width="2.2" stroke-linejoin="round"/>
       <path d="M42 40 L49 65 L38 59 L33 66 L32 42" fill="#F43F5E" stroke="#881337" stroke-width="2.2" stroke-linejoin="round"/>
       <circle cx="32" cy="26" r="17" fill="#E11D48" stroke="#FBBF24" stroke-width="3"/>
       <circle cx="32" cy="26" r="12.5" fill="#FFF1F2" stroke="#FB7185" stroke-width="1.6" stroke-dasharray="3 2"/>
-      <text x="32" y="25.5" font-size="8.5" font-weight="900" fill="#9F1239" text-anchor="middle" font-family="'Fredoka', sans-serif">100K</text>
-      <text x="32" y="33" font-size="6" font-weight="900" fill="#B45309" text-anchor="middle" font-family="'Fredoka', sans-serif">BIJAK</text>
+      <text x="32" y="25.5" font-size="9.5" font-weight="900" fill="#9F1239" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
+      <text x="32" y="33.5" font-size="5.5" font-weight="900" fill="#B45309" text-anchor="middle" font-family="'Fredoka', sans-serif">BIJAK</text>
     </svg>
   `
 };
 
 function renderCertificateCard(theme = 'emas') {
-  const isRed100k = theme === 'merah100k' || theme === 'petualangan';
+  const isRed = theme === 'merah' || theme === 'merah100k' || theme === 'petualangan';
   const safeStudentName = escapeHtmlText(AppState.studentName);
   const issueDate = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
   const devRows = RBC_DATA.appInfo.developers.map(dev => `<span class="block">${dev}</span>`).join('');
 
-  const themeCfg = isRed100k
+  const themeCfg = isRed
     ? {
         outerClass: 'border-rose-500 bg-gradient-to-br from-rose-200 via-red-100 to-rose-300',
         innerClass: 'border-dashed border-rose-400 bg-[#FFF7F8]',
         cornerBracketColor: 'border-rose-500',
-        ribbonTag: '<span class="inline-block px-3 py-0.5 rounded-full bg-rose-100 border border-rose-300 text-rose-800 text-[10px] font-black tracking-widest uppercase">💵 SERI MERAH Rp100.000 • DANA &amp; CELENGAN CERIA</span>',
+        watermarkColor: 'text-rose-400',
+        ribbonTag: '<span class="inline-block px-3 py-0.5 rounded-full bg-rose-100 border border-rose-300 text-rose-800 text-[10px] font-black tracking-widest uppercase">💵 SERI MERAH RUPIAH • DANA &amp; CELENGAN CERIA</span>',
         nameWrapClass: 'border-b-2 border-rose-500',
         nameTextClass: 'text-rose-700',
         dividerLineClass: 'bg-rose-300',
-        dividerBadge: '<span class="px-2.5 py-0.5 rounded-full bg-rose-100 border border-rose-300 text-rose-800 text-[10px] font-black">💵 • Rp100.000 • 🪙</span>',
+        dividerBadge: '<span class="px-2.5 py-0.5 rounded-full bg-rose-100 border border-rose-300 text-rose-800 text-[10px] font-black">💵 • RUPIAH &amp; CELENGAN • 🪙</span>',
         awardPillClass: 'bg-gradient-to-r from-rose-500 via-red-500 to-rose-600 border-2 border-amber-300 text-white shadow-md',
-        awardEmoji: '💵',
+        awardLeftMini: CERT_MONEY_ICONS.cuteRedBill(),
+        awardRightMini: CERT_MONEY_ICONS.piggyBankCeria(),
         footerBorderClass: 'border-rose-200',
         securityStripClass: 'bg-gradient-to-b from-amber-300 via-rose-400 to-amber-300',
         topBanner: `
-          <!-- Rangkaian Uang Merah 100K, Koin Emas & Pita Ceria di Atas -->
+          <!-- Rangkaian Uang Kertas Merah Lucu & Koin Emas Rp di Atas -->
           <div class="absolute top-0 left-1/2 -translate-x-1/2 w-60 sm:w-80 pointer-events-none" aria-hidden="true">
             <svg viewBox="0 0 320 34" class="w-full h-auto" fill="none">
               <path d="M6 3 Q160 13 314 3" stroke="#BE123C" stroke-width="1.8" stroke-linecap="round"/>
               <g transform="translate(26,7) rotate(-6)">
                 <rect width="34" height="19" rx="3" fill="#FB7185" stroke="#9F1239" stroke-width="1.3"/>
-                <text x="17" y="13" font-size="7" font-weight="900" fill="#FFF1F2" text-anchor="middle">100K</text>
+                <text x="17" y="13" font-size="8" font-weight="900" fill="#FFF1F2" text-anchor="middle">Rp</text>
               </g>
               <circle cx="84" cy="17" r="9" fill="#FACC15" stroke="#B45309" stroke-width="1.4"/>
               <text x="84" y="20" font-size="7" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
               <g transform="translate(106,9) rotate(4)">
                 <rect width="34" height="19" rx="3" fill="#F43F5E" stroke="#881337" stroke-width="1.3"/>
-                <text x="17" y="13" font-size="7" font-weight="900" fill="#FEF08A" text-anchor="middle">100rb</text>
+                <text x="17" y="13" font-size="7" font-weight="900" fill="#FEF08A" text-anchor="middle">DANA</text>
               </g>
-              <circle cx="160" cy="19" r="10" fill="#FDE047" stroke="#B45309" stroke-width="1.5"/>
-              <text x="160" y="22.5" font-size="7.5" font-weight="900" fill="#9F1239" text-anchor="middle">Rp</text>
+              <circle cx="160" cy="19" r="10.5" fill="#FDE047" stroke="#B45309" stroke-width="1.6"/>
+              <text x="160" y="22.5" font-size="8" font-weight="900" fill="#9F1239" text-anchor="middle">Rp</text>
               <g transform="translate(180,9) rotate(-4)">
                 <rect width="34" height="19" rx="3" fill="#F43F5E" stroke="#881337" stroke-width="1.3"/>
-                <text x="17" y="13" font-size="7" font-weight="900" fill="#FEF08A" text-anchor="middle">100rb</text>
+                <text x="17" y="13" font-size="7" font-weight="900" fill="#FEF08A" text-anchor="middle">HEMAT</text>
               </g>
               <circle cx="236" cy="17" r="9" fill="#FACC15" stroke="#B45309" stroke-width="1.4"/>
               <text x="236" y="20" font-size="7" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
               <g transform="translate(256,7) rotate(6)">
                 <rect width="34" height="19" rx="3" fill="#FB7185" stroke="#9F1239" stroke-width="1.3"/>
-                <text x="17" y="13" font-size="7" font-weight="900" fill="#FFF1F2" text-anchor="middle">100K</text>
+                <text x="17" y="13" font-size="8" font-weight="900" fill="#FFF1F2" text-anchor="middle">Rp</text>
               </g>
             </svg>
           </div>
         `,
-        logoLeftIcon: `<div class="w-9 h-9 sm:w-12 sm:h-12 flex-shrink-0 -rotate-6 rounded-lg overflow-hidden border-2 border-rose-300 shadow-sm bg-white p-0.5"><img src="assets/images/uang/kertas-100000.jpg" alt="Uang Merah Rp100.000" class="w-full h-full object-cover rounded"/></div>`,
-        logoRightIcon: `<div class="w-9 h-9 sm:w-12 sm:h-12 flex-shrink-0">${RBC_ICONS.celenganAyam('w-full h-full')}</div>`,
-        cornerTopLeft: CERT_MONEY_ICONS.cuteBill100k(),
+        bottomBanner: `
+          <!-- Dekorasi Pita Koin, Celengan & Uang Merah di Bawah -->
+          <div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3 pointer-events-none select-none" aria-hidden="true">
+            <span class="w-5 h-5 sm:w-7 sm:h-7 opacity-90">${CERT_MONEY_ICONS.coinStack()}</span>
+            <span class="w-6 h-5 sm:w-8 sm:h-6 opacity-90">${CERT_MONEY_ICONS.cuteRedBill()}</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-rose-100 border border-rose-300 text-rose-800 text-[9px] sm:text-[10px] font-black whitespace-nowrap">💰 BIJAK KELOLA DANA &amp; MENABUNG</span>
+            <span class="w-5 h-5 sm:w-7 sm:h-7 opacity-90">${CERT_MONEY_ICONS.piggyBankCeria()}</span>
+            <span class="w-5 h-5 sm:w-7 sm:h-7 opacity-90">${CERT_MONEY_ICONS.moneyBag()}</span>
+          </div>
+        `,
+        logoLeftIcon: `<div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 -rotate-6">${CERT_MONEY_ICONS.cuteRedBill()}</div>`,
+        logoRightIcon: `<div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rotate-6">${RBC_ICONS.celenganAyam('w-full h-full')}</div>`,
+        cornerTopLeft: CERT_MONEY_ICONS.cuteRedBill(),
         cornerTopRight: RBC_ICONS.celenganAyam('w-full h-full'),
         cornerBottomLeft: CERT_MONEY_ICONS.walletDana(),
-        cornerBottomRight: CERT_MONEY_ICONS.red100kSeal(),
+        cornerBottomRight: CERT_MONEY_ICONS.redRupiahSeal(),
         sideLeftIcons: `
-          <div class="w-12 h-12 rounded-2xl bg-rose-50/90 border border-rose-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.fanBills100k()}</div>
-          <div class="w-11 h-11 rounded-2xl bg-amber-50/90 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.moneyBag()}</div>
+          <div class="w-12 h-12 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.fanRedBills()}</div>
+          <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.moneyBag()}</div>
+          <div class="w-11 h-11 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm -rotate-3">${CERT_MONEY_ICONS.piggyBankCeria()}</div>
         `,
         sideRightIcons: `
-          <div class="w-12 h-12 rounded-2xl bg-amber-50/90 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.coinStack()}</div>
-          <div class="w-11 h-11 rounded-2xl bg-rose-50/90 border border-rose-200 p-1.5 shadow-sm -rotate-6">${RBC_MASCOT.render('cheering', 'w-full h-full')}</div>
+          <div class="w-12 h-12 rounded-2xl bg-amber-50/95 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.coinStack()}</div>
+          <div class="w-11 h-11 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.savingsBook()}</div>
+          <div class="w-11 h-11 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm rotate-3">${RBC_MASCOT.render('cheering', 'w-full h-full')}</div>
         `
       }
     : {
         outerClass: 'border-amber-500 bg-gradient-to-br from-amber-200 via-yellow-100 to-amber-300',
         innerClass: 'border-dashed border-amber-500/85 bg-[#FFFDF2]',
         cornerBracketColor: 'border-amber-500',
+        watermarkColor: 'text-amber-500',
         ribbonTag: '<span class="inline-block px-3 py-0.5 rounded-full bg-amber-100 border border-amber-400 text-amber-900 text-[10px] font-black tracking-widest uppercase">🪙 EDISI EMAS &amp; HARTA DANA CERIA</span>',
         nameWrapClass: 'border-b-2 border-amber-500',
         nameTextClass: 'text-amber-900',
         dividerLineClass: 'bg-amber-400',
-        dividerBadge: '<span class="px-2.5 py-0.5 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-[10px] font-black">🪙 • EMAS &amp; Rp • 🪙</span>',
+        dividerBadge: '<span class="px-2.5 py-0.5 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-[10px] font-black">🪙 • EMAS &amp; RUPIAH • 🪙</span>',
         awardPillClass: 'bg-gradient-to-r from-amber-300 via-yellow-300 to-amber-400 border-2 border-amber-500 text-amber-950 shadow-md',
-        awardEmoji: '🪙',
+        awardLeftMini: CERT_MONEY_ICONS.coinStack(),
+        awardRightMini: CERT_MONEY_ICONS.goldBar(),
         footerBorderClass: 'border-amber-300/80',
         securityStripClass: 'bg-gradient-to-b from-amber-400 via-yellow-300 to-amber-400',
         topBanner: `
@@ -4505,19 +4562,31 @@ function renderCertificateCard(theme = 'emas') {
             </svg>
           </div>
         `,
-        logoLeftIcon: `<div class="w-9 h-9 sm:w-12 sm:h-12 flex-shrink-0">${CERT_MONEY_ICONS.coinStack()}</div>`,
-        logoRightIcon: `<div class="w-9 h-9 sm:w-12 sm:h-12 flex-shrink-0">${RBC_ICONS.celenganAyam('w-full h-full')}</div>`,
+        bottomBanner: `
+          <!-- Dekorasi Pita Emas, Peti Harta & Celengan di Bawah -->
+          <div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3 pointer-events-none select-none" aria-hidden="true">
+            <span class="w-5 h-5 sm:w-7 sm:h-7 opacity-90">${CERT_MONEY_ICONS.goldBar()}</span>
+            <span class="w-5 h-5 sm:w-7 sm:h-7 opacity-90">${CERT_MONEY_ICONS.treasureChest()}</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-amber-100 border border-amber-400 text-amber-900 text-[9px] sm:text-[10px] font-black whitespace-nowrap">🪙 HARTA DANA &amp; CELENGAN BIJAK</span>
+            <span class="w-5 h-5 sm:w-7 sm:h-7 opacity-90">${CERT_MONEY_ICONS.coinStack()}</span>
+            <span class="w-5 h-5 sm:w-7 sm:h-7 opacity-90">${CERT_MONEY_ICONS.savingsBook()}</span>
+          </div>
+        `,
+        logoLeftIcon: `<div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 -rotate-6">${CERT_MONEY_ICONS.coinStack()}</div>`,
+        logoRightIcon: `<div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rotate-6">${RBC_ICONS.celenganAyam('w-full h-full')}</div>`,
         cornerTopLeft: CERT_MONEY_ICONS.coinStack(),
         cornerTopRight: CERT_MONEY_ICONS.goldBar(),
         cornerBottomLeft: CERT_MONEY_ICONS.moneyBag(),
         cornerBottomRight: CERT_MONEY_ICONS.goldMedalRp(),
         sideLeftIcons: `
           <div class="w-12 h-12 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.goldBar()}</div>
-          <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.walletDana()}</div>
+          <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.treasureChest()}</div>
+          <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm -rotate-3">${CERT_MONEY_ICONS.walletDana()}</div>
         `,
         sideRightIcons: `
           <div class="w-12 h-12 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm rotate-6">${RBC_ICONS.celenganAyam('w-full h-full')}</div>
-          <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.coinStack()}</div>
+          <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.savingsBook()}</div>
+          <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm rotate-3">${CERT_MONEY_ICONS.piggyBankCeria()}</div>
         `
       };
 
@@ -4527,14 +4596,24 @@ function renderCertificateCard(theme = 'emas') {
       <div class="hidden sm:block absolute inset-y-4 left-1.5 w-1.5 rounded-full opacity-75 ${themeCfg.securityStripClass}" aria-hidden="true"></div>
       <div class="hidden sm:block absolute inset-y-4 right-1.5 w-1.5 rounded-full opacity-75 ${themeCfg.securityStripClass}" aria-hidden="true"></div>
 
-      <div class="relative rounded-2xl border-2 ${themeCfg.innerClass} px-4 pt-11 pb-14 sm:px-8 sm:pt-12 sm:pb-10 md:px-10">
+      <div class="relative rounded-2xl border-2 ${themeCfg.innerClass} px-4 pt-12 pb-16 sm:px-8 sm:pt-14 sm:pb-14 md:px-10 overflow-hidden">
+        <!-- Tanda Air Koin Rupiah Lembut di Tengah Belakang -->
+        <div class="absolute inset-0 flex items-center justify-center opacity-[0.06] pointer-events-none select-none ${themeCfg.watermarkColor}" aria-hidden="true">
+          <svg viewBox="0 0 200 200" class="w-64 h-64 sm:w-80 sm:h-80" fill="none">
+            <circle cx="100" cy="100" r="88" stroke="currentColor" stroke-width="6" stroke-dasharray="10 6"/>
+            <circle cx="100" cy="100" r="68" stroke="currentColor" stroke-width="3"/>
+            <text x="100" y="118" font-size="64" font-weight="900" fill="currentColor" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
+          </svg>
+        </div>
+
         <!-- Garis Siku Sudut Bingkai -->
-        <span class="absolute top-1.5 left-1.5 w-4 h-4 border-t-4 border-l-4 rounded-tl-md ${themeCfg.cornerBracketColor} opacity-60 pointer-events-none"></span>
-        <span class="absolute top-1.5 right-1.5 w-4 h-4 border-t-4 border-r-4 rounded-tr-md ${themeCfg.cornerBracketColor} opacity-60 pointer-events-none"></span>
-        <span class="absolute bottom-1.5 left-1.5 w-4 h-4 border-b-4 border-l-4 rounded-bl-md ${themeCfg.cornerBracketColor} opacity-60 pointer-events-none"></span>
-        <span class="absolute bottom-1.5 right-1.5 w-4 h-4 border-b-4 border-r-4 rounded-br-md ${themeCfg.cornerBracketColor} opacity-60 pointer-events-none"></span>
+        <span class="absolute top-1.5 left-1.5 w-4 h-4 border-t-4 border-l-4 rounded-tl-md ${themeCfg.cornerBracketColor} opacity-65 pointer-events-none"></span>
+        <span class="absolute top-1.5 right-1.5 w-4 h-4 border-t-4 border-r-4 rounded-tr-md ${themeCfg.cornerBracketColor} opacity-65 pointer-events-none"></span>
+        <span class="absolute bottom-1.5 left-1.5 w-4 h-4 border-b-4 border-l-4 rounded-bl-md ${themeCfg.cornerBracketColor} opacity-65 pointer-events-none"></span>
+        <span class="absolute bottom-1.5 right-1.5 w-4 h-4 border-b-4 border-r-4 rounded-br-md ${themeCfg.cornerBracketColor} opacity-65 pointer-events-none"></span>
 
         ${themeCfg.topBanner}
+        ${themeCfg.bottomBanner}
 
         <!-- 4 Dekorasi Sudut Bertema Uang, Emas, Celengan & Dana -->
         <div class="absolute top-2.5 left-2.5 sm:top-4 sm:left-5 w-8 h-8 sm:w-12 sm:h-12 pointer-events-none select-none" aria-hidden="true">
@@ -4551,14 +4630,14 @@ function renderCertificateCard(theme = 'emas') {
         </div>
 
         <!-- Dekorasi Samping Kiri & Kanan (Desktop & Cetak) -->
-        <div class="hidden md:flex flex-col gap-4 items-center absolute top-1/2 -translate-y-1/2 left-4 pointer-events-none select-none" aria-hidden="true">
+        <div class="hidden md:flex flex-col gap-3 items-center absolute top-1/2 -translate-y-1/2 left-4 pointer-events-none select-none" aria-hidden="true">
           ${themeCfg.sideLeftIcons}
         </div>
-        <div class="hidden md:flex flex-col gap-4 items-center absolute top-1/2 -translate-y-1/2 right-4 pointer-events-none select-none" aria-hidden="true">
+        <div class="hidden md:flex flex-col gap-3 items-center absolute top-1/2 -translate-y-1/2 right-4 pointer-events-none select-none" aria-hidden="true">
           ${themeCfg.sideRightIcons}
         </div>
 
-        <div class="max-w-xl mx-auto space-y-3.5 sm:space-y-4">
+        <div class="relative z-10 max-w-lg mx-auto space-y-3.5 sm:space-y-4">
           <!-- Logo UPI Diapit Dekorasi Tema Uang & Celengan -->
           <div class="flex items-center justify-center gap-3 sm:gap-5 mb-1">
             ${themeCfg.logoLeftIcon}
@@ -4572,9 +4651,9 @@ function renderCertificateCard(theme = 'emas') {
           <h2 class="text-2xl sm:text-4xl font-black text-slate-800">SERTIFIKAT PENGHARGAAN</h2>
 
           <div class="flex items-center justify-center gap-2" aria-hidden="true">
-            <span class="h-0.5 w-8 sm:w-16 ${themeCfg.dividerLineClass} rounded-full"></span>
+            <span class="h-0.5 w-8 sm:w-14 ${themeCfg.dividerLineClass} rounded-full"></span>
             ${themeCfg.dividerBadge}
-            <span class="h-0.5 w-8 sm:w-16 ${themeCfg.dividerLineClass} rounded-full"></span>
+            <span class="h-0.5 w-8 sm:w-14 ${themeCfg.dividerLineClass} rounded-full"></span>
           </div>
 
           <p class="text-[11px] sm:text-xs font-semibold text-slate-500 uppercase tracking-widest">Diberikan Dengan Penuh Rasa Bangga Kepada:</p>
@@ -4587,10 +4666,10 @@ function renderCertificateCard(theme = 'emas') {
             Telah berhasil menyelesaikan seluruh tahapan pembelajaran <strong>Model DHETIK</strong> pada materi <em>Bab 5: Bijak Berbelanja Kebutuhan</em>, mengelola uang dan celengan dengan cermat, serta dinobatkan sebagai:
           </p>
 
-          <div class="inline-flex items-center gap-2 px-5 sm:px-6 py-2 rounded-full ${themeCfg.awardPillClass} font-black text-sm sm:text-base">
-            <span>${themeCfg.awardEmoji}</span>
+          <div class="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full ${themeCfg.awardPillClass} font-black text-xs sm:text-base">
+            <span class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0">${themeCfg.awardLeftMini}</span>
             <span>ANAK HEBAT BIJAK BERBELANJA</span>
-            <span>${themeCfg.awardEmoji}</span>
+            <span class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0">${themeCfg.awardRightMini}</span>
           </div>
 
           <div class="pt-5 grid grid-cols-1 sm:grid-cols-12 gap-4 text-xs font-medium text-slate-500 border-t ${themeCfg.footerBorderClass}">
@@ -4612,7 +4691,7 @@ function renderCertificateCard(theme = 'emas') {
 }
 
 function setCertificateTheme(theme) {
-  const validTheme = (theme === 'merah100k' || theme === 'petualangan') ? 'merah100k' : 'emas';
+  const validTheme = (theme === 'merah' || theme === 'merah100k' || theme === 'petualangan') ? 'merah' : 'emas';
   AppState.certTheme = validTheme;
   localStorage.setItem('rbc_cert_theme', validTheme);
   window.soundManager.playPop();
@@ -4623,9 +4702,9 @@ function setCertificateTheme(theme) {
   }
 
   const btnEmas = document.getElementById('btn-cert-theme-emas');
-  const btnMerah = document.getElementById('btn-cert-theme-merah100k');
+  const btnMerah = document.getElementById('btn-cert-theme-merah');
   const badgeEmas = document.getElementById('badge-cert-emas');
-  const badgeMerah = document.getElementById('badge-cert-merah100k');
+  const badgeMerah = document.getElementById('badge-cert-merah');
 
   if (btnEmas && btnMerah) {
     if (validTheme === 'emas') {
