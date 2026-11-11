@@ -4261,7 +4261,7 @@ function renderTahapKView() {
           <div class="absolute bottom-4 left-4 text-3xl">🪙</div>
           <div class="absolute bottom-4 right-4 text-3xl">🪙</div>
 
-          <div class="max-w-xl mx-auto space-y-4">
+          <div class="max-w-2xl mx-auto space-y-4">
             <div class="flex justify-center mb-2">
               ${RBC_ICONS.upiLogo('w-16 h-16 sm:w-20 sm:h-20')}
             </div>
@@ -4282,14 +4282,16 @@ function renderTahapKView() {
               🌟 ANAK HEBAT BIJAK BERBELANJA 🌟
             </div>
 
-            <div class="pt-6 grid grid-cols-2 gap-4 text-xs font-medium text-slate-500 border-t border-slate-200">
-              <div>
-                <span>Tanggal Terbit:</span><br/>
+            <div class="pt-6 grid grid-cols-1 sm:grid-cols-12 gap-4 text-xs font-medium text-slate-500 border-t border-slate-200">
+              <div class="sm:col-span-5">
+                <span class="block mb-1">Tanggal Terbit:</span>
                 <strong class="text-slate-800">${new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</strong>
               </div>
-              <div>
-                <span>Tim Pengembang:</span><br/>
-                <strong class="text-slate-800">Kelompok 4 PGSD UPI Cibiru</strong>
+              <div class="sm:col-span-7">
+                <span class="block mb-1">Tim Pengembang:</span>
+                <div class="text-slate-800 font-bold leading-relaxed space-y-0.5">
+                  ${RBC_DATA.appInfo.developers.map(dev => `<span class="block">${dev}</span>`).join('')}
+                </div>
               </div>
             </div>
           </div>
