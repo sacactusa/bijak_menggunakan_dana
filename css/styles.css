@@ -378,6 +378,8 @@ h1, h2, h3, h4, h5, h6, .font-title {
     top: 0;
     width: 100%;
     margin: 0;
-    padding: 20px;
+    padding: 16px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }

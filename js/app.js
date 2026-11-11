@@ -4255,42 +4255,116 @@ function renderTahapKView() {
 
       <!-- SERTIFIKAT KELULUSAN (Hidden until claimed, printable) -->
       <div id="certificate-section" class="hidden pt-6">
-        <div id="certificate-print-area" class="card-pastel p-4 sm:p-8 md:p-12 border-4 sm:border-8 border-amber-300 bg-gradient-to-br from-amber-50 via-white to-sky-50 text-center relative overflow-hidden shadow-2xl">
-          <div class="absolute top-4 left-4 text-3xl">⭐</div>
-          <div class="absolute top-4 right-4 text-3xl">⭐</div>
-          <div class="absolute bottom-4 left-4 text-3xl">🪙</div>
-          <div class="absolute bottom-4 right-4 text-3xl">🪙</div>
-
-          <div class="max-w-2xl mx-auto space-y-4">
-            <div class="flex justify-center mb-2">
-              ${RBC_ICONS.upiLogo('w-16 h-16 sm:w-20 sm:h-20')}
-            </div>
-
-            <span class="text-xs font-black tracking-widest uppercase text-red-700 block">UNIVERSITAS PENDIDIKAN INDONESIA - KAMPUS DI CIBIRU</span>
-            <h2 class="text-2xl sm:text-4xl font-black text-slate-800">SERTIFIKAT PENGHARGAAN</h2>
-            <p class="text-[11px] sm:text-xs font-semibold text-slate-500 uppercase tracking-widest">Diberikan Dengan Penuh Rasa Bangga Kepada:</p>
+        <div id="certificate-print-area" class="rounded-3xl p-3 sm:p-5 md:p-6 border-4 sm:border-8 border-amber-300 bg-[#FFFDF4] text-center relative overflow-hidden shadow-2xl">
+          <!-- Bingkai dalam ala kertas piagam sekolah -->
+          <div class="relative rounded-2xl border-2 border-dashed border-amber-300/90 bg-white/85 px-4 pt-9 pb-6 sm:px-8 sm:pt-11 sm:pb-8 md:px-10">
             
-            <div class="py-2 border-b-2 border-amber-400">
-              <h3 id="cert-student-name" class="text-2xl sm:text-3xl font-black text-sky-700 font-title">${AppState.studentName}</h3>
+            <!-- Hiasan bendera segitiga kecil di atas (bunting sederhana & ceria) -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-56 sm:w-80 pointer-events-none" aria-hidden="true">
+              <svg viewBox="0 0 320 28" class="w-full h-auto" fill="none">
+                <path d="M4 2 Q160 12 316 2" stroke="#D97706" stroke-width="1.5" stroke-linecap="round"/>
+                <polygon points="22,4 42,5 32,22" fill="#BAE6FD" stroke="#0284C7" stroke-width="1.2" stroke-linejoin="round"/>
+                <polygon points="56,6 76,7 66,24" fill="#FDE68A" stroke="#D97706" stroke-width="1.2" stroke-linejoin="round"/>
+                <polygon points="90,7 110,8 100,25" fill="#A7F3D0" stroke="#059669" stroke-width="1.2" stroke-linejoin="round"/>
+                <polygon points="124,8 144,8 134,25" fill="#FECDD3" stroke="#E11D48" stroke-width="1.2" stroke-linejoin="round"/>
+                <polygon points="158,8 178,8 168,25" fill="#FDE68A" stroke="#D97706" stroke-width="1.2" stroke-linejoin="round"/>
+                <polygon points="192,8 212,7 202,25" fill="#BAE6FD" stroke="#0284C7" stroke-width="1.2" stroke-linejoin="round"/>
+                <polygon points="226,7 246,6 236,24" fill="#A7F3D0" stroke="#059669" stroke-width="1.2" stroke-linejoin="round"/>
+                <polygon points="260,5 280,4 270,22" fill="#FECDD3" stroke="#E11D48" stroke-width="1.2" stroke-linejoin="round"/>
+              </svg>
             </div>
 
-            <p class="text-slate-600 text-sm leading-relaxed font-medium">
-              Telah berhasil menyelesaikan seluruh tahapan pembelajaran <strong>Model DHETIK</strong> pada materi <em>Bab 5: Bijak Berbelanja Kebutuhan</em>, dan dinobatkan sebagai:
-            </p>
-
-            <div class="inline-block px-6 py-2 rounded-full bg-amber-400 text-slate-900 font-black text-base shadow-md">
-              🌟 ANAK HEBAT BIJAK BERBELANJA 🌟
+            <!-- Stiker Sudut Kiri Atas: Bintang Tersenyum Lucu -->
+            <div class="absolute top-2.5 left-2.5 sm:top-4 sm:left-5 w-7 h-7 sm:w-11 sm:h-11 pointer-events-none select-none" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none">
+                <path d="M32 6 L39.5 21.5 L56.5 24 L44 36 L47 53 L32 45 L17 53 L20 36 L7.5 24 L24.5 21.5 Z" fill="#FDE047" stroke="#CA8A04" stroke-width="3" stroke-linejoin="round"/>
+                <circle cx="26.5" cy="30" r="2.2" fill="#78350F"/>
+                <circle cx="37.5" cy="30" r="2.2" fill="#78350F"/>
+                <path d="M27.5 35.5 Q32 39.5 36.5 35.5" stroke="#78350F" stroke-width="2.2" stroke-linecap="round"/>
+                <circle cx="22.5" cy="33.5" r="2.4" fill="#FCA5A5" opacity="0.8"/>
+                <circle cx="41.5" cy="33.5" r="2.4" fill="#FCA5A5" opacity="0.8"/>
+              </svg>
             </div>
 
-            <div class="pt-6 grid grid-cols-1 sm:grid-cols-12 gap-4 text-xs font-medium text-slate-500 border-t border-slate-200">
-              <div class="sm:col-span-5">
-                <span class="block mb-1">Tanggal Terbit:</span>
-                <strong class="text-slate-800">${new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</strong>
+            <!-- Stiker Sudut Kanan Atas: Pensil Warna Ceria -->
+            <div class="absolute top-2.5 right-2.5 sm:top-4 sm:right-5 w-7 h-7 sm:w-11 sm:h-11 pointer-events-none select-none" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none">
+                <g transform="rotate(-20 32 32)">
+                  <rect x="23" y="10" width="18" height="32" rx="4" fill="#7DD3FC" stroke="#0369A1" stroke-width="2.8"/>
+                  <rect x="23" y="10" width="18" height="7" rx="2.5" fill="#FDA4AF" stroke="#0369A1" stroke-width="2.8"/>
+                  <polygon points="23,42 41,42 32,56" fill="#FDE68A" stroke="#0369A1" stroke-width="2.8" stroke-linejoin="round"/>
+                  <polygon points="29,51 35,51 32,56" fill="#334155"/>
+                  <circle cx="28.5" cy="28" r="1.8" fill="#0F172A"/>
+                  <circle cx="35.5" cy="28" r="1.8" fill="#0F172A"/>
+                  <path d="M29.5 32 Q32 34.5 34.5 32" stroke="#0F172A" stroke-width="1.8" stroke-linecap="round"/>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Stiker Sudut Kiri Bawah: Celengan Lucu -->
+            <div class="hidden sm:block absolute bottom-4 left-5 w-11 h-11 pointer-events-none select-none" aria-hidden="true">
+              <svg viewBox="0 0 64 64" fill="none">
+                <ellipse cx="33" cy="37" rx="19" ry="14" fill="#FBCFE8" stroke="#BE185D" stroke-width="2.6"/>
+                <path d="M22 25 L19 18 L27 22" fill="#FBCFE8" stroke="#BE185D" stroke-width="2.4" stroke-linejoin="round"/>
+                <ellipse cx="52" cy="37" rx="4.5" ry="6" fill="#F9A8D4" stroke="#BE185D" stroke-width="2.4"/>
+                <rect x="27" y="23" width="10" height="3" rx="1.5" fill="#9D174D"/>
+                <circle cx="32" cy="14" r="6" fill="#FACC15" stroke="#B45309" stroke-width="2"/>
+                <circle cx="42" cy="34" r="2" fill="#831843"/>
+                <path d="M23 49 L23 55 M41 49 L41 55" stroke="#BE185D" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <!-- Stiker Sudut Kanan Bawah: Cap Medali Pita Piagam -->
+            <div class="hidden sm:block absolute bottom-4 right-5 w-11 h-12 pointer-events-none select-none" aria-hidden="true">
+              <svg viewBox="0 0 64 72" fill="none">
+                <path d="M22 40 L16 64 L26 58 L31 65 L32 42" fill="#F87171" stroke="#B91C1C" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M42 40 L48 64 L38 58 L33 65 L32 42" fill="#FB7185" stroke="#B91C1C" stroke-width="2.2" stroke-linejoin="round"/>
+                <circle cx="32" cy="26" r="16" fill="#FBBF24" stroke="#B45309" stroke-width="2.8"/>
+                <circle cx="32" cy="26" r="11.5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <path d="M32 18 L34.4 23 L39.8 23.7 L35.8 27.5 L36.8 32.8 L32 30.2 L27.2 32.8 L28.2 27.5 L24.2 23.7 L29.6 23 Z" fill="#F59E0B" stroke="#B45309" stroke-width="1.4" stroke-linejoin="round"/>
+              </svg>
+            </div>
+
+            <div class="max-w-2xl mx-auto space-y-4">
+              <div class="flex justify-center mb-1">
+                ${RBC_ICONS.upiLogo('w-16 h-16 sm:w-20 sm:h-20')}
               </div>
-              <div class="sm:col-span-7">
-                <span class="block mb-1">Tim Pengembang:</span>
-                <div class="text-slate-800 font-bold leading-relaxed space-y-0.5">
-                  ${RBC_DATA.appInfo.developers.map(dev => `<span class="block">${dev}</span>`).join('')}
+
+              <span class="text-xs font-black tracking-widest uppercase text-red-700 block">UNIVERSITAS PENDIDIKAN INDONESIA - KAMPUS DI CIBIRU</span>
+              <h2 class="text-2xl sm:text-4xl font-black text-slate-800">SERTIFIKAT PENGHARGAAN</h2>
+
+              <div class="flex items-center justify-center gap-2 text-amber-500" aria-hidden="true">
+                <span class="h-0.5 w-12 sm:w-20 bg-amber-300 rounded-full"></span>
+                <span class="text-xs font-black">✦</span>
+                <span class="h-0.5 w-12 sm:w-20 bg-amber-300 rounded-full"></span>
+              </div>
+
+              <p class="text-[11px] sm:text-xs font-semibold text-slate-500 uppercase tracking-widest">Diberikan Dengan Penuh Rasa Bangga Kepada:</p>
+              
+              <div class="py-2 border-b-2 border-amber-400">
+                <h3 id="cert-student-name" class="text-2xl sm:text-3xl font-black text-sky-700 font-title">${AppState.studentName}</h3>
+              </div>
+
+              <p class="text-slate-600 text-sm leading-relaxed font-medium">
+                Telah berhasil menyelesaikan seluruh tahapan pembelajaran <strong>Model DHETIK</strong> pada materi <em>Bab 5: Bijak Berbelanja Kebutuhan</em>, dan dinobatkan sebagai:
+              </p>
+
+              <div class="inline-flex items-center gap-2 px-5 sm:px-6 py-2 rounded-full bg-amber-300/90 border-2 border-amber-400 text-slate-900 font-black text-sm sm:text-base shadow-sm">
+                <span>🏅</span>
+                <span>ANAK HEBAT BIJAK BERBELANJA</span>
+                <span>🏅</span>
+              </div>
+
+              <div class="pt-6 grid grid-cols-1 sm:grid-cols-12 gap-4 text-xs font-medium text-slate-500 border-t border-amber-200/80">
+                <div class="sm:col-span-5">
+                  <span class="block mb-1">Tanggal Terbit:</span>
+                  <strong class="text-slate-800">${new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</strong>
+                </div>
+                <div class="sm:col-span-7">
+                  <span class="block mb-1">Tim Pengembang:</span>
+                  <div class="text-slate-800 font-bold leading-relaxed space-y-0.5">
+                    ${RBC_DATA.appInfo.developers.map(dev => `<span class="block">${dev}</span>`).join('')}
+                  </div>
                 </div>
               </div>
             </div>
