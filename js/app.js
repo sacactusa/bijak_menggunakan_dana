@@ -66,7 +66,7 @@ const AppState = {
   // Market Niza State
   nizaCart: [],
   nizaMission: 1,
-  nizaWallet: 20000,
+  nizaWallet: parseInt(localStorage.getItem('rbc_niza_wallet') || '20000', 10),
   
   // Quiz State
   quizIndex: 0,
@@ -93,6 +93,7 @@ const AppState = {
     localStorage.setItem('rbc_badges', JSON.stringify(this.unlockedBadges));
     localStorage.setItem('rbc_padlet_posts', JSON.stringify(this.padletPosts));
     localStorage.setItem('rbc_student_reflection', JSON.stringify(this.reflection));
+    localStorage.setItem('rbc_niza_wallet', this.nizaWallet);
     this.updateStatsUI();
 
     if (window.RBC_SUPABASE && window.RBC_SUPABASE.isConnected()) {
@@ -1087,7 +1088,7 @@ function renderTahapEView() {
           </div>
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-black">AYO MENJELAJAH: Market Niza</h1>
           <p class="text-amber-100 text-sm md:text-base font-medium max-w-xl">
-            Eksplorasi nilai uang Rupiah dan bermain simulasi jual beli dengan batas anggaran Rp20.000!
+            Eksplorasi nilai uang Rupiah dan bermain simulasi jual beli dengan pilihan anggaran Rp10.000 hingga Rp50.000!
           </p>
         </div>
         <div class="flex-shrink-0">
@@ -1096,7 +1097,7 @@ function renderTahapEView() {
       </div>
 
       <!-- Mascot Greeting -->
-      ${RBC_MASCOT.bubble("Sekarang mari kita mencoba menggunakan uang dalam kegiatan berbelanja melalui permainan Belanja Pintar di Market Niza! Perhatikan uangmu baik-baik ya, jangan sampai melebihi batas anggaran Rp20.000!")}
+      ${RBC_MASCOT.bubble("Sekarang mari kita mencoba menggunakan uang dalam kegiatan berbelanja melalui permainan Belanja Pintar di Market Niza! Kamu bisa memilih uang belanjamu mulai dari Rp10.000 sampai Rp50.000. Perhatikan baik-baik ya, jangan sampai melebihi anggaran pilihanmu!")}
 
       <!-- 1. MATERI INTERAKTIF PENGENALAN PECAHAN UANG (Urutan #1) -->
       <div class="card-pastel p-6 md:p-8 border-3 border-amber-300 bg-gradient-to-br from-amber-50/40 via-white to-sky-50/40 shadow-md">
@@ -1171,19 +1172,40 @@ function renderTahapEView() {
               <h2 class="text-2xl font-black text-slate-800">Toko Jual Beli: "Market Niza"</h2>
             </div>
           </div>
-          <!-- Dompet Siswa Anggaran Max Rp20.000 -->
+          <!-- Dompet Siswa (Dinamis sesuai Opsi Anggaran) -->
           <div class="p-3 px-4 sm:px-5 rounded-2xl bg-amber-100 border-2 border-amber-300 flex items-center justify-between sm:justify-start gap-3 w-full sm:w-auto">
             <span class="text-2xl">👛</span>
             <div>
               <span class="text-xs font-bold text-amber-800 block">Sisa Anggaran Belanjamu:</span>
-              <span id="niza-wallet-display" class="text-xl font-black text-amber-900">Rp20.000</span>
+              <span id="niza-wallet-display" class="text-xl font-black text-amber-900">Rp${(AppState.nizaWallet || 20000).toLocaleString('id-ID')}</span>
             </div>
           </div>
         </div>
 
-        <p class="text-slate-600 text-sm mb-6 font-medium">
-          Pilihlah barang-barang di bawah ini untuk dimasukkan ke dalam keranjang. Pastikan total belanja tidak melebihi anggaran maksimal <strong>Rp20.000</strong>!
-        </p>
+        <!-- Pilihan Opsi Uang Belanja Market Niza (50.000, 40.000, 30.000, 20.000, 10.000) -->
+        <div class="mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-50 via-yellow-50 to-emerald-50 border-2 border-amber-300 space-y-3 shadow-xs">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="text-xs sm:text-sm font-black text-amber-950 flex items-center gap-1.5">
+              <span>💰</span> <span>Pilih Opsi Uang Belanjamu di Market Niza:</span>
+            </span>
+            <span class="text-[11px] font-bold text-emerald-800 bg-white px-2.5 py-0.5 rounded-full border border-emerald-200">
+              Anggaran Aktif: <strong id="niza-budget-badge">Rp${(AppState.nizaWallet || 20000).toLocaleString('id-ID')}</strong>
+            </span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-2.5" id="niza-budget-options">
+            ${[50000, 40000, 30000, 20000, 10000].map(amt => {
+              const isActive = (AppState.nizaWallet || 20000) === amt;
+              return `
+                <button onclick="setNizaWallet(${amt})" id="niza-budget-btn-${amt}" class="niza-budget-btn btn-playful py-2.5 px-3 rounded-xl font-black text-xs sm:text-sm border-2 flex items-center justify-center gap-1.5 transition-all ${isActive ? 'bg-amber-400 border-amber-600 text-slate-950 shadow-md scale-[1.03]' : 'bg-white border-slate-200 text-slate-700 hover:bg-amber-50 hover:border-amber-300'}">
+                  <span>💵</span>
+                  <span>Rp${amt.toLocaleString('id-ID')}</span>
+                </button>`;
+            }).join('')}
+          </div>
+          <p class="text-slate-600 text-xs sm:text-sm font-medium">
+            Pilihlah barang-barang di bawah ini untuk dimasukkan ke dalam keranjang. Pastikan total belanja tidak melebihi anggaran pilihanmu: <strong id="niza-budget-limit-text" class="text-emerald-800">Rp${(AppState.nizaWallet || 20000).toLocaleString('id-ID')}</strong>!
+          </p>
+        </div>
 
         <!-- Rak Barang Market Niza -->
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 mb-8">
@@ -1232,7 +1254,7 @@ function renderTahapEView() {
               </div>
               <div class="border-l-2 border-slate-200 pl-3 sm:pl-6">
                 <span class="text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider block">SISA UANG / KEMBALIAN:</span>
-                <span id="niza-remaining-display" class="text-xl sm:text-2xl font-black text-emerald-600">Rp20.000</span>
+                <span id="niza-remaining-display" class="text-xl sm:text-2xl font-black text-emerald-600">Rp${(AppState.nizaWallet || 20000).toLocaleString('id-ID')}</span>
               </div>
             </div>
             <button onclick="checkoutNizaCart()" class="btn-playful w-full sm:w-auto px-7 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black text-sm rounded-2xl shadow-lg shadow-emerald-200 flex items-center justify-center gap-2">
@@ -1247,7 +1269,7 @@ function renderTahapEView() {
                 ✅ Pembayaran di Kasir Berhasil!
               </span>
               <p id="niza-last-receipt-text" class="text-slate-700 font-medium">
-                Total Belanja: Rp0 | <strong class="text-emerald-700">Sisa Uang Anda: Rp20.000</strong> (Siap Ditabung di Celengan Ayam!)
+                Total Belanja: Rp0 | <strong class="text-emerald-700">Sisa Uang Anda: Rp${(AppState.nizaWallet || 20000).toLocaleString('id-ID')}</strong> (Siap Ditabung di Celengan Ayam!)
               </p>
             </div>
             <button onclick="openNizaReceiptModal()" class="px-3.5 py-1.5 bg-white text-emerald-800 font-bold rounded-xl border border-emerald-300 hover:bg-emerald-100 shadow-sm flex-shrink-0">
@@ -1334,7 +1356,7 @@ function renderTahapEView() {
             </div>
             <div class="flex justify-between text-slate-700">
               <span>Uang Pembayaran:</span>
-              <strong class="text-sm font-bold text-slate-900">Rp20.000</strong>
+              <strong id="receipt-payment" class="text-sm font-bold text-slate-900">Rp${(AppState.nizaWallet || 20000).toLocaleString('id-ID')}</strong>
             </div>
             <div class="p-3 rounded-2xl bg-emerald-100 border-2 border-emerald-400 flex items-center justify-between text-emerald-950 mt-2">
               <div>
@@ -1425,15 +1447,37 @@ function initTahapEView() {
   loadNizaMission(1);
 }
 
+// Pilih Opsi Uang Belanja Market Niza (50.000, 40.000, 30.000, 20.000, 10.000)
+function setNizaWallet(amount) {
+  const val = parseInt(amount, 10);
+  if (![10000, 20000, 30000, 40000, 50000].includes(val)) return;
+
+  AppState.nizaWallet = val;
+  localStorage.setItem('rbc_niza_wallet', val);
+
+  const currentTotal = AppState.nizaCart.reduce((sum, i) => sum + i.price, 0);
+  if (currentTotal > val) {
+    AppState.nizaCart = [];
+    AppState.showToast(`🔄 Keranjang disesuaikan agar tidak melebihi anggaran baru Rp${val.toLocaleString('id-ID')}`);
+  } else {
+    AppState.showToast(`💰 Uang belanjamu diatur menjadi Rp${val.toLocaleString('id-ID')}!`);
+  }
+
+  window.soundManager.playCoin();
+  updateNizaCartUI();
+}
+window.setNizaWallet = setNizaWallet;
+
 // Market Niza Cart Logic
 function addToNizaCart(itemId) {
   const item = RBC_DATA.marketNizaItems.find(i => i.id === itemId);
   if (!item) return;
 
+  const budget = AppState.nizaWallet || 20000;
   const currentTotal = AppState.nizaCart.reduce((sum, i) => sum + i.price, 0);
-  if (currentTotal + item.price > 20000) {
+  if (currentTotal + item.price > budget) {
     window.soundManager.playWrong();
-    alert('⚠️ Ups! Uangmu tidak cukup. Anggaran belanjamu maksimal adalah Rp20.000! Ayo pilih barang kebutuhan yang paling utama ya.');
+    alert(`⚠️ Ups! Uangmu tidak cukup. Anggaran belanjamu saat ini maksimal adalah Rp${budget.toLocaleString('id-ID')}! Ayo pilih barang kebutuhan yang paling utama atau ubah opsi anggaranmu.`);
     return;
   }
 
@@ -1442,15 +1486,49 @@ function addToNizaCart(itemId) {
   updateNizaCartUI();
 }
 
+function removeFromNizaCart(idx) {
+  if (idx >= 0 && idx < AppState.nizaCart.length) {
+    AppState.nizaCart.splice(idx, 1);
+    window.soundManager.playPop();
+    updateNizaCartUI();
+  }
+}
+window.removeFromNizaCart = removeFromNizaCart;
+
+function resetNizaCart() {
+  AppState.nizaCart = [];
+  window.soundManager.playPop();
+  updateNizaCartUI();
+  AppState.showToast('🛒 Keranjang belanja dikosongkan.');
+}
+window.resetNizaCart = resetNizaCart;
+
 function updateNizaCartUI() {
   const container = document.getElementById('niza-cart-items');
   const totalEl = document.getElementById('niza-total-display');
   const walletEl = document.getElementById('niza-wallet-display');
   const remainingEl = document.getElementById('niza-remaining-display');
+  const badgeEl = document.getElementById('niza-budget-badge');
+  const limitEl = document.getElementById('niza-budget-limit-text');
+  const budget = AppState.nizaWallet || 20000;
+
+  // Update active button state on budget selector
+  [50000, 40000, 30000, 20000, 10000].forEach(amt => {
+    const btn = document.getElementById(`niza-budget-btn-${amt}`);
+    if (!btn) return;
+    if (amt === budget) {
+      btn.className = 'niza-budget-btn btn-playful py-2.5 px-3 rounded-xl font-black text-xs sm:text-sm border-2 flex items-center justify-center gap-1.5 transition-all bg-amber-400 border-amber-600 text-slate-950 shadow-md scale-[1.03]';
+    } else {
+      btn.className = 'niza-budget-btn btn-playful py-2.5 px-3 rounded-xl font-black text-xs sm:text-sm border-2 flex items-center justify-center gap-1.5 transition-all bg-white border-slate-200 text-slate-700 hover:bg-amber-50 hover:border-amber-300';
+    }
+  });
+
+  if (badgeEl) badgeEl.innerText = `Rp${budget.toLocaleString('id-ID')}`;
+  if (limitEl) limitEl.innerText = `Rp${budget.toLocaleString('id-ID')}`;
   if (!container || !totalEl || !walletEl) return;
 
   const total = AppState.nizaCart.reduce((sum, i) => sum + i.price, 0);
-  const remaining = Math.max(0, 20000 - total);
+  const remaining = Math.max(0, budget - total);
 
   totalEl.innerText = `Rp${total.toLocaleString('id-ID')}`;
   walletEl.innerText = `Rp${remaining.toLocaleString('id-ID')}`;
@@ -1484,19 +1562,21 @@ function checkoutNizaCart() {
     return;
   }
 
-  const sisaUang = 20000 - total;
+  const budget = AppState.nizaWallet || 20000;
+  const sisaUang = Math.max(0, budget - total);
   window.soundManager.playFanfare();
   AppState.addReward(25, 4, 'Simulasi belanja berhasil!');
   AppState.unlockBadge('pembeli-bijak');
 
-  // Buka Struk Kasir Modal dengan sisa uang
-  openNizaReceiptModal(total, sisaUang);
+  // Buka Struk Kasir Modal dengan anggaran & sisa uang aktif
+  openNizaReceiptModal(total, sisaUang, budget);
 
   if (window.RBC_SUPABASE && window.RBC_SUPABASE.isConnected()) {
     window.RBC_SUPABASE.saveCashierTransaction({
       studentName: AppState.studentName || 'Teman Belajar',
       items: AppState.nizaCart,
       total: total,
+      uangDibayar: budget,
       sisaUang: sisaUang
     });
   }
@@ -1507,20 +1587,22 @@ function checkoutNizaCart() {
   const receiptBannerText = document.getElementById('niza-last-receipt-text');
   if (receiptBanner && receiptBannerText) {
     receiptBanner.classList.remove('hidden');
-    receiptBannerText.innerHTML = `Total Belanja: <strong>Rp${total.toLocaleString('id-ID')}</strong> | Sisa Uang Anda: <strong class="text-emerald-700 text-sm">Rp${sisaUang.toLocaleString('id-ID')}</strong> (Siap Ditabung di Celengan Ayam! 🐔🪙)`;
+    receiptBannerText.innerHTML = `Anggaran: <strong>Rp${budget.toLocaleString('id-ID')}</strong> | Total Belanja: <strong>Rp${total.toLocaleString('id-ID')}</strong> | Sisa Uang Anda: <strong class="text-emerald-700 text-sm">Rp${sisaUang.toLocaleString('id-ID')}</strong> (Siap Ditabung di Celengan Ayam! 🐔🪙)`;
   }
 }
 
-function openNizaReceiptModal(customTotal, customSisa) {
+function openNizaReceiptModal(customTotal, customSisa, customBudget) {
   const modal = document.getElementById('niza-receipt-modal');
   if (!modal) return;
 
+  const budget = (typeof customBudget === 'number') ? customBudget : (AppState.nizaWallet || 20000);
   const total = (typeof customTotal === 'number') ? customTotal : AppState.nizaCart.reduce((sum, i) => sum + i.price, 0);
-  const sisa = (typeof customSisa === 'number') ? customSisa : Math.max(0, 20000 - total);
+  const sisa = (typeof customSisa === 'number') ? customSisa : Math.max(0, budget - total);
 
   const nameEl = document.getElementById('receipt-student-name');
   const timeEl = document.getElementById('receipt-timestamp');
   const totalEl = document.getElementById('receipt-total');
+  const paymentEl = document.getElementById('receipt-payment');
   const remainingEl = document.getElementById('receipt-remaining');
   const saveTipEl = document.getElementById('receipt-save-tip');
   const listEl = document.getElementById('receipt-items-list');
@@ -1528,6 +1610,7 @@ function openNizaReceiptModal(customTotal, customSisa) {
   if (nameEl) nameEl.innerText = AppState.studentName || 'Teman Belajar';
   if (timeEl) timeEl.innerText = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + ' WIB';
   if (totalEl) totalEl.innerText = `Rp${total.toLocaleString('id-ID')}`;
+  if (paymentEl) paymentEl.innerText = `Rp${budget.toLocaleString('id-ID')}`;
   if (remainingEl) remainingEl.innerText = `Rp${sisa.toLocaleString('id-ID')}`;
   if (saveTipEl) saveTipEl.innerText = `Rp${sisa.toLocaleString('id-ID')}`;
 
@@ -4809,8 +4892,10 @@ function openTeacherDashboard() {
   // populate data
   const cp = document.getElementById('edit-cp-text');
   const topic = document.getElementById('edit-topic-text');
+  const budgetInput = document.getElementById('edit-budget-num');
   if (cp) cp.value = RBC_DATA.learningObjective.cp;
   if (topic) topic.value = RBC_DATA.appInfo.topic;
+  if (budgetInput) budgetInput.value = AppState.nizaWallet || 20000;
   
   // populate student report
   const sName = document.getElementById('td-student-name');
@@ -4863,8 +4948,13 @@ function switchTeacherTab(subTab) {
 function saveTeacherMateri() {
   const cp = document.getElementById('edit-cp-text')?.value.trim();
   const topic = document.getElementById('edit-topic-text')?.value.trim();
+  const budgetVal = parseInt(document.getElementById('edit-budget-num')?.value || '0', 10);
   if (cp) RBC_DATA.learningObjective.cp = cp;
   if (topic) RBC_DATA.appInfo.topic = topic;
+  if (budgetVal >= 1000) {
+    AppState.nizaWallet = budgetVal;
+    localStorage.setItem('rbc_niza_wallet', budgetVal);
+  }
   localStorage.setItem('rbc_custom_cp', cp);
   localStorage.setItem('rbc_custom_topic', topic);
   AppState.showToast('✅ Pengaturan materi & CP berhasil diperbarui!');
@@ -4908,7 +4998,7 @@ function toggleCikoBubble() {
     beranda: 'Selamat datang! Ayo mulai petualangan belajarmu dari Tahap D - Dekatkan ya!',
     d: 'Amati video uang koin dan kertas baik-baik, lalu ceritakan pengalamanmu!',
     h: 'Ingat ya: Kebutuhan adalah barang yang wajib dipenuhi, sedangkan keinginan boleh ditunda!',
-    e: 'Hitung uang belanjamu di Market Niza dengan cermat, jangan melebihi Rp20.000!',
+    e: 'Pilih opsi uang belanjamu (Rp10.000 – Rp50.000) di Market Niza dan hitung belanjamu dengan cermat!',
     t: 'Sampaikan pendapatmu dengan santun di papan diskusi dan hargai ide teman-temanmu!',
     i: 'Pahami peta konsep dan luruskan mitos-mitos keliru tentang uang!',
     k: 'Buat celengan kreatifmu seindah mungkin dan rencanakan belanjamu dengan bijak!',
