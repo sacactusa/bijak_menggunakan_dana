@@ -159,8 +159,8 @@
         </div>
       </div>
 
-      <!-- Tier 2: Navigation Menu Bar with Custom SVG Icons (Horizontal Scrollable on Mobile) -->
-      <div id="tier2-nav-scroll" class="flex items-center gap-1 sm:gap-1.5 overflow-x-auto py-1.5 text-xs font-bold no-scrollbar scroll-smooth">
+      <!-- Tier 2: Navigation Menu Bar with Custom SVG Icons (Horizontal Scrollable on Mobile, Centered & Clean on Desktop) -->
+      <div id="tier2-nav-scroll" class="flex items-center sm:justify-center gap-1 sm:gap-2 overflow-x-auto py-1.5 text-xs font-bold no-scrollbar scroll-smooth">
         
         <!-- 1. Beranda -->
         <button data-tab="beranda" onclick="switchTab('beranda')" title="Beranda" class="nav-link px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-amber-400 text-slate-950 border border-amber-500 shadow-xs ring-2 ring-amber-300/60 font-black">
@@ -180,7 +180,7 @@
             <circle cx="10" cy="10" r="4.2" fill="#FACC15" stroke="#CA8A04" stroke-width="1.2"/>
             <text x="10" y="12" font-size="4.5" font-weight="bold" fill="#713F12" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
           </svg>
-          <span>D</span><span class="hidden xl:inline text-[11px] font-semibold opacity-80">• Dekatkan</span>
+          <span>D</span>
         </button>
 
         <!-- 3. H -->
@@ -190,7 +190,7 @@
             <rect x="12" y="7" width="10" height="10" rx="5" fill="#A7F3D0" stroke="#047857" stroke-width="2"/>
             <circle cx="12" cy="12" r="2.2" fill="#10B981"/>
           </svg>
-          <span>H</span><span class="hidden xl:inline text-[11px] font-semibold opacity-80">• Hubungkan</span>
+          <span>H</span>
         </button>
 
         <!-- 4. E -->
@@ -200,7 +200,7 @@
             <path d="M8 8V6C8 3.8 9.8 2 12 2C14.2 2 16 3.8 16 6V8" stroke="#EA580C" stroke-width="2" stroke-linecap="round"/>
             <circle cx="12" cy="14" r="2.5" fill="#F97316"/>
           </svg>
-          <span>E</span><span class="hidden xl:inline text-[11px] font-semibold opacity-80">• Eksplorasi</span>
+          <span>E</span>
         </button>
 
         <!-- 5. T -->
@@ -211,7 +211,7 @@
             <circle cx="11.5" cy="12.5" r="1.2" fill="#6D28D9"/>
             <circle cx="14.5" cy="12.5" r="1.2" fill="#6D28D9"/>
           </svg>
-          <span>T</span><span class="hidden xl:inline text-[11px] font-semibold opacity-80">• Tukar Gagasan</span>
+          <span>T</span>
         </button>
 
         <!-- 6. I -->
@@ -220,7 +220,7 @@
             <path d="M9 18H15M10 21H14M12 2C7.6 2 4 5.6 4 10C4 12.8 5.4 15.2 7.6 16.6C8.2 17 8.6 17.7 8.7 18.4L8.7 18.5H15.3L15.3 18.4C15.4 17.7 15.8 17 16.4 16.6C18.6 15.2 20 12.8 20 10C20 5.6 16.4 2 12 2Z" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M10 10L14 10" stroke="#EAB308" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
-          <span>I</span><span class="hidden xl:inline text-[11px] font-semibold opacity-80">• Ikat Konsep</span>
+          <span>I</span>
         </button>
 
         <!-- 7. K -->
@@ -232,11 +232,11 @@
             <circle cx="16.5" cy="8.5" r="1.5" fill="#10B981"/>
             <circle cx="17.5" cy="12.5" r="1.5" fill="#3B82F6"/>
           </svg>
-          <span>K</span><span class="hidden xl:inline text-[11px] font-semibold opacity-80">• Karyaku</span>
+          <span>K</span>
         </button>
 
         <!-- Separator -->
-        <span class="w-px h-5 bg-slate-200 mx-0.5 flex-shrink-0"></span>
+        <span class="w-px h-5 bg-slate-200 mx-1 flex-shrink-0"></span>
 
         <!-- 8. Kontak -->
         <button data-tab="kontak" onclick="switchTab('kontak')" title="Kontak" class="nav-link px-3 py-1.5 rounded-xl transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-sky-50 hover:border-sky-300 hover:text-sky-800 shadow-2xs">
