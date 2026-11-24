@@ -4384,6 +4384,10 @@ async function submitDiskusiBersama() {
   AppState.diskusiBersama.unshift(newPost);
   localStorage.setItem('rbc_diskusi_bersama', JSON.stringify(AppState.diskusiBersama));
 
+  if (window.RBC_SUPABASE && window.RBC_SUPABASE.isConnected() && typeof window.RBC_SUPABASE.saveDiskusiBersama === 'function') {
+    window.RBC_SUPABASE.saveDiskusiBersama(newPost);
+  }
+
   input.value = '';
   window.soundManager.playSuccess();
   AppState.addReward(10, 2, 'Kirim pendapat di Diskusi Bersama!');
@@ -5223,6 +5227,14 @@ function setCertificateTheme(theme) {
   AppState.certTheme = validTheme;
   localStorage.setItem('rbc_cert_theme', validTheme);
   window.soundManager.playPop();
+
+  if (window.RBC_SUPABASE && window.RBC_SUPABASE.isConnected() && typeof window.RBC_SUPABASE.saveSertifikat === 'function') {
+    window.RBC_SUPABASE.saveSertifikat({
+      nama: AppState.studentName || 'Teman Belajar',
+      tema: validTheme,
+      predikat: 'ANAK HEBAT BIJAK BERBELANJA'
+    });
+  }
 
   const host = document.getElementById('certificate-preview-host');
   if (host) {
@@ -6370,6 +6382,17 @@ function renderActiveGameContent(gameKey) {
   if (roundIdx >= totalQuestions) {
     const perfectScore = totalQuestions * 10;
     const isPerfect = currentScore >= perfectScore;
+
+    if (window.RBC_SUPABASE && window.RBC_SUPABASE.isConnected() && typeof window.RBC_SUPABASE.saveGameResult === 'function') {
+      window.RBC_SUPABASE.saveGameResult({
+        nama: AppState.studentName || 'Teman Belajar',
+        gameKey: gameKey,
+        score: currentScore,
+        total: totalQuestions,
+        percent: Math.round((currentScore / perfectScore) * 100)
+      });
+    }
+
     container.innerHTML = `
       <div class="text-center py-6 sm:py-8 space-y-4 animate-scale-up">
         <div class="flex justify-center">

@@ -598,6 +598,148 @@ const RBC_SUPABASE = {
     } catch (e) {}
 
     return savedData;
+  },
+
+  // 13. Simpan Hasil Game Edukasi (5 Jenis Game x 10 Soal)
+  async saveGameResult(gameData) {
+    if (!this.isConnected()) return null;
+    let savedData = null;
+    const gameTitles = {
+      tebak: 'Tebak Uang Asli',
+      susun: 'Susun Kata Ceria',
+      matematika: 'Matematika Belanja',
+      pasang: 'Pasangkan Kategori',
+      benarsalah: 'Benar / Salah Finansial'
+    };
+    const title = gameTitles[gameData.gameKey] || gameData.gameKey || 'Game Edukasi';
+    try {
+      const { data, error } = await supabaseClient
+        .from('hasil_game')
+        .insert([{
+          nama_siswa: gameData.nama || 'Teman Belajar',
+          game_tipe: gameData.gameKey || 'tebak',
+          skor: gameData.score || 0,
+          total_soal: gameData.total || 10,
+          persentase: gameData.percent || 0
+        }])
+        .select();
+      if (!error && data) {
+        console.log('✅ Supabase: Skor game edukasi tersimpan ke tabel hasil_game', data);
+        savedData = data;
+      }
+    } catch (e) {
+      console.warn('Supabase saveGameResult notice:', e);
+    }
+
+    // Cadangkan ke refleksi_siswa
+    try {
+      await supabaseClient
+        .from('refleksi_siswa')
+        .insert([{
+          nama_siswa: gameData.nama || 'Teman Belajar',
+          aku_tahu: `Game ${title}: Skor ${gameData.score}/${(gameData.total || 10) * 10} Poin (${gameData.percent || 0}%)`,
+          aku_merasa: (gameData.percent || 0) >= 70 ? 'Sangat antusias dan menguasai materi permainan uang' : 'Ingin berlatih game edukasi lagi',
+          aku_ingin_mencoba: `Menyelesaikan seluruh tantangan 10 soal di 5 jenis game edukasi`,
+          foto_celengan_url: null
+        }]);
+      console.log('✅ Supabase: Skor game dicadangkan ke refleksi_siswa');
+    } catch (e) {}
+
+    return savedData;
+  },
+
+  // 14. Simpan Postingan Diskusi Bersama (Di Bawah Kesimpulan Bersama)
+  async saveDiskusiBersama(postData) {
+    if (!this.isConnected()) return null;
+    let savedData = null;
+    try {
+      const { data, error } = await supabaseClient
+        .from('diskusi_bersama')
+        .insert([{
+          nama_siswa: postData.nama || 'Teman Belajar',
+          role: postData.role || 'Siswa Kelas 3 SD',
+          opini: postData.opini || '',
+          kategori: postData.kategori || '💰 Belanja Bijak',
+          likes: postData.likes || 1
+        }])
+        .select();
+      if (!error && data) {
+        console.log('✅ Supabase: Pendapat tersimpan ke tabel diskusi_bersama', data);
+        savedData = data;
+      }
+    } catch (e) {
+      console.warn('Supabase saveDiskusiBersama notice:', e);
+    }
+
+    // Cadangkan ke refleksi_siswa
+    try {
+      await supabaseClient
+        .from('refleksi_siswa')
+        .insert([{
+          nama_siswa: postData.nama || 'Teman Belajar',
+          aku_tahu: `Diskusi Bersama (${postData.kategori || 'Belanja Bijak'}): ${postData.opini || '-'}`,
+          aku_merasa: 'Senang berdiskusi dan berbagi opini dengan teman-teman',
+          aku_ingin_mencoba: 'Menerapkan masukan dan ide dari teman sekelas',
+          foto_celengan_url: null
+        }]);
+      console.log('✅ Supabase: Pendapat diskusi dicadangkan ke refleksi_siswa');
+    } catch (e) {}
+
+    return savedData;
+  },
+
+  // Ambil Seluruh Postingan Diskusi Bersama dari Cloud
+  async getDiskusiBersama() {
+    if (!this.isConnected()) return null;
+    try {
+      const { data, error } = await supabaseClient
+        .from('diskusi_bersama')
+        .select('*')
+        .order('created_at', { ascending: false });
+      if (error) throw error;
+      return data;
+    } catch (e) {
+      console.warn('Supabase getDiskusiBersama notice:', e);
+      return null;
+    }
+  },
+
+  // 15. Simpan Catatan Sertifikat Penghargaan Siswa (3 Tema Varian)
+  async saveSertifikat(certData) {
+    if (!this.isConnected()) return null;
+    let savedData = null;
+    try {
+      const { data, error } = await supabaseClient
+        .from('sertifikat_siswa')
+        .insert([{
+          nama_siswa: certData.nama || 'Teman Belajar',
+          predikat: certData.predikat || 'ANAK HEBAT BIJAK BERBELANJA',
+          seri_tema: certData.tema || 'biru'
+        }])
+        .select();
+      if (!error && data) {
+        console.log('✅ Supabase: Sertifikat tersimpan ke tabel sertifikat_siswa', data);
+        savedData = data;
+      }
+    } catch (e) {
+      console.warn('Supabase saveSertifikat notice:', e);
+    }
+
+    // Cadangkan ke refleksi_siswa
+    try {
+      await supabaseClient
+        .from('refleksi_siswa')
+        .insert([{
+          nama_siswa: certData.nama || 'Teman Belajar',
+          aku_tahu: `Mendapatkan Sertifikat Penghargaan: ${certData.predikat || 'ANAK HEBAT BIJAK BERBELANJA'} (Seri ${certData.tema || 'biru'})`,
+          aku_merasa: 'Sangat bangga menyelesaikan pembelajaran Model DHETIK',
+          aku_ingin_mencoba: 'Menjadi teladan dalam mengelola uang jajan dan menabung di celengan',
+          foto_celengan_url: null
+        }]);
+      console.log('✅ Supabase: Sertifikat dicadangkan ke refleksi_siswa');
+    } catch (e) {}
+
+    return savedData;
   }
 };
 

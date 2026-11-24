@@ -1,10 +1,11 @@
 -- ============================================================
--- RUANG BELAJAR CERIA - DATABASE SCHEMA UNTUK SELURUH FORM
+-- RUANG BELAJAR CERIA - DATABASE SCHEMA SUPABASE LENGKAP
+-- Sesuai dengan Seluruh Fitur & Revisi Web Terbaru (Model DHETIK)
 -- Jalankan skrip SQL ini di Supabase SQL Editor:
 -- Dashboard Supabase -> Project: design think -> SQL Editor -> New Query -> Run
 -- ============================================================
 
--- 1. Tabel Siswa & Poin (Sudah Ada / Update jika belum)
+-- 1. Tabel Siswa & Poin (Tahap Registrasi & Profil)
 CREATE TABLE IF NOT EXISTS siswa (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nama_panggilan TEXT NOT NULL,
@@ -14,7 +15,7 @@ CREATE TABLE IF NOT EXISTS siswa (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 2. Tabel Ceritaku / Jawaban Pemantik (Tahap D)
+-- 2. Tabel Ceritaku & Jawaban Pemantik (Tahap D - Definisi & Empati)
 CREATE TABLE IF NOT EXISTS ceritaku (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nama_siswa TEXT NOT NULL,
@@ -29,7 +30,7 @@ CREATE TABLE IF NOT EXISTS jawaban_pemantik (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 3. Tabel Transaksi Kasir & Sisa Belanja (Tahap H)
+-- 3. Tabel Transaksi Kasir & Sisa Belanja (Tahap H - Eksplorasi Kasir Market Niza)
 CREATE TABLE IF NOT EXISTS transaksi_kasir (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nama_siswa TEXT NOT NULL,
@@ -40,7 +41,7 @@ CREATE TABLE IF NOT EXISTS transaksi_kasir (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 4. Tabel LKPD Digital 5 Kegiatan (Tahap T)
+-- 4. Tabel LKPD Digital 5 Kegiatan (Tahap T - Telaah & Klasifikasi)
 CREATE TABLE IF NOT EXISTS lkpd_submissions (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nama_siswa TEXT NOT NULL,
@@ -53,7 +54,7 @@ CREATE TABLE IF NOT EXISTS lkpd_submissions (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 5. Tabel Papan Padlet Diskusi (Tahap T)
+-- 5. Tabel Papan Padlet Diskusi (Tahap T - Diskusi Kelompok)
 CREATE TABLE IF NOT EXISTS padlet_posts (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nama_siswa TEXT NOT NULL,
@@ -79,7 +80,7 @@ CREATE TABLE IF NOT EXISTS padlet_comments (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 7. Tabel Jawaban Penguatan Materi (Tahap I)
+-- 7. Tabel Jawaban Penguatan Materi (Tahap I - Ikat Konsep)
 CREATE TABLE IF NOT EXISTS penguatan_materi (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nama_siswa TEXT NOT NULL,
@@ -89,7 +90,18 @@ CREATE TABLE IF NOT EXISTS penguatan_materi (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 8. Tabel Hasil Karyaku (Tahap K - Upload Foto Celengan & Rencana Belanja)
+-- 8. [REVISI TERBARU] Tabel Ruang Diskusi Bersama (Tahap I - Di Bawah Kesimpulan Bersama)
+CREATE TABLE IF NOT EXISTS diskusi_bersama (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    nama_siswa TEXT NOT NULL,
+    role TEXT DEFAULT 'Siswa Kelas 3 SD',
+    opini TEXT NOT NULL,
+    kategori TEXT DEFAULT '💰 Belanja Bijak',
+    likes INT DEFAULT 1,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 9. Tabel Hasil Karyaku (Tahap K - Upload Foto Celengan & Rencana Belanja)
 CREATE TABLE IF NOT EXISTS hasil_karyaku (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nama_siswa TEXT NOT NULL,
@@ -102,7 +114,7 @@ CREATE TABLE IF NOT EXISTS hasil_karyaku (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Alias tabel karya_siswa untuk kompatibilitas
+-- Alias tabel karya_siswa untuk kompatibilitas form upload
 CREATE TABLE IF NOT EXISTS karya_siswa (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nama_siswa TEXT NOT NULL,
@@ -115,7 +127,7 @@ CREATE TABLE IF NOT EXISTS karya_siswa (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 9. Tabel Refleksi Mandiri 3 Kalimat Emas (Tahap K)
+-- 10. Tabel Refleksi Mandiri 3 Kalimat Emas & Cadangan Cloud (Tahap K)
 CREATE TABLE IF NOT EXISTS refleksi_siswa (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nama_siswa TEXT NOT NULL,
@@ -126,7 +138,17 @@ CREATE TABLE IF NOT EXISTS refleksi_siswa (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 10. Tabel Hasil Kuis Evaluasi (Kuis 10 Soal)
+-- 11. [REVISI TERBARU] Tabel Sertifikat Siswa (Tahap K - 3 Tema Desain: Biru, Merah, Emas)
+CREATE TABLE IF NOT EXISTS sertifikat_siswa (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    nama_siswa TEXT NOT NULL,
+    predikat TEXT DEFAULT 'ANAK HEBAT BIJAK BERBELANJA',
+    seri_tema TEXT DEFAULT 'biru',
+    tanggal_terbit DATE DEFAULT CURRENT_DATE,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 12. Tabel Hasil Kuis Evaluasi (Kuis 10 Soal Pemahaman Finansial)
 CREATE TABLE IF NOT EXISTS hasil_kuis (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nama_siswa TEXT NOT NULL,
@@ -136,7 +158,20 @@ CREATE TABLE IF NOT EXISTS hasil_kuis (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- 11. Tabel Kontak, Saran & Masukan (Halaman Kontak)
+-- 13. [REVISI TERBARU] Tabel Hasil Game Edukasi (5 Jenis Game x 10 Soal Lengkap)
+-- Game: tebak (Tebak Uang Asli), susun (Susun Kata), matematika (Matematika Belanja), 
+--       pasang (Pasangkan Kebutuhan/Keinginan), benarsalah (Benar / Salah)
+CREATE TABLE IF NOT EXISTS hasil_game (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    nama_siswa TEXT NOT NULL,
+    game_tipe TEXT NOT NULL,
+    skor INT NOT NULL,
+    total_soal INT DEFAULT 10,
+    persentase INT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 14. Tabel Kontak, Saran & Masukan (Halaman Kontak)
 CREATE TABLE IF NOT EXISTS kontak_masukan (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     nama_pengirim TEXT NOT NULL,
@@ -153,7 +188,7 @@ GRANT USAGE ON SCHEMA public TO anon, authenticated;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO anon, authenticated;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated;
 
--- Berikan izin eksplisit untuk seluruh tabel aplikasi
+-- Berikan izin eksplisit untuk seluruh tabel aplikasi (termasuk tabel revisi terbaru)
 GRANT ALL ON TABLE 
     siswa, 
     ceritaku, 
@@ -163,10 +198,13 @@ GRANT ALL ON TABLE
     padlet_posts, 
     padlet_comments, 
     penguatan_materi, 
+    diskusi_bersama,
     hasil_karyaku, 
     karya_siswa, 
     refleksi_siswa, 
+    sertifikat_siswa,
     hasil_kuis, 
+    hasil_game,
     kontak_masukan 
 TO anon, authenticated;
 
@@ -175,16 +213,20 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO anon, authentic
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO anon, authenticated;
 
 -- ============================================================
--- INDEX PERFORMA UNTUK PENCARIAN & RELASI CEPAT
+-- INDEX PERFORMA UNTUK PENCARIAN & RELASI CEPAT (POSTGRES BEST PRACTICES)
 -- ============================================================
 CREATE INDEX IF NOT EXISTS idx_siswa_nama ON siswa (nama_panggilan);
 CREATE INDEX IF NOT EXISTS idx_padlet_comments_post_id ON padlet_comments (post_id);
 CREATE INDEX IF NOT EXISTS idx_padlet_posts_created_at ON padlet_posts (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_diskusi_bersama_created_at ON diskusi_bersama (created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_hasil_karyaku_created_at ON hasil_karyaku (created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_refleksi_siswa_created_at ON refleksi_siswa (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_hasil_game_nama ON hasil_game (nama_siswa);
+CREATE INDEX IF NOT EXISTS idx_hasil_game_created_at ON hasil_game (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_sertifikat_siswa_nama ON sertifikat_siswa (nama_siswa);
 
 -- ============================================================
--- ROW LEVEL SECURITY (RLS) & KEBIJAKAN AKSES
+-- ROW LEVEL SECURITY (RLS) & KEBIJAKAN AKSES PUBLIK
 -- ============================================================
 -- 1. Siswa
 ALTER TABLE siswa ENABLE ROW LEVEL SECURITY;
@@ -225,7 +267,12 @@ ALTER TABLE penguatan_materi ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Akses publik penguatan_materi" ON penguatan_materi;
 CREATE POLICY "Akses publik penguatan_materi" ON penguatan_materi FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
 
--- 8. Hasil Karyaku & Karya Siswa (Upload File)
+-- 8. Diskusi Bersama (Revisi Tahap I)
+ALTER TABLE diskusi_bersama ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Akses publik diskusi_bersama" ON diskusi_bersama;
+CREATE POLICY "Akses publik diskusi_bersama" ON diskusi_bersama FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
+
+-- 9. Hasil Karyaku & Karya Siswa (Upload File)
 ALTER TABLE hasil_karyaku ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Akses publik hasil_karyaku" ON hasil_karyaku;
 CREATE POLICY "Akses publik hasil_karyaku" ON hasil_karyaku FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
@@ -234,18 +281,27 @@ ALTER TABLE karya_siswa ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Akses publik karya_siswa" ON karya_siswa;
 CREATE POLICY "Akses publik karya_siswa" ON karya_siswa FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
 
--- 9. Refleksi Siswa
+-- 10. Refleksi Siswa
 ALTER TABLE refleksi_siswa ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Akses publik refleksi_siswa" ON refleksi_siswa;
 CREATE POLICY "Akses publik refleksi_siswa" ON refleksi_siswa FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
 
--- 10. Hasil Kuis
+-- 11. Sertifikat Siswa (Revisi Sertifikat)
+ALTER TABLE sertifikat_siswa ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Akses publik sertifikat_siswa" ON sertifikat_siswa;
+CREATE POLICY "Akses publik sertifikat_siswa" ON sertifikat_siswa FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
+
+-- 12. Hasil Kuis Evaluasi
 ALTER TABLE hasil_kuis ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Akses publik hasil_kuis" ON hasil_kuis;
 CREATE POLICY "Akses publik hasil_kuis" ON hasil_kuis FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
 
--- 11. Kontak Masukan
+-- 13. Hasil Game Edukasi (Revisi Game Edukasi)
+ALTER TABLE hasil_game ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Akses publik hasil_game" ON hasil_game;
+CREATE POLICY "Akses publik hasil_game" ON hasil_game FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
+
+-- 14. Kontak Masukan
 ALTER TABLE kontak_masukan ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Akses publik kontak_masukan" ON kontak_masukan;
 CREATE POLICY "Akses publik kontak_masukan" ON kontak_masukan FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
-
