@@ -5146,8 +5146,8 @@ function renderCertificateCard(theme = 'biru') {
         <!-- KONTEN UTAMA SERTIFIKAT LANDSCAPE A4 -->
         <div class="relative z-10 max-w-3xl mx-auto flex flex-col justify-between h-full w-full">
           
-          <!-- Bagian Atas: Logo UPI Cibiru 3 cm, Header Instansi, Judul Utama & Sub-judul Seri -->
-          <div class="space-y-1 pt-0.5 text-center">
+          <!-- Bagian Atas: Logo UPI Cibiru 3 cm, Header Instansi, & Judul Utama -->
+          <div class="space-y-1 pt-1 text-center">
             <!-- Logo UPI 3 cm -->
             <div class="flex items-center justify-center mb-1">
               <div class="rounded-full bg-white p-1.5 shadow-md border-2 border-red-200 ring-2 ring-amber-200/60 inline-flex items-center justify-center flex-shrink-0" style="width: 3cm; height: 3cm; min-width: 3cm; min-height: 3cm;">
@@ -5159,23 +5159,18 @@ function renderCertificateCard(theme = 'biru') {
               <h1 class="text-xs sm:text-sm font-black tracking-widest uppercase text-red-700 block font-title">UNIVERSITAS PENDIDIKAN INDONESIA — KAMPUS UPI CIBIRU</h1>
             </div>
 
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 tracking-tight font-title mt-1 mb-0.5">SERTIFIKAT PENGHARGAAN</h2>
-
-            <!-- Sub-judul Seri Sesuai Pilihan Varian -->
-            <div class="inline-flex items-center gap-1.5 px-3.5 py-0.5 rounded-full ${themeCfg.subseriesClass} font-black text-[10px] sm:text-[11px] tracking-wider uppercase shadow-xs">
-              <span>${themeCfg.subseriesTitle}</span>
-            </div>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 tracking-tight font-title mt-1 mb-1">SERTIFIKAT PENGHARGAAN</h2>
 
             <!-- Divider Elegan -->
-            <div class="flex items-center justify-center gap-3 my-1" aria-hidden="true">
-              <span class="h-0.5 w-14 sm:w-24 ${themeCfg.dividerLineClass} rounded-full"></span>
+            <div class="flex items-center justify-center gap-3 my-1.5" aria-hidden="true">
+              <span class="h-0.5 w-16 sm:w-28 ${themeCfg.dividerLineClass} rounded-full"></span>
               <span class="${themeCfg.starColor} text-xs sm:text-sm tracking-widest select-none">★ ★ ★</span>
-              <span class="h-0.5 w-14 sm:w-24 ${themeCfg.dividerLineClass} rounded-full"></span>
+              <span class="h-0.5 w-16 sm:w-28 ${themeCfg.dividerLineClass} rounded-full"></span>
             </div>
           </div>
 
           <!-- Bagian Tengah: Kalimat Pembuka, Nama Lengkap Siswa, Isi Keterangan, & Predikat -->
-          <div class="space-y-1 sm:space-y-1.5 py-1 my-auto text-center">
+          <div class="space-y-1.5 sm:space-y-2 py-1 my-auto text-center">
             <p class="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">Diberikan dengan penuh rasa bangga kepada:</p>
             
             <div class="py-1 ${themeCfg.nameWrapClass} max-w-xl mx-auto">
@@ -5195,24 +5190,18 @@ function renderCertificateCard(theme = 'biru') {
             </div>
           </div>
 
-          <!-- Bagian Bawah: Tanggal Terbit, Lencana/Stempel Grafis Resmi, & Tim Pengembang -->
-          <div class="pt-3 sm:pt-4 border-t ${themeCfg.footerBorderClass} flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-xs px-2 sm:px-4 mt-1">
+          <!-- Bagian Bawah: Tanggal Terbit & Tim Pengembang (Tanpa Cap & Tanpa Tulisan Kecil Kampus UPI Cibiru) -->
+          <div class="pt-3 sm:pt-4 border-t ${themeCfg.footerBorderClass} flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 text-xs px-2 sm:px-6 mt-1">
             <!-- Kolom Kiri: Tanggal Terbit -->
-            <div class="text-left space-y-0.5">
-              <span class="block text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider">Tanggal</span>
-              <p class="text-xs sm:text-sm font-black text-slate-800 leading-tight">Tanggal Terbit: ${issueDate}</p>
-              <span class="text-[10px] sm:text-[11px] text-slate-500 block font-semibold">Kampus UPI Cibiru • PGSD 2026</span>
-            </div>
-
-            <!-- Tengah / Pojok Bawah: Stempel Grafis Resmi "BIJAK KELOLA DANA & MENABUNG" (Tidak Menabrak Teks) -->
-            <div class="flex-shrink-0 -rotate-6 hover:rotate-0 transition-transform select-none" title="Stempel Resmi: BIJAK KELOLA DANA & MENABUNG">
-              ${themeCfg.stamp}
+            <div class="text-left space-y-1">
+              <span class="block text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider">Tanggal Terbit</span>
+              <p class="text-xs sm:text-sm md:text-base font-black text-slate-800 leading-tight">${issueDate}</p>
             </div>
 
             <!-- Kolom Kanan: Tim Pengembang 2 Kolom Rapi -->
             <div class="text-left space-y-1">
               <span class="block text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider">Tim Pengembang:</span>
-              <div class="grid grid-cols-2 gap-x-5 gap-y-1 text-left">
+              <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-left">
                 ${devList.map(dev => `
                   <div class="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold text-slate-800">
                     <span class="w-1.5 h-1.5 rounded-full ${themeCfg.bulletColor} flex-shrink-0"></span>
@@ -5820,216 +5809,712 @@ function nextQuizQuestion() {
 }
 
 /* ============================================================
-   VIEW 10: GAME EDUKASI (5 GAME NYATA)
-   1. Tebak Gambar
-   2. Susun Kata
-   3. Petualangan Matematika
-   4. Pasangkan Jawaban
-   5. Benar atau Salah
+   VIEW 10: POJOK GAME EDUKASI CERIA (5 GAME LENGKAP & MULTI-LEVEL)
+   1. Tebak Gambar Uang & Barang (5 Soal Visual)
+   2. Susun Kata Ceria (5 Kata Finansial Interaktif)
+   3. Petualangan Matematika Belanja (5 Soal Cerita Belanja)
+   4. Pasangkan Kategori Kebutuhan vs Keinginan (5 Soal Logika)
+   5. Benar atau Salah Cermat Finansial (5 Soal Literasi)
    ============================================================ */
+
+const RBC_GAMES_DATA = {
+  tebak: {
+    id: 'tebak',
+    title: 'Tebak Gambar Uang & Barang',
+    subtitle: 'Amati gambar dengan seksama lalu pilih nominal atau nama benda yang tepat!',
+    questions: [
+      {
+        visual: '<div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-amber-100 border-4 border-amber-400 flex items-center justify-center text-4xl sm:text-5xl shadow-md select-none">🪙 500</div>',
+        prompt: 'Berapakah nilai nominal uang koin logam pada gambar di atas?',
+        hint: 'Perhatikan angka nominal 500 yang tertera pada uang logam.',
+        options: ['Rp500', 'Rp1.000', 'Rp200', 'Rp100'],
+        correct: 0,
+        explanation: 'Benar! Itu adalah uang koin Rupiah pecahan Rp500.'
+      },
+      {
+        visual: '<div class="w-36 h-20 sm:w-44 sm:h-24 rounded-2xl bg-sky-100 border-4 border-sky-400 flex flex-col items-center justify-center text-slate-800 font-black shadow-md select-none"><span class="text-[10px] uppercase tracking-wider text-sky-700">Uang Kertas Kartun</span><span class="text-2xl sm:text-3xl text-sky-900">Rp2.000</span></div>',
+        prompt: 'Uang kertas berwarna abu-abu kebiruan di atas memiliki nilai nominal:',
+        hint: 'Sering dipakai saat membeli jajanan ringan atau membayar parkir.',
+        options: ['Rp1.000', 'Rp2.000', 'Rp5.000', 'Rp10.000'],
+        correct: 1,
+        explanation: 'Hebat! Itu adalah selembar uang kertas pecahan Rp2.000.'
+      },
+      {
+        visual: '<div class="w-36 h-20 sm:w-44 sm:h-24 rounded-2xl bg-purple-100 border-4 border-purple-400 flex flex-col items-center justify-center text-purple-900 font-black shadow-md select-none"><span class="text-[10px] uppercase tracking-wider text-purple-700">Uang Kertas Kartun</span><span class="text-2xl sm:text-3xl text-purple-950">Rp10.000</span></div>',
+        prompt: 'Uang kertas berwarna ungu ceria pada gambar bernilai nominal:',
+        hint: 'Ciri khas pecahan sepuluh ribu rupiah adalah dominasi warna ungu.',
+        options: ['Rp5.000', 'Rp10.000', 'Rp20.000', 'Rp50.000'],
+        correct: 1,
+        explanation: 'Tepat sekali! Pecahan Rp10.000 sangat khas dengan warna ungunya.'
+      },
+      {
+        visual: '<div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-slate-100 border-4 border-slate-300 ring-4 ring-amber-300 flex items-center justify-center text-3xl sm:text-4xl shadow-md font-black text-amber-900 select-none">🪙 1.000</div>',
+        prompt: 'Berapakah nilai nominal uang koin logam terbesar yang beredar di Indonesia saat ini?',
+        hint: 'Nilainya sama dengan seribu rupiah.',
+        options: ['Rp500', 'Rp1.000', 'Rp2.000', 'Rp5.000'],
+        correct: 1,
+        explanation: 'Luar biasa! Koin Rp1.000 adalah pecahan koin terbesar yang banyak digunakan.'
+      },
+      {
+        visual: '<div class="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-pink-100 border-4 border-pink-400 flex flex-col items-center justify-center text-4xl shadow-md select-none"><span>🐷💰</span><span class="text-xs font-black text-pink-700 mt-1">Celengan Ceria</span></div>',
+        prompt: 'Tempat menyimpan sisa uang belanja atau uang saku sedikit demi sedikit di rumah disebut:',
+        hint: 'Biasanya berbentuk ayam, babi, atau kaleng bergambar lucu.',
+        options: ['Celengan', 'Keranjang Pasar', 'Kasir Toko', 'Struk Belanja'],
+        correct: 0,
+        explanation: 'Pintar! Menabung di celengan adalah kebiasaan baik anak hebat!'
+      }
+    ]
+  },
+  susun: {
+    id: 'susun',
+    title: 'Susun Kata Ceria',
+    subtitle: 'Klik huruf-huruf acak di bawah untuk membentuk kata finansial yang benar!',
+    questions: [
+      {
+        clue: 'Mata uang resmi kebanggaan negara Republik Indonesia:',
+        target: 'RUPIAH',
+        letters: ['P', 'U', 'A', 'R', 'H', 'I'],
+        explanation: 'R-U-P-I-A-H adalah nama mata uang resmi negara Indonesia.'
+      },
+      {
+        clue: 'Tempat menabung uang koin atau sisa jajan di rumah:',
+        target: 'CELENGAN',
+        letters: ['G', 'C', 'N', 'E', 'L', 'A', 'E', 'N'],
+        explanation: 'C-E-L-E-N-G-A-N adalah wadah favorit anak-anak untuk menabung.'
+      },
+      {
+        clue: 'Uang yang disisihkan dan disimpan untuk masa depan:',
+        target: 'TABUNGAN',
+        letters: ['B', 'T', 'U', 'A', 'N', 'G', 'A', 'N'],
+        explanation: 'T-A-B-U-N-G-A-N adalah simpanan uang hasil hemat dan disiplin.'
+      },
+      {
+        clue: 'Hal pokok yang wajib dipenuhi seperti makan dan seragam sekolah:',
+        target: 'KEBUTUHAN',
+        letters: ['B', 'K', 'T', 'E', 'H', 'U', 'U', 'A', 'N'],
+        explanation: 'K-E-B-U-T-U-H-A-N harus selalu diprioritaskan sebelum keinginan.'
+      },
+      {
+        clue: 'Kegiatan membeli barang kebutuhan di pasar atau toko:',
+        target: 'BELANJA',
+        letters: ['L', 'B', 'N', 'E', 'A', 'J', 'A'],
+        explanation: 'B-E-L-A-N-J-A harus direncanakan dengan cerdas dan bijak.'
+      }
+    ]
+  },
+  matematika: {
+    id: 'matematika',
+    title: 'Petualangan Matematika Belanja',
+    subtitle: 'Hitung penjumlahan uang belanja dan sisa kembalian dengan teliti!',
+    questions: [
+      {
+        scenario: 'Budi membeli pensil seharga <strong>Rp3.000</strong> dan buku tulis seharga <strong>Rp5.000</strong>. Berapakah total uang yang harus dibayar Budi?',
+        hint: 'Hitung: Rp3.000 + Rp5.000',
+        options: ['Rp7.000', 'Rp8.000', 'Rp9.000', 'Rp10.000'],
+        correct: 1,
+        explanation: 'Tepat! Rp3.000 + Rp5.000 = Rp8.000.'
+      },
+      {
+        scenario: 'Siti membawa uang <strong>Rp20.000</strong> ke toko buku. Ia membeli tempat pensil seharga <strong>Rp12.000</strong>. Berapakah uang kembalian yang diterima Siti?',
+        hint: 'Hitung: Rp20.000 - Rp12.000',
+        options: ['Rp6.000', 'Rp7.000', 'Rp8.000', 'Rp10.000'],
+        correct: 2,
+        explanation: 'Hebat! Rp20.000 - Rp12.000 = Rp8.000.'
+      },
+      {
+        scenario: 'Rian membeli 2 buah roti seharga masing-masing <strong>Rp4.000</strong> dan 1 kotak susu seharga <strong>Rp3.000</strong>. Berapakah total belanjaan Rian?',
+        hint: 'Hitung: (2 × Rp4.000) + Rp3.000 = Rp8.000 + Rp3.000',
+        options: ['Rp9.000', 'Rp10.000', 'Rp11.000', 'Rp12.000'],
+        correct: 2,
+        explanation: 'Benar sekali! 2 roti (Rp8.000) + 1 susu (Rp3.000) = Rp11.000.'
+      },
+      {
+        scenario: 'Uang saku Dina adalah <strong>Rp10.000</strong>. Dina membeli kue seharga <strong>Rp4.000</strong>. Sisa uangnya dimasukkan ke celengan. Berapakah uang yang berhasil ditabung Dina?',
+        hint: 'Hitung: Rp10.000 - Rp4.000',
+        options: ['Rp5.000', 'Rp6.000', 'Rp4.000', 'Rp7.000'],
+        correct: 1,
+        explanation: 'Mantap! Sisa uang Dina yang ditabung ke celengan adalah Rp6.000.'
+      },
+      {
+        scenario: 'Edo memiliki <strong>1 lembar uang Rp10.000</strong> dan <strong>2 lembar uang Rp5.000</strong>. Berapakah jumlah uang Edo seluruhnya?',
+        hint: 'Hitung: Rp10.000 + (2 × Rp5.000) = Rp10.000 + Rp10.000',
+        options: ['Rp15.000', 'Rp20.000', 'Rp25.000', 'Rp30.000'],
+        correct: 1,
+        explanation: 'Pintar! Rp10.000 + Rp10.000 = Rp20.000.'
+      }
+    ]
+  },
+  pasang: {
+    id: 'pasang',
+    title: 'Pasangkan Kategori (Kebutuhan vs Keinginan)',
+    subtitle: 'Tentukan apakah barang atau kegiatan berikut termasuk Kebutuhan Pokok atau Keinginan!',
+    questions: [
+      {
+        item: 'Membeli seragam sekolah untuk dipakai belajar sehari-hari',
+        icon: '👔',
+        options: ['Kebutuhan Pokok', 'Keinginan Tambahan'],
+        correct: 0,
+        explanation: 'Seragam sekolah adalah Kebutuhan Pokok agar siswa dapat belajar dengan rapi dan sopan di sekolah.'
+      },
+      {
+        item: 'Membeli mainan robot edisi terbaru padahal di rumah sudah punya banyak mainan sejenis',
+        icon: '🤖',
+        options: ['Kebutuhan Pokok', 'Keinginan Tambahan'],
+        correct: 1,
+        explanation: 'Mainan tambahan adalah Keinginan. Sebaiknya uangnya disimpan atau ditabung dahulu!'
+      },
+      {
+        item: 'Membeli beras, sayur mayur, dan lauk untuk makan siang keluarga',
+        icon: '🍚',
+        options: ['Kebutuhan Pokok', 'Keinginan Tambahan'],
+        correct: 0,
+        explanation: 'Makanan bernutrisi adalah Kebutuhan Pokok yang mutlak diperlukan untuk kesehatan.'
+      },
+      {
+        item: 'Membeli tiket wahana permainan dan bermain video game di mall setiap hari libur',
+        icon: '🎡',
+        options: ['Kebutuhan Pokok', 'Keinginan Tambahan'],
+        correct: 1,
+        explanation: 'Bermain game di mall adalah Keinginan rekreasi, lakukan secukupnya tanpa berlebihan.'
+      },
+      {
+        item: 'Membeli obat penurun demam dan vitamin ketika badan sedang sakit',
+        icon: '💊',
+        options: ['Kebutuhan Pokok', 'Keinginan Tambahan'],
+        correct: 0,
+        explanation: 'Obat dan vitamin saat sakit adalah Kebutuhan Pokok yang penting untuk kesembuhan tubuh.'
+      }
+    ]
+  },
+  benarsalah: {
+    id: 'benarsalah',
+    title: 'Benar atau Salah (Cermat Finansial)',
+    subtitle: 'Tentukan apakah pernyataan berikut BENAR atau SALAH berdasarkan pemahaman finansialmu!',
+    questions: [
+      {
+        statement: 'Uang koin Rp1.000 memiliki nilai yang SAMA BESAR dengan selembar uang kertas Rp1.000.',
+        isTrue: true,
+        explanation: 'BENAR! Bentuknya boleh berbeda (koin vs kertas), tetapi daya belinya sama persis yaitu Rp1.000.'
+      },
+      {
+        statement: 'Kita sebaiknya menghabiskan seluruh uang saku untuk jajan sampai habis tanpa menyisihkan untuk ditabung.',
+        isTrue: false,
+        explanation: 'SALAH! Anak bijak selalu menyisihkan sebagian uang saku ke celengan sebelum jajan.'
+      },
+      {
+        statement: 'Mendahulukan membeli buku pelajaran sekolah lebih penting daripada membeli mainan baru.',
+        isTrue: true,
+        explanation: 'BENAR! Kebutuhan belajar dan sekolah wajib didahulukan daripada keinginan membeli mainan.'
+      },
+      {
+        statement: 'Kebutuhan adalah sesuatu yang jika tidak terpenuhi tidak akan mengganggu kelangsungan hidup kita.',
+        isTrue: false,
+        explanation: 'SALAH! Kebutuhan jika tidak dipenuhi akan mengganggu hidup (seperti makan, minum, pakaian). Itu adalah pengertian keinginan!'
+      },
+      {
+        statement: 'Menabung uang kembalian belanja di celengan secara rutin akan membuat uang kita terkumpul banyak.',
+        isTrue: true,
+        explanation: 'BENAR! Seperti pepatah: "Sedikit demi sedikit, lama-lama menjadi bukit!"'
+      }
+    ]
+  }
+};
+
+const RBC_GAME_STATE = {
+  rounds: { tebak: 0, susun: 0, matematika: 0, pasang: 0, benarsalah: 0 },
+  scores: { tebak: 0, susun: 0, matematika: 0, pasang: 0, benarsalah: 0 },
+  susunAnswer: []
+};
+
 function renderGameView() {
   return `
     <div class="space-y-6 sm:space-y-8 animate-fade-in">
-      <div class="rounded-3xl bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-600 p-4 sm:p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+      <div class="rounded-3xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 p-4 sm:p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
         <div class="space-y-2 text-center md:text-left">
-          <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">Bermain Sambil Belajar</span>
+          <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">🌟 Bermain Sambil Belajar • 5 Game Interaktif</span>
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-black mt-2">Pojok Game Edukasi Ceria</h1>
           <p class="text-emerald-100 text-sm md:text-base font-medium max-w-xl">
-            Pilih 5 permainan edukasi seru di bawah ini untuk mengasah ketangkasan dan pengetahuan finansialmu!
+            Asah ketangkasan, logika uang, dan kebijaksanaan belanjamu lewat 5 permainan seru multi-level di bawah ini!
           </p>
         </div>
         <div class="flex-shrink-0">
-          ${RBC_MASCOT.render('happy', 'w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28')}
+          ${RBC_MASCOT.render('cheering', 'w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28')}
         </div>
       </div>
 
       <!-- Game Selector Buttons (Swipeable on Mobile) -->
       <div class="flex sm:grid sm:grid-cols-5 gap-2 sm:gap-3 overflow-x-auto pb-2 no-scrollbar" id="game-selector-tabs">
-        <button onclick="switchGameView('tebak')" class="flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-emerald-500 bg-emerald-500 text-white shadow-sm flex flex-col items-center gap-1">
+        <button onclick="switchGameView('tebak')" class="flex-shrink-0 min-w-[110px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-emerald-500 bg-emerald-500 text-white shadow-sm flex flex-col items-center gap-1 transition-all">
           <span class="text-xl">🖼️</span>
           <span>1. Tebak Gambar</span>
         </button>
-        <button onclick="switchGameView('susun')" class="flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1">
+        <button onclick="switchGameView('susun')" class="flex-shrink-0 min-w-[110px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1 transition-all">
           <span class="text-xl">🔤</span>
           <span>2. Susun Kata</span>
         </button>
-        <button onclick="switchGameView('matematika')" class="flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1">
+        <button onclick="switchGameView('matematika')" class="flex-shrink-0 min-w-[110px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1 transition-all">
           <span class="text-xl">🧮</span>
           <span>3. Matematika</span>
         </button>
-        <button onclick="switchGameView('pasang')" class="flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1">
+        <button onclick="switchGameView('pasang')" class="flex-shrink-0 min-w-[110px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1 transition-all">
           <span class="text-xl">🧩</span>
           <span>4. Pasangkan</span>
         </button>
-        <button onclick="switchGameView('benarsalah')" class="flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1">
+        <button onclick="switchGameView('benarsalah')" class="flex-shrink-0 min-w-[110px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1 transition-all">
           <span class="text-xl">⚖️</span>
           <span>5. Benar / Salah</span>
         </button>
       </div>
 
       <div id="game-active-container" class="card-pastel p-4 sm:p-6 md:p-8 border-2 border-emerald-200">
-        <!-- Filled dynamically -->
+        <!-- Rendered dynamically -->
       </div>
     </div>
   `;
 }
 
 function initGameView() {
-  switchGameView('tebak');
+  switchGameView(AppState.gameActive || 'tebak');
 }
 
 function switchGameView(gameKey) {
+  const validGames = ['tebak', 'susun', 'matematika', 'pasang', 'benarsalah'];
+  if (!validGames.includes(gameKey)) gameKey = 'tebak';
   AppState.gameActive = gameKey;
   window.soundManager.playPop();
 
   document.querySelectorAll('#game-selector-tabs button').forEach(btn => {
     if (btn.innerText.toLowerCase().includes(gameKey)) {
-      btn.className = "flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-emerald-500 bg-emerald-500 text-white shadow-sm flex flex-col items-center gap-1";
+      btn.className = "flex-shrink-0 min-w-[110px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-emerald-500 bg-emerald-500 text-white shadow-sm flex flex-col items-center gap-1 transition-all";
     } else {
-      btn.className = "flex-shrink-0 min-w-[105px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1";
+      btn.className = "flex-shrink-0 min-w-[110px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1 transition-all";
     }
   });
 
+  renderActiveGameContent(gameKey);
+}
+
+function renderActiveGameContent(gameKey) {
   const container = document.getElementById('game-active-container');
   if (!container) return;
 
-  switch (gameKey) {
-    case 'tebak':
-      container.innerHTML = `
-        <div class="space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b">
-            <div>
-              <span class="text-xs font-bold text-emerald-600 uppercase">Game 1</span>
-              <h3 class="text-xl font-bold text-slate-800">Tebak Gambar Uang & Barang</h3>
-            </div>
-            <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">Petunjuk: Perhatikan gambar!</span>
-          </div>
-          <div class="p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
-            <div class="w-32 h-32 rounded-full bg-amber-200 border-4 border-amber-300 flex items-center justify-center text-4xl shadow-md">
-              🪙 500
-            </div>
-            <p class="font-bold text-slate-800 text-center">Berapakah nilai uang koin logam pada gambar di atas?</p>
-            <div class="grid grid-cols-2 gap-3 w-full max-w-sm">
-              <button onclick="checkGameAnswer(true, 'Benar! Itu adalah koin Rp500!')" class="p-3 bg-white rounded-xl border-2 border-slate-200 hover:border-emerald-400 font-bold text-sm">Rp500</button>
-              <button onclick="checkGameAnswer(false, 'Kurang tepat.')" class="p-3 bg-white rounded-xl border-2 border-slate-200 hover:border-emerald-400 font-bold text-sm">Rp1.000</button>
-              <button onclick="checkGameAnswer(false, 'Kurang tepat.')" class="p-3 bg-white rounded-xl border-2 border-slate-200 hover:border-emerald-400 font-bold text-sm">Rp200</button>
-              <button onclick="checkGameAnswer(false, 'Kurang tepat.')" class="p-3 bg-white rounded-xl border-2 border-slate-200 hover:border-emerald-400 font-bold text-sm">Rp100</button>
-            </div>
-            <div id="game-feedback" class="hidden p-3 rounded-xl text-xs font-bold text-center"></div>
+  const gameData = RBC_GAMES_DATA[gameKey];
+  const roundIdx = RBC_GAME_STATE.rounds[gameKey] || 0;
+  const currentScore = RBC_GAME_STATE.scores[gameKey] || 0;
+  const totalQuestions = gameData.questions.length;
+
+  // Completion screen when all 5 questions are done
+  if (roundIdx >= totalQuestions) {
+    const perfectScore = totalQuestions * 10;
+    const isPerfect = currentScore >= perfectScore;
+    container.innerHTML = `
+      <div class="text-center py-6 sm:py-8 space-y-4 animate-scale-up">
+        <div class="flex justify-center">
+          ${RBC_MASCOT.render('cheering', 'w-24 h-24 sm:w-32 sm:h-32')}
+        </div>
+        <div class="space-y-1">
+          <span class="text-xs font-black uppercase tracking-wider text-amber-600 bg-amber-100 px-3 py-1 rounded-full">Permainan Selesai 🎉</span>
+          <h3 class="text-2xl sm:text-3xl font-black text-slate-800">Hebat! Kamu Menyelesaikan ${gameData.title}!</h3>
+          <p class="text-slate-600 text-sm max-w-md mx-auto">
+            ${isPerfect ? 'Nilai Sempurna! Pemahaman finansialmu luar biasa hebat, cermat, dan bijak!' : 'Kerja bagus! Teruslah bermain dan belajar untuk menjadi anak hebat yang bijak berbelanja!'}
+          </p>
+        </div>
+
+        <div class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-amber-50 border-2 border-amber-300 shadow-xs">
+          <span class="text-3xl">⭐</span>
+          <div class="text-left">
+            <span class="text-[11px] font-bold text-amber-800 uppercase block">Total Skor Game Ini</span>
+            <span class="text-2xl font-black text-amber-950">${currentScore} / ${perfectScore} Poin</span>
           </div>
         </div>
-      `;
-      break;
-    case 'susun':
-      container.innerHTML = `
-        <div class="space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b">
-            <div>
-              <span class="text-xs font-bold text-emerald-600 uppercase">Game 2</span>
-              <h3 class="text-xl font-bold text-slate-800">Susun Kata Ceria</h3>
-            </div>
-            <span class="text-xs font-bold px-3 py-1 bg-amber-100 text-amber-800 rounded-full">Petunjuk: Susun huruf berikut!</span>
-          </div>
-          <div class="p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
-            <p class="text-xs text-slate-600">Mata uang resmi negara Indonesia adalah:</p>
-            <div class="flex gap-2 text-2xl font-black text-purple-700">
-              <span class="p-3 bg-white rounded-xl shadow-sm border border-purple-200">R</span>
-              <span class="p-3 bg-white rounded-xl shadow-sm border border-purple-200">U</span>
-              <span class="p-3 bg-white rounded-xl shadow-sm border border-purple-200">P</span>
-              <span class="p-3 bg-white rounded-xl shadow-sm border border-purple-200">I</span>
-              <span class="p-3 bg-white rounded-xl shadow-sm border border-purple-200">A</span>
-              <span class="p-3 bg-white rounded-xl shadow-sm border border-purple-200">H</span>
-            </div>
-            <div class="flex gap-2 mt-4">
-              <button onclick="checkGameAnswer(true, 'Hebat! Kamu berhasil menyusun kata RUPIAH!')" class="px-6 py-2 bg-emerald-500 text-white font-bold rounded-xl text-xs">Cek Jawaban ✨</button>
-            </div>
-            <div id="game-feedback" class="hidden p-3 rounded-xl text-xs font-bold text-center"></div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3">
+          <button type="button" onclick="restartCurrentGame('${gameKey}')" class="btn-playful px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-2xl text-sm flex items-center gap-2 shadow-md">
+            <span>🔄 Main Ulang Game Ini</span>
+          </button>
+          <button type="button" onclick="switchGameView('${getNextGameKey(gameKey)}')" class="btn-playful px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white font-bold rounded-2xl text-sm flex items-center gap-2 shadow-md">
+            <span>🎮 Lanjut ke Game Berikutnya ➡️</span>
+          </button>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  // Active question render
+  const q = gameData.questions[roundIdx];
+  const progressPercent = Math.round(((roundIdx + 1) / totalQuestions) * 100);
+
+  let innerGameHtml = '';
+
+  if (gameKey === 'tebak') {
+    innerGameHtml = `
+      <div class="p-4 sm:p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
+        ${q.visual}
+        <p class="font-bold text-slate-800 text-center text-sm sm:text-base max-w-md">${q.prompt}</p>
+        <span class="text-xs text-slate-500 font-medium">💡 ${q.hint}</span>
+        <div id="game-options-grid" class="grid grid-cols-2 gap-3 w-full max-w-md pt-2">
+          ${q.options.map((opt, idx) => `
+            <button type="button" onclick="handleChoiceAnswer('tebak', ${idx}, ${q.correct}, '${escapeHtmlText(q.explanation)}')" class="p-3 sm:p-3.5 bg-white rounded-xl border-2 border-slate-200 hover:border-emerald-400 font-bold text-sm text-slate-800 shadow-xs transition-all active:scale-95">
+              ${opt}
+            </button>
+          `).join('')}
+        </div>
+        <div id="game-feedback-box" class="hidden w-full max-w-md p-3.5 rounded-xl text-xs sm:text-sm font-bold text-center"></div>
+      </div>
+    `;
+  } else if (gameKey === 'susun') {
+    RBC_GAME_STATE.susunAnswer = [];
+    innerGameHtml = `
+      <div class="p-4 sm:p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
+        <span class="text-xs font-bold text-purple-700 bg-purple-100 px-3 py-1 rounded-full uppercase">Teka-Teki Kata</span>
+        <p class="font-bold text-slate-800 text-center text-sm sm:text-base max-w-lg">${q.clue}</p>
+        
+        <!-- Answer Slots -->
+        <div id="susun-answer-slots" class="flex flex-wrap justify-center gap-1.5 sm:gap-2 my-2 min-h-[48px]">
+          ${Array.from({ length: q.target.length }).map(() => `
+            <span class="w-9 h-11 sm:w-11 sm:h-12 border-2 border-dashed border-purple-300 rounded-xl flex items-center justify-center text-lg sm:text-2xl font-black text-purple-900 bg-purple-50/50"></span>
+          `).join('')}
+        </div>
+
+        <!-- Scrambled Letter Buttons -->
+        <div class="space-y-1.5 text-center">
+          <span class="text-[11px] font-semibold text-slate-500 block">Klik huruf-huruf di bawah sesuai urutan:</span>
+          <div id="susun-letter-bank" class="flex flex-wrap justify-center gap-2 max-w-md">
+            ${q.letters.map((letter, idx) => `
+              <button type="button" id="btn-letter-${idx}" onclick="handleSusunLetterClick(${idx}, '${letter}', '${q.target}', '${escapeHtmlText(q.explanation)}')" class="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl border-2 border-purple-200 hover:border-purple-500 text-purple-900 font-black text-lg sm:text-xl shadow-xs transition-all active:scale-95">
+                ${letter}
+              </button>
+            `).join('')}
           </div>
         </div>
-      `;
-      break;
-    case 'matematika':
-      container.innerHTML = `
-        <div class="space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b">
-            <div>
-              <span class="text-xs font-bold text-emerald-600 uppercase">Game 3</span>
-              <h3 class="text-xl font-bold text-slate-800">Petualangan Matematika Belanja</h3>
-            </div>
+
+        <!-- Controls -->
+        <div class="flex items-center gap-2 pt-2">
+          <button type="button" onclick="handleSusunReset('${q.target}')" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-all">
+            <span>🔄 Reset</span>
+          </button>
+          <button type="button" onclick="handleSusunBackspace('${q.target}')" class="px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-all">
+            <span>⌫ Hapus</span>
+          </button>
+          <button type="button" id="btn-susun-check" onclick="handleSusunCheck('${q.target}', '${escapeHtmlText(q.explanation)}')" class="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 shadow-md transition-all">
+            <span>✨ Cek Jawaban</span>
+          </button>
+        </div>
+
+        <div id="game-feedback-box" class="hidden w-full max-w-md p-3.5 rounded-xl text-xs sm:text-sm font-bold text-center"></div>
+      </div>
+    `;
+  } else if (gameKey === 'matematika') {
+    innerGameHtml = `
+      <div class="p-4 sm:p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
+        <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-3xl shadow-xs">
+          🧮
+        </div>
+        <p class="font-bold text-slate-800 text-center text-sm sm:text-base max-w-md leading-relaxed">${q.scenario}</p>
+        <span class="text-xs text-slate-500 font-medium">💡 ${q.hint}</span>
+        <div id="game-options-grid" class="grid grid-cols-2 gap-3 w-full max-w-md pt-2">
+          ${q.options.map((opt, idx) => `
+            <button type="button" onclick="handleChoiceAnswer('matematika', ${idx}, ${q.correct}, '${escapeHtmlText(q.explanation)}')" class="p-3 sm:p-3.5 bg-white rounded-xl border-2 border-slate-200 hover:border-amber-400 font-black text-sm text-slate-800 shadow-xs transition-all active:scale-95">
+              ${opt}
+            </button>
+          `).join('')}
+        </div>
+        <div id="game-feedback-box" class="hidden w-full max-w-md p-3.5 rounded-xl text-xs sm:text-sm font-bold text-center"></div>
+      </div>
+    `;
+  } else if (gameKey === 'pasang') {
+    innerGameHtml = `
+      <div class="p-4 sm:p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
+        <div class="w-16 h-16 rounded-3xl bg-sky-100 border-2 border-sky-300 flex items-center justify-center text-4xl shadow-xs">
+          ${q.icon}
+        </div>
+        <div class="text-center space-y-1 max-w-md">
+          <span class="text-[11px] font-bold text-sky-700 uppercase tracking-wider block">Kategori Belanja:</span>
+          <p class="font-bold text-slate-800 text-sm sm:text-base leading-snug">"${q.item}"</p>
+        </div>
+        <span class="text-xs text-slate-500 font-medium">Pilih salah satu kategori yang paling tepat:</span>
+        <div id="game-options-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-md pt-1">
+          <button type="button" onclick="handleChoiceAnswer('pasang', 0, ${q.correct}, '${escapeHtmlText(q.explanation)}')" class="p-3.5 bg-white rounded-2xl border-2 border-emerald-200 hover:border-emerald-500 font-black text-sm text-emerald-800 shadow-xs transition-all active:scale-95 flex items-center justify-center gap-2">
+            <span>🥗 Kebutuhan Pokok</span>
+          </button>
+          <button type="button" onclick="handleChoiceAnswer('pasang', 1, ${q.correct}, '${escapeHtmlText(q.explanation)}')" class="p-3.5 bg-white rounded-2xl border-2 border-amber-200 hover:border-amber-500 font-black text-sm text-amber-800 shadow-xs transition-all active:scale-95 flex items-center justify-center gap-2">
+            <span>🧸 Keinginan Tambahan</span>
+          </button>
+        </div>
+        <div id="game-feedback-box" class="hidden w-full max-w-md p-3.5 rounded-xl text-xs sm:text-sm font-bold text-center"></div>
+      </div>
+    `;
+  } else if (gameKey === 'benarsalah') {
+    innerGameHtml = `
+      <div class="p-4 sm:p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
+        <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-3xl shadow-xs">
+          ⚖️
+        </div>
+        <div class="text-center space-y-1 max-w-md">
+          <span class="text-[11px] font-bold text-indigo-700 uppercase tracking-wider block">Pernyataan Finansial:</span>
+          <p class="font-bold text-slate-800 text-sm sm:text-base leading-snug">"${q.statement}"</p>
+        </div>
+        <span class="text-xs text-slate-500 font-medium">Apakah pernyataan di atas Benar atau Salah?</span>
+        <div id="game-options-grid" class="flex gap-3 w-full max-w-xs pt-1">
+          <button type="button" onclick="handleTrueFalseAnswer(true, ${q.isTrue}, '${escapeHtmlText(q.explanation)}')" class="flex-1 py-3 bg-white rounded-2xl border-2 border-emerald-300 hover:border-emerald-500 hover:bg-emerald-50 font-black text-sm text-emerald-800 shadow-xs transition-all active:scale-95">
+            👍 BENAR
+          </button>
+          <button type="button" onclick="handleTrueFalseAnswer(false, ${q.isTrue}, '${escapeHtmlText(q.explanation)}')" class="flex-1 py-3 bg-white rounded-2xl border-2 border-rose-300 hover:border-rose-500 hover:bg-rose-50 font-black text-sm text-rose-800 shadow-xs transition-all active:scale-95">
+            👎 SALAH
+          </button>
+        </div>
+        <div id="game-feedback-box" class="hidden w-full max-w-md p-3.5 rounded-xl text-xs sm:text-sm font-bold text-center"></div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = `
+    <div class="space-y-4 animate-fade-in">
+      <!-- Game Sub-header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-200">
+        <div>
+          <span class="text-xs font-bold text-emerald-600 uppercase tracking-wide">${gameData.title}</span>
+          <h3 class="text-lg sm:text-xl font-black text-slate-800">Tantangan Soal ${roundIdx + 1} dari ${totalQuestions}</h3>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-28 sm:w-36 bg-slate-200 rounded-full h-2.5 overflow-hidden">
+            <div class="bg-emerald-500 h-2.5 rounded-full transition-all duration-300" style="width: ${progressPercent}%;"></div>
           </div>
-          <div class="p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
-            <p class="font-bold text-slate-800 text-center">Budi membeli pensil seharga Rp3.000 dan buku seharga Rp5.000. Berapakah total yang harus dibayar Budi?</p>
-            <div class="grid grid-cols-2 gap-3 w-full max-w-sm">
-              <button onclick="checkGameAnswer(false, 'Hitung kembali: 3.000 + 5.000')" class="p-3 bg-white rounded-xl border font-bold text-sm">Rp7.000</button>
-              <button onclick="checkGameAnswer(true, 'Tepat! Rp3.000 + Rp5.000 = Rp8.000!')" class="p-3 bg-white rounded-xl border font-bold text-sm">Rp8.000</button>
-              <button onclick="checkGameAnswer(false, 'Masih belum tepat.')" class="p-3 bg-white rounded-xl border font-bold text-sm">Rp9.000</button>
-              <button onclick="checkGameAnswer(false, 'Masih belum tepat.')" class="p-3 bg-white rounded-xl border font-bold text-sm">Rp10.000</button>
-            </div>
-            <div id="game-feedback" class="hidden p-3 rounded-xl text-xs font-bold text-center"></div>
-          </div>
+          <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-900 font-black text-xs shadow-xs">⭐ ${currentScore} Poin</span>
+        </div>
+      </div>
+
+      <!-- Main Game Board -->
+      ${innerGameHtml}
+    </div>
+  `;
+}
+
+function handleChoiceAnswer(gameKey, selectedIdx, correctIdx, explanation) {
+  const isCorrect = selectedIdx === correctIdx;
+  const grid = document.getElementById('game-options-grid');
+  if (grid) {
+    const buttons = grid.querySelectorAll('button');
+    buttons.forEach((btn, idx) => {
+      btn.disabled = true;
+      if (idx === correctIdx) {
+        btn.className = "p-3 sm:p-3.5 bg-emerald-500 text-white rounded-xl border-2 border-emerald-600 font-bold text-sm shadow-sm";
+      } else if (idx === selectedIdx && !isCorrect) {
+        btn.className = "p-3 sm:p-3.5 bg-rose-500 text-white rounded-xl border-2 border-rose-600 font-bold text-sm shadow-sm";
+      } else {
+        btn.className = "p-3 sm:p-3.5 bg-slate-100 text-slate-400 rounded-xl border-2 border-slate-200 font-bold text-sm opacity-60";
+      }
+    });
+  }
+
+  const fb = document.getElementById('game-feedback-box');
+  if (fb) {
+    fb.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'border-emerald-300', 'bg-rose-100', 'text-rose-900', 'border-rose-300');
+    if (isCorrect) {
+      window.soundManager.playCorrect();
+      fb.classList.add('bg-emerald-100', 'text-emerald-900', 'border', 'border-emerald-300');
+      RBC_GAME_STATE.scores[gameKey] = (RBC_GAME_STATE.scores[gameKey] || 0) + 10;
+      AppState.addReward(10, 2);
+      fb.innerHTML = `
+        <div class="space-y-2">
+          <p>🎉 <strong>Jawabanmu Tepat Sekali! (+10 Poin)</strong></p>
+          <p class="text-xs font-medium text-emerald-800">${explanation}</p>
+          <button type="button" onclick="nextGameQuestion('${gameKey}')" class="mt-2 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition-all active:scale-95">
+            Lanjut ke Soal Berikutnya ➡️
+          </button>
         </div>
       `;
-      break;
-    case 'pasang':
-      container.innerHTML = `
-        <div class="space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b">
-            <div>
-              <span class="text-xs font-bold text-emerald-600 uppercase">Game 4</span>
-              <h3 class="text-xl font-bold text-slate-800">Pasangkan Jawaban</h3>
-            </div>
-          </div>
-          <div class="p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
-            <p class="text-xs text-slate-600">Pasangkan fungsi berikut: <strong>Membeli seragam sekolah untuk dipakai belajar</strong></p>
-            <div class="flex gap-3">
-              <button onclick="checkGameAnswer(true, 'Tepat! Seragam sekolah adalah Kebutuhan pokok siswa!')" class="px-6 py-3 bg-emerald-500 text-white font-bold rounded-xl text-sm">Kebutuhan Pokok</button>
-              <button onclick="checkGameAnswer(false, 'Seragam bukan sekadar keinginan, melainkan kebutuhan penting!')" class="px-6 py-3 bg-amber-500 text-white font-bold rounded-xl text-sm">Keinginan Saja</button>
-            </div>
-            <div id="game-feedback" class="hidden p-3 rounded-xl text-xs font-bold text-center"></div>
-          </div>
+    } else {
+      window.soundManager.playWrong();
+      fb.classList.add('bg-rose-100', 'text-rose-900', 'border', 'border-rose-300');
+      fb.innerHTML = `
+        <div class="space-y-2">
+          <p>💪 <strong>Kurang Tepat, Simak Penjelasannya:</strong></p>
+          <p class="text-xs font-medium text-rose-800">${explanation}</p>
+          <button type="button" onclick="nextGameQuestion('${gameKey}')" class="mt-2 px-5 py-2 bg-slate-700 hover:bg-slate-800 text-white font-bold rounded-xl text-xs shadow-md transition-all active:scale-95">
+            Lanjut ke Soal Berikutnya ➡️
+          </button>
         </div>
       `;
-      break;
-    case 'benarsalah':
-      container.innerHTML = `
-        <div class="space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b">
-            <div>
-              <span class="text-xs font-bold text-emerald-600 uppercase">Game 5</span>
-              <h3 class="text-xl font-bold text-slate-800">Benar atau Salah</h3>
-            </div>
-          </div>
-          <div class="p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
-            <p class="font-bold text-slate-800 text-center text-sm md:text-base">
-              "Uang koin Rp1.000 memiliki nilai yang SAMA BESAR dengan selembar uang kertas Rp1.000."
-            </p>
-            <div class="flex gap-4">
-              <button onclick="checkGameAnswer(true, 'BENAR! Keduanya bernilai sama persis Rp1.000!')" class="px-8 py-3 bg-emerald-500 text-white font-black rounded-2xl text-base shadow-md">BENAR 👍</button>
-              <button onclick="checkGameAnswer(false, 'Pernyataan tersebut benar, nilainya sama!')" class="px-8 py-3 bg-rose-500 text-white font-black rounded-2xl text-base shadow-md">SALAH 👎</button>
-            </div>
-            <div id="game-feedback" class="hidden p-3 rounded-xl text-xs font-bold text-center"></div>
-          </div>
-        </div>
-      `;
-      break;
+    }
   }
 }
 
-function checkGameAnswer(isCorrect, msg) {
-  const fb = document.getElementById('game-feedback');
-  if (!fb) return;
-  fb.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'bg-rose-100', 'text-rose-800');
-  if (isCorrect) {
-    window.soundManager.playCorrect();
-    fb.classList.add('bg-emerald-100', 'text-emerald-800');
-    fb.innerHTML = `🎉 ${msg} (+10 Bintang!)`;
-    AppState.addReward(10, 2);
-  } else {
-    window.soundManager.playWrong();
-    fb.classList.add('bg-rose-100', 'text-rose-800');
-    fb.innerHTML = `💪 ${msg}`;
+function handleTrueFalseAnswer(userChoice, correctChoice, explanation) {
+  const isCorrect = userChoice === correctChoice;
+  const grid = document.getElementById('game-options-grid');
+  if (grid) {
+    grid.querySelectorAll('button').forEach(btn => btn.disabled = true);
+  }
+
+  const fb = document.getElementById('game-feedback-box');
+  if (fb) {
+    fb.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'border-emerald-300', 'bg-rose-100', 'text-rose-900', 'border-rose-300');
+    if (isCorrect) {
+      window.soundManager.playCorrect();
+      fb.classList.add('bg-emerald-100', 'text-emerald-900', 'border', 'border-emerald-300');
+      RBC_GAME_STATE.scores.benarsalah = (RBC_GAME_STATE.scores.benarsalah || 0) + 10;
+      AppState.addReward(10, 2);
+      fb.innerHTML = `
+        <div class="space-y-2">
+          <p>🎉 <strong>Tepat Sekali! Analisismu Benar! (+10 Poin)</strong></p>
+          <p class="text-xs font-medium text-emerald-800">${explanation}</p>
+          <button type="button" onclick="nextGameQuestion('benarsalah')" class="mt-2 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition-all active:scale-95">
+            Lanjut ke Soal Berikutnya ➡️
+          </button>
+        </div>
+      `;
+    } else {
+      window.soundManager.playWrong();
+      fb.classList.add('bg-rose-100', 'text-rose-900', 'border', 'border-rose-300');
+      fb.innerHTML = `
+        <div class="space-y-2">
+          <p>💪 <strong>Kurang Tepat! Simak penjelasannya:</strong></p>
+          <p class="text-xs font-medium text-rose-800">${explanation}</p>
+          <button type="button" onclick="nextGameQuestion('benarsalah')" class="mt-2 px-5 py-2 bg-slate-700 hover:bg-slate-800 text-white font-bold rounded-xl text-xs shadow-md transition-all active:scale-95">
+            Lanjut ke Soal Berikutnya ➡️
+          </button>
+        </div>
+      `;
+    }
   }
 }
+
+function handleSusunLetterClick(letterIdx, letter, targetWord, explanation) {
+  if (RBC_GAME_STATE.susunAnswer.length >= targetWord.length) return;
+  window.soundManager.playPop();
+
+  RBC_GAME_STATE.susunAnswer.push({ idx: letterIdx, letter: letter });
+  const btn = document.getElementById(`btn-letter-${letterIdx}`);
+  if (btn) {
+    btn.disabled = true;
+    btn.classList.add('opacity-30', 'pointer-events-none', 'bg-slate-100');
+  }
+
+  updateSusunSlots(targetWord);
+}
+
+function handleSusunBackspace(targetWord) {
+  if (RBC_GAME_STATE.susunAnswer.length === 0) return;
+  window.soundManager.playPop();
+
+  const popped = RBC_GAME_STATE.susunAnswer.pop();
+  const btn = document.getElementById(`btn-letter-${popped.idx}`);
+  if (btn) {
+    btn.disabled = false;
+    btn.classList.remove('opacity-30', 'pointer-events-none', 'bg-slate-100');
+  }
+
+  updateSusunSlots(targetWord);
+}
+
+function handleSusunReset(targetWord) {
+  window.soundManager.playPop();
+  RBC_GAME_STATE.susunAnswer.forEach(item => {
+    const btn = document.getElementById(`btn-letter-${item.idx}`);
+    if (btn) {
+      btn.disabled = false;
+      btn.classList.remove('opacity-30', 'pointer-events-none', 'bg-slate-100');
+    }
+  });
+  RBC_GAME_STATE.susunAnswer = [];
+  updateSusunSlots(targetWord);
+
+  const fb = document.getElementById('game-feedback-box');
+  if (fb) fb.classList.add('hidden');
+}
+
+function updateSusunSlots(targetWord) {
+  const slotsContainer = document.getElementById('susun-answer-slots');
+  if (!slotsContainer) return;
+
+  const currentChars = RBC_GAME_STATE.susunAnswer.map(a => a.letter);
+  slotsContainer.innerHTML = Array.from({ length: targetWord.length }).map((_, i) => {
+    const ch = currentChars[i] || '';
+    if (ch) {
+      return `<span class="w-9 h-11 sm:w-11 sm:h-12 border-2 border-purple-500 rounded-xl flex items-center justify-center text-lg sm:text-2xl font-black text-purple-950 bg-white shadow-xs">${ch}</span>`;
+    } else {
+      return `<span class="w-9 h-11 sm:w-11 sm:h-12 border-2 border-dashed border-purple-300 rounded-xl flex items-center justify-center text-lg sm:text-2xl font-black text-purple-900 bg-purple-50/50"></span>`;
+    }
+  }).join('');
+}
+
+function handleSusunCheck(targetWord, explanation) {
+  const currentWord = RBC_GAME_STATE.susunAnswer.map(a => a.letter).join('');
+  const fb = document.getElementById('game-feedback-box');
+  if (!fb) return;
+
+  if (currentWord.length < targetWord.length) {
+    window.soundManager.playWrong();
+    fb.classList.remove('hidden');
+    fb.className = "w-full max-w-md p-3.5 rounded-xl text-xs sm:text-sm font-bold text-center bg-amber-100 text-amber-900 border border-amber-300";
+    fb.innerHTML = `⚠️ Hurufnya belum lengkap! Masukkan ${targetWord.length} huruf ya.`;
+    return;
+  }
+
+  fb.classList.remove('hidden');
+  if (currentWord === targetWord) {
+    window.soundManager.playCorrect();
+    RBC_GAME_STATE.scores.susun = (RBC_GAME_STATE.scores.susun || 0) + 10;
+    AppState.addReward(10, 2);
+    fb.className = "w-full max-w-md p-3.5 rounded-xl text-xs sm:text-sm font-bold text-center bg-emerald-100 text-emerald-900 border border-emerald-300";
+    fb.innerHTML = `
+      <div class="space-y-2">
+        <p>🎉 <strong>Hebat Sekali! Kamu Berhasil Menyusun Kata "${targetWord}"! (+10 Poin)</strong></p>
+        <p class="text-xs font-medium text-emerald-800">${explanation}</p>
+        <button type="button" onclick="nextGameQuestion('susun')" class="mt-2 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition-all active:scale-95">
+          Lanjut ke Kata Berikutnya ➡️
+        </button>
+      </div>
+    `;
+    const checkBtn = document.getElementById('btn-susun-check');
+    if (checkBtn) checkBtn.disabled = true;
+  } else {
+    window.soundManager.playWrong();
+    fb.className = "w-full max-w-md p-3.5 rounded-xl text-xs sm:text-sm font-bold text-center bg-rose-100 text-rose-900 border border-rose-300";
+    fb.innerHTML = `
+      <div class="space-y-2">
+        <p>💪 <strong>Susunan kata belum tepat!</strong></p>
+        <p class="text-xs font-medium text-rose-800">Coba tekan tombol Reset lalu susun kembali huruf-hurufnya dengan urutan yang benar ya!</p>
+      </div>
+    `;
+  }
+}
+
+function nextGameQuestion(gameKey) {
+  window.soundManager.playPop();
+  RBC_GAME_STATE.rounds[gameKey] = (RBC_GAME_STATE.rounds[gameKey] || 0) + 1;
+  renderActiveGameContent(gameKey);
+}
+
+function restartCurrentGame(gameKey) {
+  window.soundManager.playPop();
+  RBC_GAME_STATE.rounds[gameKey] = 0;
+  RBC_GAME_STATE.scores[gameKey] = 0;
+  RBC_GAME_STATE.susunAnswer = [];
+  renderActiveGameContent(gameKey);
+}
+
+function getNextGameKey(currentKey) {
+  const order = ['tebak', 'susun', 'matematika', 'pasang', 'benarsalah'];
+  const idx = order.indexOf(currentKey);
+  return order[(idx + 1) % order.length];
+}
+
+// Window bindings
+window.renderGameView = renderGameView;
+window.initGameView = initGameView;
+window.switchGameView = switchGameView;
+window.renderActiveGameContent = renderActiveGameContent;
+window.handleChoiceAnswer = handleChoiceAnswer;
+window.handleTrueFalseAnswer = handleTrueFalseAnswer;
+window.handleSusunLetterClick = handleSusunLetterClick;
+window.handleSusunBackspace = handleSusunBackspace;
+window.handleSusunReset = handleSusunReset;
+window.handleSusunCheck = handleSusunCheck;
+window.nextGameQuestion = nextGameQuestion;
+window.restartCurrentGame = restartCurrentGame;
 
 /* ============================================================
    VIEW 11: TENTANG (ABOUT & TEAM)
