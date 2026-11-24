@@ -52,32 +52,34 @@
   <!-- Toast Notification Container -->
   <div id="global-toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 opacity-0 pointer-events-none translate-y-4"></div>
 
-  <!-- Top Announcement Bar (Header Identity UPI Cibiru sesuai Storyboard) -->
-  <header class="bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 text-white py-1.5 px-3 sm:px-4 shadow-xs">
-    <div class="max-w-7xl mx-auto flex items-center justify-between text-xs font-bold gap-2">
-      <!-- Mobile View (Compact Single Line) -->
-      <div class="flex sm:hidden items-center justify-between w-full text-[11px]">
-        <span class="flex items-center gap-1 font-black truncate">🎓 UPI CIBIRU • IPAS KELAS 3 SD</span>
-        <span class="bg-white/20 px-2 py-0.5 rounded-full text-[9px] uppercase tracking-wider flex-shrink-0">#dHeTik</span>
+  <!-- Fixed Top Navbar Wrapper (Header + 2-Tier Navigation) -->
+  <div id="top-fixed-nav" class="fixed top-0 left-0 right-0 z-40 bg-white">
+    <!-- Top Announcement Bar (Header Identity UPI Cibiru sesuai Storyboard) -->
+    <header class="bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 text-white py-1.5 px-3 sm:px-4 shadow-xs">
+      <div class="max-w-7xl mx-auto flex items-center justify-between text-xs font-bold gap-2">
+        <!-- Mobile View (Compact Single Line) -->
+        <div class="flex sm:hidden items-center justify-between w-full text-[11px]">
+          <span class="flex items-center gap-1 font-black truncate">🎓 UPI CIBIRU • IPAS KELAS 3 SD</span>
+          <span class="bg-white/20 px-2 py-0.5 rounded-full text-[9px] uppercase tracking-wider flex-shrink-0">#dHeTik</span>
+        </div>
+        <!-- Desktop & Tablet View -->
+        <div class="hidden sm:flex items-center gap-2">
+          <span>🎓 KAMPUS UPI DI CIBIRU</span>
+          <span class="opacity-60">•</span>
+          <span class="tracking-wider">PGSD 2026</span>
+          <span class="opacity-60">•</span>
+          <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider">#dHeTik</span>
+        </div>
+        <div class="hidden sm:flex items-center gap-4 text-[11px]">
+          <span>IPAS KELAS 3 SD (FASE B)</span>
+          <span class="opacity-60">•</span>
+          <span>BAB 5: BIJAK BERBELANJA KEBUTUHAN</span>
+        </div>
       </div>
-      <!-- Desktop & Tablet View -->
-      <div class="hidden sm:flex items-center gap-2">
-        <span>🎓 KAMPUS UPI DI CIBIRU</span>
-        <span class="opacity-60">•</span>
-        <span class="tracking-wider">PGSD 2026</span>
-        <span class="opacity-60">•</span>
-        <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider">#dHeTik</span>
-      </div>
-      <div class="hidden sm:flex items-center gap-4 text-[11px]">
-        <span>IPAS KELAS 3 SD (FASE B)</span>
-        <span class="opacity-60">•</span>
-        <span>BAB 5: BIJAK BERBELANJA KEBUTUHAN</span>
-      </div>
-    </div>
-  </header>
+    </header>
 
-  <!-- Enhanced 2-Tier Clean Navbar with Official UPI Logo -->
-  <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-2 border-red-100 shadow-md">
+    <!-- Enhanced 2-Tier Clean Navbar with Official UPI Logo -->
+    <nav class="bg-white/95 backdrop-blur-md border-b-2 border-red-100 shadow-md">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
       
       <!-- Tier 1: Brand Logo & User Action Controls -->
@@ -264,9 +266,10 @@
       <div id="global-progress-bar" class="bg-gradient-to-r from-sky-400 via-amber-400 to-emerald-400 h-1.5 transition-all duration-500" style="width: 0%"></div>
     </div>
   </nav>
+  </div> <!-- /#top-fixed-nav -->
 
-  <!-- Main View Container -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 pb-28 md:pb-12">
+  <!-- Main View Container (Padded for Fixed Top Navbar) -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 pb-28 md:pb-12 pt-[148px] sm:pt-[168px]">
     <div id="main-content-view">
       <!-- Dynamic View Component Loaded Here -->
     </div>
@@ -728,5 +731,19 @@
   <script src="js/mascot.js?v=20261112_1"></script>
   <script src="js/supabase-client.js?v=20261112_1"></script>
   <script src="js/app.js?v=20261112_1"></script>
+  <script>
+    // Dinamis sesuaikan padding top main agar tidak tertutup fixed navbar di berbagai ukuran layar
+    function syncFixedNavbarOffset() {
+      const navWrap = document.getElementById('top-fixed-nav');
+      const main = document.querySelector('main');
+      if (navWrap && main) {
+        const h = navWrap.offsetHeight;
+        if (h > 0) main.style.paddingTop = (h + 16) + 'px';
+      }
+    }
+    window.addEventListener('DOMContentLoaded', syncFixedNavbarOffset);
+    window.addEventListener('load', syncFixedNavbarOffset);
+    window.addEventListener('resize', syncFixedNavbarOffset);
+  </script>
 </body>
 </html>

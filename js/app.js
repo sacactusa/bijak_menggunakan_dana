@@ -1211,6 +1211,37 @@ function renderTahapHView() {
           Amati infografis dan cerita bergambar mengenai empat kegiatan nyata menggunakan uang di bawah ini:
         </p>
 
+        <!-- TAMPILAN POSTER INFOGRAFIS RESMI (FOTO 1) -->
+        <div class="mb-8 rounded-3xl overflow-hidden bg-gradient-to-b from-emerald-50 via-teal-50 to-white border-2 border-emerald-300 p-3.5 sm:p-6 shadow-xl group">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-3.5 px-1">
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-1 rounded-full bg-emerald-600 text-white font-black text-xs uppercase tracking-wider shadow-xs">
+                📊 Poster Infografis Pembelajaran
+              </span>
+              <span class="text-xs text-emerald-800 font-bold hidden sm:inline">
+                IPAS Kelas 3 SD • Kebutuhan & Keinginan
+              </span>
+            </div>
+            <button type="button" onclick="openImageLightbox('assets/images/foto1.jpeg', 'Infografis: Uang dalam Kehidupan Sehari-hari', 'IPAS Kelas 3 SD')" class="btn-playful inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black transition-all shadow-md">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+              <span>Perbesar Poster HD 🔍</span>
+            </button>
+          </div>
+
+          <!-- Container Foto 1 -->
+          <div class="cursor-pointer overflow-hidden rounded-2xl bg-white border border-emerald-200 shadow-inner flex items-center justify-center relative hover:ring-4 hover:ring-emerald-200 transition-all" onclick="openImageLightbox('assets/images/foto1.jpeg', 'Infografis: Uang dalam Kehidupan Sehari-hari', 'IPAS Kelas 3 SD')">
+            <img src="assets/images/foto1.jpeg" alt="Infografis Uang dalam Kehidupan Sehari-hari" class="w-full max-h-[680px] object-contain rounded-2xl transition-transform duration-300 group-hover:scale-[1.01]" onerror="this.src='foto1.jpeg'"/>
+            <div class="absolute bottom-3 right-3 bg-slate-900/75 backdrop-blur-xs text-white text-[11px] font-bold px-3 py-1 rounded-full pointer-events-none opacity-85 group-hover:opacity-100 transition-opacity">
+              🔍 Klik untuk Memperbesar
+            </div>
+          </div>
+
+          <div class="mt-3.5 flex flex-wrap items-center justify-between text-xs text-slate-500 px-1 gap-2">
+            <span class="font-medium text-slate-600">💡 <strong>Tip Belajar:</strong> Klik pada poster di atas untuk membaca teks infografis secara penuh!</span>
+            <span class="font-bold text-emerald-700 bg-emerald-100/90 px-2.5 py-0.5 rounded-md">Resolusi Tinggi 1131×1600</span>
+          </div>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           <div class="p-5 rounded-2xl bg-amber-50 border-2 border-amber-200 flex flex-col items-center text-center space-y-2">
             <span class="text-4xl">🥪</span>
@@ -3931,6 +3962,37 @@ function renderTahapIView() {
           Amati keterkaitan antar konsep pada diagram peta konsep di bawah ini:
         </p>
 
+        <!-- TAMPILAN POSTER PETA KONSEP RESMI (FOTO 2) -->
+        <div class="mb-8 rounded-3xl overflow-hidden bg-gradient-to-b from-rose-50 via-amber-50 to-white border-2 border-rose-300 p-3.5 sm:p-6 shadow-xl group">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-3.5 px-1">
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-1 rounded-full bg-rose-600 text-white font-black text-xs uppercase tracking-wider shadow-xs">
+                🗺️ Bagan Peta Konsep Utama
+              </span>
+              <span class="text-xs text-rose-800 font-bold hidden sm:inline">
+                IPAS Kelas 3 SD • Uang & Pengelolaannya
+              </span>
+            </div>
+            <button type="button" onclick="openImageLightbox('assets/images/foto2.jpeg', 'Peta Konsep: Uang dan Pengelolaannya', 'IPAS Kelas 3 SD')" class="btn-playful inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-black transition-all shadow-md">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"/></svg>
+              <span>Perbesar Peta Konsep HD 🔍</span>
+            </button>
+          </div>
+
+          <!-- Container Foto 2 -->
+          <div class="cursor-pointer overflow-hidden rounded-2xl bg-white border border-rose-200 shadow-inner flex items-center justify-center relative hover:ring-4 hover:ring-rose-200 transition-all" onclick="openImageLightbox('assets/images/foto2.jpeg', 'Peta Konsep: Uang dan Pengelolaannya', 'IPAS Kelas 3 SD')">
+            <img src="assets/images/foto2.jpeg" alt="Peta Konsep Uang dan Pengelolaannya" class="w-full max-h-[680px] object-contain rounded-2xl transition-transform duration-300 group-hover:scale-[1.01]" onerror="this.src='foto2.jpeg'"/>
+            <div class="absolute bottom-3 right-3 bg-slate-900/75 backdrop-blur-xs text-white text-[11px] font-bold px-3 py-1 rounded-full pointer-events-none opacity-85 group-hover:opacity-100 transition-opacity">
+              🔍 Klik untuk Memperbesar
+            </div>
+          </div>
+
+          <div class="mt-3.5 flex flex-wrap items-center justify-between text-xs text-slate-500 px-1 gap-2">
+            <span class="font-medium text-slate-600">💡 <strong>Tip Belajar:</strong> Klik pada bagan di atas untuk melihat detail hubungan dan struktur materi!</span>
+            <span class="font-bold text-rose-700 bg-rose-100/90 px-2.5 py-0.5 rounded-md">Resolusi Tinggi 1131×1600</span>
+          </div>
+        </div>
+
         <!-- Diagram Peta Konsep Interaktif -->
         <div class="p-6 rounded-3xl bg-gradient-to-br from-rose-50 via-amber-50 to-sky-50 border-2 border-rose-200 space-y-6">
           <!-- Pusat -->
@@ -4225,6 +4287,19 @@ function renderTahapKView() {
                   </span>
                 </div>
               </div>
+            </div>
+
+            <!-- EMBED PADLET PAMERAN KARYA (Sesuai Permintaan Revisi) -->
+            <div class="mt-6 space-y-3">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="inline-flex items-center gap-1.5 font-bold text-xs sm:text-sm text-slate-800">
+                  <span class="text-lg">📌</span> Papan Interaktif Padlet Pameran Celengan Kreatif
+                </span>
+                <a href="https://padlet.com/embed/s025crorn0mkl1knlm7f" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-rose-600 hover:text-rose-700 hover:underline">
+                  Buka Penuh di Tab Baru ↗️
+                </a>
+              </div>
+              <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/s025crorn0mkl1knlm7f" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p></div>
             </div>
 
             <!-- Link Upload Padlet Produk Celengan Kreatif (Highlight Besar) -->
