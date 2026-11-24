@@ -1646,7 +1646,7 @@ function renderTahapEView() {
           <!-- Grid Rak Barang -->
           <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4" id="niza-items-grid">
             ${RBC_DATA.marketNizaItems.map(item => {
-              const iconHtml = (item.icon === 'clayWarna') ? RBC_ICONS.clayWarna('w-10 h-10 inline-block') : `<span class="text-3xl">${item.icon}</span>`;
+              const iconHtml = (typeof RBC_ICONS[item.icon] === 'function') ? RBC_ICONS[item.icon]('w-10 h-10 inline-block') : `<span class="text-3xl">${item.icon}</span>`;
               return `
               <div class="niza-item-card p-3.5 sm:p-4 bg-white rounded-2xl border-2 border-slate-200 hover:border-emerald-300 shadow-sm flex flex-col justify-between space-y-3 group hover:shadow-md transition-all" data-category="${item.category}">
                 <div class="flex items-start justify-between gap-2">
@@ -2006,7 +2006,7 @@ function updateNizaCartUI() {
   }
 
   container.innerHTML = AppState.nizaCart.map((item, idx) => {
-    const iconHtml = (item.icon === 'clayWarna') ? RBC_ICONS.clayWarna('w-6 h-6 inline-block') : `<span class="text-xl">${item.icon}</span>`;
+    const iconHtml = (typeof RBC_ICONS[item.icon] === 'function') ? RBC_ICONS[item.icon]('w-6 h-6 inline-block') : `<span class="text-xl">${item.icon}</span>`;
     return `
     <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 border border-slate-200 text-xs">
       <div class="flex items-center gap-2">

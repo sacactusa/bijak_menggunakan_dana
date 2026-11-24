@@ -193,6 +193,136 @@ const RBC_ICONS = {
       <circle cx="27" cy="21" r="0.8" fill="#FFFFFF"/>
     </svg>`,
 
+  // Rautan Pensil Putar & Serutan (Pencil Sharpener)
+  rautanPensil: (cls = "w-10 h-10") => `
+    <svg class="${cls}" viewBox="0 0 36 36" fill="none">
+      <!-- Wadah Bawah Transparan Serutan Pensil -->
+      <rect x="7" y="16" width="22" height="15" rx="3.5" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.3"/>
+      <!-- Serutan Pensil Melingkar di Dalam Wadah -->
+      <path d="M10 24 Q13 21 16 25 Q19 28 22 23" stroke="#F59E0B" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M12 28 Q15 25 18 28 Q22 30 25 26" stroke="#EF4444" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <circle cx="14" cy="27" r="1.1" fill="#FBBF24"/>
+      <circle cx="21" cy="25" r="1" fill="#D97706"/>
+      <line x1="8" y1="21" x2="28" y2="21" stroke="#BAE6FD" stroke-width="0.8" stroke-dasharray="1.5 1.5"/>
+      <!-- Bodi Mesin Rautan Atas (Toska / Cyan Ceria) -->
+      <path d="M8 16 L8 8 C8 5.8 9.8 4 12 4 L24 4 C26.2 4 28 5.8 28 8 L28 16 Z" fill="#06B6D4" stroke="#0891B2" stroke-width="1.4"/>
+      <!-- Lubang Masuk Pensil Depan -->
+      <circle cx="18" cy="10" r="4.2" fill="#1E293B" stroke="#CBD5E1" stroke-width="1.3"/>
+      <!-- Pensil yang Sedang Diraut (Menancap Miring) -->
+      <polygon points="18,10 16,6 20,6" fill="#FDE68A" stroke="#CA8A04" stroke-width="0.7"/>
+      <polygon points="18,10 17,8 19,8" fill="#0F172A"/>
+      <rect x="16" y="2" width="4" height="4.5" fill="#EF4444" stroke="#B91C1C" stroke-width="0.7"/>
+      <line x1="17.5" y1="2" x2="17.5" y2="6.5" stroke="#FDE047" stroke-width="0.6"/>
+      <!-- Gagang Pemutar Rautan (Engkol Putar di Samping) -->
+      <path d="M28 10 L32 7 L32 14" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="32" cy="14" r="2.3" fill="#EF4444" stroke="#991B1B" stroke-width="1"/>
+      <!-- Kaki Karet Rautan -->
+      <rect x="9" y="30.5" width="4" height="2" rx="1" fill="#475569"/>
+      <rect x="23" y="30.5" width="4" height="2" rx="1" fill="#475569"/>
+    </svg>`,
+
+  // Buku Gambar A4 / Sketchbook Lukis
+  bukuGambar: (cls = "w-10 h-10") => `
+    <svg class="${cls}" viewBox="0 0 36 36" fill="none">
+      <!-- Lembaran Buku Bagian Bawah -->
+      <rect x="4" y="8" width="28" height="23" rx="2.5" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1"/>
+      <!-- Halaman Kertas Gambar Utama (Putih Bersih) -->
+      <rect x="3" y="6" width="28" height="23" rx="2.5" fill="#FFFFFF" stroke="#475569" stroke-width="1.3"/>
+      <!-- Spiral Kawat Jilid Buku di Bagian Atas -->
+      <path d="M6 8 C6 3.5 8.5 3.5 8.5 8 M11 8 C11 3.5 13.5 3.5 13.5 8 M16 8 C16 3.5 18.5 3.5 18.5 8 M21 8 C21 3.5 23.5 3.5 23.5 8 M26 8 C26 3.5 28.5 3.5 28.5 8" stroke="#334155" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="7.2" cy="7.5" r="0.9" fill="#94A3B8"/>
+      <circle cx="12.2" cy="7.5" r="0.9" fill="#94A3B8"/>
+      <circle cx="17.2" cy="7.5" r="0.9" fill="#94A3B8"/>
+      <circle cx="22.2" cy="7.5" r="0.9" fill="#94A3B8"/>
+      <circle cx="27.2" cy="7.5" r="0.9" fill="#94A3B8"/>
+      <!-- Gambar Ceria di Lembar Buku Gambar: Pelangi, Matahari & Bukit -->
+      <path d="M5 25 Q13 14 22 25" stroke="#FB7185" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M6.5 26 Q13.5 17 20.5 26" stroke="#FBBF24" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <path d="M8 27 Q14 20 20 27" stroke="#38BDF8" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <!-- Matahari Kuning Ceria -->
+      <circle cx="25" cy="14" r="3.2" fill="#FACC15" stroke="#EAB308" stroke-width="0.9"/>
+      <path d="M25 9.5 V8.5 M25 18.5 V19.5 M20.5 14 H19.5 M29.5 14 H30.5" stroke="#F59E0B" stroke-width="0.9" stroke-linecap="round"/>
+      <!-- Bukit Hijau di Bawah -->
+      <path d="M3 27 Q12 21 21 27 L21 28.5 L3 28.5 Z" fill="#86EFAC" opacity="0.8"/>
+      <!-- Kuas Lukis Miring di Pojok Kanan Bawah -->
+      <rect x="18" y="24" width="13" height="2" rx="1" transform="rotate(-28 18 24)" fill="#EA580C"/>
+      <rect x="15.5" y="23.5" width="3" height="2.2" rx="0.4" transform="rotate(-28 15.5 23.5)" fill="#CBD5E1"/>
+      <path d="M13.5 22 C14.5 24 16 24 15.5 22 Z" fill="#2563EB"/>
+      <!-- Label Huruf Lucu "A4" -->
+      <rect x="5.5" y="11" width="5.5" height="3" rx="0.8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="0.5"/>
+      <text x="8.2" y="13.3" font-size="2.4" font-weight="900" fill="#475569" text-anchor="middle" font-family="'Fredoka', sans-serif">A4</text>
+    </svg>`,
+
+  // Kipas Angin Mini USB / Portable Electric Desk Fan
+  kipasAngin: (cls = "w-10 h-10") => `
+    <svg class="${cls}" viewBox="0 0 36 36" fill="none">
+      <!-- Hembusan Angin Segar di Depan -->
+      <path d="M29 7 Q33 9 30 12" stroke="#38BDF8" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+      <path d="M30 14 Q34 16 31 19" stroke="#38BDF8" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+      <path d="M28 21 Q32 23 29 25" stroke="#38BDF8" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      <!-- Kaki Dasar / Dudukan Meja Kipas -->
+      <ellipse cx="17" cy="31" rx="9" ry="3.2" fill="#F1F5F9" stroke="#64748B" stroke-width="1.4"/>
+      <!-- Tombol Power & Kecepatan Hijau -->
+      <circle cx="17" cy="30.8" r="1.4" fill="#10B981" stroke="#059669" stroke-width="0.6"/>
+      <!-- Leher / Tiang Kipas Angin -->
+      <path d="M15.5 23 L15.5 30 M18.5 23 L18.5 30" stroke="#64748B" stroke-width="1.8" stroke-linecap="round"/>
+      <!-- Lingkaran Keranjang / Grill Kipas Luar -->
+      <circle cx="17" cy="14" r="10.5" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.6"/>
+      <!-- Garis Ruji-Ruji Kipas (Grille Protector) -->
+      <circle cx="17" cy="14" r="6.5" stroke="#38BDF8" stroke-width="0.8" stroke-dasharray="2 1.5"/>
+      <line x1="17" y1="3.5" x2="17" y2="24.5" stroke="#0284C7" stroke-width="0.9" opacity="0.7"/>
+      <line x1="6.5" y1="14" x2="27.5" y2="14" stroke="#0284C7" stroke-width="0.9" opacity="0.7"/>
+      <line x1="9.5" y1="6.5" x2="24.5" y2="21.5" stroke="#38BDF8" stroke-width="0.8" opacity="0.7"/>
+      <line x1="9.5" y1="21.5" x2="24.5" y2="6.5" stroke="#38BDF8" stroke-width="0.8" opacity="0.7"/>
+      <!-- 3 Baling-Baling Kipas Angin Aerodinamis Berputar -->
+      <path d="M17 14 C15.5 8 21 6.5 20 11.5 Z" fill="#0EA5E9" stroke="#0284C7" stroke-width="0.9"/>
+      <path d="M17 14 C22 16.5 21 21.5 16.5 19 Z" fill="#0EA5E9" stroke="#0284C7" stroke-width="0.9"/>
+      <path d="M17 14 C13 17 10 12.5 14.5 11 Z" fill="#0EA5E9" stroke="#0284C7" stroke-width="0.9"/>
+      <!-- Poros / Rotor Tengah Kipas -->
+      <circle cx="17" cy="14" r="2.8" fill="#0369A1" stroke="#0C4A6E" stroke-width="0.9"/>
+      <circle cx="17" cy="14" r="1.1" fill="#BAE6FD"/>
+    </svg>`,
+
+  // Penghapus Pensil Sekolah (Rubber Eraser)
+  penghapus: (cls = "w-10 h-10") => `
+    <svg class="${cls}" viewBox="0 0 36 36" fill="none">
+      <!-- Serpihan Karet Penghapus di Bawah -->
+      <circle cx="6" cy="30" r="1" fill="#F472B6"/>
+      <circle cx="9" cy="32" r="0.8" fill="#F472B6"/>
+      <path d="M26 31 Q28 32 30 31" stroke="#F472B6" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <!-- Blok Karet Penghapus Bagian Atas/Ujung (Merah Muda Lembut) -->
+      <path d="M5 16 L12 8 L18 8 L11 16 Z" fill="#FCE7F3" stroke="#F472B6" stroke-width="1.1"/>
+      <rect x="5" y="16" width="10" height="12" rx="1.5" fill="#F472B6" stroke="#DB2777" stroke-width="1.3"/>
+      <!-- Selongsong Karton Pelindung Biru (Cardboard Sleeve) -->
+      <rect x="13" y="10" width="17" height="17" rx="2" fill="#2563EB" stroke="#1D4ED8" stroke-width="1.4"/>
+      <!-- Garis Putih & Aksen Selongsong -->
+      <rect x="13" y="15" width="17" height="5" fill="#FFFFFF"/>
+      <text x="21.5" y="18.8" font-size="3.2" font-weight="900" fill="#1E40AF" text-anchor="middle" font-family="'Fredoka', sans-serif">2B</text>
+      <!-- Bayangan Lipatan 3D Karet Belakang -->
+      <path d="M18 8 L30 8 L30 10 L18 10 Z" fill="#93C5FD"/>
+    </svg>`,
+
+  // Botol Minum Tumbler Sekolah Higienis
+  botolMinum: (cls = "w-10 h-10") => `
+    <svg class="${cls}" viewBox="0 0 36 36" fill="none">
+      <!-- Tali Gantungan / Pegangan Botol -->
+      <path d="M21 9 Q26 11 25 18" stroke="#F59E0B" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <!-- Badan Botol Transparan Biru -->
+      <rect x="11" y="11" width="14" height="21" rx="4" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.5"/>
+      <!-- Air Minum Segar di Dalam Botol -->
+      <rect x="12" y="17" width="12" height="14" rx="2.5" fill="#38BDF8" opacity="0.8"/>
+      <!-- Garis Takaran Mililiter -->
+      <line x1="13" y1="20" x2="16" y2="20" stroke="#0284C7" stroke-width="1" stroke-linecap="round"/>
+      <line x1="13" y1="24" x2="15" y2="24" stroke="#0284C7" stroke-width="0.9" stroke-linecap="round"/>
+      <line x1="13" y1="28" x2="16" y2="28" stroke="#0284C7" stroke-width="1" stroke-linecap="round"/>
+      <!-- Tutup Flip-Top Botol & Sedotan Higienis -->
+      <rect x="12" y="9" width="12" height="3" rx="1" fill="#0284C7" stroke="#0369A1" stroke-width="0.8"/>
+      <path d="M14 9 C14 5 22 5 22 9 Z" fill="#0EA5E9" stroke="#0284C7" stroke-width="1.1"/>
+      <rect x="17" y="6" width="2" height="3" rx="0.5" fill="#FDE047"/>
+      <!-- Kilau Efek Kaca Botol Bersih -->
+      <line x1="22" y1="14" x2="22" y2="29" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" opacity="0.75"/>
+    </svg>`,
+
   // Gambar Asli Uang Logam Resmi Bank Indonesia (Emisi 2016)
   rupiahCoin: (val, cls = "w-24 h-24 sm:w-28 sm:h-28", side = "depan") => {
     const v = parseInt(val, 10);
