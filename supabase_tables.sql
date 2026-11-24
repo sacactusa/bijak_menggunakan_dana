@@ -153,9 +153,35 @@ GRANT USAGE ON SCHEMA public TO anon, authenticated;
 GRANT ALL ON ALL TABLES IN SCHEMA public TO anon, authenticated;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO anon, authenticated;
 
+-- Berikan izin eksplisit untuk seluruh tabel aplikasi
+GRANT ALL ON TABLE 
+    siswa, 
+    ceritaku, 
+    jawaban_pemantik, 
+    transaksi_kasir, 
+    lkpd_submissions, 
+    padlet_posts, 
+    padlet_comments, 
+    penguatan_materi, 
+    hasil_karyaku, 
+    karya_siswa, 
+    refleksi_siswa, 
+    hasil_kuis, 
+    kontak_masukan 
+TO anon, authenticated;
+
 -- Default privileges untuk tabel baru
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO anon, authenticated;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO anon, authenticated;
+
+-- ============================================================
+-- INDEX PERFORMA UNTUK PENCARIAN & RELASI CEPAT
+-- ============================================================
+CREATE INDEX IF NOT EXISTS idx_siswa_nama ON siswa (nama_panggilan);
+CREATE INDEX IF NOT EXISTS idx_padlet_comments_post_id ON padlet_comments (post_id);
+CREATE INDEX IF NOT EXISTS idx_padlet_posts_created_at ON padlet_posts (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_hasil_karyaku_created_at ON hasil_karyaku (created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_refleksi_siswa_created_at ON refleksi_siswa (created_at DESC);
 
 -- ============================================================
 -- ROW LEVEL SECURITY (RLS) & KEBIJAKAN AKSES
