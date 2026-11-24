@@ -1277,16 +1277,6 @@ function renderTahapHView() {
             <span class="text-xs font-bold text-rose-700 bg-rose-100 px-2 py-0.5 rounded-md">Fungsi: Penyimpan Nilai</span>
           </div>
         </div>
-
-        <!-- LKPD Aktivitas 2 Visual Reference -->
-        <div class="p-4 rounded-2xl bg-white border border-slate-200 flex flex-col sm:flex-row items-center gap-4">
-          <img src="assets/images/lkpd-aktivitas2-fungsi.jpg" alt="LKPD Aktivitas 2" class="w-32 rounded-xl shadow-md border" onerror="this.src='docx_media/image1.jpg'"/>
-          <div class="text-sm space-y-1">
-            <span class="text-xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">LKPD Aktivitas 2</span>
-            <h5 class="font-bold text-slate-800">Uang dalam Kehidupanku</h5>
-            <p class="text-slate-600 text-xs">Uang membuat kita dapat memperoleh barang yang kita butuhkan dengan tertib dan adil.</p>
-          </div>
-        </div>
       </div>
 
       <!-- 2. NARASI PENGHUBUNG (Urutan #2) -->
@@ -4180,16 +4170,45 @@ function renderTahapIView() {
         <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-purple-50 via-pink-50 to-amber-50 border-2 border-purple-200 space-y-3.5">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <span class="text-xs font-bold text-purple-950 flex items-center gap-1.5">
-              <span>✍️</span> Tulis Pendapatmu (<strong class="text-purple-700">${escapeHtmlText(AppState.studentName)}</strong>):
+              <span>✍️</span> <strong>Tulis Pendapat Baru:</strong>
             </span>
             <span class="text-[10px] text-purple-800 font-bold bg-white px-2.5 py-0.5 rounded-full border border-purple-200 shadow-2xs">
               ⭐ +10 Poin &amp; +2 Bintang
             </span>
           </div>
 
+          <!-- Kolom Identitas Pengirim (Bisa diisi siswa mana pun) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <div>
+              <label for="diskusi-author-name" class="block text-[11px] font-bold text-slate-700 mb-1">
+                👤 Nama Siswa / Teman Belajar:
+              </label>
+              <input
+                type="text"
+                id="diskusi-author-name"
+                value="${escapeHtmlText(AppState.studentName && AppState.studentName !== 'Teman Belajar' ? AppState.studentName : '')}"
+                placeholder="Ketik namamu di sini..."
+                class="w-full p-2.5 rounded-xl border border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 text-xs font-bold text-slate-800 bg-white placeholder:font-normal placeholder:text-slate-400 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label for="diskusi-author-role" class="block text-[11px] font-bold text-slate-700 mb-1">
+                🏷️ Kelas / Peran:
+              </label>
+              <select
+                id="diskusi-author-role"
+                class="w-full p-2.5 rounded-xl border border-purple-200 focus:border-purple-500 text-xs font-bold text-slate-800 bg-white focus:outline-none"
+              >
+                <option value="Siswa Kelas 3 SD">Siswa Kelas 3 SD</option>
+                <option value="Teman Ceria">Teman Ceria</option>
+                <option value="Ketua Kelompok">Ketua Kelompok</option>
+              </select>
+            </div>
+          </div>
+
           <!-- Pilihan Topik Cepat -->
-          <div class="flex flex-wrap items-center gap-1.5 text-xs">
-            <span class="text-[11px] text-slate-500 font-bold">Topik Cepat:</span>
+          <div class="flex flex-wrap items-center gap-1.5 text-xs pt-0.5">
+            <span class="text-[11px] text-slate-600 font-bold">Topik Cepat:</span>
             <button type="button" onclick="setDiskusiPrompt('Tips menabung di celengan ayam')" class="px-2.5 py-1 rounded-xl bg-white hover:bg-purple-100 text-purple-800 text-[11px] font-bold border border-purple-200 shadow-2xs transition-colors">
               🐷 Tips Menabung
             </button>
@@ -4205,8 +4224,8 @@ function renderTahapIView() {
             <textarea
               id="diskusi-input-text"
               rows="3"
-              placeholder="Tuliskan pendapat atau pengalamanmu di sini... (contoh: Menurut saya, kita harus selalu menyisihkan uang saku untuk ditabung di celengan ayam...)"
-              class="w-full p-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none text-xs sm:text-sm font-semibold text-slate-800 bg-white placeholder:text-slate-400 placeholder:font-normal"
+              placeholder="Tuliskan pendapat, pengalaman, atau tips belanjamu di sini... (contoh: Menurut saya, kita harus selalu menyisihkan uang saku untuk ditabung di celengan ayam...)"
+              class="w-full p-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none text-xs sm:text-sm font-semibold text-slate-800 bg-white placeholder:text-slate-400 placeholder:font-normal leading-relaxed"
             ></textarea>
             <div class="flex flex-wrap items-center justify-between gap-2">
               <span id="diskusi-alert-msg" class="text-xs font-bold text-rose-600 hidden"></span>
@@ -4217,14 +4236,18 @@ function renderTahapIView() {
           </div>
         </div>
 
-        <!-- Daftar Komentar Pendapat Teman -->
+        <!-- Daftar Pendapat Teman Belajar (Langsung Ditampilkan) -->
         <div class="space-y-3 pt-2">
           <div class="flex items-center justify-between text-xs font-bold text-slate-600 px-1">
-            <span>Daftar Pendapat Teman Belajar:</span>
-            <span class="text-purple-700 font-bold">💬 Saling Menghargai &amp; Santun</span>
+            <span class="flex items-center gap-1.5">
+              <span>💬</span> <strong>Daftar Pendapat &amp; Pengalaman Teman Belajar:</strong>
+            </span>
+            <span class="text-purple-700 font-bold bg-purple-50 px-2.5 py-0.5 rounded-full border border-purple-200">
+              Saling Menghargai &amp; Santun
+            </span>
           </div>
-          <div id="diskusi-posts-container" class="space-y-3">
-            <!-- Rendered by renderDiskusiPosts() -->
+          <div id="diskusi-posts-container" class="space-y-3.5">
+            ${getDiskusiPostsHtml()}
           </div>
         </div>
       </div>
@@ -4247,94 +4270,213 @@ function getDefaultDiskusiPosts() {
     {
       id: 'diskusi-1',
       nama: 'Bima Santoso',
-      role: 'Siswa Kelas 3',
+      role: 'Siswa Kelas 3 SD',
       waktu: 'Baru saja',
       opini: 'Kalau saya dapat uang saku Rp 5.000, saya jajan Rp 3.000 untuk beli roti di kantin sekolah, lalu Rp 2.000 sisanya langsung saya tabung di celengan ayam di kamar!',
       kategori: '🐷 Tips Menabung',
-      likes: 6
+      likes: 6,
+      comments: [
+        { author: 'Siti Rahmawati', text: 'Wah hebat Bima! Celengan ayamnya pasti cepat penuh ya 🌟', waktu: 'Baru saja' },
+        { author: 'Ciko Mascot', text: 'Keren sekali kebiasaan menabungmu, patut dicontoh teman sekelas!', waktu: 'Baru saja' }
+      ]
     },
     {
       id: 'diskusi-2',
       nama: 'Siti Rahmawati',
-      role: 'Siswa Kelas 3',
+      role: 'Siswa Kelas 3 SD',
       waktu: '12 menit lalu',
       opini: 'Kemarin waktu diajak ke toko mainan, saya ingat nasihat bu guru untuk utamakan kebutuhan. Jadi saya pilih beli buku gambar dan pensil warna untuk tugas sekolah.',
       kategori: '⚖️ Kebutuhan vs Keinginan',
-      likes: 9
+      likes: 9,
+      comments: [
+        { author: 'Alif Pratama', text: 'Setuju Siti! Kebutuhan sekolah memang harus didahulukan daripada mainan 👍', waktu: '10 menit lalu' }
+      ]
     },
     {
       id: 'diskusi-3',
       nama: 'Alif Pratama',
-      role: 'Siswa Kelas 3',
+      role: 'Siswa Kelas 3 SD',
       waktu: '25 menit lalu',
       opini: 'Belanja bijak itu membuat daftar barang kebutuhan terlebih dahulu sebelum berangkat belanja. Dengan begitu kita tidak lapar mata dan uangnya aman!',
       kategori: '💰 Belanja Bijak',
-      likes: 7
+      likes: 7,
+      comments: [
+        { author: 'Ines Khairunisa (Guru)', text: 'Cerdas sekali Alif! Membuat daftar belanja adalah trik jitu berhemat 👏', waktu: '20 menit lalu' }
+      ]
     }
   ];
+}
+
+function getDiskusiPostsHtml() {
+  if (!AppState.diskusiBersama || !Array.isArray(AppState.diskusiBersama) || AppState.diskusiBersama.length === 0) {
+    AppState.diskusiBersama = getDefaultDiskusiPosts();
+  }
+  const posts = AppState.diskusiBersama || [];
+  if (posts.length === 0) {
+    return `
+      <div class="p-6 text-center text-slate-500 bg-white rounded-2xl border border-dashed border-purple-200">
+        <p class="text-xs font-semibold">Belum ada opini yang masuk. Jadilah yang pertama berpendapat!</p>
+      </div>
+    `;
+  }
+
+  return posts.map(post => {
+    const isMe = normalizeStudentKey(post.nama) === normalizeStudentKey(AppState.studentName);
+    const initial = (post.nama || 'S').trim().charAt(0).toUpperCase();
+    const comments = Array.isArray(post.comments) ? post.comments : [];
+
+    return `
+      <div class="p-4 sm:p-5 rounded-2xl bg-white border-2 border-purple-100 shadow-xs space-y-3 transition-all hover:border-purple-300">
+        <!-- Post Header -->
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-white font-black text-sm flex items-center justify-center flex-shrink-0 shadow-xs">
+              ${initial}
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="font-black text-xs sm:text-sm text-slate-800 truncate">${escapeHtmlText(post.nama)}</span>
+                ${isMe ? '<span class="px-2 py-0.2 rounded-full bg-purple-100 text-purple-900 text-[9.5px] font-black">Saya</span>' : ''}
+              </div>
+              <span class="text-[10.5px] text-slate-400 font-medium">${escapeHtmlText(post.role || 'Siswa Kelas 3 SD')} • ${escapeHtmlText(post.waktu || 'Baru saja')}</span>
+            </div>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-purple-50 text-purple-800 text-[10.5px] font-bold border border-purple-200 flex-shrink-0">
+            ${escapeHtmlText(post.kategori || '💬 Opini')}
+          </span>
+        </div>
+
+        <!-- Post Body -->
+        <div class="p-3.5 rounded-xl bg-purple-50/40 border border-purple-100">
+          <p class="text-xs sm:text-sm text-slate-800 leading-relaxed font-semibold">
+            "${escapeHtmlText(post.opini)}"
+          </p>
+        </div>
+
+        <!-- Action Bar: Likes & Comments counter -->
+        <div class="flex items-center justify-between pt-1 border-t border-slate-100 text-xs">
+          <div class="flex items-center gap-3">
+            <button type="button" onclick="likeDiskusiPost('${post.id}')" class="btn-playful inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold transition-colors">
+              <span>❤️</span> <span>Suka (${post.likes || 0})</span>
+            </button>
+            <span class="text-[11px] font-bold text-slate-500">
+              💬 ${comments.length} Tanggapan Teman
+            </span>
+          </div>
+          <span class="text-[10.5px] text-emerald-600 font-bold">Diskusi Santun ✔</span>
+        </div>
+
+        <!-- Thread Komentar Santun dari Siswa Lain -->
+        <div class="pt-2 space-y-2.5 border-t border-purple-100/70">
+          <div class="flex items-center justify-between text-[11px] font-bold text-purple-900">
+            <span>💬 Tanggapan &amp; Komentar Teman:</span>
+            <span class="text-[10px] text-slate-400 font-normal">Saling memberi masukan positif</span>
+          </div>
+
+          <!-- List Komentar -->
+          <div class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+            ${comments.length > 0 ? comments.map(c => `
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 text-xs space-y-0.5">
+                <div class="flex items-center justify-between">
+                  <span class="font-black text-purple-900 text-[11px]">👤 ${escapeHtmlText(c.author)}</span>
+                  <span class="text-[9.5px] text-slate-400 font-medium">${escapeHtmlText(c.waktu || 'Baru saja')}</span>
+                </div>
+                <p class="text-slate-700 text-xs pl-3.5 leading-snug">${escapeHtmlText(c.text)}</p>
+              </div>
+            `).join('') : `
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-dashed border-slate-200 text-center text-[11px] text-slate-400">
+                Belum ada tanggapan untuk pendapat ini. Ayo jadi yang pertama memberikan komentar!
+              </div>
+            `}
+          </div>
+
+          <!-- Form Tambah Komentar Siswa Lain -->
+          <div class="pt-1.5 p-2.5 rounded-xl bg-purple-50/60 border border-purple-200 space-y-2">
+            <span class="text-[11px] font-bold text-purple-950 block">Tulis tanggapan atau komentarmu untuk ${escapeHtmlText(post.nama)}:</span>
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input
+                type="text"
+                id="komentar-author-${post.id}"
+                value="${escapeHtmlText(AppState.studentName && AppState.studentName !== 'Teman Belajar' ? AppState.studentName : '')}"
+                placeholder="Namamu..."
+                class="w-full sm:w-36 p-2 rounded-lg border border-slate-200 text-xs font-bold text-slate-800 bg-white focus:border-purple-400 focus:outline-none"
+              />
+              <input
+                type="text"
+                id="komentar-text-${post.id}"
+                placeholder="Ketik tanggapan santun di sini..."
+                onkeydown="if(event.key==='Enter') submitDiskusiKomentar('${post.id}')"
+                class="flex-1 p-2 rounded-lg border border-slate-200 text-xs text-slate-800 bg-white focus:border-purple-400 focus:outline-none"
+              />
+              <button
+                type="button"
+                onclick="submitDiskusiKomentar('${post.id}')"
+                class="btn-playful px-3.5 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs flex items-center justify-center gap-1 shadow-sm flex-shrink-0"
+              >
+                <span>Kirim 💬</span>
+              </button>
+            </div>
+
+            <!-- Quick Suggestion Buttons -->
+            <div class="flex flex-wrap items-center gap-1 pt-0.5 text-[10px]">
+              <span class="text-slate-500 font-semibold">Tanggapan cepat:</span>
+              <button type="button" onclick="quickDiskusiComment('${post.id}', 'Setuju sekali! Ide yang sangat bagus 🌟')" class="px-2 py-0.5 rounded-md bg-white hover:bg-purple-100 text-purple-800 border border-purple-200 font-medium transition-colors">👍 Setuju sekali!</button>
+              <button type="button" onclick="quickDiskusiComment('${post.id}', 'Wah, terima kasih tipsnya sangat bermanfaat! 👏')" class="px-2 py-0.5 rounded-md bg-white hover:bg-purple-100 text-purple-800 border border-purple-200 font-medium transition-colors">💡 Bermanfaat!</button>
+              <button type="button" onclick="quickDiskusiComment('${post.id}', 'Keren banget! Saya juga mau coba cara ini. ✨')" class="px-2 py-0.5 rounded-md bg-white hover:bg-purple-100 text-purple-800 border border-purple-200 font-medium transition-colors">✨ Keren banget!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
 function initTahapIView() {
   if (!AppState.diskusiBersama || !Array.isArray(AppState.diskusiBersama) || AppState.diskusiBersama.length === 0) {
     AppState.diskusiBersama = getDefaultDiskusiPosts();
+    localStorage.setItem('rbc_diskusi_bersama', JSON.stringify(AppState.diskusiBersama));
   }
   renderDiskusiPosts();
+
+  // Muat postingan cloud tambahan jika Supabase terhubung
+  if (window.RBC_SUPABASE && window.RBC_SUPABASE.isConnected() && typeof window.RBC_SUPABASE.getDiskusiBersama === 'function') {
+    window.RBC_SUPABASE.getDiskusiBersama().then(cloudPosts => {
+      if (cloudPosts && Array.isArray(cloudPosts) && cloudPosts.length > 0) {
+        const existingMap = new Map();
+        (AppState.diskusiBersama || []).forEach(p => existingMap.set(String(p.id), p));
+        let changed = false;
+
+        cloudPosts.forEach(cp => {
+          const cpId = String(cp.id);
+          if (!existingMap.has(cpId)) {
+            AppState.diskusiBersama.push({
+              id: cp.id,
+              nama: cp.nama_siswa,
+              role: cp.role || 'Siswa Kelas 3 SD',
+              waktu: 'Tersimpan di Cloud',
+              opini: cp.opini,
+              kategori: cp.kategori || '💬 Opini',
+              likes: cp.likes || 1,
+              comments: Array.isArray(cp.komentar) ? cp.komentar : []
+            });
+            changed = true;
+          }
+        });
+
+        if (changed) {
+          localStorage.setItem('rbc_diskusi_bersama', JSON.stringify(AppState.diskusiBersama));
+          renderDiskusiPosts();
+        }
+      }
+    }).catch(e => console.warn('Supabase getDiskusiBersama note:', e));
+  }
 }
 
 function renderDiskusiPosts() {
   const container = document.getElementById('diskusi-posts-container');
-  if (!container) return;
-
-  const posts = AppState.diskusiBersama || [];
-  if (posts.length === 0) {
-    container.innerHTML = `
-      <div class="p-6 text-center text-slate-500 bg-white rounded-2xl border border-dashed border-purple-200">
-        <p class="text-xs font-semibold">Belum ada opini yang masuk. Jadilah yang pertama berpendapat!</p>
-      </div>
-    `;
-    return;
+  if (container) {
+    container.innerHTML = getDiskusiPostsHtml();
   }
-
-  const countEl = document.getElementById('diskusi-count');
-  if (countEl) countEl.innerText = posts.length;
-
-  container.innerHTML = posts.map(post => {
-    const isMe = normalizeStudentKey(post.nama) === normalizeStudentKey(AppState.studentName);
-    const initial = (post.nama || 'S').trim().charAt(0).toUpperCase();
-
-    return `
-      <div class="p-4 rounded-2xl bg-white border border-purple-100 shadow-xs space-y-2.5 transition-all hover:border-purple-300">
-        <div class="flex items-center justify-between gap-2">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-indigo-500 text-white font-black text-xs flex items-center justify-center flex-shrink-0 shadow-2xs">
-              ${initial}
-            </div>
-            <div class="min-w-0">
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="font-bold text-xs text-slate-800 truncate">${escapeHtmlText(post.nama)}</span>
-                ${isMe ? '<span class="px-2 py-0.2 rounded-full bg-purple-100 text-purple-900 text-[9.5px] font-black">Saya</span>' : ''}
-              </div>
-              <span class="text-[10px] text-slate-400 font-medium">${post.role || 'Siswa Kelas 3'} • ${post.waktu || 'Baru saja'}</span>
-            </div>
-          </div>
-          <span class="px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-800 text-[10px] font-bold border border-purple-200 flex-shrink-0">
-            ${escapeHtmlText(post.kategori || '💬 Opini')}
-          </span>
-        </div>
-
-        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium pl-10">
-          "${escapeHtmlText(post.opini)}"
-        </p>
-
-        <div class="flex items-center justify-between pt-1 border-t border-slate-100 pl-10 text-xs">
-          <span class="text-[10px] text-slate-400 font-medium">Komentar Pembelajaran</span>
-          <button type="button" onclick="likeDiskusiPost('${post.id}')" class="btn-playful inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-800 text-xs font-bold transition-colors">
-            <span>❤️</span> <span>Suka (${post.likes || 0})</span>
-          </button>
-        </div>
-      </div>
-    `;
-  }).join('');
 }
 
 function setDiskusiPrompt(topic) {
@@ -4345,17 +4487,22 @@ function setDiskusiPrompt(topic) {
 }
 
 async function submitDiskusiBersama() {
-  const input = document.getElementById('diskusi-input-text');
+  const nameInput = document.getElementById('diskusi-author-name');
+  const roleInput = document.getElementById('diskusi-author-role');
+  const textInput = document.getElementById('diskusi-input-text');
   const alertEl = document.getElementById('diskusi-alert-msg');
-  if (!input) return;
+  if (!textInput) return;
 
-  const text = input.value.trim();
+  const text = textInput.value.trim();
+  const name = (nameInput ? nameInput.value.trim() : '') || AppState.studentName || 'Siswa Ceria';
+  const role = (roleInput ? roleInput.value : '') || 'Siswa Kelas 3 SD';
+
   if (text.length < 5) {
     if (alertEl) {
       alertEl.innerText = 'Mohon tuliskan pendapatmu minimal 5 karakter ya!';
       alertEl.classList.remove('hidden');
     }
-    input.focus();
+    textInput.focus();
     return;
   }
 
@@ -4372,15 +4519,16 @@ async function submitDiskusiBersama() {
 
   const newPost = {
     id: 'diskusi-' + Date.now(),
-    nama: AppState.studentName && AppState.studentName !== 'Teman Belajar' ? AppState.studentName : 'Siswa Ceria',
-    role: 'Siswa Kelas 3 SD',
+    nama: name,
+    role: role,
     waktu: 'Baru saja',
     opini: text,
     kategori: kategori,
-    likes: 1
+    likes: 1,
+    comments: []
   };
 
-  if (!AppState.diskusiBersama) AppState.diskusiBersama = [];
+  if (!AppState.diskusiBersama) AppState.diskusiBersama = getDefaultDiskusiPosts();
   AppState.diskusiBersama.unshift(newPost);
   localStorage.setItem('rbc_diskusi_bersama', JSON.stringify(AppState.diskusiBersama));
 
@@ -4388,11 +4536,59 @@ async function submitDiskusiBersama() {
     window.RBC_SUPABASE.saveDiskusiBersama(newPost);
   }
 
-  input.value = '';
+  textInput.value = '';
   window.soundManager.playSuccess();
   AppState.addReward(10, 2, 'Kirim pendapat di Diskusi Bersama!');
-  AppState.showToast('🎉 Pendapatmu berhasil diposting ke Diskusi Bersama! (+10 Poin, +2 Bintang)');
+  AppState.showToast(`🎉 Pendapat dari ${name} berhasil diposting ke Diskusi Bersama! (+10 Poin, +2 Bintang)`);
   renderDiskusiPosts();
+}
+
+function submitDiskusiKomentar(postId) {
+  const authorInput = document.getElementById(`komentar-author-${postId}`);
+  const textInput = document.getElementById(`komentar-text-${postId}`);
+
+  const author = (authorInput ? authorInput.value.trim() : '') || AppState.studentName || 'Teman Belajar';
+  const text = textInput ? textInput.value.trim() : '';
+
+  if (!text) {
+    if (textInput) textInput.focus();
+    return;
+  }
+
+  if (!AppState.diskusiBersama) AppState.diskusiBersama = getDefaultDiskusiPosts();
+  const post = AppState.diskusiBersama.find(p => String(p.id) === String(postId));
+  if (post) {
+    if (!post.comments) post.comments = [];
+    const newComment = {
+      author: author,
+      text: text,
+      waktu: 'Baru saja'
+    };
+    post.comments.push(newComment);
+
+    localStorage.setItem('rbc_diskusi_bersama', JSON.stringify(AppState.diskusiBersama));
+    window.soundManager.playCorrect();
+    AppState.addReward(5, 1, 'Tanggapan diskusimu berhasil dikirimkan!');
+    AppState.showToast(`✅ Tanggapan dari ${author} berhasil dikirim! (+5 Poin, +1 Bintang)`);
+
+    renderDiskusiPosts();
+
+    if (window.RBC_SUPABASE && window.RBC_SUPABASE.isConnected()) {
+      if (typeof window.RBC_SUPABASE.saveDiskusiKomentar === 'function') {
+        window.RBC_SUPABASE.saveDiskusiKomentar(postId, newComment);
+      } else if (typeof window.RBC_SUPABASE.saveDiskusiBersama === 'function') {
+        window.RBC_SUPABASE.saveDiskusiBersama(post);
+      }
+    }
+  }
+}
+
+function quickDiskusiComment(postId, text) {
+  const textInput = document.getElementById(`komentar-text-${postId}`);
+  if (textInput) {
+    textInput.value = text;
+    submitDiskusiKomentar(postId);
+  }
 }
 
 function likeDiskusiPost(postId) {

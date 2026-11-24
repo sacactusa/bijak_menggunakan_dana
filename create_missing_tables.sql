@@ -15,8 +15,12 @@ CREATE TABLE IF NOT EXISTS diskusi_bersama (
     opini TEXT NOT NULL,
     kategori TEXT DEFAULT '💰 Belanja Bijak',
     likes INT DEFAULT 1,
+    komentar JSONB DEFAULT '[]'::jsonb,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- Pastikan kolom komentar tersedia jika tabel sudah pernah dibuat sebelumnya
+ALTER TABLE diskusi_bersama ADD COLUMN IF NOT EXISTS komentar JSONB DEFAULT '[]'::jsonb;
 
 -- 2. Tabel Hasil Game Edukasi (5 Jenis Game x 10 Soal Lengkap)
 CREATE TABLE IF NOT EXISTS hasil_game (

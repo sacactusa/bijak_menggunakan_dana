@@ -98,8 +98,12 @@ CREATE TABLE IF NOT EXISTS diskusi_bersama (
     opini TEXT NOT NULL,
     kategori TEXT DEFAULT '💰 Belanja Bijak',
     likes INT DEFAULT 1,
+    komentar JSONB DEFAULT '[]'::jsonb,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+-- Pastikan kolom komentar tersedia jika tabel sudah ada sebelumnya
+ALTER TABLE diskusi_bersama ADD COLUMN IF NOT EXISTS komentar JSONB DEFAULT '[]'::jsonb;
 
 -- 9. Tabel Hasil Karyaku (Tahap K - Upload Foto Celengan & Rencana Belanja)
 CREATE TABLE IF NOT EXISTS hasil_karyaku (

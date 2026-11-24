@@ -653,19 +653,32 @@ const RBC_SUPABASE = {
     if (!this.isConnected()) return null;
     let savedData = null;
     try {
-      const { data, error } = await supabaseClient
-        .from('diskusi_bersama')
-        .insert([{
-          nama_siswa: postData.nama || 'Teman Belajar',
-          role: postData.role || 'Siswa Kelas 3 SD',
-          opini: postData.opini || '',
-          kategori: postData.kategori || '💰 Belanja Bijak',
-          likes: postData.likes || 1
-        }])
-        .select();
-      if (!error && data) {
-        console.log('✅ Supabase: Pendapat tersimpan ke tabel diskusi_bersama', data);
-        savedData = data;
+      const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(postData.id);
+      const payload = {
+        nama_siswa: postData.nama || 'Teman Belajar',
+        role: postData.role || 'Siswa Kelas 3 SD',
+        opini: postData.opini || '',
+        kategori: postData.kategori || '💰 Belanja Bijak',
+        likes: postData.likes || 1,
+        komentar: Array.isArray(postData.comments) ? postData.comments : []
+      };
+
+      if (isUUID) {
+        payload.id = postData.id;
+        const { data, error } = await supabaseClient
+          .from('diskusi_bersama')
+          .upsert([payload])
+          .select();
+        if (!error && data) savedData = data;
+      } else {
+        const { data, error } = await supabaseClient
+          .from('diskusi_bersama')
+          .insert([payload])
+          .select();
+        if (!error && data) savedData = data;
+      }
+      if (savedData) {
+        console.log('✅ Supabase: Pendapat diskusi tersimpan ke tabel diskusi_bersama', savedData);
       }
     } catch (e) {
       console.warn('Supabase saveDiskusiBersama notice:', e);
@@ -686,6 +699,30 @@ const RBC_SUPABASE = {
     } catch (e) {}
 
     return savedData;
+  },
+
+  // Simpan Komentar / Tanggapan Diskusi Bersama
+  async saveDiskusiKomentar(postId, commentData) {
+    if (!this.isConnected()) return null;
+    try {
+      const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(postId);
+      if (isUUID) {
+        const { data: row } = await supabaseClient
+          .from('diskusi_bersama')
+          .select('komentar')
+          .eq('id', postId)
+          .single();
+        const existing = (row && Array.isArray(row.komentar)) ? row.komentar : [];
+        existing.push(commentData);
+        await supabaseClient
+          .from('diskusi_bersama')
+          .update({ komentar: existing })
+          .eq('id', postId);
+        console.log('✅ Supabase: Komentar diskusi tersinkronisasi');
+      }
+    } catch (e) {
+      console.warn('Supabase saveDiskusiKomentar notice:', e);
+    }
   },
 
   // Ambil Seluruh Postingan Diskusi Bersama dari Cloud
