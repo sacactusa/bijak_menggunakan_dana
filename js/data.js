@@ -17,7 +17,7 @@ const RBC_DATA = {
       "Nur Afifah Handayani",
       "Zidna Syifanadia Impian Pragita Mariannisa"
     ],
-    canvaUrl: "https://canva.link/e0arf658n2yoz1b",
+    canvaUrl: "https://www.canva.com/design/DAHb2IGHjsE/IgiEOmruFezjIqMk79QEOA/view?utm_content=DAHb2IGHjsE&utm_campaign=designshare&utm_medium=embeds&utm_source=link",
     closingTagline: "Belajar Jadi Lebih Seru, Belanja Jadi Lebih Bijak!",
     closingSubtitle: "Ruang Belajar Ceria – Teman Belajar, Petualangan Menyenangkan!"
   },

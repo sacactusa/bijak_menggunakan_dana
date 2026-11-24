@@ -4106,19 +4106,27 @@ function renderTahapIView() {
           </div>
         </div>
 
-        <!-- Canva Slide Presentation Embed & Link -->
+        <!-- Canva Slide Presentation Embed & Link Sesuai Permintaan Revisi -->
         <div class="p-6 rounded-2xl bg-gradient-to-r from-sky-50 to-blue-50 border-2 border-sky-200 space-y-3">
           <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
               <span class="text-xs font-bold text-sky-700 uppercase">Slide Materi Guru</span>
-              <h4 class="font-bold text-slate-800 text-base">Presentasi Canva: Bijak Berbelanja Kebutuhan</h4>
+              <h4 class="font-bold text-slate-800 text-base">Presentasi Canva: Mengenal Uang dalam Gaya Ilustratif</h4>
             </div>
-            <a href="${RBC_DATA.appInfo.canvaUrl}" target="_blank" rel="noopener noreferrer" class="btn-playful w-full sm:w-auto px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-sm">
-              <span>Buka Slide Canva ➔</span>
+            <a href="https://www.canva.com/design/DAHb2IGHjsE/IgiEOmruFezjIqMk79QEOA/view?utm_content=DAHb2IGHjsE&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener noreferrer" class="btn-playful w-full sm:w-auto px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-sm">
+              <span>Buka Slide Canva di Tab Baru ➔</span>
             </a>
           </div>
-          <p class="text-xs text-slate-600">
-            Kamu dapat membuka tautan Canva di atas untuk menyimak rangkuman materi lengkap dalam bentuk slide presentasi yang menarik!
+
+          <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
+             padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+             border-radius: 8px; will-change: transform;">
+            <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+              src="https://www.canva.com/design/DAHb2IGHjsE/IgiEOmruFezjIqMk79QEOA/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+            </iframe>
+          </div>
+          <p class="text-xs text-slate-600 font-medium">
+            <a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAHb2IGHjsE&#x2F;IgiEOmruFezjIqMk79QEOA&#x2F;view?utm_content=DAHb2IGHjsE&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener" class="text-sky-700 hover:underline font-bold">Presentasi Pendidikan Mengenal Uang dalam Gaya Ilustratif Hijau.pptx</a> oleh Nur Khasanah,s.pd
           </p>
         </div>
       </div>
