@@ -5190,8 +5190,8 @@ function renderCertificateCard(theme = 'biru') {
             </div>
           </div>
 
-          <!-- Bagian Bawah: Tanggal Terbit & Tim Pengembang (Tanpa Cap & Tanpa Tulisan Kecil Kampus UPI Cibiru) -->
-          <div class="pt-3 sm:pt-4 border-t ${themeCfg.footerBorderClass} flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 text-xs px-2 sm:px-6 mt-1">
+          <!-- Bagian Bawah: Tanggal Terbit & Tim Pengembang (Dinaikkan 2 Enter ke Atas & Tertata Rapi) -->
+          <div class="pt-3 sm:pt-4 border-t ${themeCfg.footerBorderClass} flex flex-col sm:flex-row items-start justify-between gap-4 text-xs px-2 sm:px-6 mb-7 sm:mb-9 md:mb-11">
             <!-- Kolom Kiri: Tanggal Terbit -->
             <div class="text-left space-y-1">
               <span class="block text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider">Tanggal Terbit</span>
