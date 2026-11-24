@@ -113,17 +113,39 @@ const RBC_DATA = {
     { value: 100000, label: "Rp100.000", name: "Seratus Ribu Rupiah", type: "kertas", hero: "Soekarno - Hatta", color: "#fecdd3", bgStyle: "bg-rose-100 border-rose-300 text-rose-800", desc: "Berwarna merah muda terang dengan gambar Proklamator Ir. Soekarno & Mohammad Hatta." }
   ],
 
-  // Market Niza Store Goods
+  // Market Niza Store Goods (Lengkap untuk Simulasi Interaktif Berbagai Anggaran)
   marketNizaItems: [
+    // --- Kategori Kebutuhan (Alat Sekolah & Makanan Bergizi) ---
     { id: "pencil", name: "Pensil 2B Lucu", price: 3000, category: "kebutuhan", icon: "✏️", desc: "Alat tulis untuk menulis dan mengerjakan tugas sekolah." },
     { id: "eraser", name: "Penghapus Karakter", price: 2000, category: "kebutuhan", icon: "🧼", desc: "Menghapus tulisan pensil yang salah dengan bersih." },
+    { id: "ruler", name: "Penggaris Bening 30 cm", price: 3000, category: "kebutuhan", icon: "📐", desc: "Alat ukur untuk membuat garis lurus yang rapi." },
+    { id: "sharpener", name: "Rautan Pensil Putar", price: 3000, category: "kebutuhan", icon: "⚙️", desc: "Meruncingkan pensil yang tumpul agar tulisan tetap terbaca." },
     { id: "notebook", name: "Buku Tulis Bergaris", price: 5000, category: "kebutuhan", icon: "📓", desc: "Buku catatan belajar agar pelajaran selalu tersimpan rapi." },
+    { id: "drawingbook", name: "Buku Gambar A4", price: 6000, category: "kebutuhan", icon: "🎨", desc: "Buku gambar untuk melatih kreativitas seni rupa di sekolah." },
+    { id: "colorpencil", name: "Pensil Warna 12 Warna", price: 12000, category: "kebutuhan", icon: "🖍️", desc: "Alat mewarnai tugas peta, diagram, dan karya seni sekolah." },
+    { id: "pencilcase", name: "Kotak Pensil Praktis", price: 10000, category: "kebutuhan", icon: "👝", desc: "Tempat menyimpan alat tulis agar tertata dan tidak tercecer." },
+    { id: "waterbottle", name: "Botol Minum Higienis", price: 15000, category: "kebutuhan", icon: "🍶", desc: "Botol air minum ramah lingkungan untuk menjaga cairan tubuh." },
+    { id: "lunchbox", name: "Kotak Bekal Sehat", price: 14000, category: "kebutuhan", icon: "🍱", desc: "Wadah bekal makanan bergizi yang dibawa dari rumah." },
+    { id: "bread", name: "Roti Manis Gandum", price: 5000, category: "kebutuhan", icon: "🍞", desc: "Makanan pokok pengganjal perut bernutrisi saat jam istirahat." },
+    { id: "milk", name: "Susu Kotak UHT Segar", price: 4000, category: "kebutuhan", icon: "🧃", desc: "Minuman bernutrisi kaya kalsium untuk pertumbuhan tubuh." },
+    { id: "apple", name: "Buah Apel Merah Segar", price: 4000, category: "kebutuhan", icon: "🍎", desc: "Buah manis kaya serat dan vitamin C untuk daya tahan tubuh." },
+    { id: "banana", name: "Pisang Emas Manis", price: 3000, category: "kebutuhan", icon: "🍌", desc: "Buah segar sumber energi sehat sebelum mulai belajar." },
+    { id: "mineralwater", name: "Air Mineral Botol", price: 3000, category: "kebutuhan", icon: "💧", desc: "Air minum bersih dan segar untuk melegakan dahaga." },
+    { id: "savingpiggy", name: "Celengan Gerabah Ceria", price: 8000, category: "kebutuhan", icon: "🐷", desc: "Celengan untuk melatih kebiasaan menabung sisa uang saku." },
+
+    // --- Kategori Keinginan (Mainan, Aksesoris & Camilan Hiburan) ---
     { id: "rubik", name: "Rubik Puzzle Warna", price: 10000, category: "keinginan", icon: "🎲", desc: "Mainan asah otak warna-warni yang seru untuk waktu luang." },
-    { id: "snack", name: "Ciki / Makanan Ringan", price: 3000, category: "keinginan", icon: "🍿", desc: "Camilan renyah yang enak disantap saat istirahat." },
-    { id: "milk", name: "Susu Kotak Segar", price: 4000, category: "kebutuhan", icon: "🧃", desc: "Minuman bergizi kaya kalsium untuk pertumbuhan tubuh." },
-    { id: "bread", name: "Roti Manis Cokelat", price: 5000, category: "kebutuhan", icon: "🍞", desc: "Makanan pengganjal perut saat lapar di jam istirahat." },
+    { id: "snack", name: "Ciki / Keripik Renyah", price: 3000, category: "keinginan", icon: "🍿", desc: "Camilan renyah pelengkap santai saat waktu istirahat." },
     { id: "slime", name: "Slime / Clay Warna", price: 7000, category: "keinginan", icon: "clayWarna", desc: "Mainan tanah liat berwarna untuk berkreasi membuat aneka bentuk." },
-    { id: "sticker", name: "Stiker Kartun Lucu", price: 2000, category: "keinginan", icon: "⭐", desc: "Stiker hiasan untuk ditempel di buku atau tempat pensil." }
+    { id: "sticker", name: "Stiker Kartun Lucu", price: 2000, category: "keinginan", icon: "⭐", desc: "Stiker hiasan bergambar lucu untuk ditempel di buku tugas." },
+    { id: "toycar", name: "Mobil-Mobilan Diecast", price: 15000, category: "keinginan", icon: "🚗", desc: "Mainan mobil balap koleksi seru untuk bermain bersama teman." },
+    { id: "robot", name: "Robot Mini Suara", price: 20000, category: "keinginan", icon: "🤖", desc: "Mainan robot kecil canggih dengan lampu dan suara ceria." },
+    { id: "minifan", name: "Kipas Angin Mini USB", price: 18000, category: "keinginan", icon: "🪭", desc: "Kipas angin kecil portabel penyejuk udara saat cuaca panas." },
+    { id: "keychain", name: "Gantungan Kunci Boneka", price: 5000, category: "keinginan", icon: "🧸", desc: "Aksesoris gantungan lucu berbulu halus untuk mempercantik tas." },
+    { id: "chocobar", name: "Cokelat Batang Manis", price: 6000, category: "keinginan", icon: "🍫", desc: "Makanan manis cokelat yang nikmat untuk dinikmati sesekali." },
+    { id: "boba", name: "Es Minuman Boba", price: 8000, category: "keinginan", icon: "🧋", desc: "Minuman manis manis dingin dengan mutiara tapioka kenyal." },
+    { id: "balloon", name: "Balon Karakter Terbang", price: 5000, category: "keinginan", icon: "🎈", desc: "Balon gas warna-warni berbentuk hewan lucu untuk pesta." },
+    { id: "yoyo", name: "Yoyo Lampu Menyala", price: 7000, category: "keinginan", icon: "🪀", desc: "Mainan yoyo klasik yang menyala saat diputar kencang." }
   ],
 
   // Videos Data

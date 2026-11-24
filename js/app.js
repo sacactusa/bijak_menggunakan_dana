@@ -169,9 +169,9 @@ const AppState = {
   // Diskusi Padlet
   padletPosts: JSON.parse(localStorage.getItem('rbc_padlet_posts') || '[]'),
 
-  // Refleksi Siswa & Tema Sertifikat ('emas' | 'merah')
+  // Refleksi Siswa & Tema Sertifikat ('emas' | 'merah' | 'biru')
   reflection: _hasValidSessionStudent ? JSON.parse(localStorage.getItem('rbc_student_reflection') || '{}') : {},
-  certTheme: (localStorage.getItem('rbc_cert_theme') === 'merah' || localStorage.getItem('rbc_cert_theme') === 'merah100k' || localStorage.getItem('rbc_cert_theme') === 'petualangan') ? 'merah' : 'emas',
+  certTheme: ['merah', 'biru'].includes(localStorage.getItem('rbc_cert_theme')) ? localStorage.getItem('rbc_cert_theme') : 'emas',
 
   // Save state per student profile
   save() {
@@ -1624,28 +1624,48 @@ function renderTahapEView() {
           </p>
         </div>
 
-        <!-- Rak Barang Market Niza -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4 mb-8">
-          ${RBC_DATA.marketNizaItems.map(item => {
-            const iconHtml = (item.icon === 'clayWarna') ? RBC_ICONS.clayWarna('w-10 h-10 inline-block') : `<span class="text-3xl">${item.icon}</span>`;
-            return `
-            <div class="p-4 bg-white rounded-2xl border-2 border-slate-200 hover:border-emerald-300 shadow-sm flex flex-col justify-between space-y-3 group hover:shadow-md transition-all">
-              <div class="flex items-start justify-between gap-2">
-                <div class="w-12 h-12 flex items-center justify-center">${iconHtml}</div>
-                <span class="text-xs font-bold px-2 py-0.5 rounded-full ${item.category === 'kebutuhan' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
-                  ${item.category === 'kebutuhan' ? 'Kebutuhan' : 'Keinginan'}
-                </span>
-              </div>
-              <div>
-                <h4 class="font-bold text-slate-800 text-sm group-hover:text-emerald-700 transition-colors">${item.name}</h4>
-                <p class="text-xs text-slate-500 mt-0.5 line-clamp-1">${item.desc}</p>
-                <span class="font-black text-emerald-700 text-base mt-2 block">Rp${item.price.toLocaleString('id-ID')}</span>
-              </div>
-              <button onclick="addToNizaCart('${item.id}')" class="btn-playful w-full py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-sm">
-                <span>+ Beli Barang</span>
+        <!-- Filter Kategori & Rak Barang Market Niza -->
+        <div class="space-y-4 mb-8">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3 bg-white/80 rounded-2xl border border-emerald-200">
+            <div class="flex flex-wrap items-center gap-1.5" id="niza-category-filters">
+              <button onclick="filterNizaCategory('all')" id="niza-cat-all" class="niza-cat-btn btn-playful px-3.5 py-1.5 rounded-xl text-xs font-black bg-emerald-600 text-white shadow-xs transition-all">
+                Semua Barang (${RBC_DATA.marketNizaItems.length})
               </button>
-            </div>`;
-          }).join('')}
+              <button onclick="filterNizaCategory('kebutuhan')" id="niza-cat-kebutuhan" class="niza-cat-btn btn-playful px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-emerald-100 hover:text-emerald-800 transition-all">
+                🥦 Kebutuhan (${RBC_DATA.marketNizaItems.filter(i => i.category === 'kebutuhan').length})
+              </button>
+              <button onclick="filterNizaCategory('keinginan')" id="niza-cat-keinginan" class="niza-cat-btn btn-playful px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-amber-100 hover:text-amber-800 transition-all">
+                🎮 Keinginan (${RBC_DATA.marketNizaItems.filter(i => i.category === 'keinginan').length})
+              </button>
+            </div>
+            <span class="text-xs text-slate-500 font-semibold">
+              Tersedia <strong>${RBC_DATA.marketNizaItems.length}</strong> pilihan barang simulasi
+            </span>
+          </div>
+
+          <!-- Grid Rak Barang -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4" id="niza-items-grid">
+            ${RBC_DATA.marketNizaItems.map(item => {
+              const iconHtml = (item.icon === 'clayWarna') ? RBC_ICONS.clayWarna('w-10 h-10 inline-block') : `<span class="text-3xl">${item.icon}</span>`;
+              return `
+              <div class="niza-item-card p-3.5 sm:p-4 bg-white rounded-2xl border-2 border-slate-200 hover:border-emerald-300 shadow-sm flex flex-col justify-between space-y-3 group hover:shadow-md transition-all" data-category="${item.category}">
+                <div class="flex items-start justify-between gap-2">
+                  <div class="w-12 h-12 flex items-center justify-center">${iconHtml}</div>
+                  <span class="text-[11px] font-bold px-2 py-0.5 rounded-full ${item.category === 'kebutuhan' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                    ${item.category === 'kebutuhan' ? 'Kebutuhan' : 'Keinginan'}
+                  </span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-emerald-700 transition-colors line-clamp-1">${item.name}</h4>
+                  <p class="text-[11px] text-slate-500 mt-0.5 line-clamp-2 leading-snug">${item.desc}</p>
+                  <span class="font-black text-emerald-700 text-sm sm:text-base mt-2 block">Rp${item.price.toLocaleString('id-ID')}</span>
+                </div>
+                <button onclick="addToNizaCart('${item.id}')" class="btn-playful w-full py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-sm">
+                  <span>+ Beli Barang</span>
+                </button>
+              </div>`;
+            }).join('')}
+          </div>
         </div>
 
         <!-- Keranjang & Kasir Market Niza -->
@@ -1919,6 +1939,35 @@ function resetNizaCart() {
   AppState.showToast('🛒 Keranjang belanja dikosongkan.');
 }
 window.resetNizaCart = resetNizaCart;
+
+function filterNizaCategory(cat) {
+  const cards = document.querySelectorAll('#niza-items-grid .niza-item-card');
+  cards.forEach(card => {
+    const itemCat = card.getAttribute('data-category');
+    if (cat === 'all' || itemCat === cat) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  const btnAll = document.getElementById('niza-cat-all');
+  const btnKeb = document.getElementById('niza-cat-kebutuhan');
+  const btnKei = document.getElementById('niza-cat-keinginan');
+
+  const baseInactive = 'niza-cat-btn btn-playful px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all';
+  if (btnAll) btnAll.className = (cat === 'all')
+    ? 'niza-cat-btn btn-playful px-3.5 py-1.5 rounded-xl text-xs font-black bg-emerald-600 text-white shadow-xs transition-all'
+    : baseInactive;
+  if (btnKeb) btnKeb.className = (cat === 'kebutuhan')
+    ? 'niza-cat-btn btn-playful px-3.5 py-1.5 rounded-xl text-xs font-black bg-emerald-600 text-white shadow-xs transition-all'
+    : baseInactive;
+  if (btnKei) btnKei.className = (cat === 'keinginan')
+    ? 'niza-cat-btn btn-playful px-3.5 py-1.5 rounded-xl text-xs font-black bg-amber-600 text-white shadow-xs transition-all'
+    : baseInactive;
+  window.soundManager.playPop();
+}
+window.filterNizaCategory = filterNizaCategory;
 
 function updateNizaCartUI() {
   const container = document.getElementById('niza-cart-items');
@@ -2304,7 +2353,7 @@ function completeStageEAndNext() {
    1. Alur & Tujuan Pembelajaran Tahap T
    2. Aturan Diskusi Santun
    3. Gambar & Cerita Sederhana (Nasi, Buku Tulis, Mainan, Jajanan)
-   4. LKPD Digital Kebutuhan vs Keinginan (5 Kegiatan Interaktif & Canva)
+   4. LKPD Digital Kebutuhan vs Keinginan (5 Kegiatan Interaktif)
       (1) Ayo Amati Barang!
       (2) Ayo Kelompokkan!
       (3) Mengapa Kamu Memilihnya?
@@ -2526,14 +2575,14 @@ function renderTahapTView() {
           </div>
         </div>
 
-        <!-- Slot Diskusi Bersama Terhubung ke Padlet (Highlight Besar) -->
+        <!-- Slot Diskusi Bersama (Terhubung ke Ruang Kolaborasi Narasi Kelas) -->
         <div class="p-5 sm:p-7 rounded-3xl bg-gradient-to-r from-amber-100 via-yellow-50 to-orange-100 border-4 border-amber-400 ring-4 ring-amber-200/60 shadow-xl space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-500 text-white text-xs sm:text-sm font-black uppercase tracking-wider shadow-sm">
-              <span>💬</span> <span>SLOT DISKUSI BERSAMA • LINK KOLABORASI</span>
+              <span>💬</span> <span>SLOT DISKUSI BERSAMA • KOLABORASI NARASI</span>
             </span>
             <span class="text-xs font-black text-amber-900 bg-white px-3 py-1 rounded-full border border-amber-300 animate-pulse">
-              🔥 Ayo Diskusi di Sini!
+              🔥 Ayo Berbagi Opini!
             </span>
           </div>
 
@@ -2542,26 +2591,19 @@ function renderTahapTView() {
               Mari Berdiskusi Tentang 4 Barang di Atas!
             </h3>
             <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
-              Setelah mengamati gambar dan membaca cerita sederhana di atas, ayo tuliskan pendapatmu dan berdiskusi bersama teman-teman melalui link Padlet berikut:
+              Setelah mengamati gambar dan membaca cerita sederhana di atas, tuliskan pendapatmu langsung pada <strong>Ruang Kolaborasi Narasi</strong> di bagian bawah halaman ini bersama teman sekelas:
             </p>
           </div>
 
-          <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="block w-full p-3.5 sm:p-4 rounded-2xl bg-white border-2 border-amber-400 hover:border-orange-500 hover:bg-amber-50/70 transition-all shadow-sm group">
-            <span class="text-[11px] font-extrabold uppercase tracking-wider text-amber-700 block mb-1">🔗 KLIK TAUTAN DISKUSI BERSAMA (PADLET):</span>
-            <span class="text-xs sm:text-base font-black text-amber-950 underline break-all group-hover:text-orange-700">
-              https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg
-            </span>
-          </a>
-
-          <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="btn-playful w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:from-amber-600 hover:to-red-600 text-white font-black text-sm sm:text-lg flex items-center justify-center gap-2.5 shadow-xl">
-            <span>💬 BUKA SLOT DISKUSI BERSAMA SEKARANG ↗️</span>
-          </a>
+          <button onclick="document.getElementById('kolaborasi-section')?.scrollIntoView({ behavior: 'smooth' })" class="btn-playful w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 hover:from-amber-600 hover:to-red-600 text-white font-black text-sm sm:text-lg flex items-center justify-center gap-2.5 shadow-xl">
+            <span>💬 BUKA RUANG KOLABORASI NARASI KELAS ↓</span>
+          </button>
         </div>
       </section>
 
-      <!-- 4. LKPD DIGITAL: 5 KEGIATAN & TAUTAN CANVA -->
+      <!-- 4. LKPD DIGITAL: 5 KEGIATAN INTERAKTIF -->
       <section class="card-pastel p-6 md:p-8 border-3 border-teal-300 bg-white shadow-lg space-y-8">
-        <!-- Banner Tautan LKPD Canva -->
+        <!-- Banner LKPD Digital -->
         <div class="rounded-2xl bg-gradient-to-r from-teal-500 via-emerald-500 to-teal-600 p-6 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
           <div class="space-y-2 max-w-xl">
             <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-xs font-black uppercase tracking-wider">
@@ -2569,13 +2611,13 @@ function renderTahapTView() {
             </div>
             <h2 class="text-2xl md:text-3xl font-black">LKPD Digital: Kebutuhan dan Keinginan 📝</h2>
             <p class="text-teal-50 text-xs md:text-sm font-medium leading-relaxed">
-              Peserta didik mengakses LKPD digital tentang kebutuhan dan keinginan yang tersedia pada halaman web belajar, kemudian mengerjakan LKPD secara individu dengan mengelompokkan barang ke dalam kategori kebutuhan atau keinginan berdasarkan gambar dan cerita.
+              Kerjakan LKPD digital interaktif di bawah ini secara mandiri dengan mengelompokkan barang ke dalam kategori kebutuhan atau keinginan berdasarkan gambar dan cerita di atas!
             </p>
           </div>
           <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0 w-full md:w-auto">
-            <a href="https://canva.link/9qvvwyerlogq0i1" target="_blank" rel="noopener noreferrer" class="btn-playful px-5 py-3 rounded-2xl bg-white hover:bg-teal-50 text-teal-800 font-black text-xs md:text-sm flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all">
-              <span>🎨 Buka LKPD di Canva ↗️</span>
-            </a>
+            <div class="px-5 py-3 rounded-2xl bg-white/20 border border-white/30 text-white font-black text-xs md:text-sm flex items-center justify-center gap-2">
+              <span>✨ Langsung Interaktif di Web</span>
+            </div>
           </div>
         </div>
 
@@ -2788,38 +2830,31 @@ function renderTahapTView() {
 
               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 pt-2">
                 <span id="reason-feedback" class="text-xs font-bold text-amber-900">
-                  Simpan alasan analisis untuk disertakan saat mengunggah di Padlet.
+                  Simpan alasan analisis untuk disertakan dalam Ruang Kolaborasi Narasi.
                 </span>
                 <button onclick="saveLkpdReasons()" class="btn-playful w-full sm:w-auto px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm">
                   <span>💾 Simpan Alasan Analisis</span>
                 </button>
               </div>
 
-              <!-- Link Upload Alasan Analisis ke Padlet (Highlight Besar) -->
+              <!-- Menuju ke Kolaborasi Narasi -->
               <div class="p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-sky-100 via-cyan-50 to-indigo-100 border-4 border-sky-400 ring-4 ring-sky-200/60 shadow-xl space-y-3.5">
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-sky-600 text-white text-xs sm:text-sm font-black uppercase tracking-wider shadow-sm">
-                    <span>📌</span> <span>LINK KOLABORASI LKPD • PENTING</span>
+                    <span>📌</span> <span>KOLABORASI NARASI • PENTING</span>
                   </span>
                   <span class="text-xs font-black text-sky-900 bg-white px-3 py-1 rounded-full border border-sky-300">
-                    📤 Wajib Diunggah
+                    💡 Siap Dibagikan
                   </span>
                 </div>
 
                 <p class="text-base sm:text-xl font-black text-sky-950 leading-snug">
-                  Simpan alasan analisis dan unggah pada link yang disediakan
+                  Simpan alasan analisismu dan bagikan langsung ke Ruang Kolaborasi Narasi bersama teman sekelas!
                 </p>
 
-                <a href="https://padlet.com/nurafifahn16/lkpdkebutuhandankeinginan" target="_blank" rel="noopener noreferrer" class="block w-full p-3.5 sm:p-4 rounded-2xl bg-white border-2 border-sky-400 hover:border-indigo-500 hover:bg-sky-50/70 transition-all shadow-sm group">
-                  <span class="text-[11px] font-extrabold uppercase tracking-wider text-sky-700 block mb-1">🔗 KLIK LINK PADLET LKPD KEBUTUHAN & KEINGINAN:</span>
-                  <span class="text-xs sm:text-base font-black text-sky-900 underline break-all group-hover:text-indigo-700">
-                    https://padlet.com/nurafifahn16/lkpdkebutuhandankeinginan
-                  </span>
-                </a>
-
-                <a href="https://padlet.com/nurafifahn16/lkpdkebutuhandankeinginan" target="_blank" rel="noopener noreferrer" class="btn-playful w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white font-black text-sm sm:text-lg flex items-center justify-center gap-2.5 shadow-xl">
-                  <span>📤 UNGGAH ALASAN ANALISIS DI LINK PADLET ↗️</span>
-                </a>
+                <button onclick="document.getElementById('kolaborasi-section')?.scrollIntoView({ behavior: 'smooth' })" class="btn-playful w-full px-6 py-4 rounded-2xl bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white font-black text-sm sm:text-lg flex items-center justify-center gap-2.5 shadow-xl">
+                  <span>💬 MENUJU RUANG KOLABORASI NARASI 1, 2, 3 ↓</span>
+                </button>
               </div>
             </div>
 
@@ -2946,63 +2981,42 @@ function renderTahapTView() {
         </div>
       </section>
 
-      <!-- 5. RUANG KOLABORASI: PADLET TERSEMAT & TANGGAPAN SANTUN -->
-      <section class="card-pastel p-6 md:p-8 border-3 border-violet-300 bg-white shadow-xl space-y-6">
+      <!-- 5. RUANG KOLABORASI: DISKUSI NARASI 1, 2, 3 & TANGGAPAN SANTUN -->
+      <section id="kolaborasi-section" class="card-pastel p-6 md:p-8 border-3 border-violet-300 bg-white shadow-xl space-y-6">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-violet-100">
           <div>
             <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-violet-100 text-violet-800 text-xs font-bold uppercase tracking-wider mb-2">
               <span>Kolaborasi Terpadu</span>
             </div>
             <h2 class="text-2xl font-black text-slate-800 flex items-center gap-2">
-              <span>📌 Papan Diskusi Padlet Kelas 3 (Tersemat)</span>
+              <span>🤝 Ruang Kolaborasi &amp; Diskusi Narasi Kelas 3</span>
             </h2>
             <p class="text-xs md:text-sm text-slate-600 mt-1 max-w-2xl leading-relaxed">
-              Setelah menyelesaikan LKPD, peserta didik diarahkan untuk berbagi hasil pekerjaan melalui Padlet yang tersemat pada halaman diskusi. Setiap peserta didik mengunggah hasil pengelompokan beserta alasannya. Peserta didik membaca hasil pekerjaan teman dan memberikan tanggapan atau pertanyaan melalui kolom komentar Padlet dengan menggunakan bahasa yang santun.
+              Setelah menyelesaikan LKPD, mari berbagi hasil opini dan alasanmu pada ketiga Narasi di bawah ini. Masukkan pendapatmu pada Narasi 1, Narasi 2, atau Narasi 3, lalu berikan tanggapan santun pada pendapat teman sekelas!
             </p>
           </div>
           <div class="flex flex-col sm:flex-row gap-2.5 flex-shrink-0 w-full md:w-auto">
-            <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="btn-playful px-4 py-3 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-900 font-black text-xs md:text-sm flex items-center justify-center gap-2 shadow-md transition-all">
-              <span>🌐 Buka Padlet Kolaborasi ↗️</span>
-            </a>
             <button onclick="openNewPostModal()" class="btn-playful px-5 py-3 rounded-2xl bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-black text-xs md:text-sm flex items-center justify-center gap-2 shadow-lg shadow-violet-200 transition-all">
-              <span>+ Unggah Hasil LKPD ke Padlet 🚀</span>
+              <span>+ Unggah Opini Narasi Lengkap 🚀</span>
             </button>
           </div>
         </div>
 
-        <!-- Tautan Langsung Padlet Kolaborasi Terpadu (Highlight Besar) -->
-        <div class="p-5 sm:p-7 rounded-3xl bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white border-4 border-violet-300 ring-4 ring-purple-200 shadow-2xl space-y-4">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-violet-900 text-xs sm:text-sm font-black uppercase tracking-wider shadow-sm">
-              <span>🌐</span> <span>LINK UTAMA KOLABORASI TERPADU (PADLET)</span>
-            </span>
-            <span class="text-xs font-black text-amber-950 bg-amber-300 px-3 py-1 rounded-full shadow-sm animate-pulse">
-              ✨ Diskusi Kelas Aktif
-            </span>
+        <!-- Banner Info Siswa Aktif -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-600 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-md">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl">👤</span>
+            <div>
+              <div class="text-[11px] font-bold text-purple-200 uppercase tracking-wider">Nama Peserta Didik Aktif</div>
+              <div class="text-base sm:text-lg font-black text-white" id="kolaborasi-student-badge">${escapeHtmlText(AppState.studentName)}</div>
+            </div>
           </div>
-
-          <div class="space-y-1">
-            <h3 class="font-black text-lg sm:text-2xl text-white">
-              Klik untuk Masuk ke Ruang Kolaborasi Padlet Bersama!
-            </h3>
-            <p class="text-xs sm:text-sm text-purple-100 font-medium">
-              Unggah temuan diskusimu dan berikan tanggapan santun untuk hasil karya teman-temanmu pada tautan resmi berikut:
-            </p>
-          </div>
-
-          <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="block w-full p-3.5 sm:p-4 rounded-2xl bg-white text-violet-950 border-2 border-amber-300 hover:bg-amber-50 transition-all shadow-md group">
-            <span class="text-[11px] font-extrabold uppercase tracking-wider text-purple-700 block mb-1">🔗 LINK PADLET MARI BERDISKUSI:</span>
-            <span class="text-xs sm:text-base font-black underline break-all group-hover:text-fuchsia-700">
-              https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg
-            </span>
-          </a>
-
-          <a href="https://padlet.com/virgaraya/mari-berdiskusi-s025d70n1az4io914xyg" target="_blank" rel="noopener noreferrer" class="btn-playful w-full px-6 py-4 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm sm:text-lg flex items-center justify-center gap-2.5 shadow-xl">
-            <span>🚀 BUKA PADLET KOLABORASI TERPADU SEKARANG ↗️</span>
-          </a>
+          <span class="text-xs font-bold bg-white/20 px-3.5 py-1.5 rounded-full border border-white/30 text-white">
+            ✨ Namamu otomatis terpasang pada setiap opini &amp; komentar
+          </span>
         </div>
 
-        <!-- NOTIFIKASI SUBMIT PADLET -->
+        <!-- NOTIFIKASI SUBMIT KOLABORASI -->
         <div id="padlet-alert-area" class="hidden"></div>
 
         <!-- Aturan Cepat Saat Mengomentari -->
@@ -3016,77 +3030,116 @@ function renderTahapTView() {
           </span>
         </div>
 
-        <!-- 3 KOLOM KELOMPOK PADLET -->
+        <!-- 3 KOLOM NARASI KOLABORASI -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="padlet-columns">
-          <!-- Kolom Kelompok 1 -->
+          <!-- Kolom Narasi 1 -->
           <div class="p-4 rounded-3xl bg-sky-50/80 border-2 border-sky-200 space-y-4 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between pb-3 border-b border-sky-200">
                 <div class="flex items-center gap-2">
-                  <span class="text-2xl">🦌</span>
+                  <span class="text-2xl">🍚</span>
                   <div>
-                    <h3 class="font-black text-sky-950 text-sm">Kelompok 1</h3>
-                    <span class="text-[10px] font-bold text-sky-700">Kancil Cerdik</span>
+                    <h3 class="font-black text-sky-950 text-sm">Narasi 1</h3>
+                    <span class="text-[10px] font-bold text-sky-700">Kebutuhan Pokok (Nasi)</span>
                   </div>
                 </div>
                 <span class="px-2.5 py-0.5 rounded-full bg-white text-sky-800 text-[10px] font-extrabold border border-sky-200">
                   Diskusi Aktif
                 </span>
               </div>
+
+              <!-- Input Opini Cepat Langsung di Kolom Narasi 1 -->
+              <div class="mt-3 p-3 bg-white rounded-2xl border border-sky-200 shadow-xs space-y-2">
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="font-bold text-sky-900">💬 Kirim Opini Narasi 1:</span>
+                  <span class="text-[10px] font-semibold text-slate-500">Nama: <strong class="text-sky-700">${escapeHtmlText(AppState.studentName)}</strong></span>
+                </div>
+                <textarea id="quick-opinion-1" rows="2" class="w-full p-2 text-xs rounded-xl border border-slate-200 focus:ring-2 focus:ring-sky-400 focus:outline-none" placeholder="Tuliskan opinimu tentang Nasi sebagai kebutuhan pokok..."></textarea>
+                <button onclick="submitQuickNarasiOpinion('1')" class="btn-playful w-full py-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-black text-xs flex items-center justify-center gap-1 shadow-xs">
+                  <span>Kirim Opini Narasi 1 💬</span>
+                </button>
+              </div>
+
               <div id="posts-group-1" class="space-y-3 mt-3">
                 <!-- Post Cards akan dirender via JS -->
               </div>
             </div>
             <button onclick="quickPostForGroup('1')" class="w-full py-2 rounded-xl bg-white hover:bg-sky-100 text-sky-800 font-bold text-xs border border-sky-200 flex items-center justify-center gap-1 shadow-sm mt-3">
-              <span>+ Unggah ke Kelompok 1</span>
+              <span>+ Form Lengkap Opini Narasi 1</span>
             </button>
           </div>
 
-          <!-- Kolom Kelompok 2 -->
+          <!-- Kolom Narasi 2 -->
           <div class="p-4 rounded-3xl bg-amber-50/80 border-2 border-amber-200 space-y-4 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between pb-3 border-b border-amber-200">
                 <div class="flex items-center gap-2">
-                  <span class="text-2xl">🐰</span>
+                  <span class="text-2xl">📖</span>
                   <div>
-                    <h3 class="font-black text-amber-950 text-sm">Kelompok 2</h3>
-                    <span class="text-[10px] font-bold text-amber-700">Kelinci Hebat</span>
+                    <h3 class="font-black text-amber-950 text-sm">Narasi 2</h3>
+                    <span class="text-[10px] font-bold text-amber-700">Kebutuhan Belajar (Buku)</span>
                   </div>
                 </div>
                 <span class="px-2.5 py-0.5 rounded-full bg-white text-amber-800 text-[10px] font-extrabold border border-amber-200">
                   Diskusi Aktif
                 </span>
               </div>
+
+              <!-- Input Opini Cepat Langsung di Kolom Narasi 2 -->
+              <div class="mt-3 p-3 bg-white rounded-2xl border border-amber-200 shadow-xs space-y-2">
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="font-bold text-amber-900">💬 Kirim Opini Narasi 2:</span>
+                  <span class="text-[10px] font-semibold text-slate-500">Nama: <strong class="text-amber-800">${escapeHtmlText(AppState.studentName)}</strong></span>
+                </div>
+                <textarea id="quick-opinion-2" rows="2" class="w-full p-2 text-xs rounded-xl border border-slate-200 focus:ring-2 focus:ring-amber-400 focus:outline-none" placeholder="Tuliskan opinimu tentang Buku Tulis untuk belajar sekolah..."></textarea>
+                <button onclick="submitQuickNarasiOpinion('2')" class="btn-playful w-full py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-black text-xs flex items-center justify-center gap-1 shadow-xs">
+                  <span>Kirim Opini Narasi 2 💬</span>
+                </button>
+              </div>
+
               <div id="posts-group-2" class="space-y-3 mt-3">
                 <!-- Post Cards akan dirender via JS -->
               </div>
             </div>
             <button onclick="quickPostForGroup('2')" class="w-full py-2 rounded-xl bg-white hover:bg-amber-100 text-amber-900 font-bold text-xs border border-amber-200 flex items-center justify-center gap-1 shadow-sm mt-3">
-              <span>+ Unggah ke Kelompok 2</span>
+              <span>+ Form Lengkap Opini Narasi 2</span>
             </button>
           </div>
 
-          <!-- Kolom Kelompok 3 -->
+          <!-- Kolom Narasi 3 -->
           <div class="p-4 rounded-3xl bg-rose-50/80 border-2 border-rose-200 space-y-4 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between pb-3 border-b border-rose-200">
                 <div class="flex items-center gap-2">
-                  <span class="text-2xl">🦉</span>
+                  <span class="text-2xl">🚗</span>
                   <div>
-                    <h3 class="font-black text-rose-950 text-sm">Kelompok 3</h3>
-                    <span class="text-[10px] font-bold text-rose-700">Burung Hantu Bijak</span>
+                    <h3 class="font-black text-rose-950 text-sm">Narasi 3</h3>
+                    <span class="text-[10px] font-bold text-rose-700">Keinginan &amp; Hiburan</span>
                   </div>
                 </div>
                 <span class="px-2.5 py-0.5 rounded-full bg-white text-rose-800 text-[10px] font-extrabold border border-rose-200">
                   Diskusi Aktif
                 </span>
               </div>
+
+              <!-- Input Opini Cepat Langsung di Kolom Narasi 3 -->
+              <div class="mt-3 p-3 bg-white rounded-2xl border border-rose-200 shadow-xs space-y-2">
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="font-bold text-rose-900">💬 Kirim Opini Narasi 3:</span>
+                  <span class="text-[10px] font-semibold text-slate-500">Nama: <strong class="text-rose-700">${escapeHtmlText(AppState.studentName)}</strong></span>
+                </div>
+                <textarea id="quick-opinion-3" rows="2" class="w-full p-2 text-xs rounded-xl border border-slate-200 focus:ring-2 focus:ring-rose-400 focus:outline-none" placeholder="Tuliskan opinimu tentang Mainan dan Jajanan sebagai keinginan..."></textarea>
+                <button onclick="submitQuickNarasiOpinion('3')" class="btn-playful w-full py-1.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-black text-xs flex items-center justify-center gap-1 shadow-xs">
+                  <span>Kirim Opini Narasi 3 💬</span>
+                </button>
+              </div>
+
               <div id="posts-group-3" class="space-y-3 mt-3">
                 <!-- Post Cards akan dirender via JS -->
               </div>
             </div>
             <button onclick="quickPostForGroup('3')" class="w-full py-2 rounded-xl bg-white hover:bg-rose-100 text-rose-900 font-bold text-xs border border-rose-200 flex items-center justify-center gap-1 shadow-sm mt-3">
-              <span>+ Unggah ke Kelompok 3</span>
+              <span>+ Form Lengkap Opini Narasi 3</span>
             </button>
           </div>
         </div>
@@ -3154,15 +3207,15 @@ function renderTahapTView() {
           <ul class="space-y-2 text-xs md:text-sm text-slate-700">
             <li class="flex items-start gap-2">
               <span class="text-violet-600 font-bold mt-0.5">✔</span>
-              <span><strong>Mengerjakan LKPD digital melalui lima kegiatan:</strong> Ayo Amati Barang, Ayo Kelompokkan, Mengapa Kamu Memilihnya, Ayo Berpikir, dan Ayo Simpulkan (<a href="https://canva.link/9qvvwyerlogq0i1" target="_blank" rel="noopener noreferrer" class="text-violet-700 underline font-bold hover:text-violet-900">Link LKPD Canva</a>).</span>
+              <span><strong>Mengerjakan LKPD digital melalui lima kegiatan interaktif:</strong> Ayo Amati Barang, Ayo Kelompokkan, Mengapa Kamu Memilihnya, Ayo Berpikir, dan Ayo Simpulkan.</span>
             </li>
             <li class="flex items-start gap-2">
               <span class="text-violet-600 font-bold mt-0.5">✔</span>
-              <span><strong>Mengunggah hasil pengerjaan LKPD</strong> melalui Padlet yang tersedia pada halaman diskusi.</span>
+              <span><strong>Memasukkan opini pada Ruang Kolaborasi Narasi 1, Narasi 2, dan Narasi 3</strong> yang langsung tercatat dengan nama masing-masing.</span>
             </li>
             <li class="flex items-start gap-2">
               <span class="text-violet-600 font-bold mt-0.5">✔</span>
-              <span><strong>Membaca dan memberikan tanggapan</strong> terhadap hasil pekerjaan teman menggunakan bahasa yang santun.</span>
+              <span><strong>Membaca dan memberikan tanggapan santun</strong> terhadap opini dan alasan teman sekelas.</span>
             </li>
           </ul>
         </div>
@@ -3179,13 +3232,13 @@ function renderTahapTView() {
       </div>
     </div>
 
-    <!-- MODAL UNGGAH HASIL LKPD KE PADLET -->
+    <!-- MODAL UNGGAH HASIL LKPD KE KOLABORASI NARASI -->
     <div id="padlet-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
       <div class="bg-white rounded-3xl max-w-lg w-full p-4 sm:p-6 md:p-8 shadow-2xl border-4 border-violet-200 space-y-5 animate-bounce-gentle max-h-[90vh] overflow-y-auto">
         <div class="flex items-center justify-between pb-3 border-b border-slate-100">
           <div class="flex items-center gap-2">
             <span class="text-2xl">📝</span>
-            <h3 class="font-black text-slate-800 text-lg">Unggah Hasil LKPD ke Padlet</h3>
+            <h3 class="font-black text-slate-800 text-lg">Unggah Opini ke Ruang Kolaborasi Narasi</h3>
           </div>
           <button onclick="closeNewPostModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold flex items-center justify-center transition-colors">✕</button>
         </div>
@@ -3193,25 +3246,25 @@ function renderTahapTView() {
         <div class="space-y-4 text-xs md:text-sm">
           <div>
             <label class="block font-bold text-slate-700 mb-1">Nama Peserta Didik / Anggota:</label>
-            <input type="text" id="post-author" value="${AppState.studentName}" class="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:ring-2 focus:ring-violet-400 focus:outline-none"/>
+            <input type="text" id="post-author" value="${escapeHtmlText(AppState.studentName)}" class="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:ring-2 focus:ring-violet-400 focus:outline-none"/>
           </div>
 
           <div>
-            <label class="block font-bold text-slate-700 mb-1">Pilih Kelompok Padlet:</label>
+            <label class="block font-bold text-slate-700 mb-1">Pilih Narasi Kolaborasi:</label>
             <select id="post-group" class="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:ring-2 focus:ring-violet-400 focus:outline-none">
-              <option value="1">Kelompok 1 (Kancil Cerdik)</option>
-              <option value="2">Kelompok 2 (Kelinci Hebat)</option>
-              <option value="3">Kelompok 3 (Burung Hantu Bijak)</option>
+              <option value="1">Narasi 1: Kebutuhan Pokok Sehari-hari (Nasi 🍚)</option>
+              <option value="2">Narasi 2: Kebutuhan Belajar &amp; Sekolah (Buku Tulis 📖)</option>
+              <option value="3">Narasi 3: Keinginan &amp; Hiburan (Mainan &amp; Jajanan 🚗🍫)</option>
             </select>
           </div>
 
           <div>
-            <label class="block font-bold text-slate-700 mb-1">Judul Pengelompokan LKPD:</label>
+            <label class="block font-bold text-slate-700 mb-1">Judul Opini LKPD:</label>
             <input type="text" id="post-title" value="Hasil LKPD: Kebutuhan vs Keinginan 4 Barang" class="w-full p-2.5 rounded-xl border border-slate-300 font-semibold focus:ring-2 focus:ring-violet-400 focus:outline-none"/>
           </div>
 
           <div>
-            <label class="block font-bold text-slate-700 mb-1">Alasan dan Temuan Diskusi:</label>
+            <label class="block font-bold text-slate-700 mb-1">Alasan dan Temuan Opini:</label>
             <textarea id="post-content" rows="4" class="w-full p-2.5 rounded-xl border border-slate-300 font-medium focus:ring-2 focus:ring-violet-400 focus:outline-none" placeholder="Tuliskan temuan pengelompokanmu dan alasan mengapa barang tersebut termasuk kebutuhan atau keinginan..."></textarea>
           </div>
 
@@ -3231,7 +3284,7 @@ function renderTahapTView() {
         <div class="flex items-center justify-end gap-3 pt-2">
           <button onclick="closeNewPostModal()" class="px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-100 font-bold text-xs transition-colors">Batal</button>
           <button onclick="savePadletPost()" class="px-6 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-700 text-white font-black text-xs shadow-md shadow-violet-200 transition-all flex items-center gap-1.5">
-            <span>Kirim ke Padlet 🚀</span>
+            <span>Kirim Opini Kolaborasi 🚀</span>
           </button>
         </div>
       </div>
@@ -3518,7 +3571,7 @@ function renderPadletPosts() {
     if (grpPosts.length === 0) {
       col.innerHTML = `
         <div class="p-4 rounded-xl bg-white/60 border border-dashed border-slate-200 text-center text-xs text-slate-400">
-          Belum ada kiriman di kelompok ini. Jadilah yang pertama!
+          Belum ada opini di Narasi ini. Jadilah yang pertama memberikan pendapat!
         </div>
       `;
       return;
@@ -3530,7 +3583,7 @@ function renderPadletPosts() {
           <span class="font-black text-slate-800 text-xs flex items-center gap-1.5">
             👤 ${post.author}
           </span>
-          <span class="text-[10px] text-slate-400 font-semibold">Kelompok ${post.group}</span>
+          <span class="text-[10px] text-violet-700 font-bold bg-violet-50 px-2 py-0.5 rounded-md border border-violet-200">Narasi ${post.group}</span>
         </div>
         <div class="px-2 py-0.5 rounded-full bg-violet-100 text-violet-800 font-black text-[10px] inline-block">
           ${post.title}
@@ -3587,6 +3640,49 @@ function renderPadletPosts() {
     `).join('');
   });
 }
+
+function submitQuickNarasiOpinion(grp) {
+  const input = document.getElementById(`quick-opinion-${grp}`);
+  const text = input?.value.trim();
+  if (!text) {
+    alert('Mohon tuliskan pendapat atau opinimu terlebih dahulu ya!');
+    return;
+  }
+
+  const author = AppState.studentName || 'Peserta Didik';
+  const narasiTitles = {
+    '1': 'Opini Narasi 1: Kebutuhan Pokok 🍚',
+    '2': 'Opini Narasi 2: Kebutuhan Belajar 📖',
+    '3': 'Opini Narasi 3: Keinginan & Hiburan 🚗🍫'
+  };
+
+  const newPost = {
+    id: 'post-' + Date.now(),
+    author: author,
+    group: String(grp),
+    title: narasiTitles[grp] || `Opini Narasi ${grp}`,
+    content: text,
+    likes: 1,
+    comments: [
+      { author: 'Ciko Mascot', text: `Terima kasih telah berbagi opini di Narasi ${grp}! Pendapatmu sangat bijak 🌟` }
+    ]
+  };
+
+  if (!AppState.padletPosts) AppState.padletPosts = [];
+  AppState.padletPosts.unshift(newPost);
+  AppState.save();
+  renderPadletPosts();
+  input.value = '';
+
+  if (window.RBC_SUPABASE && window.RBC_SUPABASE.isConnected()) {
+    window.RBC_SUPABASE.sendPadletPost(newPost);
+  }
+
+  window.soundManager.playFanfare();
+  AppState.addReward(15, 3, `Opinimu berhasil dikirim ke Narasi ${grp}!`);
+  AppState.showToast(`✅ Opinimu berhasil dikirim ke Narasi ${grp}!`);
+}
+window.submitQuickNarasiOpinion = submitQuickNarasiOpinion;
 
 window.tempPadletFile = null;
 
@@ -3717,7 +3813,7 @@ function savePadletPost() {
   }
 
   window.soundManager.playFanfare();
-  AppState.addReward(20, 4, 'Hasil LKPD-mu berhasil diunggah ke Papan Padlet!');
+  AppState.addReward(20, 4, 'Hasil opinimu berhasil diunggah ke Ruang Kolaborasi Narasi!');
 
   const alertArea = document.getElementById('padlet-alert-area');
   if (alertArea) {
@@ -3725,17 +3821,17 @@ function savePadletPost() {
     alertArea.innerHTML = `
       <div class="p-4 bg-emerald-50 border-2 border-emerald-400 rounded-2xl text-xs space-y-1.5 shadow-sm animate-fade-in">
         <div class="flex items-center justify-between font-black text-emerald-900 text-sm">
-          <span class="flex items-center gap-1.5"><span>🎉</span> NOTIFIKASI: Postingan & File LKPD Berhasil Tersubmit!</span>
+          <span class="flex items-center gap-1.5"><span>🎉</span> NOTIFIKASI: Opini Narasi Berhasil Tersubmit!</span>
           <span class="text-[10px] px-2.5 py-1 rounded-full bg-emerald-200 text-emerald-950 font-bold">Tersimpan di Supabase ✅</span>
         </div>
         <p class="text-emerald-800 leading-relaxed font-medium">
-          Hore, <strong>${author}</strong>! Postingan diskusi dan karyamu telah sukses tersimpan ke database cloud dan langsung tampil di Kelompok ${group}.
+          Hore, <strong>${author}</strong>! Postingan opini dan analisismu telah sukses tersimpan dan langsung tampil di Narasi ${group}.
         </p>
       </div>
     `;
     alertArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
-  AppState.showToast('✅ Postingan Padlet berhasil tersubmit ke database!');
+  AppState.showToast('✅ Opini berhasil dikirim ke Narasi ' + group + '!');
 }
 
 function likePadletItem(postId) {
@@ -4256,25 +4352,25 @@ function renderTahapKView() {
 
       <!-- SERTIFIKAT KELULUSAN (Hidden until claimed, printable, 2 Pilihan Desain Bertema Uang & Celengan) -->
       <div id="certificate-section" class="hidden pt-6 space-y-5">
-        <!-- Pilihan 2 Versi Desain Sertifikat -->
+        <!-- Pilihan 3 Versi Desain Sertifikat -->
         <div class="p-4 sm:p-5 rounded-3xl bg-white border-2 border-amber-200 shadow-sm space-y-3">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-center sm:text-left">
             <div>
               <span class="text-[11px] font-black uppercase tracking-wider text-amber-700 block">💰 Pilih Versi Sertifikat Bertema Uangmu</span>
-              <h3 class="text-sm sm:text-base font-black text-slate-800">Tersedia 2 Versi Desain (Emas &amp; Merah Uang Rupiah) — Pilih Favoritmu!</h3>
+              <h3 class="text-sm sm:text-base font-black text-slate-800">Tersedia 3 Versi Desain (Emas, Merah, &amp; Biru Uang Rupiah) — Pilih Favoritmu!</h3>
             </div>
-            <span class="text-xs font-semibold text-slate-500">Bisa langsung dicetak atau disimpan PDF</span>
+            <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">📄 Format Standar A4 (21 cm × 29,7 cm)</span>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <button type="button" id="btn-cert-theme-emas" onclick="setCertificateTheme('emas')" class="text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 ${AppState.certTheme !== 'merah' ? 'border-amber-500 bg-amber-50/90 ring-2 ring-amber-200 shadow-sm' : 'border-slate-200 bg-slate-50 hover:border-amber-300'}">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <button type="button" id="btn-cert-theme-emas" onclick="setCertificateTheme('emas')" class="text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 ${AppState.certTheme === 'emas' ? 'border-amber-500 bg-amber-50/90 ring-2 ring-amber-200 shadow-sm' : 'border-slate-200 bg-slate-50 hover:border-amber-300'}">
               <span class="w-10 h-10 rounded-xl bg-amber-100 border border-amber-400 flex items-center justify-center text-xl flex-shrink-0">🪙</span>
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between gap-2">
-                  <span class="font-black text-xs sm:text-sm text-slate-800">Versi 1: Emas &amp; Dana Berkilau</span>
-                  <span id="badge-cert-emas" class="${AppState.certTheme !== 'merah' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-black">Dipilih</span>
+                  <span class="font-black text-xs sm:text-sm text-slate-800">Versi 1: Emas</span>
+                  <span id="badge-cert-emas" class="${AppState.certTheme === 'emas' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-black">Dipilih</span>
                 </div>
-                <span class="text-[11px] text-slate-600 font-medium block truncate">Koin emas Rp, batangan emas, peti harta &amp; celengan</span>
+                <span class="text-[11px] text-slate-600 font-medium block truncate">Koin emas Rp, batangan emas &amp; celengan</span>
               </div>
             </button>
 
@@ -4282,10 +4378,21 @@ function renderTahapKView() {
               <span class="w-10 h-10 rounded-xl bg-rose-100 border border-rose-400 flex items-center justify-center text-xl flex-shrink-0">💵</span>
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between gap-2">
-                  <span class="font-black text-xs sm:text-sm text-slate-800">Versi 2: Merah Uang Rupiah</span>
+                  <span class="font-black text-xs sm:text-sm text-slate-800">Versi 2: Merah</span>
                   <span id="badge-cert-merah" class="${AppState.certTheme === 'merah' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-black">Dipilih</span>
                 </div>
-                <span class="text-[11px] text-slate-600 font-medium block truncate">Uang kertas merah Rp, celengan, dompet &amp; buku tabungan</span>
+                <span class="text-[11px] text-slate-600 font-medium block truncate">Uang kertas merah Rp, dompet &amp; tabungan</span>
+              </div>
+            </button>
+
+            <button type="button" id="btn-cert-theme-biru" onclick="setCertificateTheme('biru')" class="text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 ${AppState.certTheme === 'biru' ? 'border-sky-500 bg-sky-50/90 ring-2 ring-sky-200 shadow-sm' : 'border-slate-200 bg-slate-50 hover:border-sky-300'}">
+              <span class="w-10 h-10 rounded-xl bg-sky-100 border border-sky-400 flex items-center justify-center text-xl flex-shrink-0">💶</span>
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="font-black text-xs sm:text-sm text-slate-800">Versi 3: Biru</span>
+                  <span id="badge-cert-biru" class="${AppState.certTheme === 'biru' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-sky-500 text-white text-[10px] font-black">Dipilih</span>
+                </div>
+                <span class="text-[11px] text-slate-600 font-medium block truncate">Uang kertas biru Rp, celengan &amp; segel bijak</span>
               </div>
             </button>
           </div>
@@ -4445,17 +4552,154 @@ const CERT_MONEY_ICONS = {
       <text x="32" y="25.5" font-size="9.5" font-weight="900" fill="#9F1239" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
       <text x="32" y="33.5" font-size="5.5" font-weight="900" fill="#B45309" text-anchor="middle" font-family="'Fredoka', sans-serif">BIJAK</text>
     </svg>
+  `,
+  cuteBlueBill: () => `
+    <svg viewBox="0 0 72 56" fill="none" class="w-full h-full">
+      <g transform="rotate(-6 36 28)">
+        <rect x="6" y="11" width="60" height="34" rx="5" fill="#38BDF8" stroke="#0369A1" stroke-width="2.6"/>
+        <rect x="11" y="15.5" width="50" height="25" rx="3" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.3" stroke-dasharray="2.5 2"/>
+        <rect x="46" y="15.5" width="6" height="25" fill="#BAE6FD" opacity="0.75"/>
+        <text x="20.5" y="26.5" font-size="9.5" font-weight="900" fill="#0369A1" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
+        <circle cx="33" cy="29" r="1.8" fill="#0C4A6E"/>
+        <circle cx="43" cy="29" r="1.8" fill="#0C4A6E"/>
+        <path d="M35 33.5 Q38 36.5 41 33.5" stroke="#0C4A6E" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="29.5" cy="32" r="2.1" fill="#7DD3FC"/>
+        <circle cx="46.5" cy="32" r="2.1" fill="#7DD3FC"/>
+      </g>
+    </svg>
+  `,
+  fanBlueBills: () => `
+    <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
+      <rect x="12" y="14" width="38" height="22" rx="4" transform="rotate(-18 31 25)" fill="#7DD3FC" stroke="#0284C7" stroke-width="2.2"/>
+      <rect x="14" y="19" width="38" height="22" rx="4" transform="rotate(-4 33 30)" fill="#38BDF8" stroke="#0369A1" stroke-width="2.2"/>
+      <rect x="16" y="25" width="38" height="22" rx="4" transform="rotate(8 35 36)" fill="#E0F2FE" stroke="#075985" stroke-width="2.4"/>
+      <text x="35" y="40" font-size="9" font-weight="900" fill="#0369A1" text-anchor="middle" font-family="'Fredoka', sans-serif">RUPIAH</text>
+      <circle cx="17" cy="44" r="7" fill="#FACC15" stroke="#B45309" stroke-width="2"/>
+      <text x="17" y="46.5" font-size="6.5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
+    </svg>
+  `,
+  blueRupiahSeal: () => `
+    <svg viewBox="0 0 64 72" fill="none" class="w-full h-full">
+      <path d="M22 40 L15 65 L26 59 L31 66 L32 42" fill="#0284C7" stroke="#0369A1" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M42 40 L49 65 L38 59 L33 66 L32 42" fill="#38BDF8" stroke="#0369A1" stroke-width="2.2" stroke-linejoin="round"/>
+      <circle cx="32" cy="26" r="17" fill="#0284C7" stroke="#FBBF24" stroke-width="3"/>
+      <circle cx="32" cy="26" r="12.5" fill="#E0F2FE" stroke="#38BDF8" stroke-width="1.6" stroke-dasharray="3 2"/>
+      <text x="32" y="25.5" font-size="9.5" font-weight="900" fill="#0369A1" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
+      <text x="32" y="33.5" font-size="5.5" font-weight="900" fill="#B45309" text-anchor="middle" font-family="'Fredoka', sans-serif">BIJAK</text>
+    </svg>
+  `,
+  piggyBankBlue: () => `
+    <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
+      <circle cx="32" cy="13" r="6" fill="#FACC15" stroke="#B45309" stroke-width="2"/>
+      <text x="32" y="15.2" font-size="5.5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
+      <ellipse cx="33" cy="38" rx="19" ry="14" fill="#BAE6FD" stroke="#0284C7" stroke-width="2.5"/>
+      <path d="M21 26 L18 19 L27 23" fill="#BAE6FD" stroke="#0284C7" stroke-width="2.3" stroke-linejoin="round"/>
+      <ellipse cx="52" cy="38" rx="4.5" ry="6" fill="#7DD3FC" stroke="#0284C7" stroke-width="2.3"/>
+      <rect x="27" y="24" width="10" height="3" rx="1.5" fill="#0369A1"/>
+      <circle cx="41" cy="34.5" r="2" fill="#0C4A6E"/>
+      <circle cx="33" cy="34.5" r="2" fill="#0C4A6E"/>
+      <path d="M35 39.5 Q37.5 42 40 39.5" stroke="#0C4A6E" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M23 50 L23 56 M41 50 L41 56" stroke="#0284C7" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  `,
+  blueSavingsBook: () => `
+    <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
+      <rect x="13" y="10" width="38" height="44" rx="6" fill="#BAE6FD" stroke="#0284C7" stroke-width="2.5"/>
+      <path d="M20 10 L20 54" stroke="#0284C7" stroke-width="2.2"/>
+      <rect x="25" y="16" width="20" height="10" rx="2.5" fill="#FFFFFF" stroke="#38BDF8" stroke-width="1.5"/>
+      <text x="35" y="23" font-size="6" font-weight="900" fill="#0369A1" text-anchor="middle" font-family="'Fredoka', sans-serif">TABUNGAN</text>
+      <circle cx="31" cy="34" r="1.8" fill="#0C4A6E"/>
+      <circle cx="41" cy="34" r="1.8" fill="#0C4A6E"/>
+      <path d="M33 38.5 Q36 41.5 39 38.5" stroke="#0C4A6E" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="47" cy="48" r="7" fill="#FACC15" stroke="#92400E" stroke-width="2"/>
+      <text x="47" y="50.5" font-size="6.5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
+    </svg>
   `
 };
 
 function renderCertificateCard(theme = 'emas') {
   const isRed = theme === 'merah' || theme === 'merah100k' || theme === 'petualangan';
+  const isBlue = theme === 'biru' || theme === 'blue';
   const safeStudentName = escapeHtmlText(AppState.studentName);
   const issueDate = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
   const devRows = RBC_DATA.appInfo.developers.map(dev => `<span class="block">${dev}</span>`).join('');
 
-  const themeCfg = isRed
-    ? {
+  let themeCfg;
+  if (isBlue) {
+    themeCfg = {
+      outerClass: 'border-sky-500 bg-gradient-to-br from-sky-200 via-blue-100 to-cyan-300',
+      innerClass: 'border-dashed border-sky-400 bg-[#F0F9FF]',
+      cornerBracketColor: 'border-sky-500',
+      watermarkColor: 'text-sky-400',
+      ribbonTag: '<span class="inline-block px-3 py-0.5 rounded-full bg-sky-100 border border-sky-300 text-sky-800 text-[10px] font-black tracking-widest uppercase">💵 SERI BIRU RUPIAH • DANA &amp; CELENGAN CERIA</span>',
+      nameWrapClass: 'border-b-2 border-sky-500',
+      nameTextClass: 'text-sky-800',
+      dividerLineClass: 'bg-sky-300',
+      dividerBadge: '<span class="px-2.5 py-0.5 rounded-full bg-sky-100 border border-sky-300 text-sky-800 text-[10px] font-black">💵 • RUPIAH BIRU &amp; CELENGAN • 🪙</span>',
+      awardPillClass: 'bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-600 border-2 border-sky-200 text-white shadow-md',
+      awardLeftMini: CERT_MONEY_ICONS.cuteBlueBill(),
+      awardRightMini: CERT_MONEY_ICONS.piggyBankBlue(),
+      footerBorderClass: 'border-sky-200',
+      securityStripClass: 'bg-gradient-to-b from-sky-300 via-cyan-400 to-blue-400',
+      topBanner: `
+        <!-- Rangkaian Uang Kertas Biru Lucu & Koin Emas Rp di Atas -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-60 sm:w-80 pointer-events-none" aria-hidden="true">
+          <svg viewBox="0 0 320 34" class="w-full h-auto" fill="none">
+            <path d="M6 3 Q160 13 314 3" stroke="#0284C7" stroke-width="1.8" stroke-linecap="round"/>
+            <g transform="translate(26,7) rotate(-6)">
+              <rect width="34" height="19" rx="3" fill="#38BDF8" stroke="#0369A1" stroke-width="1.3"/>
+              <text x="17" y="13" font-size="8" font-weight="900" fill="#F0F9FF" text-anchor="middle">Rp</text>
+            </g>
+            <circle cx="84" cy="17" r="9" fill="#FACC15" stroke="#B45309" stroke-width="1.4"/>
+            <text x="84" y="20" font-size="7" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
+            <g transform="translate(106,9) rotate(4)">
+              <rect width="34" height="19" rx="3" fill="#0284C7" stroke="#0C4A6E" stroke-width="1.3"/>
+              <text x="17" y="13" font-size="7" font-weight="900" fill="#FEF08A" text-anchor="middle">DANA</text>
+            </g>
+            <circle cx="160" cy="19" r="10.5" fill="#FDE047" stroke="#B45309" stroke-width="1.6"/>
+            <text x="160" y="22.5" font-size="8" font-weight="900" fill="#0369A1" text-anchor="middle">Rp</text>
+            <g transform="translate(180,9) rotate(-4)">
+              <rect width="34" height="19" rx="3" fill="#0284C7" stroke="#0C4A6E" stroke-width="1.3"/>
+              <text x="17" y="13" font-size="7" font-weight="900" fill="#FEF08A" text-anchor="middle">BIJAK</text>
+            </g>
+            <circle cx="236" cy="17" r="9" fill="#FACC15" stroke="#B45309" stroke-width="1.4"/>
+            <text x="236" y="20" font-size="7" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
+            <g transform="translate(256,7) rotate(6)">
+              <rect width="34" height="19" rx="3" fill="#38BDF8" stroke="#0369A1" stroke-width="1.3"/>
+              <text x="17" y="13" font-size="8" font-weight="900" fill="#F0F9FF" text-anchor="middle">Rp</text>
+            </g>
+          </svg>
+        </div>
+      `,
+      bottomBanner: `
+        <!-- Dekorasi Pita Koin, Celengan & Uang Biru di Bawah -->
+        <div class="absolute bottom-1.5 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3 pointer-events-none select-none" aria-hidden="true">
+          <span class="w-5 h-5 sm:w-7 sm:h-7 opacity-90">${CERT_MONEY_ICONS.coinStack()}</span>
+          <span class="w-6 h-5 sm:w-8 sm:h-6 opacity-90">${CERT_MONEY_ICONS.cuteBlueBill()}</span>
+          <span class="px-2.5 py-0.5 rounded-full bg-sky-100 border border-sky-300 text-sky-800 text-[9px] sm:text-[10px] font-black whitespace-nowrap">💰 BIJAK KELOLA DANA &amp; MENABUNG</span>
+          <span class="w-5 h-5 sm:w-7 sm:h-7 opacity-90">${CERT_MONEY_ICONS.piggyBankBlue()}</span>
+          <span class="w-5 h-5 sm:w-7 sm:h-7 opacity-90">${CERT_MONEY_ICONS.moneyBag()}</span>
+        </div>
+      `,
+      logoLeftIcon: `<div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 -rotate-6">${CERT_MONEY_ICONS.cuteBlueBill()}</div>`,
+      logoRightIcon: `<div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rotate-6">${RBC_ICONS.celenganAyam('w-full h-full')}</div>`,
+      cornerTopLeft: CERT_MONEY_ICONS.cuteBlueBill(),
+      cornerTopRight: CERT_MONEY_ICONS.blueSavingsBook(),
+      cornerBottomLeft: CERT_MONEY_ICONS.fanBlueBills(),
+      cornerBottomRight: CERT_MONEY_ICONS.blueRupiahSeal(),
+      sideLeftIcons: `
+        <div class="w-12 h-12 rounded-2xl bg-sky-50/95 border border-sky-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.fanBlueBills()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.moneyBag()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-sky-50/95 border border-sky-200 p-1.5 shadow-sm -rotate-3">${CERT_MONEY_ICONS.piggyBankBlue()}</div>
+      `,
+      sideRightIcons: `
+        <div class="w-12 h-12 rounded-2xl bg-amber-50/95 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.coinStack()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-sky-50/95 border border-sky-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.blueSavingsBook()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-sky-50/95 border border-sky-200 p-1.5 shadow-sm rotate-3">${RBC_MASCOT.render('cheering', 'w-full h-full')}</div>
+      `
+    };
+  } else if (isRed) {
+    themeCfg = {
         outerClass: 'border-rose-500 bg-gradient-to-br from-rose-200 via-red-100 to-rose-300',
         innerClass: 'border-dashed border-rose-400 bg-[#FFF7F8]',
         cornerBracketColor: 'border-rose-500',
@@ -4526,8 +4770,9 @@ function renderCertificateCard(theme = 'emas') {
           <div class="w-11 h-11 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.savingsBook()}</div>
           <div class="w-11 h-11 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm rotate-3">${RBC_MASCOT.render('cheering', 'w-full h-full')}</div>
         `
-      }
-    : {
+      };
+  } else {
+    themeCfg = {
         outerClass: 'border-amber-500 bg-gradient-to-br from-amber-200 via-yellow-100 to-amber-300',
         innerClass: 'border-dashed border-amber-500/85 bg-[#FFFDF2]',
         cornerBracketColor: 'border-amber-500',
@@ -4589,9 +4834,10 @@ function renderCertificateCard(theme = 'emas') {
           <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm rotate-3">${CERT_MONEY_ICONS.piggyBankCeria()}</div>
         `
       };
+  }
 
   return `
-    <div id="certificate-print-area" class="rounded-3xl p-3 sm:p-5 md:p-6 border-4 sm:border-8 ${themeCfg.outerClass} text-center relative overflow-hidden shadow-2xl transition-colors duration-300">
+    <div id="certificate-print-area" class="certificate-a4-fixed rounded-3xl p-3 sm:p-5 md:p-6 border-4 sm:border-8 ${themeCfg.outerClass} text-center relative overflow-hidden shadow-2xl transition-colors duration-300" style="max-width: 210mm; min-height: 297mm;">
       <!-- Strip Pita Dekorasi Sisi Kiri & Kanan -->
       <div class="hidden sm:block absolute inset-y-4 left-1.5 w-1.5 rounded-full opacity-75 ${themeCfg.securityStripClass}" aria-hidden="true"></div>
       <div class="hidden sm:block absolute inset-y-4 right-1.5 w-1.5 rounded-full opacity-75 ${themeCfg.securityStripClass}" aria-hidden="true"></div>
@@ -4691,7 +4937,7 @@ function renderCertificateCard(theme = 'emas') {
 }
 
 function setCertificateTheme(theme) {
-  const validTheme = (theme === 'merah' || theme === 'merah100k' || theme === 'petualangan') ? 'merah' : 'emas';
+  const validTheme = ['emas', 'merah', 'biru'].includes(theme) ? theme : 'emas';
   AppState.certTheme = validTheme;
   localStorage.setItem('rbc_cert_theme', validTheme);
   window.soundManager.playPop();
@@ -4703,22 +4949,32 @@ function setCertificateTheme(theme) {
 
   const btnEmas = document.getElementById('btn-cert-theme-emas');
   const btnMerah = document.getElementById('btn-cert-theme-merah');
+  const btnBiru = document.getElementById('btn-cert-theme-biru');
   const badgeEmas = document.getElementById('badge-cert-emas');
   const badgeMerah = document.getElementById('badge-cert-merah');
+  const badgeBiru = document.getElementById('badge-cert-biru');
 
-  if (btnEmas && btnMerah) {
-    if (validTheme === 'emas') {
-      btnEmas.className = 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-amber-500 bg-amber-50/90 ring-2 ring-amber-200 shadow-sm';
-      btnMerah.className = 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-slate-200 bg-slate-50 hover:border-rose-300';
-      if (badgeEmas) badgeEmas.classList.remove('hidden');
-      if (badgeMerah) badgeMerah.classList.add('hidden');
-    } else {
-      btnEmas.className = 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-slate-200 bg-slate-50 hover:border-amber-300';
-      btnMerah.className = 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-rose-500 bg-rose-50/90 ring-2 ring-rose-200 shadow-sm';
-      if (badgeEmas) badgeEmas.classList.add('hidden');
-      if (badgeMerah) badgeMerah.classList.remove('hidden');
-    }
+  const baseStyle = 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-slate-200 bg-slate-50';
+
+  if (btnEmas) {
+    btnEmas.className = (validTheme === 'emas')
+      ? 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-amber-500 bg-amber-50/90 ring-2 ring-amber-200 shadow-sm'
+      : `${baseStyle} hover:border-amber-300`;
   }
+  if (btnMerah) {
+    btnMerah.className = (validTheme === 'merah')
+      ? 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-rose-500 bg-rose-50/90 ring-2 ring-rose-200 shadow-sm'
+      : `${baseStyle} hover:border-rose-300`;
+  }
+  if (btnBiru) {
+    btnBiru.className = (validTheme === 'biru')
+      ? 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-sky-500 bg-sky-50/90 ring-2 ring-sky-200 shadow-sm'
+      : `${baseStyle} hover:border-sky-300`;
+  }
+
+  if (badgeEmas) badgeEmas.classList.toggle('hidden', validTheme !== 'emas');
+  if (badgeMerah) badgeMerah.classList.toggle('hidden', validTheme !== 'merah');
+  if (badgeBiru) badgeBiru.classList.toggle('hidden', validTheme !== 'biru');
 }
 window.setCertificateTheme = setCertificateTheme;
 
