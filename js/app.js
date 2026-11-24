@@ -172,9 +172,9 @@ const AppState = {
   // Diskusi Bersama Tahap I
   diskusiBersama: JSON.parse(localStorage.getItem('rbc_diskusi_bersama') || 'null'),
 
-  // Refleksi Siswa & Tema Sertifikat ('emas' | 'merah' | 'biru')
+  // Refleksi Siswa & Tema Sertifikat ('biru' | 'merah' | 'emas')
   reflection: _hasValidSessionStudent ? JSON.parse(localStorage.getItem('rbc_student_reflection') || '{}') : {},
-  certTheme: ['merah', 'biru'].includes(localStorage.getItem('rbc_cert_theme')) ? localStorage.getItem('rbc_cert_theme') : 'emas',
+  certTheme: ['biru', 'merah', 'emas'].includes(localStorage.getItem('rbc_cert_theme')) ? localStorage.getItem('rbc_cert_theme') : 'biru',
 
   // Save state per student profile
   save() {
@@ -4688,43 +4688,43 @@ function renderTahapKView() {
         <div class="p-4 sm:p-5 rounded-3xl bg-white border-2 border-amber-200 shadow-sm space-y-3">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 text-center sm:text-left">
             <div>
-              <span class="text-[11px] font-black uppercase tracking-wider text-amber-700 block">💰 Pilih Versi Sertifikat Bertema Uangmu</span>
-              <h3 class="text-sm sm:text-base font-black text-slate-800">Tersedia 3 Versi Desain (Emas, Merah, &amp; Biru Uang Rupiah) — Pilih Favoritmu!</h3>
+              <span class="text-[11px] font-black uppercase tracking-wider text-amber-700 block">💰 Pilih Desain Sertifikat Penghargaan Siswa</span>
+              <h3 class="text-sm sm:text-base font-black text-slate-800">Tersedia 3 Varian Desain (Biru Dasar, Merah Menengah, &amp; Emas Utama) — Pilih Favoritmu!</h3>
             </div>
             <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">📄 Format Standar A4 (21 cm × 29,7 cm)</span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <button type="button" id="btn-cert-theme-emas" onclick="setCertificateTheme('emas')" class="text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 ${AppState.certTheme === 'emas' ? 'border-amber-500 bg-amber-50/90 ring-2 ring-amber-200 shadow-sm' : 'border-slate-200 bg-slate-50 hover:border-amber-300'}">
-              <span class="w-10 h-10 rounded-xl bg-amber-100 border border-amber-400 flex items-center justify-center text-xl flex-shrink-0">🪙</span>
-              <div class="min-w-0 flex-1">
-                <div class="flex items-center justify-between gap-2">
-                  <span class="font-black text-xs sm:text-sm text-slate-800">Versi 1: Emas</span>
-                  <span id="badge-cert-emas" class="${AppState.certTheme === 'emas' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-black">Dipilih</span>
-                </div>
-                <span class="text-[11px] text-slate-600 font-medium block truncate">Koin emas Rp, batangan emas &amp; celengan</span>
-              </div>
-            </button>
-
-            <button type="button" id="btn-cert-theme-merah" onclick="setCertificateTheme('merah')" class="text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 ${AppState.certTheme === 'merah' ? 'border-rose-500 bg-rose-50/90 ring-2 ring-rose-200 shadow-sm' : 'border-slate-200 bg-slate-50 hover:border-rose-300'}">
-              <span class="w-10 h-10 rounded-xl bg-rose-100 border border-rose-400 flex items-center justify-center text-xl flex-shrink-0">💵</span>
-              <div class="min-w-0 flex-1">
-                <div class="flex items-center justify-between gap-2">
-                  <span class="font-black text-xs sm:text-sm text-slate-800">Versi 2: Merah</span>
-                  <span id="badge-cert-merah" class="${AppState.certTheme === 'merah' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-black">Dipilih</span>
-                </div>
-                <span class="text-[11px] text-slate-600 font-medium block truncate">Uang kertas merah Rp, dompet &amp; tabungan</span>
-              </div>
-            </button>
-
             <button type="button" id="btn-cert-theme-biru" onclick="setCertificateTheme('biru')" class="text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 ${AppState.certTheme === 'biru' ? 'border-sky-500 bg-sky-50/90 ring-2 ring-sky-200 shadow-sm' : 'border-slate-200 bg-slate-50 hover:border-sky-300'}">
               <span class="w-10 h-10 rounded-xl bg-sky-100 border border-sky-400 flex items-center justify-center text-xl flex-shrink-0">💶</span>
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between gap-2">
-                  <span class="font-black text-xs sm:text-sm text-slate-800">Versi 3: Biru</span>
+                  <span class="font-black text-xs sm:text-sm text-slate-800">Varian 1: Biru (Seri Dasar)</span>
                   <span id="badge-cert-biru" class="${AppState.certTheme === 'biru' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-sky-500 text-white text-[10px] font-black">Dipilih</span>
                 </div>
-                <span class="text-[11px] text-slate-600 font-medium block truncate">Uang kertas biru Rp, celengan &amp; segel bijak</span>
+                <span class="text-[11px] text-slate-600 font-medium block truncate">Celengan babi, koin berkilau &amp; uang kartun</span>
+              </div>
+            </button>
+
+            <button type="button" id="btn-cert-theme-merah" onclick="setCertificateTheme('merah')" class="text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 ${AppState.certTheme === 'merah' ? 'border-rose-500 bg-rose-50/90 ring-2 ring-rose-200 shadow-sm' : 'border-slate-200 bg-slate-50 hover:border-rose-300'}">
+              <span class="w-10 h-10 rounded-xl bg-rose-100 border border-rose-400 flex items-center justify-center text-xl flex-shrink-0">🛒</span>
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="font-black text-xs sm:text-sm text-slate-800">Varian 2: Merah (Seri Menengah)</span>
+                  <span id="badge-cert-merah" class="${AppState.certTheme === 'merah' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-black">Dipilih</span>
+                </div>
+                <span class="text-[11px] text-slate-600 font-medium block truncate">Keranjang belanja, kalkulator &amp; lencana juara</span>
+              </div>
+            </button>
+
+            <button type="button" id="btn-cert-theme-emas" onclick="setCertificateTheme('emas')" class="text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 ${AppState.certTheme === 'emas' ? 'border-amber-500 bg-amber-50/90 ring-2 ring-amber-200 shadow-sm' : 'border-slate-200 bg-slate-50 hover:border-amber-300'}">
+              <span class="w-10 h-10 rounded-xl bg-amber-100 border border-amber-400 flex items-center justify-center text-xl flex-shrink-0">🏆</span>
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="font-black text-xs sm:text-sm text-slate-800">Varian 3: Emas (Seri Utama)</span>
+                  <span id="badge-cert-emas" class="${AppState.certTheme === 'emas' ? '' : 'hidden '}px-2 py-0.5 rounded-full bg-amber-400 text-slate-900 text-[10px] font-black">Dipilih</span>
+                </div>
+                <span class="text-[11px] text-slate-600 font-medium block truncate">Piala emas, peti harta karun &amp; medali bintang</span>
               </div>
             </button>
           </div>
@@ -4745,215 +4745,239 @@ function renderTahapKView() {
 }
 
 const CERT_MONEY_ICONS = {
-  coinStack: () => `
+  celenganBabiLucu: () => `
     <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
-      <ellipse cx="32" cy="48" rx="18" ry="6" fill="#D97706" stroke="#92400E" stroke-width="2.2"/>
-      <ellipse cx="32" cy="41" rx="18" ry="6" fill="#F59E0B" stroke="#92400E" stroke-width="2.2"/>
-      <ellipse cx="32" cy="34" rx="18" ry="6" fill="#FBBF24" stroke="#92400E" stroke-width="2.2"/>
-      <circle cx="32" cy="24" r="14" fill="#FDE047" stroke="#B45309" stroke-width="2.6"/>
-      <circle cx="32" cy="24" r="10.2" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.3" stroke-dasharray="2.5 2"/>
-      <text x="32" y="21" font-size="7.5" font-weight="900" fill="#92400E" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
-      <circle cx="27.5" cy="24.5" r="1.5" fill="#78350F"/>
-      <circle cx="36.5" cy="24.5" r="1.5" fill="#78350F"/>
-      <path d="M29 28 Q32 30.5 35 28" stroke="#78350F" stroke-width="1.8" stroke-linecap="round"/>
-      <circle cx="15" cy="14" r="2.2" fill="#FACC15"/>
-      <circle cx="49" cy="13" r="1.8" fill="#FDE047"/>
+      <ellipse cx="32" cy="11" rx="8" ry="4" fill="#FDE047" stroke="#B45309" stroke-width="1.8"/>
+      <text x="32" y="13" font-size="5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
+      <ellipse cx="32" cy="38" rx="22" ry="17" fill="#BAE6FD" stroke="#0284C7" stroke-width="2.5"/>
+      <path d="M19 25 L16 16 L27 21" fill="#7DD3FC" stroke="#0284C7" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M45 25 L48 16 L37 21" fill="#7DD3FC" stroke="#0284C7" stroke-width="2.2" stroke-linejoin="round"/>
+      <ellipse cx="32" cy="40" rx="7.5" ry="5.5" fill="#E0F2FE" stroke="#0284C7" stroke-width="2"/>
+      <circle cx="29.5" cy="40" r="1.3" fill="#0369A1"/>
+      <circle cx="34.5" cy="40" r="1.3" fill="#0369A1"/>
+      <path d="M22 32 Q25 29 28 32" stroke="#0C4A6E" stroke-width="2" stroke-linecap="round"/>
+      <path d="M36 32 Q39 29 42 32" stroke="#0C4A6E" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="19" cy="36" rx="3" ry="2" fill="#F472B6" opacity="0.6"/>
+      <ellipse cx="45" cy="36" rx="3" ry="2" fill="#F472B6" opacity="0.6"/>
+      <rect x="27" y="22" width="10" height="2.5" rx="1.2" fill="#0369A1"/>
+      <rect x="18" y="52" width="6" height="6" rx="2" fill="#7DD3FC" stroke="#0284C7" stroke-width="2"/>
+      <rect x="40" y="52" width="6" height="6" rx="2" fill="#7DD3FC" stroke="#0284C7" stroke-width="2"/>
     </svg>
   `,
-  goldBar: () => `
+  koinRupiahBerkilau: () => `
     <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
-      <polygon points="10,44 20,24 44,24 54,44" fill="#F59E0B" stroke="#92400E" stroke-width="2.5" stroke-linejoin="round"/>
-      <polygon points="18,24 24,18 40,18 46,24" fill="#FEF08A" stroke="#92400E" stroke-width="2.2" stroke-linejoin="round"/>
-      <polygon points="22,30 42,30 47,41 17,41" fill="#FDE047"/>
-      <circle cx="27" cy="34" r="1.8" fill="#78350F"/>
-      <circle cx="37" cy="34" r="1.8" fill="#78350F"/>
-      <path d="M29 37.5 Q32 40 35 37.5" stroke="#78350F" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="M13 15 L15 19 L19 20 L15 21 L13 25 L11 21 L7 20 L11 19 Z" fill="#FBBF24"/>
-      <circle cx="49" cy="20" r="6" fill="#FACC15" stroke="#B45309" stroke-width="1.8"/>
-      <text x="49" y="22.5" font-size="6" font-weight="900" fill="#78350F" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
+      <circle cx="32" cy="32" r="22" fill="#FBBF24" stroke="#B45309" stroke-width="2.6"/>
+      <circle cx="32" cy="32" r="17" fill="#FDE047" stroke="#D97706" stroke-width="1.6" stroke-dasharray="3 2"/>
+      <text x="32" y="37" font-size="14" font-weight="900" fill="#78350F" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
+      <path d="M50 14 L52 18 L56 20 L52 22 L50 26 L48 22 L44 20 L48 18 Z" fill="#FDE047" stroke="#CA8A04" stroke-width="1"/>
+      <path d="M14 44 L15.5 47 L19 48 L15.5 49 L14 52 L12.5 49 L9 48 L12.5 47 Z" fill="#FEF08A"/>
     </svg>
   `,
-  treasureChest: () => `
-    <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
-      <path d="M14 26 C14 15 50 15 50 26 Z" fill="#D97706" stroke="#78350F" stroke-width="2.4" stroke-linejoin="round"/>
-      <circle cx="22" cy="24" r="5" fill="#FDE047" stroke="#B45309" stroke-width="1.6"/>
-      <circle cx="32" cy="22" r="5.5" fill="#FACC15" stroke="#B45309" stroke-width="1.6"/>
-      <circle cx="42" cy="24" r="5" fill="#FDE047" stroke="#B45309" stroke-width="1.6"/>
-      <rect x="12" y="26" width="40" height="26" rx="5" fill="#F59E0B" stroke="#78350F" stroke-width="2.4"/>
-      <rect x="27" y="26" width="10" height="26" fill="#FDE68A" stroke="#78350F" stroke-width="1.8"/>
-      <rect x="28.5" y="30" width="7" height="8" rx="2" fill="#DC2626" stroke="#7F1D1D" stroke-width="1.4"/>
-      <circle cx="20" cy="39" r="1.8" fill="#78350F"/>
-      <circle cx="44" cy="39" r="1.8" fill="#78350F"/>
-      <path d="M29 44 Q32 47 35 44" stroke="#78350F" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-  `,
-  moneyBag: () => `
-    <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
-      <path d="M23 14 L26 20 H38 L41 14 Q36 10 32 13 Q28 10 23 14 Z" fill="#FDE68A" stroke="#B45309" stroke-width="2.4" stroke-linejoin="round"/>
-      <path d="M24 21 C15 26 12 40 16 49 C19 55 45 55 48 49 C52 40 49 26 40 21 Z" fill="#FEF08A" stroke="#B45309" stroke-width="2.6" stroke-linejoin="round"/>
-      <rect x="23" y="19" width="18" height="4.5" rx="2.2" fill="#EF4444" stroke="#991B1B" stroke-width="1.6"/>
-      <text x="32" y="34" font-size="9.5" font-weight="900" fill="#92400E" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
-      <circle cx="26.5" cy="39.5" r="1.8" fill="#78350F"/>
-      <circle cx="37.5" cy="39.5" r="1.8" fill="#78350F"/>
-      <path d="M28.5 43.5 Q32 46.5 35.5 43.5" stroke="#78350F" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="49" cy="50" r="6.5" fill="#FACC15" stroke="#B45309" stroke-width="2"/>
-      <text x="49" y="52.2" font-size="5.5" font-weight="900" fill="#78350F" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
-    </svg>
-  `,
-  goldMedalRp: () => `
-    <svg viewBox="0 0 64 72" fill="none" class="w-full h-full">
-      <path d="M22 40 L15 65 L26 59 L31 66 L32 42" fill="#F59E0B" stroke="#92400E" stroke-width="2.2" stroke-linejoin="round"/>
-      <path d="M42 40 L49 65 L38 59 L33 66 L32 42" fill="#DC2626" stroke="#991B1B" stroke-width="2.2" stroke-linejoin="round"/>
-      <circle cx="32" cy="26" r="17" fill="#FBBF24" stroke="#92400E" stroke-width="2.8"/>
-      <circle cx="32" cy="26" r="12.5" fill="#FEF9C3" stroke="#D97706" stroke-width="1.6" stroke-dasharray="3 2"/>
-      <text x="32" y="29.5" font-size="11" font-weight="900" fill="#92400E" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
-      <circle cx="16" cy="14" r="2.2" fill="#FDE047"/>
-      <circle cx="49" cy="14" r="2.2" fill="#FDE047"/>
-    </svg>
-  `,
-  piggyBankCeria: () => `
-    <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
-      <circle cx="32" cy="13" r="6" fill="#FACC15" stroke="#B45309" stroke-width="2"/>
-      <text x="32" y="15.2" font-size="5.5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
-      <ellipse cx="33" cy="38" rx="19" ry="14" fill="#FBCFE8" stroke="#BE185D" stroke-width="2.5"/>
-      <path d="M21 26 L18 19 L27 23" fill="#FBCFE8" stroke="#BE185D" stroke-width="2.3" stroke-linejoin="round"/>
-      <ellipse cx="52" cy="38" rx="4.5" ry="6" fill="#F9A8D4" stroke="#BE185D" stroke-width="2.3"/>
-      <rect x="27" y="24" width="10" height="3" rx="1.5" fill="#9D174D"/>
-      <circle cx="41" cy="34.5" r="2" fill="#831843"/>
-      <circle cx="33" cy="34.5" r="2" fill="#831843"/>
-      <path d="M35 39.5 Q37.5 42 40 39.5" stroke="#831843" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="M23 50 L23 56 M41 50 L41 56" stroke="#BE185D" stroke-width="3" stroke-linecap="round"/>
-    </svg>
-  `,
-  savingsBook: () => `
-    <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
-      <rect x="13" y="10" width="38" height="44" rx="6" fill="#FDE68A" stroke="#B45309" stroke-width="2.5"/>
-      <path d="M20 10 L20 54" stroke="#B45309" stroke-width="2.2"/>
-      <rect x="25" y="16" width="20" height="10" rx="2.5" fill="#FFFFFF" stroke="#D97706" stroke-width="1.5"/>
-      <text x="35" y="23" font-size="6" font-weight="900" fill="#B45309" text-anchor="middle" font-family="'Fredoka', sans-serif">DANA</text>
-      <circle cx="31" cy="34" r="1.8" fill="#78350F"/>
-      <circle cx="41" cy="34" r="1.8" fill="#78350F"/>
-      <path d="M33 38.5 Q36 41.5 39 38.5" stroke="#78350F" stroke-width="1.8" stroke-linecap="round"/>
-      <circle cx="47" cy="48" r="7" fill="#FACC15" stroke="#92400E" stroke-width="2"/>
-      <text x="47" y="50.5" font-size="6.5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
-    </svg>
-  `,
-  cuteRedBill: () => `
-    <svg viewBox="0 0 72 56" fill="none" class="w-full h-full">
-      <g transform="rotate(-7 36 28)">
-        <rect x="6" y="11" width="60" height="34" rx="5" fill="#FB7185" stroke="#9F1239" stroke-width="2.6"/>
-        <rect x="11" y="15.5" width="50" height="25" rx="3" fill="#FFE4E6" stroke="#E11D48" stroke-width="1.3" stroke-dasharray="2.5 2"/>
-        <rect x="46" y="15.5" width="6" height="25" fill="#FDE047" opacity="0.65"/>
-        <text x="20.5" y="26.5" font-size="9.5" font-weight="900" fill="#9F1239" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
-        <circle cx="33" cy="29" r="1.8" fill="#881337"/>
-        <circle cx="43" cy="29" r="1.8" fill="#881337"/>
-        <path d="M35 33.5 Q38 36.5 41 33.5" stroke="#881337" stroke-width="1.8" stroke-linecap="round"/>
-        <circle cx="29.5" cy="32" r="2.1" fill="#FDA4AF"/>
-        <circle cx="46.5" cy="32" r="2.1" fill="#FDA4AF"/>
+  uangKertasKartun: () => `
+    <svg viewBox="0 0 68 52" fill="none" class="w-full h-full">
+      <g transform="rotate(-6 34 26)">
+        <rect x="6" y="8" width="56" height="34" rx="5" fill="#38BDF8" stroke="#0284C7" stroke-width="2.5"/>
+        <rect x="11" y="12" width="46" height="26" rx="3.5" fill="#E0F2FE" stroke="#0369A1" stroke-width="1.3" stroke-dasharray="2 1.5"/>
+        <circle cx="34" cy="25" r="9" fill="#7DD3FC" stroke="#0284C7" stroke-width="1.4"/>
+        <text x="34" y="29.5" font-size="10" font-weight="900" fill="#0C4A6E" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
+        <circle cx="21" cy="25" r="2" fill="#0C4A6E"/>
+        <circle cx="47" cy="25" r="2" fill="#0C4A6E"/>
+        <path d="M31 30 Q34 33 37 30" stroke="#0C4A6E" stroke-width="1.6" stroke-linecap="round"/>
+        <ellipse cx="18" cy="27" rx="2" ry="1.2" fill="#FDA4AF"/>
+        <ellipse cx="50" cy="27" rx="2" ry="1.2" fill="#FDA4AF"/>
       </g>
     </svg>
   `,
-  walletDana: () => `
+  bintangKecil: () => `
+    <svg viewBox="0 0 48 48" fill="none" class="w-full h-full">
+      <path d="M24 4 L27 18 L41 21 L29 28 L32 42 L24 33 L16 42 L19 28 L7 21 L21 18 Z" fill="#FACC15" stroke="#B45309" stroke-width="1.5"/>
+      <circle cx="38" cy="10" r="3" fill="#38BDF8"/>
+      <circle cx="10" cy="38" r="2.5" fill="#FEF08A"/>
+    </svg>
+  `,
+  wavyBlueBorderSvg: () => `
+    <svg class="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1000 700" fill="none">
+      <path d="M 24 24 Q 250 8 500 24 T 976 24 Q 992 250 976 500 T 976 676 Q 750 692 500 676 T 24 676 Q 8 500 24 250 Z" stroke="#38BDF8" stroke-width="4" stroke-dasharray="14 7"/>
+      <rect x="32" y="32" width="936" height="636" rx="20" stroke="#0284C7" stroke-width="1.8" opacity="0.65"/>
+      <path d="M 20 70 Q 45 45 70 20" stroke="#FACC15" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 980 70 Q 955 45 930 20" stroke="#FACC15" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 20 630 Q 45 655 70 680" stroke="#FACC15" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 980 630 Q 955 655 930 680" stroke="#FACC15" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  `,
+  keranjangBelanja: () => `
     <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
-      <rect x="18" y="12" width="28" height="16" rx="3" transform="rotate(-10 18 12)" fill="#F43F5E" stroke="#9F1239" stroke-width="2.2"/>
-      <text x="31" y="21" font-size="7.5" font-weight="900" fill="#FFFFFF" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
-      <rect x="10" y="22" width="42" height="29" rx="7" fill="#FB7185" stroke="#881337" stroke-width="2.6"/>
-      <rect x="36" y="31" width="18" height="11" rx="5" fill="#FDE047" stroke="#B45309" stroke-width="2"/>
-      <circle cx="42" cy="36.5" r="2" fill="#92400E"/>
-      <circle cx="21" cy="35" r="1.9" fill="#4C0519"/>
-      <circle cx="30" cy="35" r="1.9" fill="#4C0519"/>
-      <path d="M23 39.5 Q25.5 42 28 39.5" stroke="#4C0519" stroke-width="1.8" stroke-linecap="round"/>
+      <rect x="20" y="14" width="7" height="15" rx="2" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.6"/>
+      <rect x="21" y="11" width="5" height="4" rx="1" fill="#38BDF8"/>
+      <ellipse cx="34" cy="18" rx="5" ry="12" transform="rotate(20 34 18)" fill="#FBBF24" stroke="#92400E" stroke-width="1.6"/>
+      <circle cx="44" cy="22" r="6" fill="#EF4444" stroke="#991B1B" stroke-width="1.6"/>
+      <path d="M44 16 Q45 13 47 13" stroke="#15803D" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M16 28 C16 12 48 12 48 28" stroke="#881337" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M12 28 L17 50 C17.5 52 19 53 21 53 H43 C45 53 46.5 52 47 50 L52 28 Z" fill="#FB7185" stroke="#9F1239" stroke-width="2.6" stroke-linejoin="round"/>
+      <line x1="22" y1="34" x2="42" y2="34" stroke="#FFE4E6" stroke-width="1.8"/>
+      <line x1="24" y1="42" x2="40" y2="42" stroke="#FFE4E6" stroke-width="1.8"/>
+      <line x1="26" y1="28" x2="28" y2="52" stroke="#FFE4E6" stroke-width="1.8"/>
+      <line x1="38" y1="28" x2="36" y2="52" stroke="#FFE4E6" stroke-width="1.8"/>
+      <circle cx="32" cy="38" r="4.5" fill="#FEF08A" stroke="#B45309" stroke-width="1.2"/>
+      <circle cx="30.5" cy="37" r="0.8" fill="#78350F"/>
+      <circle cx="33.5" cy="37" r="0.8" fill="#78350F"/>
+      <path d="M30.5 39.5 Q32 41 33.5 39.5" stroke="#78350F" stroke-width="1" stroke-linecap="round"/>
     </svg>
   `,
-  fanRedBills: () => `
+  tasBelanjaKebutuhan: () => `
     <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
-      <rect x="12" y="14" width="38" height="22" rx="4" transform="rotate(-18 31 25)" fill="#FDA4AF" stroke="#BE123C" stroke-width="2.2"/>
-      <rect x="14" y="19" width="38" height="22" rx="4" transform="rotate(-4 33 30)" fill="#F43F5E" stroke="#881337" stroke-width="2.2"/>
-      <rect x="16" y="25" width="38" height="22" rx="4" transform="rotate(8 35 36)" fill="#FFE4E6" stroke="#9F1239" stroke-width="2.4"/>
-      <text x="35" y="40" font-size="9" font-weight="900" fill="#9F1239" text-anchor="middle" font-family="'Fredoka', sans-serif">RUPIAH</text>
-      <circle cx="17" cy="44" r="7" fill="#FACC15" stroke="#B45309" stroke-width="2"/>
-      <text x="17" y="46.5" font-size="6.5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
+      <rect x="22" y="12" width="8" height="16" rx="2" fill="#60A5FA" stroke="#1E40AF" stroke-width="1.5"/>
+      <circle cx="38" cy="18" r="6" fill="#F97316" stroke="#9A3412" stroke-width="1.5"/>
+      <rect x="30" y="8" width="6" height="18" rx="2" fill="#4ADE80" stroke="#166534" stroke-width="1.5"/>
+      <path d="M22 26 C22 16 42 16 42 26" stroke="#B45309" stroke-width="2.5" fill="none"/>
+      <path d="M14 24 L18 52 C18.5 54 20 55 22 55 H42 C44 55 45.5 54 46 52 L50 24 Z" fill="#FDE68A" stroke="#B45309" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M32 37 C30 33 26 34 26 37 C26 41 32 44 32 44 C32 44 38 41 38 37 C38 34 34 33 32 37 Z" fill="#EF4444"/>
+      <text x="32" y="51" font-size="5.5" font-weight="900" fill="#92400E" text-anchor="middle" font-family="'Fredoka', sans-serif">KEBUTUHAN</text>
     </svg>
   `,
-  redRupiahSeal: () => `
-    <svg viewBox="0 0 64 72" fill="none" class="w-full h-full">
-      <path d="M22 40 L15 65 L26 59 L31 66 L32 42" fill="#E11D48" stroke="#881337" stroke-width="2.2" stroke-linejoin="round"/>
-      <path d="M42 40 L49 65 L38 59 L33 66 L32 42" fill="#F43F5E" stroke="#881337" stroke-width="2.2" stroke-linejoin="round"/>
-      <circle cx="32" cy="26" r="17" fill="#E11D48" stroke="#FBBF24" stroke-width="3"/>
-      <circle cx="32" cy="26" r="12.5" fill="#FFF1F2" stroke="#FB7185" stroke-width="1.6" stroke-dasharray="3 2"/>
-      <text x="32" y="25.5" font-size="9.5" font-weight="900" fill="#9F1239" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
-      <text x="32" y="33.5" font-size="5.5" font-weight="900" fill="#B45309" text-anchor="middle" font-family="'Fredoka', sans-serif">BIJAK</text>
-    </svg>
-  `,
-  cuteBlueBill: () => `
-    <svg viewBox="0 0 72 56" fill="none" class="w-full h-full">
-      <g transform="rotate(-6 36 28)">
-        <rect x="6" y="11" width="60" height="34" rx="5" fill="#38BDF8" stroke="#0369A1" stroke-width="2.6"/>
-        <rect x="11" y="15.5" width="50" height="25" rx="3" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.3" stroke-dasharray="2.5 2"/>
-        <rect x="46" y="15.5" width="6" height="25" fill="#BAE6FD" opacity="0.75"/>
-        <text x="20.5" y="26.5" font-size="9.5" font-weight="900" fill="#0369A1" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
-        <circle cx="33" cy="29" r="1.8" fill="#0C4A6E"/>
-        <circle cx="43" cy="29" r="1.8" fill="#0C4A6E"/>
-        <path d="M35 33.5 Q38 36.5 41 33.5" stroke="#0C4A6E" stroke-width="1.8" stroke-linecap="round"/>
-        <circle cx="29.5" cy="32" r="2.1" fill="#7DD3FC"/>
-        <circle cx="46.5" cy="32" r="2.1" fill="#7DD3FC"/>
-      </g>
-    </svg>
-  `,
-  fanBlueBills: () => `
+  kalkulatorLucu: () => `
     <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
-      <rect x="12" y="14" width="38" height="22" rx="4" transform="rotate(-18 31 25)" fill="#7DD3FC" stroke="#0284C7" stroke-width="2.2"/>
-      <rect x="14" y="19" width="38" height="22" rx="4" transform="rotate(-4 33 30)" fill="#38BDF8" stroke="#0369A1" stroke-width="2.2"/>
-      <rect x="16" y="25" width="38" height="22" rx="4" transform="rotate(8 35 36)" fill="#E0F2FE" stroke="#075985" stroke-width="2.4"/>
-      <text x="35" y="40" font-size="9" font-weight="900" fill="#0369A1" text-anchor="middle" font-family="'Fredoka', sans-serif">RUPIAH</text>
-      <circle cx="17" cy="44" r="7" fill="#FACC15" stroke="#B45309" stroke-width="2"/>
-      <text x="17" y="46.5" font-size="6.5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
+      <rect x="14" y="10" width="36" height="46" rx="7" fill="#F43F5E" stroke="#881337" stroke-width="2.5"/>
+      <rect x="19" y="16" width="26" height="11" rx="3" fill="#FFE4E6" stroke="#9F1239" stroke-width="1.5"/>
+      <text x="32" y="24" font-size="6.5" font-weight="900" fill="#881337" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp BIJAK</text>
+      <circle cx="23" cy="22" r="1" fill="#881337"/>
+      <circle cx="41" cy="22" r="1" fill="#881337"/>
+      <rect x="19" y="31" width="7" height="6" rx="2" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.2"/>
+      <rect x="28.5" y="31" width="7" height="6" rx="2" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.2"/>
+      <rect x="38" y="31" width="7" height="6" rx="2" fill="#FDBA74" stroke="#C2410C" stroke-width="1.2"/>
+      <rect x="19" y="39" width="7" height="6" rx="2" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.2"/>
+      <rect x="28.5" y="39" width="7" height="6" rx="2" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.2"/>
+      <rect x="38" y="39" width="7" height="6" rx="2" fill="#FDBA74" stroke="#C2410C" stroke-width="1.2"/>
+      <rect x="19" y="47" width="16.5" height="6" rx="2" fill="#FEF08A" stroke="#CA8A04" stroke-width="1.2"/>
+      <rect x="38" y="47" width="7" height="6" rx="2" fill="#38BDF8" stroke="#0284C7" stroke-width="1.2"/>
     </svg>
   `,
-  blueRupiahSeal: () => `
-    <svg viewBox="0 0 64 72" fill="none" class="w-full h-full">
-      <path d="M22 40 L15 65 L26 59 L31 66 L32 42" fill="#0284C7" stroke="#0369A1" stroke-width="2.2" stroke-linejoin="round"/>
-      <path d="M42 40 L49 65 L38 59 L33 66 L32 42" fill="#38BDF8" stroke="#0369A1" stroke-width="2.2" stroke-linejoin="round"/>
-      <circle cx="32" cy="26" r="17" fill="#0284C7" stroke="#FBBF24" stroke-width="3"/>
-      <circle cx="32" cy="26" r="12.5" fill="#E0F2FE" stroke="#38BDF8" stroke-width="1.6" stroke-dasharray="3 2"/>
-      <text x="32" y="25.5" font-size="9.5" font-weight="900" fill="#0369A1" text-anchor="middle" font-family="'Fredoka', sans-serif">Rp</text>
-      <text x="32" y="33.5" font-size="5.5" font-weight="900" fill="#B45309" text-anchor="middle" font-family="'Fredoka', sans-serif">BIJAK</text>
+  lencanaJuara: () => `
+    <svg viewBox="0 0 64 68" fill="none" class="w-full h-full">
+      <path d="M24 38 L16 62 L26 57 L32 64 L33 40" fill="#E11D48" stroke="#881337" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M40 38 L48 62 L38 57 L32 64 L31 40" fill="#FB7185" stroke="#9F1239" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="32" cy="26" r="18" fill="#E11D48" stroke="#FB923C" stroke-width="3"/>
+      <circle cx="32" cy="26" r="14" fill="#FBBF24" stroke="#B45309" stroke-width="1.8"/>
+      <polygon points="32,15 35,22 43,23 37,28 39,36 32,32 25,36 27,28 21,23 29,22" fill="#FEF08A" stroke="#92400E" stroke-width="1.3"/>
     </svg>
   `,
-  piggyBankBlue: () => `
+  geometricRibbonBorderSvg: () => `
+    <svg class="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1000 700" fill="none">
+      <rect x="22" y="22" width="956" height="656" rx="14" stroke="#FB7185" stroke-width="3.5"/>
+      <rect x="30" y="30" width="940" height="640" rx="10" stroke="#9F1239" stroke-width="1.8" stroke-dasharray="12 6"/>
+      <polygon points="22,60 60,22 80,22 22,80" fill="#FDA4AF" opacity="0.85"/>
+      <polygon points="978,60 940,22 920,22 978,80" fill="#FDA4AF" opacity="0.85"/>
+      <polygon points="22,640 60,678 80,678 22,620" fill="#FDA4AF" opacity="0.85"/>
+      <polygon points="978,640 940,678 920,678 978,620" fill="#FDA4AF" opacity="0.85"/>
+      <rect x="68" y="26" width="6" height="6" transform="rotate(45 71 29)" fill="#F97316"/>
+      <rect x="928" y="26" width="6" height="6" transform="rotate(45 931 29)" fill="#F97316"/>
+      <rect x="68" y="668" width="6" height="6" transform="rotate(45 71 671)" fill="#F97316"/>
+      <rect x="928" y="668" width="6" height="6" transform="rotate(45 931 671)" fill="#F97316"/>
+    </svg>
+  `,
+  pialaEmas: () => `
     <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
-      <circle cx="32" cy="13" r="6" fill="#FACC15" stroke="#B45309" stroke-width="2"/>
-      <text x="32" y="15.2" font-size="5.5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
-      <ellipse cx="33" cy="38" rx="19" ry="14" fill="#BAE6FD" stroke="#0284C7" stroke-width="2.5"/>
-      <path d="M21 26 L18 19 L27 23" fill="#BAE6FD" stroke="#0284C7" stroke-width="2.3" stroke-linejoin="round"/>
-      <ellipse cx="52" cy="38" rx="4.5" ry="6" fill="#7DD3FC" stroke="#0284C7" stroke-width="2.3"/>
-      <rect x="27" y="24" width="10" height="3" rx="1.5" fill="#0369A1"/>
-      <circle cx="41" cy="34.5" r="2" fill="#0C4A6E"/>
-      <circle cx="33" cy="34.5" r="2" fill="#0C4A6E"/>
-      <path d="M35 39.5 Q37.5 42 40 39.5" stroke="#0C4A6E" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="M23 50 L23 56 M41 50 L41 56" stroke="#0284C7" stroke-width="3" stroke-linecap="round"/>
+      <path d="M18 20 C10 20 10 32 20 34" stroke="#B45309" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M46 20 C54 20 54 32 44 34" stroke="#B45309" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M19 14 H45 V28 C45 36 39 42 32 42 C25 42 19 36 19 28 Z" fill="#FBBF24" stroke="#B45309" stroke-width="2.5" stroke-linejoin="round"/>
+      <ellipse cx="32" cy="14" rx="13" ry="3" fill="#FDE047" stroke="#B45309" stroke-width="2"/>
+      <polygon points="32,20 34,24 38,24.5 35,27.5 36,32 32,29.5 28,32 29,27.5 26,24.5 30,24" fill="#FEF08A" stroke="#78350F" stroke-width="1.2"/>
+      <path d="M30 42 H34 V48 H30 Z" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+      <path d="M22 54 L26 48 H38 L42 54 Z" fill="#D97706" stroke="#78350F" stroke-width="2.2" stroke-linejoin="round"/>
+      <rect x="20" y="54" width="24" height="4" rx="1.5" fill="#78350F"/>
+      <circle cx="16" cy="12" r="1.5" fill="#FDE047"/>
+      <circle cx="48" cy="12" r="2" fill="#FDE047"/>
     </svg>
   `,
-  blueSavingsBook: () => `
-    <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
-      <rect x="13" y="10" width="38" height="44" rx="6" fill="#BAE6FD" stroke="#0284C7" stroke-width="2.5"/>
-      <path d="M20 10 L20 54" stroke="#0284C7" stroke-width="2.2"/>
-      <rect x="25" y="16" width="20" height="10" rx="2.5" fill="#FFFFFF" stroke="#38BDF8" stroke-width="1.5"/>
-      <text x="35" y="23" font-size="6" font-weight="900" fill="#0369A1" text-anchor="middle" font-family="'Fredoka', sans-serif">TABUNGAN</text>
-      <circle cx="31" cy="34" r="1.8" fill="#0C4A6E"/>
-      <circle cx="41" cy="34" r="1.8" fill="#0C4A6E"/>
-      <path d="M33 38.5 Q36 41.5 39 38.5" stroke="#0C4A6E" stroke-width="1.8" stroke-linecap="round"/>
-      <circle cx="47" cy="48" r="7" fill="#FACC15" stroke="#92400E" stroke-width="2"/>
-      <text x="47" y="50.5" font-size="6.5" font-weight="900" fill="#78350F" text-anchor="middle">Rp</text>
+  medaliBintang: () => `
+    <svg viewBox="0 0 64 68" fill="none" class="w-full h-full">
+      <path d="M22 10 L28 32 L32 30 L36 32 L42 10" fill="#DC2626" stroke="#991B1B" stroke-width="2.2"/>
+      <circle cx="32" cy="40" r="18" fill="#F59E0B" stroke="#92400E" stroke-width="2.6"/>
+      <circle cx="32" cy="40" r="14" fill="#FDE047" stroke="#B45309" stroke-width="1.5" stroke-dasharray="3 2"/>
+      <polygon points="32,28 35,35 43,36 37,41 39,49 32,45 25,49 27,41 21,36 29,35" fill="#FEF08A" stroke="#78350F" stroke-width="1.4"/>
     </svg>
-  `
+  `,
+  petiHartaKarun: () => `
+    <svg viewBox="0 0 64 64" fill="none" class="w-full h-full">
+      <path d="M12 24 C12 12 52 12 52 24 Z" fill="#B45309" stroke="#78350F" stroke-width="2.5"/>
+      <circle cx="22" cy="22" r="4.5" fill="#FDE047" stroke="#B45309" stroke-width="1.4"/>
+      <circle cx="30" cy="20" r="5" fill="#FACC15" stroke="#B45309" stroke-width="1.4"/>
+      <circle cx="38" cy="19" r="5" fill="#FEF08A" stroke="#B45309" stroke-width="1.4"/>
+      <circle cx="44" cy="22" r="4.5" fill="#FDE047" stroke="#B45309" stroke-width="1.4"/>
+      <rect x="12" y="24" width="40" height="28" rx="5" fill="#D97706" stroke="#78350F" stroke-width="2.6"/>
+      <rect x="18" y="24" width="5" height="28" fill="#FDE68A" stroke="#92400E" stroke-width="1.4"/>
+      <rect x="41" y="24" width="5" height="28" fill="#FDE68A" stroke="#92400E" stroke-width="1.4"/>
+      <rect x="28" y="27" width="8" height="9" rx="2.5" fill="#EF4444" stroke="#991B1B" stroke-width="1.5"/>
+      <circle cx="32" cy="31.5" r="1.5" fill="#FEF08A"/>
+    </svg>
+  `,
+  pitaPenghargaan: () => `
+    <svg viewBox="0 0 64 68" fill="none" class="w-full h-full">
+      <path d="M22 36 L15 62 L26 57 L31 64 L32 38" fill="#D97706" stroke="#78350F" stroke-width="2.2"/>
+      <path d="M42 36 L49 62 L38 57 L33 64 L32 38" fill="#F59E0B" stroke="#92400E" stroke-width="2.2"/>
+      <circle cx="32" cy="25" r="17" fill="#FBBF24" stroke="#92400E" stroke-width="2.8"/>
+      <circle cx="32" cy="25" r="12" fill="#FEF9C3" stroke="#D97706" stroke-width="1.5"/>
+      <text x="32" y="29" font-size="10" font-weight="900" fill="#78350F" text-anchor="middle" font-family="'Fredoka', sans-serif">★</text>
+    </svg>
+  `,
+  classicGoldBorderSvg: () => `
+    <svg class="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 1000 700" fill="none">
+      <rect x="22" y="22" width="956" height="656" rx="12" stroke="#D97706" stroke-width="3.5"/>
+      <rect x="30" y="30" width="940" height="640" rx="8" stroke="#F59E0B" stroke-width="1.8"/>
+      <rect x="36" y="36" width="928" height="628" rx="6" stroke="#FDE047" stroke-width="1" stroke-dasharray="6 4" opacity="0.75"/>
+      <path d="M 30,80 C 50,80 80,50 80,30" stroke="#B45309" stroke-width="2.5" fill="none"/>
+      <path d="M 970,80 C 950,80 920,50 920,30" stroke="#B45309" stroke-width="2.5" fill="none"/>
+      <path d="M 30,620 C 50,620 80,650 80,670" stroke="#B45309" stroke-width="2.5" fill="none"/>
+      <path d="M 970,620 C 950,620 920,650 920,670" stroke="#B45309" stroke-width="2.5" fill="none"/>
+      <circle cx="85" cy="85" r="3.5" fill="#FDE047" stroke="#B45309" stroke-width="1"/>
+      <circle cx="915" cy="85" r="3.5" fill="#FDE047" stroke="#B45309" stroke-width="1"/>
+      <circle cx="85" cy="615" r="3.5" fill="#FDE047" stroke="#B45309" stroke-width="1"/>
+      <circle cx="915" cy="615" r="3.5" fill="#FDE047" stroke="#B45309" stroke-width="1"/>
+    </svg>
+  `,
+  officialStamp: (theme = 'biru') => {
+    let ringColor = '#0284C7';
+    let badgeFill = '#F0F9FF';
+    let textColor = '#0369A1';
+    let centerIcon = '🪙';
+
+    if (theme === 'merah') {
+      ringColor = '#E11D48';
+      badgeFill = '#FFF1F2';
+      textColor = '#9F1239';
+      centerIcon = '🛒';
+    } else if (theme === 'emas') {
+      ringColor = '#D97706';
+      badgeFill = '#FFFBEB';
+      textColor = '#78350F';
+      centerIcon = '🏆';
+    }
+
+    return `
+      <div class="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 flex items-center justify-center select-none -rotate-6" title="Stempel Resmi: BIJAK KELOLA DANA &amp; MENABUNG">
+        <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-sm">
+          <circle cx="50" cy="50" r="48" fill="${badgeFill}" stroke="${ringColor}" stroke-width="2.5" stroke-dasharray="4 2"/>
+          <circle cx="50" cy="50" r="42" fill="none" stroke="${ringColor}" stroke-width="1.5"/>
+          <path id="stamp-curve-${theme}" d="M 18,50 A 32,32 0 1,1 82,50 A 32,32 0 1,1 18,50" fill="none"/>
+          <text font-size="7.2" font-weight="900" fill="${textColor}" letter-spacing="0.8">
+            <textPath href="#stamp-curve-${theme}" startOffset="50%" text-anchor="middle">
+              ★ BIJAK KELOLA DANA &amp; MENABUNG ★
+            </textPath>
+          </text>
+          <circle cx="50" cy="50" r="17" fill="white" stroke="${ringColor}" stroke-width="1.5"/>
+          <text x="50" y="48" font-size="11" text-anchor="middle">${centerIcon}</text>
+          <text x="50" y="58" font-size="6" font-weight="900" fill="${textColor}" text-anchor="middle" font-family="'Fredoka', sans-serif">DHETIK</text>
+        </svg>
+      </div>
+    `;
+  }
 };
 
-function renderCertificateCard(theme = 'emas') {
+function renderCertificateCard(theme = 'biru') {
   const isRed = theme === 'merah' || theme === 'merah100k' || theme === 'petualangan';
   const isBlue = theme === 'biru' || theme === 'blue';
   const safeStudentName = escapeHtmlText(AppState.studentName);
-  const issueDate = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+  const issueDate = "25 November 2026";
   const devList = (typeof RBC_DATA !== 'undefined' ? RBC_DATA : (window.RBC_DATA || {})).appInfo?.developers || [
     "Ines Khairunisa",
     "Nasrun Nurhakim",
@@ -4964,96 +4988,111 @@ function renderCertificateCard(theme = 'emas') {
   let themeCfg;
   if (isBlue) {
     themeCfg = {
-      outerClass: 'border-sky-500 bg-gradient-to-br from-sky-200 via-blue-100 to-cyan-300',
-      innerClass: 'border-dashed border-sky-400 bg-[#F0F9FF]',
-      cornerBracketColor: 'border-sky-500',
-      watermarkColor: 'text-sky-400',
-      nameWrapClass: 'border-b-2 border-sky-500',
-      nameTextClass: 'text-sky-800',
+      themeKey: 'biru',
+      subseriesTitle: 'SERI BIRU — RUPIAH DANA &amp; CELENGAN CERIA',
+      subseriesClass: 'bg-sky-100 text-sky-800 border border-sky-300',
+      outerClass: 'border-sky-500 bg-gradient-to-br from-sky-400 via-sky-200 to-blue-300',
+      innerClass: 'border-sky-300 bg-white shadow-inner',
+      borderSvg: CERT_MONEY_ICONS.wavyBlueBorderSvg(),
+      cornerBracketColor: 'border-sky-400',
+      watermarkColor: 'text-sky-300',
+      nameWrapClass: 'border-b-2 border-sky-400',
+      nameTextClass: 'text-sky-900',
       dividerLineClass: 'bg-sky-400',
-      awardPillClass: 'bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-600 border-2 border-sky-200 text-white shadow-md',
-      awardLeftMini: CERT_MONEY_ICONS.cuteBlueBill(),
-      awardRightMini: CERT_MONEY_ICONS.piggyBankBlue(),
+      starColor: 'text-amber-400',
+      bulletColor: 'bg-sky-500',
+      awardPillClass: 'bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 border-2 border-amber-300 text-white shadow-md',
+      awardLeftMini: CERT_MONEY_ICONS.koinRupiahBerkilau(),
+      awardRightMini: CERT_MONEY_ICONS.celenganBabiLucu(),
       footerBorderClass: 'border-sky-200',
       securityStripClass: 'bg-gradient-to-b from-sky-300 via-cyan-400 to-blue-400',
-      logoLeftIcon: `<div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 -rotate-6">${CERT_MONEY_ICONS.cuteBlueBill()}</div>`,
-      logoRightIcon: `<div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rotate-6">${RBC_ICONS.celenganAyam('w-full h-full')}</div>`,
-      cornerTopLeft: CERT_MONEY_ICONS.cuteBlueBill(),
-      cornerTopRight: CERT_MONEY_ICONS.blueSavingsBook(),
-      cornerBottomLeft: CERT_MONEY_ICONS.fanBlueBills(),
-      cornerBottomRight: CERT_MONEY_ICONS.blueRupiahSeal(),
+      cornerTopLeft: CERT_MONEY_ICONS.celenganBabiLucu(),
+      cornerTopRight: CERT_MONEY_ICONS.koinRupiahBerkilau(),
+      cornerBottomLeft: CERT_MONEY_ICONS.uangKertasKartun(),
+      cornerBottomRight: CERT_MONEY_ICONS.bintangKecil(),
       sideLeftIcons: `
-        <div class="w-12 h-12 rounded-2xl bg-sky-50/95 border border-sky-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.fanBlueBills()}</div>
-        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.moneyBag()}</div>
-        <div class="w-11 h-11 rounded-2xl bg-sky-50/95 border border-sky-200 p-1.5 shadow-sm -rotate-3">${CERT_MONEY_ICONS.piggyBankBlue()}</div>
+        <div class="w-12 h-12 rounded-2xl bg-sky-50/95 border border-sky-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.celenganBabiLucu()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.koinRupiahBerkilau()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-sky-50/95 border border-sky-200 p-1.5 shadow-sm -rotate-3">${CERT_MONEY_ICONS.uangKertasKartun()}</div>
       `,
       sideRightIcons: `
-        <div class="w-12 h-12 rounded-2xl bg-amber-50/95 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.coinStack()}</div>
-        <div class="w-11 h-11 rounded-2xl bg-sky-50/95 border border-sky-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.blueSavingsBook()}</div>
-        <div class="w-11 h-11 rounded-2xl bg-sky-50/95 border border-sky-200 p-1.5 shadow-sm rotate-3">${RBC_MASCOT.render('cheering', 'w-full h-full')}</div>
-      `
+        <div class="w-12 h-12 rounded-2xl bg-amber-50/95 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.koinRupiahBerkilau()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-sky-50/95 border border-sky-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.bintangKecil()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-sky-50/95 border border-sky-200 p-1.5 shadow-sm rotate-3">${CERT_MONEY_ICONS.celenganBabiLucu()}</div>
+      `,
+      stamp: CERT_MONEY_ICONS.officialStamp('biru')
     };
   } else if (isRed) {
     themeCfg = {
-      outerClass: 'border-rose-500 bg-gradient-to-br from-rose-200 via-red-100 to-rose-300',
-      innerClass: 'border-dashed border-rose-400 bg-[#FFF7F8]',
-      cornerBracketColor: 'border-rose-500',
-      watermarkColor: 'text-rose-400',
-      nameWrapClass: 'border-b-2 border-rose-500',
-      nameTextClass: 'text-rose-700',
+      themeKey: 'merah',
+      subseriesTitle: 'SERI MERAH — PAHLAWAN CERMAT &amp; BELANJA PINTAR',
+      subseriesClass: 'bg-rose-100 text-rose-800 border border-rose-300',
+      outerClass: 'border-rose-500 bg-gradient-to-br from-rose-400 via-rose-200 to-red-300',
+      innerClass: 'border-rose-300 bg-white shadow-inner',
+      borderSvg: CERT_MONEY_ICONS.geometricRibbonBorderSvg(),
+      cornerBracketColor: 'border-rose-400',
+      watermarkColor: 'text-rose-300',
+      nameWrapClass: 'border-b-2 border-rose-400',
+      nameTextClass: 'text-rose-900',
       dividerLineClass: 'bg-rose-400',
-      awardPillClass: 'bg-gradient-to-r from-rose-500 via-red-500 to-rose-600 border-2 border-amber-300 text-white shadow-md',
-      awardLeftMini: CERT_MONEY_ICONS.cuteRedBill(),
-      awardRightMini: CERT_MONEY_ICONS.piggyBankCeria(),
+      starColor: 'text-amber-500',
+      bulletColor: 'bg-rose-500',
+      awardPillClass: 'bg-gradient-to-r from-rose-500 via-red-600 to-rose-700 border-2 border-amber-300 text-white shadow-md',
+      awardLeftMini: CERT_MONEY_ICONS.keranjangBelanja(),
+      awardRightMini: CERT_MONEY_ICONS.lencanaJuara(),
       footerBorderClass: 'border-rose-200',
       securityStripClass: 'bg-gradient-to-b from-amber-300 via-rose-400 to-amber-300',
-      logoLeftIcon: `<div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 -rotate-6">${CERT_MONEY_ICONS.cuteRedBill()}</div>`,
-      logoRightIcon: `<div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rotate-6">${RBC_ICONS.celenganAyam('w-full h-full')}</div>`,
-      cornerTopLeft: CERT_MONEY_ICONS.cuteRedBill(),
-      cornerTopRight: RBC_ICONS.celenganAyam('w-full h-full'),
-      cornerBottomLeft: CERT_MONEY_ICONS.walletDana(),
-      cornerBottomRight: CERT_MONEY_ICONS.redRupiahSeal(),
+      cornerTopLeft: CERT_MONEY_ICONS.keranjangBelanja(),
+      cornerTopRight: CERT_MONEY_ICONS.tasBelanjaKebutuhan(),
+      cornerBottomLeft: CERT_MONEY_ICONS.kalkulatorLucu(),
+      cornerBottomRight: CERT_MONEY_ICONS.lencanaJuara(),
       sideLeftIcons: `
-        <div class="w-12 h-12 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.fanRedBills()}</div>
-        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.moneyBag()}</div>
-        <div class="w-11 h-11 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm -rotate-3">${CERT_MONEY_ICONS.piggyBankCeria()}</div>
+        <div class="w-12 h-12 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.keranjangBelanja()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.tasBelanjaKebutuhan()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm -rotate-3">${CERT_MONEY_ICONS.kalkulatorLucu()}</div>
       `,
       sideRightIcons: `
-        <div class="w-12 h-12 rounded-2xl bg-amber-50/95 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.coinStack()}</div>
-        <div class="w-11 h-11 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.savingsBook()}</div>
-        <div class="w-11 h-11 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm rotate-3">${RBC_MASCOT.render('cheering', 'w-full h-full')}</div>
-      `
+        <div class="w-12 h-12 rounded-2xl bg-amber-50/95 border border-amber-200 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.lencanaJuara()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.keranjangBelanja()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-rose-50/95 border border-rose-200 p-1.5 shadow-sm rotate-3">${CERT_MONEY_ICONS.kalkulatorLucu()}</div>
+      `,
+      stamp: CERT_MONEY_ICONS.officialStamp('merah')
     };
   } else {
     themeCfg = {
-      outerClass: 'border-amber-500 bg-gradient-to-br from-amber-200 via-yellow-100 to-amber-300',
-      innerClass: 'border-dashed border-amber-500/85 bg-[#FFFDF2]',
-      cornerBracketColor: 'border-amber-500',
-      watermarkColor: 'text-amber-500',
-      nameWrapClass: 'border-b-2 border-amber-500',
-      nameTextClass: 'text-amber-900',
+      themeKey: 'emas',
+      subseriesTitle: 'SERI EMAS — BINTANG UTAMA BIJAK KELOLA DANA',
+      subseriesClass: 'bg-amber-100 text-amber-900 border border-amber-300',
+      outerClass: 'border-amber-500 bg-gradient-to-br from-amber-400 via-yellow-200 to-amber-300',
+      innerClass: 'border-amber-300 bg-[#FFFDF7] shadow-inner',
+      borderSvg: CERT_MONEY_ICONS.classicGoldBorderSvg(),
+      cornerBracketColor: 'border-amber-400',
+      watermarkColor: 'text-amber-400',
+      nameWrapClass: 'border-b-2 border-amber-400',
+      nameTextClass: 'text-amber-950',
       dividerLineClass: 'bg-amber-400',
-      awardPillClass: 'bg-gradient-to-r from-amber-300 via-yellow-300 to-amber-400 border-2 border-amber-500 text-amber-950 shadow-md',
-      awardLeftMini: CERT_MONEY_ICONS.coinStack(),
-      awardRightMini: CERT_MONEY_ICONS.goldBar(),
-      footerBorderClass: 'border-amber-300/80',
+      starColor: 'text-amber-500',
+      bulletColor: 'bg-amber-600',
+      awardPillClass: 'bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-500 border-2 border-amber-600 text-amber-950 shadow-md',
+      awardLeftMini: CERT_MONEY_ICONS.pialaEmas(),
+      awardRightMini: CERT_MONEY_ICONS.medaliBintang(),
+      footerBorderClass: 'border-amber-200',
       securityStripClass: 'bg-gradient-to-b from-amber-400 via-yellow-300 to-amber-400',
-      logoLeftIcon: `<div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 -rotate-6">${CERT_MONEY_ICONS.coinStack()}</div>`,
-      logoRightIcon: `<div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 rotate-6">${RBC_ICONS.celenganAyam('w-full h-full')}</div>`,
-      cornerTopLeft: CERT_MONEY_ICONS.coinStack(),
-      cornerTopRight: CERT_MONEY_ICONS.goldBar(),
-      cornerBottomLeft: CERT_MONEY_ICONS.moneyBag(),
-      cornerBottomRight: CERT_MONEY_ICONS.goldMedalRp(),
+      cornerTopLeft: CERT_MONEY_ICONS.pialaEmas(),
+      cornerTopRight: CERT_MONEY_ICONS.medaliBintang(),
+      cornerBottomLeft: CERT_MONEY_ICONS.petiHartaKarun(),
+      cornerBottomRight: CERT_MONEY_ICONS.pitaPenghargaan(),
       sideLeftIcons: `
-        <div class="w-12 h-12 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.goldBar()}</div>
-        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.treasureChest()}</div>
-        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm -rotate-3">${CERT_MONEY_ICONS.walletDana()}</div>
+        <div class="w-12 h-12 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.pialaEmas()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.petiHartaKarun()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm -rotate-3">${CERT_MONEY_ICONS.medaliBintang()}</div>
       `,
       sideRightIcons: `
-        <div class="w-12 h-12 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm rotate-6">${RBC_ICONS.celenganAyam('w-full h-full')}</div>
-        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.savingsBook()}</div>
-        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm rotate-3">${CERT_MONEY_ICONS.piggyBankCeria()}</div>
-      `
+        <div class="w-12 h-12 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm rotate-6">${CERT_MONEY_ICONS.petiHartaKarun()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm -rotate-6">${CERT_MONEY_ICONS.medaliBintang()}</div>
+        <div class="w-11 h-11 rounded-2xl bg-amber-50/95 border border-amber-300 p-1.5 shadow-sm rotate-3">${CERT_MONEY_ICONS.pitaPenghargaan()}</div>
+      `,
+      stamp: CERT_MONEY_ICONS.officialStamp('emas')
     };
   }
 
@@ -5064,8 +5103,11 @@ function renderCertificateCard(theme = 'emas') {
       <div class="hidden sm:block absolute inset-y-4 right-1.5 w-1.5 rounded-full opacity-75 ${themeCfg.securityStripClass}" aria-hidden="true"></div>
 
       <div class="relative rounded-2xl border-2 ${themeCfg.innerClass} px-5 sm:px-10 md:px-14 py-4 sm:py-5 md:py-6 overflow-hidden flex flex-col justify-between h-full">
+        <!-- Bingkai Vektor Unik Tiap Seri -->
+        ${themeCfg.borderSvg}
+
         <!-- Tanda Air Koin Rupiah Lembut di Tengah Belakang -->
-        <div class="absolute inset-0 flex items-center justify-center opacity-[0.06] pointer-events-none select-none ${themeCfg.watermarkColor}" aria-hidden="true">
+        <div class="absolute inset-0 flex items-center justify-center opacity-[0.05] pointer-events-none select-none ${themeCfg.watermarkColor}" aria-hidden="true">
           <svg viewBox="0 0 200 200" class="w-64 h-64 sm:w-80 sm:h-80" fill="none">
             <circle cx="100" cy="100" r="88" stroke="currentColor" stroke-width="6" stroke-dasharray="10 6"/>
             <circle cx="100" cy="100" r="68" stroke="currentColor" stroke-width="3"/>
@@ -5079,7 +5121,7 @@ function renderCertificateCard(theme = 'emas') {
         <span class="absolute bottom-1.5 left-1.5 w-4 h-4 border-b-4 border-l-4 rounded-bl-md ${themeCfg.cornerBracketColor} opacity-65 pointer-events-none"></span>
         <span class="absolute bottom-1.5 right-1.5 w-4 h-4 border-b-4 border-r-4 rounded-br-md ${themeCfg.cornerBracketColor} opacity-65 pointer-events-none"></span>
 
-        <!-- 4 Dekorasi Sudut Bertema Uang, Emas, Celengan & Dana -->
+        <!-- 4 Dekorasi Sudut Unik Tiap Varian -->
         <div class="absolute top-2.5 left-2.5 sm:top-4 sm:left-5 w-8 h-8 sm:w-11 sm:h-11 pointer-events-none select-none" aria-hidden="true">
           ${themeCfg.cornerTopLeft}
         </div>
@@ -5104,42 +5146,44 @@ function renderCertificateCard(theme = 'emas') {
         <!-- KONTEN UTAMA SERTIFIKAT LANDSCAPE A4 -->
         <div class="relative z-10 max-w-3xl mx-auto flex flex-col justify-between h-full w-full">
           
-          <!-- Bagian Atas: Logo UPI & Judul Penghargaan -->
-          <div class="space-y-1 pt-1 text-center">
-            <!-- Logo 3cm diapit ikon tema -->
-            <div class="flex items-center justify-center gap-4 sm:gap-6 mb-1">
-              ${themeCfg.logoLeftIcon}
+          <!-- Bagian Atas: Logo UPI Cibiru 3 cm, Header Instansi, Judul Utama & Sub-judul Seri -->
+          <div class="space-y-1 pt-0.5 text-center">
+            <!-- Logo UPI 3 cm -->
+            <div class="flex items-center justify-center mb-1">
               <div class="rounded-full bg-white p-1.5 shadow-md border-2 border-red-200 ring-2 ring-amber-200/60 inline-flex items-center justify-center flex-shrink-0" style="width: 3cm; height: 3cm; min-width: 3cm; min-height: 3cm;">
                 <img src="assets/images/logo.png" alt="Logo UPI" class="w-full h-full object-contain" />
               </div>
-              ${themeCfg.logoRightIcon}
             </div>
 
             <div class="space-y-0.5">
-              <span class="text-xs sm:text-sm font-black tracking-widest uppercase text-red-700 block font-title">UNIVERSITAS PENDIDIKAN INDONESIA</span>
-              <span class="text-[11px] sm:text-xs font-bold tracking-wider uppercase text-slate-700 block">KAMPUS UPI CIBIRU</span>
+              <h1 class="text-xs sm:text-sm font-black tracking-widest uppercase text-red-700 block font-title">UNIVERSITAS PENDIDIKAN INDONESIA — KAMPUS UPI CIBIRU</h1>
             </div>
 
-            <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 tracking-tight font-title mt-2 mb-1">SERTIFIKAT PENGHARGAAN</h2>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 tracking-tight font-title mt-1 mb-0.5">SERTIFIKAT PENGHARGAAN</h2>
 
-            <!-- Divider Elegan Tanpa Teks Tema/Edisi -->
+            <!-- Sub-judul Seri Sesuai Pilihan Varian -->
+            <div class="inline-flex items-center gap-1.5 px-3.5 py-0.5 rounded-full ${themeCfg.subseriesClass} font-black text-[10px] sm:text-[11px] tracking-wider uppercase shadow-xs">
+              <span>${themeCfg.subseriesTitle}</span>
+            </div>
+
+            <!-- Divider Elegan -->
             <div class="flex items-center justify-center gap-3 my-1" aria-hidden="true">
               <span class="h-0.5 w-14 sm:w-24 ${themeCfg.dividerLineClass} rounded-full"></span>
-              <span class="text-amber-500 text-xs sm:text-sm tracking-widest select-none">★ ★ ★</span>
+              <span class="${themeCfg.starColor} text-xs sm:text-sm tracking-widest select-none">★ ★ ★</span>
               <span class="h-0.5 w-14 sm:w-24 ${themeCfg.dividerLineClass} rounded-full"></span>
             </div>
           </div>
 
-          <!-- Bagian Tengah: Nama Penerima & Deskripsi Prestasi -->
-          <div class="space-y-1.5 sm:space-y-2 py-1 my-auto text-center">
-            <p class="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">Diberikan Dengan Penuh Rasa Bangga Kepada:</p>
+          <!-- Bagian Tengah: Kalimat Pembuka, Nama Lengkap Siswa, Isi Keterangan, & Predikat -->
+          <div class="space-y-1 sm:space-y-1.5 py-1 my-auto text-center">
+            <p class="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">Diberikan dengan penuh rasa bangga kepada:</p>
             
             <div class="py-1 ${themeCfg.nameWrapClass} max-w-xl mx-auto">
-              <h3 id="cert-student-name" class="text-2xl sm:text-3xl md:text-4xl font-black ${themeCfg.nameTextClass} font-title tracking-wide">${safeStudentName}</h3>
+              <h3 id="cert-student-name" class="text-3xl sm:text-4xl md:text-5xl font-black ${themeCfg.nameTextClass} font-title tracking-wide">${safeStudentName}</h3>
             </div>
 
             <p class="text-slate-600 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed font-medium pt-0.5">
-              Telah berhasil menyelesaikan seluruh tahapan pembelajaran <strong>Model DHETIK</strong> pada materi <em>Bab 5: Bijak Berbelanja Kebutuhan</em>, cermat membedakan kebutuhan dan keinginan, menabung di celengan, serta dinobatkan sebagai:
+              Telah berhasil menyelesaikan seluruh tahapan pembelajaran <strong>Model DHETIK</strong> pada materi <em>Bab 5: Bijak Berbelanja Kebutuhan</em>, cermat membedakan kebutuhan dan keinginan, terampil menabung di celengan, serta dinobatkan sebagai:
             </p>
 
             <div class="pt-0.5">
@@ -5151,23 +5195,28 @@ function renderCertificateCard(theme = 'emas') {
             </div>
           </div>
 
-          <!-- Bagian Bawah: Tanggal Terbit & Tim Pengembang -->
-          <div class="pt-3 sm:pt-4 border-t ${themeCfg.footerBorderClass} flex flex-col sm:flex-row items-start justify-between gap-4 text-xs px-2 sm:px-6 mt-1">
-            <!-- Kolom 1: Tanggal Terbit & Info Kampus -->
-            <div class="text-left space-y-1">
-              <span class="block text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider">Tanggal Terbit</span>
-              <p class="text-xs sm:text-sm font-black text-slate-800 leading-tight">${issueDate}</p>
-              <span class="text-[10px] sm:text-[11px] text-slate-500 block font-semibold">Kampus UPI di Cibiru • PGSD 2026</span>
+          <!-- Bagian Bawah: Tanggal Terbit, Lencana/Stempel Grafis Resmi, & Tim Pengembang -->
+          <div class="pt-3 sm:pt-4 border-t ${themeCfg.footerBorderClass} flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-xs px-2 sm:px-4 mt-1">
+            <!-- Kolom Kiri: Tanggal Terbit -->
+            <div class="text-left space-y-0.5">
+              <span class="block text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider">Tanggal</span>
+              <p class="text-xs sm:text-sm font-black text-slate-800 leading-tight">Tanggal Terbit: ${issueDate}</p>
+              <span class="text-[10px] sm:text-[11px] text-slate-500 block font-semibold">Kampus UPI Cibiru • PGSD 2026</span>
             </div>
 
-            <!-- Kolom 2: Tim Pengembang (Tertata Rapih, Jelas, & Berjarak Seimbang) -->
-            <div class="text-left sm:text-right space-y-1">
-              <span class="block text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider">Tim Pengembang</span>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 text-left">
+            <!-- Tengah / Pojok Bawah: Stempel Grafis Resmi "BIJAK KELOLA DANA & MENABUNG" (Tidak Menabrak Teks) -->
+            <div class="flex-shrink-0 -rotate-6 hover:rotate-0 transition-transform select-none" title="Stempel Resmi: BIJAK KELOLA DANA & MENABUNG">
+              ${themeCfg.stamp}
+            </div>
+
+            <!-- Kolom Kanan: Tim Pengembang 2 Kolom Rapi -->
+            <div class="text-left space-y-1">
+              <span class="block text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider">Tim Pengembang:</span>
+              <div class="grid grid-cols-2 gap-x-5 gap-y-1 text-left">
                 ${devList.map(dev => `
                   <div class="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold text-slate-800">
-                    <span class="w-1.5 h-1.5 rounded-full bg-red-600 flex-shrink-0"></span>
-                    <span class="whitespace-nowrap sm:whitespace-normal leading-snug">${dev}</span>
+                    <span class="w-1.5 h-1.5 rounded-full ${themeCfg.bulletColor} flex-shrink-0"></span>
+                    <span class="whitespace-nowrap">${dev}</span>
                   </div>
                 `).join('')}
               </div>
@@ -5181,7 +5230,7 @@ function renderCertificateCard(theme = 'emas') {
 }
 
 function setCertificateTheme(theme) {
-  const validTheme = ['emas', 'merah', 'biru'].includes(theme) ? theme : 'emas';
+  const validTheme = ['biru', 'merah', 'emas'].includes(theme) ? theme : 'biru';
   AppState.certTheme = validTheme;
   localStorage.setItem('rbc_cert_theme', validTheme);
   window.soundManager.playPop();
@@ -5191,34 +5240,34 @@ function setCertificateTheme(theme) {
     host.innerHTML = renderCertificateCard(validTheme);
   }
 
-  const btnEmas = document.getElementById('btn-cert-theme-emas');
-  const btnMerah = document.getElementById('btn-cert-theme-merah');
   const btnBiru = document.getElementById('btn-cert-theme-biru');
-  const badgeEmas = document.getElementById('badge-cert-emas');
-  const badgeMerah = document.getElementById('badge-cert-merah');
+  const btnMerah = document.getElementById('btn-cert-theme-merah');
+  const btnEmas = document.getElementById('btn-cert-theme-emas');
   const badgeBiru = document.getElementById('badge-cert-biru');
+  const badgeMerah = document.getElementById('badge-cert-merah');
+  const badgeEmas = document.getElementById('badge-cert-emas');
 
   const baseStyle = 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-slate-200 bg-slate-50';
 
-  if (btnEmas) {
-    btnEmas.className = (validTheme === 'emas')
-      ? 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-amber-500 bg-amber-50/90 ring-2 ring-amber-200 shadow-sm'
-      : `${baseStyle} hover:border-amber-300`;
+  if (btnBiru) {
+    btnBiru.className = (validTheme === 'biru')
+      ? 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-sky-500 bg-sky-50/90 ring-2 ring-sky-200 shadow-sm'
+      : `${baseStyle} hover:border-sky-300`;
   }
   if (btnMerah) {
     btnMerah.className = (validTheme === 'merah')
       ? 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-rose-500 bg-rose-50/90 ring-2 ring-rose-200 shadow-sm'
       : `${baseStyle} hover:border-rose-300`;
   }
-  if (btnBiru) {
-    btnBiru.className = (validTheme === 'biru')
-      ? 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-sky-500 bg-sky-50/90 ring-2 ring-sky-200 shadow-sm'
-      : `${baseStyle} hover:border-sky-300`;
+  if (btnEmas) {
+    btnEmas.className = (validTheme === 'emas')
+      ? 'text-left p-3.5 rounded-2xl border-2 transition-all flex items-center gap-3 border-amber-500 bg-amber-50/90 ring-2 ring-amber-200 shadow-sm'
+      : `${baseStyle} hover:border-amber-300`;
   }
 
-  if (badgeEmas) badgeEmas.classList.toggle('hidden', validTheme !== 'emas');
-  if (badgeMerah) badgeMerah.classList.toggle('hidden', validTheme !== 'merah');
   if (badgeBiru) badgeBiru.classList.toggle('hidden', validTheme !== 'biru');
+  if (badgeMerah) badgeMerah.classList.toggle('hidden', validTheme !== 'merah');
+  if (badgeEmas) badgeEmas.classList.toggle('hidden', validTheme !== 'emas');
 }
 window.setCertificateTheme = setCertificateTheme;
 
