@@ -5809,59 +5809,129 @@ function nextQuizQuestion() {
 }
 
 /* ============================================================
-   VIEW 10: POJOK GAME EDUKASI CERIA (5 GAME LENGKAP & MULTI-LEVEL)
-   1. Tebak Gambar Uang & Barang (5 Soal Visual)
-   2. Susun Kata Ceria (5 Kata Finansial Interaktif)
-   3. Petualangan Matematika Belanja (5 Soal Cerita Belanja)
-   4. Pasangkan Kategori Kebutuhan vs Keinginan (5 Soal Logika)
-   5. Benar atau Salah Cermat Finansial (5 Soal Literasi)
+   VIEW 10: POJOK GAME EDUKASI CERIA (5 GAME LENGKAP • 10 SOAL REALISTIS)
+   1. Tebak Gambar Uang & Barang (10 Soal Realistis Uang Asli)
+   2. Susun Kata Ceria (10 Kata Finansial Interaktif)
+   3. Petualangan Matematika Belanja (10 Soal Hitung Uang Nyata)
+   4. Pasangkan Kategori Kebutuhan vs Keinginan (10 Skenario Nyata)
+   5. Benar atau Salah Cermat Finansial (10 Literasi Keuangan Nyata)
    ============================================================ */
 
 const RBC_GAMES_DATA = {
   tebak: {
     id: 'tebak',
     title: 'Tebak Gambar Uang & Barang',
-    subtitle: 'Amati gambar dengan seksama lalu pilih nominal atau nama benda yang tepat!',
+    subtitle: 'Amati foto asli uang Rupiah resmi Bank Indonesia dan pilih nominalnya dengan tepat!',
     questions: [
       {
-        visual: '<div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-amber-100 border-4 border-amber-400 flex items-center justify-center text-4xl sm:text-5xl shadow-md select-none">🪙 500</div>',
-        prompt: 'Berapakah nilai nominal uang koin logam pada gambar di atas?',
-        hint: 'Perhatikan angka nominal 500 yang tertera pada uang logam.',
+        visual: `
+          <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden shadow-lg border-4 border-slate-300 ring-4 ring-amber-300/60 bg-slate-100 flex items-center justify-center p-1 select-none transition-transform hover:scale-105">
+            <img src="assets/images/uang/koin-500-depan.jpg" alt="Uang Logam Rp500 Asli" class="w-full h-full object-cover rounded-full" />
+          </div>`,
+        prompt: 'Berapakah nilai nominal uang koin logam resmi Bank Indonesia pada gambar di atas?',
+        hint: 'Perhatikan angka nominal yang tertera pada bagian tengah koin logam.',
         options: ['Rp500', 'Rp1.000', 'Rp200', 'Rp100'],
         correct: 0,
-        explanation: 'Benar! Itu adalah uang koin Rupiah pecahan Rp500.'
+        explanation: 'Benar! Itu adalah uang logam resmi Bank Indonesia pecahan Rp500 (bunga Melati).'
       },
       {
-        visual: '<div class="w-36 h-20 sm:w-44 sm:h-24 rounded-2xl bg-sky-100 border-4 border-sky-400 flex flex-col items-center justify-center text-slate-800 font-black shadow-md select-none"><span class="text-[10px] uppercase tracking-wider text-sky-700">Uang Kertas Kartun</span><span class="text-2xl sm:text-3xl text-sky-900">Rp2.000</span></div>',
-        prompt: 'Uang kertas berwarna abu-abu kebiruan di atas memiliki nilai nominal:',
-        hint: 'Sering dipakai saat membeli jajanan ringan atau membayar parkir.',
-        options: ['Rp1.000', 'Rp2.000', 'Rp5.000', 'Rp10.000'],
+        visual: `
+          <div class="w-52 sm:w-60 md:w-68 rounded-xl overflow-hidden shadow-md border-2 border-slate-200 bg-white transition-transform hover:scale-105 select-none">
+            <img src="assets/images/uang/kertas-2000.jpg" alt="Uang Kertas Rp2.000 Asli Emisi 2022" class="w-full h-auto object-contain block" />
+          </div>`,
+        prompt: 'Uang kertas Tahun Emisi 2022 berwarna abu-abu pada gambar di atas bernilai nominal:',
+        hint: 'Uang ini menampilkan pahlawan nasional Mohammad Hoesni Thamrin.',
+        options: ['Rp1.000', 'Rp2.000', 'Rp5.000', 'Rp20.000'],
         correct: 1,
-        explanation: 'Hebat! Itu adalah selembar uang kertas pecahan Rp2.000.'
+        explanation: 'Hebat! Itu adalah selembar uang kertas asli pecahan Rp2.000 TE 2022.'
       },
       {
-        visual: '<div class="w-36 h-20 sm:w-44 sm:h-24 rounded-2xl bg-purple-100 border-4 border-purple-400 flex flex-col items-center justify-center text-purple-900 font-black shadow-md select-none"><span class="text-[10px] uppercase tracking-wider text-purple-700">Uang Kertas Kartun</span><span class="text-2xl sm:text-3xl text-purple-950">Rp10.000</span></div>',
-        prompt: 'Uang kertas berwarna ungu ceria pada gambar bernilai nominal:',
-        hint: 'Ciri khas pecahan sepuluh ribu rupiah adalah dominasi warna ungu.',
+        visual: `
+          <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden shadow-lg border-4 border-slate-300 ring-4 ring-amber-400/60 bg-slate-100 flex items-center justify-center p-1 select-none transition-transform hover:scale-105">
+            <img src="assets/images/uang/koin-1000-depan.jpg" alt="Uang Logam Rp1.000 Asli" class="w-full h-full object-cover rounded-full" />
+          </div>`,
+        prompt: 'Berapakah nilai uang koin logam terbesar yang beredar di Indonesia pada foto di atas?',
+        hint: 'Koin ini bernilai seribu rupiah.',
+        options: ['Rp500', 'Rp1.000', 'Rp200', 'Rp2.000'],
+        correct: 1,
+        explanation: 'Luar biasa! Koin Rp1.000 adalah pecahan uang logam terbesar yang beredar saat ini.'
+      },
+      {
+        visual: `
+          <div class="w-52 sm:w-60 md:w-68 rounded-xl overflow-hidden shadow-md border-2 border-slate-200 bg-white transition-transform hover:scale-105 select-none">
+            <img src="assets/images/uang/kertas-10000.jpg" alt="Uang Kertas Rp10.000 Asli Emisi 2022" class="w-full h-auto object-contain block" />
+          </div>`,
+        prompt: 'Uang kertas berwarna ungu ceria pada foto di atas memiliki nilai nominal:',
+        hint: 'Menampilkan gambar pahlawan Frans Kaisiepo dari Papua.',
         options: ['Rp5.000', 'Rp10.000', 'Rp20.000', 'Rp50.000'],
         correct: 1,
-        explanation: 'Tepat sekali! Pecahan Rp10.000 sangat khas dengan warna ungunya.'
+        explanation: 'Tepat sekali! Uang kertas Rp10.000 sangat khas dengan dominasi warna ungu cerah.'
       },
       {
-        visual: '<div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-slate-100 border-4 border-slate-300 ring-4 ring-amber-300 flex items-center justify-center text-3xl sm:text-4xl shadow-md font-black text-amber-900 select-none">🪙 1.000</div>',
-        prompt: 'Berapakah nilai nominal uang koin logam terbesar yang beredar di Indonesia saat ini?',
-        hint: 'Nilainya sama dengan seribu rupiah.',
-        options: ['Rp500', 'Rp1.000', 'Rp2.000', 'Rp5.000'],
+        visual: `
+          <div class="w-52 sm:w-60 md:w-68 rounded-xl overflow-hidden shadow-md border-2 border-slate-200 bg-white transition-transform hover:scale-105 select-none">
+            <img src="assets/images/uang/kertas-5000.jpg" alt="Uang Kertas Rp5.000 Asli Emisi 2022" class="w-full h-auto object-contain block" />
+          </div>`,
+        prompt: 'Berapakah nilai nominal uang kertas berwarna cokelat oranye hangat pada foto di atas?',
+        hint: 'Menampilkan pahlawan nasional Dr. K.H. Idham Chalid.',
+        options: ['Rp2.000', 'Rp5.000', 'Rp10.000', 'Rp50.000'],
         correct: 1,
-        explanation: 'Luar biasa! Koin Rp1.000 adalah pecahan koin terbesar yang banyak digunakan.'
+        explanation: 'Pintar! Gambar di atas adalah uang kertas pecahan Rp5.000 Tahun Emisi 2022.'
       },
       {
-        visual: '<div class="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-pink-100 border-4 border-pink-400 flex flex-col items-center justify-center text-4xl shadow-md select-none"><span>🐷💰</span><span class="text-xs font-black text-pink-700 mt-1">Celengan Ceria</span></div>',
-        prompt: 'Tempat menyimpan sisa uang belanja atau uang saku sedikit demi sedikit di rumah disebut:',
-        hint: 'Biasanya berbentuk ayam, babi, atau kaleng bergambar lucu.',
-        options: ['Celengan', 'Keranjang Pasar', 'Kasir Toko', 'Struk Belanja'],
-        correct: 0,
-        explanation: 'Pintar! Menabung di celengan adalah kebiasaan baik anak hebat!'
+        visual: `
+          <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden shadow-lg border-4 border-slate-300 ring-4 ring-sky-300/60 bg-slate-100 flex items-center justify-center p-1 select-none transition-transform hover:scale-105">
+            <img src="assets/images/uang/koin-200-depan.jpg" alt="Uang Logam Rp200 Asli" class="w-full h-full object-cover rounded-full" />
+          </div>`,
+        prompt: 'Berapakah nilai nominal uang koin logam aluminium pada foto di atas?',
+        hint: 'Koin ini bergambar burung Jalak Bali.',
+        options: ['Rp100', 'Rp200', 'Rp500', 'Rp1.000'],
+        correct: 1,
+        explanation: 'Benar! Koin logam aluminium tersebut bernilai dua ratus rupiah (Rp200).'
+      },
+      {
+        visual: `
+          <div class="w-52 sm:w-60 md:w-68 rounded-xl overflow-hidden shadow-md border-2 border-slate-200 bg-white transition-transform hover:scale-105 select-none">
+            <img src="assets/images/uang/kertas-20000.jpg" alt="Uang Kertas Rp20.000 Asli Emisi 2022" class="w-full h-auto object-contain block" />
+          </div>`,
+        prompt: 'Uang kertas berwarna hijau cerah pada foto memiliki nilai nominal:',
+        hint: 'Menampilkan pahlawan nasional Dr. G.S.S.J. Ratulangi (Sam Ratulangi).',
+        options: ['Rp10.000', 'Rp20.000', 'Rp50.000', 'Rp2.000'],
+        correct: 1,
+        explanation: 'Luar biasa! Pecahan Rp20.000 memiliki warna hijau segar yang anggun.'
+      },
+      {
+        visual: `
+          <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden shadow-lg border-4 border-slate-300 ring-4 ring-slate-400/40 bg-slate-100 flex items-center justify-center p-1 select-none transition-transform hover:scale-105">
+            <img src="assets/images/uang/koin-100-depan.jpg" alt="Uang Logam Rp100 Asli" class="w-full h-full object-cover rounded-full" />
+          </div>`,
+        prompt: 'Berapakah nilai uang koin logam terkecil yang masih resmi berlaku pada foto di atas?',
+        hint: 'Koin ini bergambar burung Kakaktua Raja.',
+        options: ['Rp50', 'Rp100', 'Rp200', 'Rp500'],
+        correct: 1,
+        explanation: 'Hebat! Koin Rp100 adalah pecahan uang logam terkecil yang masih sah digunakan saat ini.'
+      },
+      {
+        visual: `
+          <div class="w-52 sm:w-60 md:w-68 rounded-xl overflow-hidden shadow-md border-2 border-slate-200 bg-white transition-transform hover:scale-105 select-none">
+            <img src="assets/images/uang/kertas-50000.jpg" alt="Uang Kertas Rp50.000 Asli Emisi 2022" class="w-full h-auto object-contain block" />
+          </div>`,
+        prompt: 'Uang kertas berwarna biru laut pada gambar di atas bernilai nominal:',
+        hint: 'Menampilkan gambar pahlawan Ir. H. Djuanda Kartawidjaja.',
+        options: ['Rp20.000', 'Rp50.000', 'Rp100.000', 'Rp10.000'],
+        correct: 1,
+        explanation: 'Tepat sekali! Pecahan Rp50.000 berwarna biru laut dengan pahlawan Ir. H. Djuanda.'
+      },
+      {
+        visual: `
+          <div class="w-52 sm:w-60 md:w-68 rounded-xl overflow-hidden shadow-md border-2 border-slate-200 bg-white transition-transform hover:scale-105 select-none">
+            <img src="assets/images/uang/kertas-100000.jpg" alt="Uang Kertas Rp100.000 Asli Emisi 2022" class="w-full h-auto object-contain block" />
+          </div>`,
+        prompt: 'Uang kertas dengan nilai nominal tertinggi di Indonesia berwarna merah pada foto adalah:',
+        hint: 'Menampilkan Proklamator Kemerdekaan Ir. Soekarno dan Drs. Mohammad Hatta.',
+        options: ['Rp50.000', 'Rp75.000', 'Rp100.000', 'Rp200.000'],
+        correct: 2,
+        explanation: 'Sempurna! Uang kertas Rp100.000 adalah pecahan mata uang Rupiah dengan nominal terbesar.'
       }
     ]
   },
@@ -5899,6 +5969,36 @@ const RBC_GAMES_DATA = {
         target: 'BELANJA',
         letters: ['L', 'B', 'N', 'E', 'A', 'J', 'A'],
         explanation: 'B-E-L-A-N-J-A harus direncanakan dengan cerdas dan bijak.'
+      },
+      {
+        clue: 'Sesuatu yang ingin kita miliki namun tidak wajib segera dipenuhi:',
+        target: 'KEINGINAN',
+        letters: ['G', 'K', 'I', 'N', 'I', 'N', 'A', 'A', 'E'],
+        explanation: 'K-E-I-N-G-I-N-A-N boleh ditunda dan dipenuhi setelah kebutuhan pokok.'
+      },
+      {
+        clue: 'Uang logam berbentuk bulat pipih terbuat dari aluminium atau nikel:',
+        target: 'KOIN',
+        letters: ['O', 'K', 'N', 'I'],
+        explanation: 'K-O-I-N adalah bentuk fisik uang logam Rupiah.'
+      },
+      {
+        clue: 'Uang lebih yang dikembalikan oleh penjual kepada pembeli:',
+        target: 'KEMBALIAN',
+        letters: ['M', 'K', 'E', 'B', 'A', 'L', 'A', 'I', 'N'],
+        explanation: 'K-E-M-B-A-L-I-A-N adalah selisih uang belanja yang diterima kembali.'
+      },
+      {
+        clue: 'Besaran nilai uang yang harus dibayarkan untuk membeli suatu barang:',
+        target: 'HARGA',
+        letters: ['R', 'H', 'A', 'G', 'A'],
+        explanation: 'H-A-R-G-A adalah nilai tukar suatu barang dalam satuan Rupiah.'
+      },
+      {
+        clue: 'Orang yang membeli barang atau jasa untuk memenuhi kebutuhannya:',
+        target: 'PEMBELI',
+        letters: ['M', 'P', 'E', 'B', 'E', 'L', 'I'],
+        explanation: 'P-E-M-B-E-L-I yang bijak selalu mencatat kebutuhan sebelum berbelanja.'
       }
     ]
   },
@@ -5908,6 +6008,15 @@ const RBC_GAMES_DATA = {
     subtitle: 'Hitung penjumlahan uang belanja dan sisa kembalian dengan teliti!',
     questions: [
       {
+        visual: `
+          <div class="flex items-center justify-center gap-2 flex-wrap select-none">
+            <div class="w-32 rounded-lg overflow-hidden shadow-sm border border-slate-200"><img src="assets/images/uang/kertas-1000.jpg" class="w-full h-auto block" alt="Rp1.000"/></div>
+            <div class="w-32 rounded-lg overflow-hidden shadow-sm border border-slate-200"><img src="assets/images/uang/kertas-2000.jpg" class="w-full h-auto block" alt="Rp2.000"/></div>
+            <span class="text-xs font-bold text-slate-500">(Pensil Rp3.000)</span>
+            <span class="text-xl font-bold text-slate-400">+</span>
+            <div class="w-32 rounded-lg overflow-hidden shadow-sm border border-slate-200"><img src="assets/images/uang/kertas-5000.jpg" class="w-full h-auto block" alt="Rp5.000"/></div>
+            <span class="text-xs font-bold text-slate-500">(Buku Rp5.000)</span>
+          </div>`,
         scenario: 'Budi membeli pensil seharga <strong>Rp3.000</strong> dan buku tulis seharga <strong>Rp5.000</strong>. Berapakah total uang yang harus dibayar Budi?',
         hint: 'Hitung: Rp3.000 + Rp5.000',
         options: ['Rp7.000', 'Rp8.000', 'Rp9.000', 'Rp10.000'],
@@ -5915,13 +6024,23 @@ const RBC_GAMES_DATA = {
         explanation: 'Tepat! Rp3.000 + Rp5.000 = Rp8.000.'
       },
       {
-        scenario: 'Siti membawa uang <strong>Rp20.000</strong> ke toko buku. Ia membeli tempat pensil seharga <strong>Rp12.000</strong>. Berapakah uang kembalian yang diterima Siti?',
+        visual: `
+          <div class="w-44 sm:w-52 rounded-xl overflow-hidden shadow-sm border border-slate-200 mx-auto select-none">
+            <img src="assets/images/uang/kertas-20000.jpg" alt="Uang Rp20.000" class="w-full h-auto block" />
+          </div>`,
+        scenario: 'Siti membawa uang <strong>Rp20.000</strong> (uang kertas hijau) ke toko buku. Ia membeli tempat pensil seharga <strong>Rp12.000</strong>. Berapakah uang kembalian yang diterima Siti?',
         hint: 'Hitung: Rp20.000 - Rp12.000',
         options: ['Rp6.000', 'Rp7.000', 'Rp8.000', 'Rp10.000'],
         correct: 2,
         explanation: 'Hebat! Rp20.000 - Rp12.000 = Rp8.000.'
       },
       {
+        visual: `
+          <div class="flex items-center justify-center gap-2 select-none">
+            <div class="w-28 rounded-lg overflow-hidden shadow-sm border border-slate-200"><img src="assets/images/uang/kertas-2000.jpg" class="w-full h-auto block" alt="Rp2.000"/></div>
+            <div class="w-28 rounded-lg overflow-hidden shadow-sm border border-slate-200"><img src="assets/images/uang/kertas-2000.jpg" class="w-full h-auto block" alt="Rp2.000"/></div>
+            <span class="text-xs font-bold text-slate-500">(2 Roti @Rp4.000 = Rp8.000) + 1 Susu Rp3.000</span>
+          </div>`,
         scenario: 'Rian membeli 2 buah roti seharga masing-masing <strong>Rp4.000</strong> dan 1 kotak susu seharga <strong>Rp3.000</strong>. Berapakah total belanjaan Rian?',
         hint: 'Hitung: (2 × Rp4.000) + Rp3.000 = Rp8.000 + Rp3.000',
         options: ['Rp9.000', 'Rp10.000', 'Rp11.000', 'Rp12.000'],
@@ -5929,18 +6048,90 @@ const RBC_GAMES_DATA = {
         explanation: 'Benar sekali! 2 roti (Rp8.000) + 1 susu (Rp3.000) = Rp11.000.'
       },
       {
-        scenario: 'Uang saku Dina adalah <strong>Rp10.000</strong>. Dina membeli kue seharga <strong>Rp4.000</strong>. Sisa uangnya dimasukkan ke celengan. Berapakah uang yang berhasil ditabung Dina?',
+        visual: `
+          <div class="w-44 sm:w-52 rounded-xl overflow-hidden shadow-sm border border-slate-200 mx-auto select-none">
+            <img src="assets/images/uang/kertas-10000.jpg" alt="Uang Rp10.000" class="w-full h-auto block" />
+          </div>`,
+        scenario: 'Uang saku Dina adalah selembar <strong>Rp10.000</strong> (uang kertas ungu). Dina membeli kue seharga <strong>Rp4.000</strong>. Sisa uangnya dimasukkan ke celengan. Berapakah uang yang berhasil ditabung Dina?',
         hint: 'Hitung: Rp10.000 - Rp4.000',
         options: ['Rp5.000', 'Rp6.000', 'Rp4.000', 'Rp7.000'],
         correct: 1,
         explanation: 'Mantap! Sisa uang Dina yang ditabung ke celengan adalah Rp6.000.'
       },
       {
-        scenario: 'Edo memiliki <strong>1 lembar uang Rp10.000</strong> dan <strong>2 lembar uang Rp5.000</strong>. Berapakah jumlah uang Edo seluruhnya?',
+        visual: `
+          <div class="flex items-center justify-center gap-2 flex-wrap select-none">
+            <div class="w-32 rounded-lg overflow-hidden shadow-sm border border-slate-200"><img src="assets/images/uang/kertas-10000.jpg" class="w-full h-auto block" alt="Rp10.000"/></div>
+            <span class="text-lg font-black text-slate-400">+</span>
+            <div class="w-32 rounded-lg overflow-hidden shadow-sm border border-slate-200"><img src="assets/images/uang/kertas-5000.jpg" class="w-full h-auto block" alt="Rp5.000"/></div>
+            <span class="text-xs font-bold text-slate-500">(2 lembar Rp5.000)</span>
+          </div>`,
+        scenario: 'Edo memiliki <strong>1 lembar uang Rp10.000</strong> dan <strong>2 lembar uang Rp5.000</strong>. Berapakah jumlah total uang Edo seluruhnya?',
         hint: 'Hitung: Rp10.000 + (2 × Rp5.000) = Rp10.000 + Rp10.000',
         options: ['Rp15.000', 'Rp20.000', 'Rp25.000', 'Rp30.000'],
         correct: 1,
         explanation: 'Pintar! Rp10.000 + Rp10.000 = Rp20.000.'
+      },
+      {
+        visual: `
+          <div class="flex items-center justify-center gap-2 select-none">
+            <span class="text-2xl">🍚</span><span class="text-xs font-bold text-slate-700">Beras Rp15.000</span>
+            <span class="text-xl font-bold text-slate-400">+</span>
+            <span class="text-2xl">🍳</span><span class="text-xs font-bold text-slate-700">Minyak Rp18.000</span>
+          </div>`,
+        scenario: 'Ibu membeli 1 kg beras seharga <strong>Rp15.000</strong> dan minyak goreng seharga <strong>Rp18.000</strong>. Berapakah total uang belanjaan kebutuhan pokok Ibu?',
+        hint: 'Hitung: Rp15.000 + Rp18.000',
+        options: ['Rp30.000', 'Rp32.000', 'Rp33.000', 'Rp35.000'],
+        correct: 2,
+        explanation: 'Tepat! Rp15.000 + Rp18.000 = Rp33.000.'
+      },
+      {
+        visual: `
+          <div class="flex items-center justify-center gap-2 select-none">
+            <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-slate-300 shadow"><img src="assets/images/uang/koin-500-depan.jpg" class="w-full h-full object-cover" alt="Koin Rp500"/></div>
+            <span class="text-sm font-black text-slate-700">× 4 keping koin logam</span>
+          </div>`,
+        scenario: 'Farhan memiliki <strong>4 keping uang logam Rp500</strong> di saku bajunya. Berapakah total nilai uang koin Farhan jika digabungkan?',
+        hint: 'Hitung: 4 × Rp500 = Rp500 + Rp500 + Rp500 + Rp500',
+        options: ['Rp1.500', 'Rp2.000', 'Rp2.500', 'Rp3.000'],
+        correct: 1,
+        explanation: 'Hebat! 4 keping koin Rp500 nilainya tepat Rp2.000.'
+      },
+      {
+        visual: `
+          <div class="w-44 sm:w-52 rounded-xl overflow-hidden shadow-sm border border-slate-200 mx-auto select-none">
+            <img src="assets/images/uang/kertas-50000.jpg" alt="Uang Rp50.000" class="w-full h-auto block" />
+          </div>`,
+        scenario: 'Ayu membayar baju seragam sekolah seharga <strong>Rp35.000</strong> menggunakan <strong>1 lembar uang Rp50.000</strong> (uang kertas biru). Berapakah uang kembalian yang Ayu terima?',
+        hint: 'Hitung: Rp50.000 - Rp35.000',
+        options: ['Rp10.000', 'Rp15.000', 'Rp20.000', 'Rp25.000'],
+        correct: 1,
+        explanation: 'Pintar! Rp50.000 - Rp35.000 = Rp15.000.'
+      },
+      {
+        visual: `
+          <div class="flex items-center justify-center gap-2 select-none">
+            <div class="w-36 rounded-lg overflow-hidden shadow-sm border border-slate-200"><img src="assets/images/uang/kertas-2000.jpg" class="w-full h-auto block" alt="Rp2.000"/></div>
+            <span class="text-xs font-bold text-slate-600">× 5 hari berturut-turut</span>
+          </div>`,
+        scenario: 'Doni menabung <strong>Rp2.000</strong> (uang kertas abu-abu) setiap hari di celengannya. Berapakah jumlah tabungan Doni setelah <strong>5 hari</strong> menabung secara rutin?',
+        hint: 'Hitung: 5 × Rp2.000',
+        options: ['Rp8.000', 'Rp10.000', 'Rp12.000', 'Rp15.000'],
+        correct: 1,
+        explanation: 'Benar sekali! 5 × Rp2.000 = Rp10.000 tabungan Doni.'
+      },
+      {
+        visual: `
+          <div class="flex items-center justify-center gap-2 flex-wrap select-none">
+            <div class="w-28 rounded-lg overflow-hidden shadow-sm border border-slate-200"><img src="assets/images/uang/kertas-50000.jpg" class="w-full h-auto block" alt="Rp50.000"/></div>
+            <div class="w-28 rounded-lg overflow-hidden shadow-sm border border-slate-200"><img src="assets/images/uang/kertas-20000.jpg" class="w-full h-auto block" alt="Rp20.000"/></div>
+            <div class="w-28 rounded-lg overflow-hidden shadow-sm border border-slate-200"><img src="assets/images/uang/kertas-10000.jpg" class="w-full h-auto block" alt="Rp10.000"/></div>
+          </div>`,
+        scenario: 'Di dalam dompet Nisa terdapat <strong>1 lembar Rp50.000</strong>, <strong>1 lembar Rp20.000</strong>, dan <strong>1 lembar Rp10.000</strong>. Berapakah jumlah uang Nisa seluruhnya?',
+        hint: 'Hitung: Rp50.000 + Rp20.000 + Rp10.000',
+        options: ['Rp70.000', 'Rp75.000', 'Rp80.000', 'Rp85.000'],
+        correct: 2,
+        explanation: 'Luar biasa! Rp50.000 + Rp20.000 + Rp10.000 = Rp80.000.'
       }
     ]
   },
@@ -5968,7 +6159,7 @@ const RBC_GAMES_DATA = {
         icon: '🍚',
         options: ['Kebutuhan Pokok', 'Keinginan Tambahan'],
         correct: 0,
-        explanation: 'Makanan bernutrisi adalah Kebutuhan Pokok yang mutlak diperlukan untuk kesehatan.'
+        explanation: 'Makanan bernutrisi adalah Kebutuhan Pokok yang mutlak diperlukan untuk kesehatan tubuh.'
       },
       {
         item: 'Membeli tiket wahana permainan dan bermain video game di mall setiap hari libur',
@@ -5983,6 +6174,41 @@ const RBC_GAMES_DATA = {
         options: ['Kebutuhan Pokok', 'Keinginan Tambahan'],
         correct: 0,
         explanation: 'Obat dan vitamin saat sakit adalah Kebutuhan Pokok yang penting untuk kesembuhan tubuh.'
+      },
+      {
+        item: 'Membeli buku tulis dan pensil untuk mencatat pelajaran di kelas',
+        icon: '✏️',
+        options: ['Kebutuhan Pokok', 'Keinginan Tambahan'],
+        correct: 0,
+        explanation: 'Buku dan pensil adalah Kebutuhan Pokok belajar siswa di sekolah.'
+      },
+      {
+        item: 'Membeli sepatu bermerek sangat mahal hanya untuk pamer kepada teman-teman',
+        icon: '👟',
+        options: ['Kebutuhan Pokok', 'Keinginan Tambahan'],
+        correct: 1,
+        explanation: 'Membeli sepatu mahal untuk gengsi adalah Keinginan, utamakan fungsi dan kesederhanaan.'
+      },
+      {
+        item: 'Membayar tagihan air bersih dan listrik untuk kebutuhan penerangan rumah',
+        icon: '💡',
+        options: ['Kebutuhan Pokok', 'Keinginan Tambahan'],
+        correct: 0,
+        explanation: 'Air dan listrik adalah Kebutuhan Pokok sehari-hari keluarga di rumah.'
+      },
+      {
+        item: 'Membeli minuman boba manis berukuran besar setiap pulang sekolah',
+        icon: '🧋',
+        options: ['Kebutuhan Pokok', 'Keinginan Tambahan'],
+        correct: 1,
+        explanation: 'Minuman manis jajan adalah Keinginan tambahan, sebaiknya membawa air putih dari rumah.'
+      },
+      {
+        item: 'Membeli kacamata periksa dokter karena mata buram saat melihat tulisan di papan tulis',
+        icon: '👓',
+        options: ['Kebutuhan Pokok', 'Keinginan Tambahan'],
+        correct: 0,
+        explanation: 'Kacamata medis adalah Kebutuhan Pokok agar proses belajar tidak terganggu.'
       }
     ]
   },
@@ -5992,29 +6218,66 @@ const RBC_GAMES_DATA = {
     subtitle: 'Tentukan apakah pernyataan berikut BENAR atau SALAH berdasarkan pemahaman finansialmu!',
     questions: [
       {
+        visual: `
+          <div class="flex items-center justify-center gap-3 select-none">
+            <div class="w-16 h-16 rounded-full overflow-hidden border shadow"><img src="assets/images/uang/koin-1000-depan.jpg" class="w-full h-full object-cover" alt="Koin Rp1.000"/></div>
+            <span class="text-sm font-black text-slate-400">vs</span>
+            <div class="w-28 rounded-lg overflow-hidden border shadow"><img src="assets/images/uang/kertas-1000.jpg" class="w-full h-auto block" alt="Kertas Rp1.000"/></div>
+          </div>`,
         statement: 'Uang koin Rp1.000 memiliki nilai yang SAMA BESAR dengan selembar uang kertas Rp1.000.',
         isTrue: true,
-        explanation: 'BENAR! Bentuknya boleh berbeda (koin vs kertas), tetapi daya belinya sama persis yaitu Rp1.000.'
+        explanation: 'BENAR! Meskipun bahannya berbeda (logam vs kertas), daya belinya sama persis yaitu Rp1.000.'
       },
       {
         statement: 'Kita sebaiknya menghabiskan seluruh uang saku untuk jajan sampai habis tanpa menyisihkan untuk ditabung.',
         isTrue: false,
-        explanation: 'SALAH! Anak bijak selalu menyisihkan sebagian uang saku ke celengan sebelum jajan.'
+        explanation: 'SALAH! Anak hebat selalu membiasakan diri menyisihkan sebagian uang saku ke celengan terlebih dahulu.'
       },
       {
         statement: 'Mendahulukan membeli buku pelajaran sekolah lebih penting daripada membeli mainan baru.',
         isTrue: true,
-        explanation: 'BENAR! Kebutuhan belajar dan sekolah wajib didahulukan daripada keinginan membeli mainan.'
+        explanation: 'BENAR! Kebutuhan belajar dan pendidikan wajib didahulukan daripada keinginan membeli mainan.'
       },
       {
         statement: 'Kebutuhan adalah sesuatu yang jika tidak terpenuhi tidak akan mengganggu kelangsungan hidup kita.',
         isTrue: false,
-        explanation: 'SALAH! Kebutuhan jika tidak dipenuhi akan mengganggu hidup (seperti makan, minum, pakaian). Itu adalah pengertian keinginan!'
+        explanation: 'SALAH! Kebutuhan pokok jika tidak dipenuhi akan mengganggu hidup (seperti makan, minum, pakaian). Itu adalah pengertian keinginan!'
       },
       {
         statement: 'Menabung uang kembalian belanja di celengan secara rutin akan membuat uang kita terkumpul banyak.',
         isTrue: true,
         explanation: 'BENAR! Seperti pepatah: "Sedikit demi sedikit, lama-lama menjadi bukit!"'
+      },
+      {
+        statement: 'Uang Rupiah adalah alat pembayaran yang sah dan resmi di seluruh wilayah Negara Kesatuan Republik Indonesia.',
+        isTrue: true,
+        explanation: 'BENAR! Berdasarkan undang-undang, mata uang resmi Republik Indonesia adalah Rupiah.'
+      },
+      {
+        statement: 'Membeli barang diskon yang sebenarnya tidak kita butuhkan adalah contoh perilaku hidup hemat.',
+        isTrue: false,
+        explanation: 'SALAH! Membeli barang yang tidak dibutuhkan hanya karena murah atau diskon termasuk pemborosan.'
+      },
+      {
+        statement: 'Merawat fisik uang Rupiah dengan tidak melipat kasar, tidak mencoret, dan tidak menstapler adalah wujud cinta Rupiah.',
+        isTrue: true,
+        explanation: 'BENAR! Gerakan Cinta, Bangga, dan Paham Rupiah mengajak kita merawat fisik uang dengan prinsip 5 Jangan.'
+      },
+      {
+        visual: `
+          <div class="flex items-center justify-center gap-3 select-none">
+            <div class="w-28 rounded-lg overflow-hidden border shadow"><img src="assets/images/uang/kertas-50000.jpg" class="w-full h-auto block" alt="Rp50.000"/></div>
+            <span class="text-xs font-bold text-slate-500">vs</span>
+            <div class="w-28 rounded-lg overflow-hidden border shadow"><img src="assets/images/uang/kertas-20000.jpg" class="w-full h-auto block" alt="Rp20.000"/></div>
+          </div>`,
+        statement: 'Uang kertas Rp50.000 bernilai nominal lebih kecil dibandingkan uang kertas Rp20.000.',
+        isTrue: false,
+        explanation: 'SALAH! Nominal Rp50.000 bernilai lebih besar dua setengah kali lipat daripada Rp20.000.'
+      },
+      {
+        statement: 'Membuat catatan daftar belanja sebelum pergi ke pasar dapat membantu kita terhindar dari pemborosan.',
+        isTrue: true,
+        explanation: 'BENAR! Catatan belanja membantu kita fokus membeli barang kebutuhan pokok yang memang diperlukan.'
       }
     ]
   }
@@ -6031,10 +6294,10 @@ function renderGameView() {
     <div class="space-y-6 sm:space-y-8 animate-fade-in">
       <div class="rounded-3xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 p-4 sm:p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
         <div class="space-y-2 text-center md:text-left">
-          <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">🌟 Bermain Sambil Belajar • 5 Game Interaktif</span>
+          <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">🌟 Bermain Sambil Belajar • 5 Game Edukasi (10 Soal per Game)</span>
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-black mt-2">Pojok Game Edukasi Ceria</h1>
           <p class="text-emerald-100 text-sm md:text-base font-medium max-w-xl">
-            Asah ketangkasan, logika uang, dan kebijaksanaan belanjamu lewat 5 permainan seru multi-level di bawah ini!
+            Kenali uang asli Rupiah, asah matematika belanja, dan uji pemahaman finansialmu lewat 10 tantangan seru di setiap game!
           </p>
         </div>
         <div class="flex-shrink-0">
@@ -6046,7 +6309,7 @@ function renderGameView() {
       <div class="flex sm:grid sm:grid-cols-5 gap-2 sm:gap-3 overflow-x-auto pb-2 no-scrollbar" id="game-selector-tabs">
         <button onclick="switchGameView('tebak')" class="flex-shrink-0 min-w-[110px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-emerald-500 bg-emerald-500 text-white shadow-sm flex flex-col items-center gap-1 transition-all">
           <span class="text-xl">🖼️</span>
-          <span>1. Tebak Gambar</span>
+          <span>1. Tebak Uang Asli</span>
         </button>
         <button onclick="switchGameView('susun')" class="flex-shrink-0 min-w-[110px] sm:min-w-0 p-2.5 sm:p-3 rounded-2xl font-bold text-xs border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 shadow-sm flex flex-col items-center gap-1 transition-all">
           <span class="text-xl">🔤</span>
@@ -6103,7 +6366,7 @@ function renderActiveGameContent(gameKey) {
   const currentScore = RBC_GAME_STATE.scores[gameKey] || 0;
   const totalQuestions = gameData.questions.length;
 
-  // Completion screen when all 5 questions are done
+  // Completion screen when all 10 questions are done
   if (roundIdx >= totalQuestions) {
     const perfectScore = totalQuestions * 10;
     const isPerfect = currentScore >= perfectScore;
@@ -6114,9 +6377,9 @@ function renderActiveGameContent(gameKey) {
         </div>
         <div class="space-y-1">
           <span class="text-xs font-black uppercase tracking-wider text-amber-600 bg-amber-100 px-3 py-1 rounded-full">Permainan Selesai 🎉</span>
-          <h3 class="text-2xl sm:text-3xl font-black text-slate-800">Hebat! Kamu Menyelesaikan ${gameData.title}!</h3>
+          <h3 class="text-2xl sm:text-3xl font-black text-slate-800">Hebat! Kamu Menyelesaikan 10 Soal ${gameData.title}!</h3>
           <p class="text-slate-600 text-sm max-w-md mx-auto">
-            ${isPerfect ? 'Nilai Sempurna! Pemahaman finansialmu luar biasa hebat, cermat, dan bijak!' : 'Kerja bagus! Teruslah bermain dan belajar untuk menjadi anak hebat yang bijak berbelanja!'}
+            ${isPerfect ? 'Nilai Sempurna 100! Pemahaman finansial dan pengenalan uang Rupiahmu luar biasa cermat!' : 'Kerja bagus! Teruslah bermain dan belajar untuk menjadi anak hebat yang bijak berbelanja!'}
           </p>
         </div>
 
@@ -6167,7 +6430,7 @@ function renderActiveGameContent(gameKey) {
     RBC_GAME_STATE.susunAnswer = [];
     innerGameHtml = `
       <div class="p-4 sm:p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
-        <span class="text-xs font-bold text-purple-700 bg-purple-100 px-3 py-1 rounded-full uppercase">Teka-Teki Kata</span>
+        <span class="text-xs font-bold text-purple-700 bg-purple-100 px-3 py-1 rounded-full uppercase">Teka-Teki Kata ${roundIdx + 1}/10</span>
         <p class="font-bold text-slate-800 text-center text-sm sm:text-base max-w-lg">${q.clue}</p>
         
         <!-- Answer Slots -->
@@ -6208,9 +6471,7 @@ function renderActiveGameContent(gameKey) {
   } else if (gameKey === 'matematika') {
     innerGameHtml = `
       <div class="p-4 sm:p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
-        <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-3xl shadow-xs">
-          🧮
-        </div>
+        ${q.visual ? q.visual : '<div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-3xl shadow-xs">🧮</div>'}
         <p class="font-bold text-slate-800 text-center text-sm sm:text-base max-w-md leading-relaxed">${q.scenario}</p>
         <span class="text-xs text-slate-500 font-medium">💡 ${q.hint}</span>
         <div id="game-options-grid" class="grid grid-cols-2 gap-3 w-full max-w-md pt-2">
@@ -6248,9 +6509,7 @@ function renderActiveGameContent(gameKey) {
   } else if (gameKey === 'benarsalah') {
     innerGameHtml = `
       <div class="p-4 sm:p-6 bg-slate-50 rounded-2xl flex flex-col items-center space-y-4">
-        <div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-3xl shadow-xs">
-          ⚖️
-        </div>
+        ${q.visual ? q.visual : '<div class="w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-3xl shadow-xs">⚖️</div>'}
         <div class="text-center space-y-1 max-w-md">
           <span class="text-[11px] font-bold text-indigo-700 uppercase tracking-wider block">Pernyataan Finansial:</span>
           <p class="font-bold text-slate-800 text-sm sm:text-base leading-snug">"${q.statement}"</p>
@@ -6281,7 +6540,7 @@ function renderActiveGameContent(gameKey) {
           <div class="w-28 sm:w-36 bg-slate-200 rounded-full h-2.5 overflow-hidden">
             <div class="bg-emerald-500 h-2.5 rounded-full transition-all duration-300" style="width: ${progressPercent}%;"></div>
           </div>
-          <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-900 font-black text-xs shadow-xs">⭐ ${currentScore} Poin</span>
+          <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-900 font-black text-xs shadow-xs">⭐ ${currentScore} / ${totalQuestions * 10} Poin</span>
         </div>
       </div>
 
