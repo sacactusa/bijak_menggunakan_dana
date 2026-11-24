@@ -169,6 +169,9 @@ const AppState = {
   // Diskusi Padlet
   padletPosts: JSON.parse(localStorage.getItem('rbc_padlet_posts') || '[]'),
 
+  // Diskusi Bersama Tahap I
+  diskusiBersama: JSON.parse(localStorage.getItem('rbc_diskusi_bersama') || 'null'),
+
   // Refleksi Siswa & Tema Sertifikat ('emas' | 'merah' | 'biru')
   reflection: _hasValidSessionStudent ? JSON.parse(localStorage.getItem('rbc_student_reflection') || '{}') : {},
   certTheme: ['merah', 'biru'].includes(localStorage.getItem('rbc_cert_theme')) ? localStorage.getItem('rbc_cert_theme') : 'emas',
@@ -187,6 +190,7 @@ const AppState = {
     localStorage.setItem('rbc_completed_stages', JSON.stringify(this.completedStages));
     localStorage.setItem('rbc_badges', JSON.stringify(this.unlockedBadges));
     localStorage.setItem('rbc_padlet_posts', JSON.stringify(this.padletPosts));
+    localStorage.setItem('rbc_diskusi_bersama', JSON.stringify(this.diskusiBersama));
     localStorage.setItem('rbc_student_reflection', JSON.stringify(this.reflection));
     localStorage.setItem('rbc_niza_wallet', this.nizaWallet);
     localStorage.setItem('rbc_name_confirmed', 'true');
@@ -550,9 +554,9 @@ function switchTab(tabId) {
   document.querySelectorAll('.nav-link').forEach(btn => {
     const target = btn.getAttribute('data-tab');
     if (target === tabId) {
-      btn.className = 'nav-link px-3.5 py-1.5 sm:py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 bg-amber-400 text-slate-900 border border-amber-500 shadow-sm transform scale-105';
+      btn.className = 'nav-link px-3 py-1.5 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 flex-shrink-0 bg-amber-400 text-slate-950 border border-amber-500 shadow-xs ring-2 ring-amber-300/60';
     } else {
-      btn.className = 'nav-link px-3 py-1.5 sm:py-2 rounded-2xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-amber-50 hover:border-amber-300 hover:text-amber-900 shadow-2xs';
+      btn.className = 'nav-link px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 flex-shrink-0 bg-white border border-slate-200 text-slate-700 hover:bg-amber-50 hover:border-amber-300 hover:text-amber-900 shadow-2xs';
     }
   });
 
@@ -4119,15 +4123,102 @@ function renderTahapIView() {
         </div>
       </div>
 
-      <!-- 5. KOLOM DISKUSI / REFLEKSI (Urutan #5) -->
+      <!-- 5. KESIMPULAN BERSAMA (Urutan #5) -->
       <div class="card-pastel p-6 border-2 border-indigo-200">
-        <h3 class="font-bold text-slate-800 text-base mb-2">💬 Kesimpulan Bersama</h3>
+        <h3 class="font-bold text-slate-800 text-base mb-2 flex items-center gap-2">
+          <span>💬</span> Kesimpulan Bersama
+        </h3>
         <p class="text-slate-600 text-sm leading-relaxed mb-4">
-          Sekarang kita semua paham bahwa uang adalah alat tukar yang berharga. Kita harus pintar mendahulukan kebutuhan dan menyisihkan uang saku untuk menabung!
+          Sekarang kita semua paham bahwa uang adalah alat tukar yang berharga. Kita harus pintar mendahulukan kebutuhan dan menyisihkan uang saku untuk menabung di celengan!
         </p>
-        <button onclick="switchTab('kuis')" class="btn-playful w-full sm:w-auto px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 shadow-md">
-          <span>Uji Pemahamanmu di Kuis Interaktif 🎯</span>
-        </button>
+
+        ${AppState.quizCompleted ? `
+          <div class="p-3.5 rounded-2xl bg-emerald-50 border-2 border-emerald-300 text-emerald-950 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-2">
+            <div class="flex items-center gap-2 text-xs sm:text-sm font-bold">
+              <span class="text-xl">🎉</span>
+              <span>Kuis Interaktif Telah Dikerjakan! Skor: <strong>${Math.round((AppState.quizScore / RBC_DATA.quizQuestions.length) * 100)}</strong> / 100</span>
+            </div>
+            <button onclick="switchTab('kuis')" class="btn-playful px-3.5 py-1.5 rounded-xl bg-emerald-200 hover:bg-emerald-300 text-emerald-900 text-xs font-black transition-colors shadow-2xs">
+              Ulangi Kuis ↗
+            </button>
+          </div>
+        ` : `
+          <button onclick="switchTab('kuis')" class="btn-playful w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 shadow-md">
+            <span>Uji Pemahamanmu di Kuis Interaktif 🎯</span>
+          </button>
+        `}
+      </div>
+
+      <!-- 6. RUANG DISKUSI BERSAMA (Di Bawah Kesimpulan Bersama Sesuai Permintaan Revisi) -->
+      <div class="card-pastel p-6 md:p-8 border-2 border-purple-200 space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-purple-100">
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-2xl bg-purple-100 text-purple-800 flex items-center justify-center text-xl shadow-xs">💬</span>
+            <div>
+              <span class="text-xs font-bold uppercase text-purple-600 tracking-wider">Aktivitas Kolaborasi Belajar</span>
+              <h3 class="text-xl md:text-2xl font-bold text-slate-800">Diskusi Bersama: Berbagi Pendapat &amp; Pengalaman</h3>
+            </div>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-purple-100 text-purple-900 text-xs font-black border border-purple-200">
+            👥 Ruang Diskusi Siswa Ceria
+          </span>
+        </div>
+
+        <p class="text-slate-600 text-sm leading-relaxed font-medium">
+          Setelah menyimak kesimpulan bersama mengenai uang dan pengelolaannya, mari kita saling berbagi pendapat dan pengalaman belajar! Tuliskan caramu menabung di celengan atau bagaimana caramu mendahulukan kebutuhan daripada keinginan:
+        </p>
+
+        <!-- Form Input Diskusi Bersama -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-purple-50 via-pink-50 to-amber-50 border-2 border-purple-200 space-y-3.5">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="text-xs font-bold text-purple-950 flex items-center gap-1.5">
+              <span>✍️</span> Tulis Pendapatmu (<strong class="text-purple-700">${escapeHtmlText(AppState.studentName)}</strong>):
+            </span>
+            <span class="text-[10px] text-purple-800 font-bold bg-white px-2.5 py-0.5 rounded-full border border-purple-200 shadow-2xs">
+              ⭐ +10 Poin &amp; +2 Bintang
+            </span>
+          </div>
+
+          <!-- Pilihan Topik Cepat -->
+          <div class="flex flex-wrap items-center gap-1.5 text-xs">
+            <span class="text-[11px] text-slate-500 font-bold">Topik Cepat:</span>
+            <button type="button" onclick="setDiskusiPrompt('Tips menabung di celengan ayam')" class="px-2.5 py-1 rounded-xl bg-white hover:bg-purple-100 text-purple-800 text-[11px] font-bold border border-purple-200 shadow-2xs transition-colors">
+              🐷 Tips Menabung
+            </button>
+            <button type="button" onclick="setDiskusiPrompt('Cara membedakan kebutuhan dan keinginan')" class="px-2.5 py-1 rounded-xl bg-white hover:bg-amber-100 text-amber-900 text-[11px] font-bold border border-amber-200 shadow-2xs transition-colors">
+              ⚖️ Kebutuhan vs Keinginan
+            </button>
+            <button type="button" onclick="setDiskusiPrompt('Rencana belanja bijak uang saku')" class="px-2.5 py-1 rounded-xl bg-white hover:bg-emerald-100 text-emerald-900 text-[11px] font-bold border border-emerald-200 shadow-2xs transition-colors">
+              💰 Belanja Bijak
+            </button>
+          </div>
+
+          <div class="space-y-2">
+            <textarea
+              id="diskusi-input-text"
+              rows="3"
+              placeholder="Tuliskan pendapat atau pengalamanmu di sini... (contoh: Menurut saya, kita harus selalu menyisihkan uang saku untuk ditabung di celengan ayam...)"
+              class="w-full p-3 rounded-xl border-2 border-purple-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 focus:outline-none text-xs sm:text-sm font-semibold text-slate-800 bg-white placeholder:text-slate-400 placeholder:font-normal"
+            ></textarea>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span id="diskusi-alert-msg" class="text-xs font-bold text-rose-600 hidden"></span>
+              <button type="button" onclick="submitDiskusiBersama()" class="btn-playful ml-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-700 hover:to-indigo-800 text-white font-black text-xs sm:text-sm flex items-center gap-1.5 shadow-md shadow-purple-200">
+                <span>🚀 Kirim Pendapat ke Forum Diskusi</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daftar Komentar Pendapat Teman -->
+        <div class="space-y-3 pt-2">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-600 px-1">
+            <span>Daftar Pendapat Teman Belajar:</span>
+            <span class="text-purple-700 font-bold">💬 Saling Menghargai &amp; Santun</span>
+          </div>
+          <div id="diskusi-posts-container" class="space-y-3">
+            <!-- Rendered by renderDiskusiPosts() -->
+          </div>
+        </div>
       </div>
 
       <!-- Navigation Buttons -->
@@ -4143,7 +4234,165 @@ function renderTahapIView() {
   `;
 }
 
-function initTahapIView() {}
+function getDefaultDiskusiPosts() {
+  return [
+    {
+      id: 'diskusi-1',
+      nama: 'Bima Santoso',
+      role: 'Siswa Kelas 3',
+      waktu: 'Baru saja',
+      opini: 'Kalau saya dapat uang saku Rp 5.000, saya jajan Rp 3.000 untuk beli roti di kantin sekolah, lalu Rp 2.000 sisanya langsung saya tabung di celengan ayam di kamar!',
+      kategori: '🐷 Tips Menabung',
+      likes: 6
+    },
+    {
+      id: 'diskusi-2',
+      nama: 'Siti Rahmawati',
+      role: 'Siswa Kelas 3',
+      waktu: '12 menit lalu',
+      opini: 'Kemarin waktu diajak ke toko mainan, saya ingat nasihat bu guru untuk utamakan kebutuhan. Jadi saya pilih beli buku gambar dan pensil warna untuk tugas sekolah.',
+      kategori: '⚖️ Kebutuhan vs Keinginan',
+      likes: 9
+    },
+    {
+      id: 'diskusi-3',
+      nama: 'Alif Pratama',
+      role: 'Siswa Kelas 3',
+      waktu: '25 menit lalu',
+      opini: 'Belanja bijak itu membuat daftar barang kebutuhan terlebih dahulu sebelum berangkat belanja. Dengan begitu kita tidak lapar mata dan uangnya aman!',
+      kategori: '💰 Belanja Bijak',
+      likes: 7
+    }
+  ];
+}
+
+function initTahapIView() {
+  if (!AppState.diskusiBersama || !Array.isArray(AppState.diskusiBersama) || AppState.diskusiBersama.length === 0) {
+    AppState.diskusiBersama = getDefaultDiskusiPosts();
+  }
+  renderDiskusiPosts();
+}
+
+function renderDiskusiPosts() {
+  const container = document.getElementById('diskusi-posts-container');
+  if (!container) return;
+
+  const posts = AppState.diskusiBersama || [];
+  if (posts.length === 0) {
+    container.innerHTML = `
+      <div class="p-6 text-center text-slate-500 bg-white rounded-2xl border border-dashed border-purple-200">
+        <p class="text-xs font-semibold">Belum ada opini yang masuk. Jadilah yang pertama berpendapat!</p>
+      </div>
+    `;
+    return;
+  }
+
+  const countEl = document.getElementById('diskusi-count');
+  if (countEl) countEl.innerText = posts.length;
+
+  container.innerHTML = posts.map(post => {
+    const isMe = normalizeStudentKey(post.nama) === normalizeStudentKey(AppState.studentName);
+    const initial = (post.nama || 'S').trim().charAt(0).toUpperCase();
+
+    return `
+      <div class="p-4 rounded-2xl bg-white border border-purple-100 shadow-xs space-y-2.5 transition-all hover:border-purple-300">
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-indigo-500 text-white font-black text-xs flex items-center justify-center flex-shrink-0 shadow-2xs">
+              ${initial}
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="font-bold text-xs text-slate-800 truncate">${escapeHtmlText(post.nama)}</span>
+                ${isMe ? '<span class="px-2 py-0.2 rounded-full bg-purple-100 text-purple-900 text-[9.5px] font-black">Saya</span>' : ''}
+              </div>
+              <span class="text-[10px] text-slate-400 font-medium">${post.role || 'Siswa Kelas 3'} • ${post.waktu || 'Baru saja'}</span>
+            </div>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-800 text-[10px] font-bold border border-purple-200 flex-shrink-0">
+            ${escapeHtmlText(post.kategori || '💬 Opini')}
+          </span>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium pl-10">
+          "${escapeHtmlText(post.opini)}"
+        </p>
+
+        <div class="flex items-center justify-between pt-1 border-t border-slate-100 pl-10 text-xs">
+          <span class="text-[10px] text-slate-400 font-medium">Komentar Pembelajaran</span>
+          <button type="button" onclick="likeDiskusiPost('${post.id}')" class="btn-playful inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-800 text-xs font-bold transition-colors">
+            <span>❤️</span> <span>Suka (${post.likes || 0})</span>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function setDiskusiPrompt(topic) {
+  const input = document.getElementById('diskusi-input-text');
+  if (!input) return;
+  input.value = `[${topic}] Menurut saya, `;
+  input.focus();
+}
+
+async function submitDiskusiBersama() {
+  const input = document.getElementById('diskusi-input-text');
+  const alertEl = document.getElementById('diskusi-alert-msg');
+  if (!input) return;
+
+  const text = input.value.trim();
+  if (text.length < 5) {
+    if (alertEl) {
+      alertEl.innerText = 'Mohon tuliskan pendapatmu minimal 5 karakter ya!';
+      alertEl.classList.remove('hidden');
+    }
+    input.focus();
+    return;
+  }
+
+  if (alertEl) alertEl.classList.add('hidden');
+
+  let kategori = '💬 Pendapat Siswa';
+  if (text.includes('Tips menabung') || text.includes('menabung') || text.includes('celengan')) {
+    kategori = '🐷 Tips Menabung';
+  } else if (text.includes('kebutuhan') || text.includes('keinginan')) {
+    kategori = '⚖️ Kebutuhan vs Keinginan';
+  } else if (text.includes('belanja') || text.includes('uang saku')) {
+    kategori = '💰 Belanja Bijak';
+  }
+
+  const newPost = {
+    id: 'diskusi-' + Date.now(),
+    nama: AppState.studentName && AppState.studentName !== 'Teman Belajar' ? AppState.studentName : 'Siswa Ceria',
+    role: 'Siswa Kelas 3 SD',
+    waktu: 'Baru saja',
+    opini: text,
+    kategori: kategori,
+    likes: 1
+  };
+
+  if (!AppState.diskusiBersama) AppState.diskusiBersama = [];
+  AppState.diskusiBersama.unshift(newPost);
+  localStorage.setItem('rbc_diskusi_bersama', JSON.stringify(AppState.diskusiBersama));
+
+  input.value = '';
+  window.soundManager.playSuccess();
+  AppState.addReward(10, 2, 'Kirim pendapat di Diskusi Bersama!');
+  AppState.showToast('🎉 Pendapatmu berhasil diposting ke Diskusi Bersama! (+10 Poin, +2 Bintang)');
+  renderDiskusiPosts();
+}
+
+function likeDiskusiPost(postId) {
+  if (!AppState.diskusiBersama) return;
+  const post = AppState.diskusiBersama.find(p => String(p.id) === String(postId));
+  if (post) {
+    post.likes = (post.likes || 0) + 1;
+    localStorage.setItem('rbc_diskusi_bersama', JSON.stringify(AppState.diskusiBersama));
+    window.soundManager.playPop();
+    renderDiskusiPosts();
+  }
+}
 
 async function savePenguatanAnswers() {
   const a1 = document.getElementById('penguatan-1')?.value.trim();
@@ -4697,7 +4946,15 @@ function renderCertificateCard(theme = 'emas') {
   const isBlue = theme === 'biru' || theme === 'blue';
   const safeStudentName = escapeHtmlText(AppState.studentName);
   const issueDate = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
-  const devRows = RBC_DATA.appInfo.developers.map(dev => `<span class="block">${dev}</span>`).join('');
+  const devList = (typeof RBC_DATA !== 'undefined' ? RBC_DATA : (window.RBC_DATA || {})).appInfo?.developers || [
+    "Ines Khairunisa",
+    "Nasrun Nurhakim",
+    "Nur Afifah Handayani",
+    "Zidna Syifanadia Impian Pragita Mariannisa"
+  ];
+  const devGrid = devList.map(dev => 
+    `<span class="truncate block text-[10px] sm:text-[11px] font-bold text-slate-800">• ${dev}</span>`
+  ).join('');
 
   let themeCfg;
   if (isBlue) {
@@ -4912,12 +5169,12 @@ function renderCertificateCard(theme = 'emas') {
   }
 
   return `
-    <div id="certificate-print-area" class="certificate-a4-fixed rounded-3xl p-3 sm:p-5 md:p-6 border-4 sm:border-8 ${themeCfg.outerClass} text-center relative overflow-hidden shadow-2xl transition-colors duration-300" style="max-width: 210mm; min-height: 297mm;">
+    <div id="certificate-print-area" class="certificate-a4-fixed rounded-3xl p-3 sm:p-5 md:p-6 border-4 sm:border-8 ${themeCfg.outerClass} text-center relative overflow-hidden shadow-2xl transition-colors duration-300" style="max-width: 297mm; min-height: 210mm; aspect-ratio: 297 / 210;">
       <!-- Strip Pita Dekorasi Sisi Kiri & Kanan -->
       <div class="hidden sm:block absolute inset-y-4 left-1.5 w-1.5 rounded-full opacity-75 ${themeCfg.securityStripClass}" aria-hidden="true"></div>
       <div class="hidden sm:block absolute inset-y-4 right-1.5 w-1.5 rounded-full opacity-75 ${themeCfg.securityStripClass}" aria-hidden="true"></div>
 
-      <div class="relative rounded-2xl border-2 ${themeCfg.innerClass} px-4 pt-12 pb-16 sm:px-8 sm:pt-14 sm:pb-14 md:px-10 overflow-hidden">
+      <div class="relative rounded-2xl border-2 ${themeCfg.innerClass} px-5 sm:px-10 md:px-14 py-4 sm:py-5 md:py-6 overflow-hidden flex flex-col justify-between h-full">
         <!-- Tanda Air Koin Rupiah Lembut di Tengah Belakang -->
         <div class="absolute inset-0 flex items-center justify-center opacity-[0.06] pointer-events-none select-none ${themeCfg.watermarkColor}" aria-hidden="true">
           <svg viewBox="0 0 200 200" class="w-64 h-64 sm:w-80 sm:h-80" fill="none">
@@ -4937,74 +5194,99 @@ function renderCertificateCard(theme = 'emas') {
         ${themeCfg.bottomBanner}
 
         <!-- 4 Dekorasi Sudut Bertema Uang, Emas, Celengan & Dana -->
-        <div class="absolute top-2.5 left-2.5 sm:top-4 sm:left-5 w-8 h-8 sm:w-12 sm:h-12 pointer-events-none select-none" aria-hidden="true">
+        <div class="absolute top-2.5 left-2.5 sm:top-4 sm:left-5 w-8 h-8 sm:w-11 sm:h-11 pointer-events-none select-none" aria-hidden="true">
           ${themeCfg.cornerTopLeft}
         </div>
-        <div class="absolute top-2.5 right-2.5 sm:top-4 sm:right-5 w-8 h-8 sm:w-12 sm:h-12 pointer-events-none select-none" aria-hidden="true">
+        <div class="absolute top-2.5 right-2.5 sm:top-4 sm:right-5 w-8 h-8 sm:w-11 sm:h-11 pointer-events-none select-none" aria-hidden="true">
           ${themeCfg.cornerTopRight}
         </div>
-        <div class="absolute bottom-2.5 left-2.5 sm:bottom-4 sm:left-5 w-8 h-8 sm:w-12 sm:h-12 pointer-events-none select-none" aria-hidden="true">
+        <div class="absolute bottom-2.5 left-2.5 sm:bottom-4 sm:left-5 w-8 h-8 sm:w-11 sm:h-11 pointer-events-none select-none" aria-hidden="true">
           ${themeCfg.cornerBottomLeft}
         </div>
-        <div class="absolute bottom-2.5 right-2.5 sm:bottom-4 sm:right-5 w-8 h-8 sm:w-12 sm:h-12 pointer-events-none select-none" aria-hidden="true">
+        <div class="absolute bottom-2.5 right-2.5 sm:bottom-4 sm:right-5 w-8 h-8 sm:w-11 sm:h-11 pointer-events-none select-none" aria-hidden="true">
           ${themeCfg.cornerBottomRight}
         </div>
 
-        <!-- Dekorasi Samping Kiri & Kanan (Desktop & Cetak) -->
-        <div class="hidden md:flex flex-col gap-3 items-center absolute top-1/2 -translate-y-1/2 left-4 pointer-events-none select-none" aria-hidden="true">
+        <!-- Dekorasi Samping Kiri & Kanan (Desktop & Cetak Landscape) -->
+        <div class="hidden lg:flex flex-col gap-2.5 items-center absolute top-1/2 -translate-y-1/2 left-3 sm:left-5 pointer-events-none select-none" aria-hidden="true">
           ${themeCfg.sideLeftIcons}
         </div>
-        <div class="hidden md:flex flex-col gap-3 items-center absolute top-1/2 -translate-y-1/2 right-4 pointer-events-none select-none" aria-hidden="true">
+        <div class="hidden lg:flex flex-col gap-2.5 items-center absolute top-1/2 -translate-y-1/2 right-3 sm:right-5 pointer-events-none select-none" aria-hidden="true">
           ${themeCfg.sideRightIcons}
         </div>
 
-        <div class="relative z-10 max-w-lg mx-auto space-y-3.5 sm:space-y-4">
-          <!-- Logo UPI Diapit Dekorasi Tema Uang & Celengan -->
-          <div class="flex items-center justify-center gap-3 sm:gap-5 mb-1">
-            ${themeCfg.logoLeftIcon}
-            ${RBC_ICONS.upiLogo('w-16 h-16 sm:w-20 sm:h-20')}
-            ${themeCfg.logoRightIcon}
-          </div>
-
-          <div>${themeCfg.ribbonTag}</div>
-
-          <span class="text-xs font-black tracking-widest uppercase text-red-700 block">UNIVERSITAS PENDIDIKAN INDONESIA - KAMPUS DI CIBIRU</span>
-          <h2 class="text-2xl sm:text-4xl font-black text-slate-800">SERTIFIKAT PENGHARGAAN</h2>
-
-          <div class="flex items-center justify-center gap-2" aria-hidden="true">
-            <span class="h-0.5 w-8 sm:w-14 ${themeCfg.dividerLineClass} rounded-full"></span>
-            ${themeCfg.dividerBadge}
-            <span class="h-0.5 w-8 sm:w-14 ${themeCfg.dividerLineClass} rounded-full"></span>
-          </div>
-
-          <p class="text-[11px] sm:text-xs font-semibold text-slate-500 uppercase tracking-widest">Diberikan Dengan Penuh Rasa Bangga Kepada:</p>
+        <!-- KONTEN UTAMA SERTIFIKAT LANDSCAPE A4 -->
+        <div class="relative z-10 max-w-3xl mx-auto flex flex-col justify-between h-full w-full space-y-2 sm:space-y-3">
           
-          <div class="py-2 ${themeCfg.nameWrapClass}">
-            <h3 id="cert-student-name" class="text-2xl sm:text-3xl font-black ${themeCfg.nameTextClass} font-title">${safeStudentName}</h3>
-          </div>
-
-          <p class="text-slate-600 text-sm leading-relaxed font-medium">
-            Telah berhasil menyelesaikan seluruh tahapan pembelajaran <strong>Model DHETIK</strong> pada materi <em>Bab 5: Bijak Berbelanja Kebutuhan</em>, mengelola uang dan celengan dengan cermat, serta dinobatkan sebagai:
-          </p>
-
-          <div class="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full ${themeCfg.awardPillClass} font-black text-xs sm:text-base">
-            <span class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0">${themeCfg.awardLeftMini}</span>
-            <span>ANAK HEBAT BIJAK BERBELANJA</span>
-            <span class="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0">${themeCfg.awardRightMini}</span>
-          </div>
-
-          <div class="pt-5 grid grid-cols-1 sm:grid-cols-12 gap-4 text-xs font-medium text-slate-500 border-t ${themeCfg.footerBorderClass}">
-            <div class="sm:col-span-5">
-              <span class="block mb-1">Tanggal Terbit:</span>
-              <strong class="text-slate-800">${issueDate}</strong>
+          <!-- Bagian Atas: Logo UPI & Judul Penghargaan -->
+          <div class="space-y-1 sm:space-y-1.5 pt-1">
+            <div class="flex items-center justify-center gap-3 sm:gap-6 mb-0.5">
+              ${themeCfg.logoLeftIcon}
+              ${RBC_ICONS.upiLogo('w-12 h-12 sm:w-16 sm:h-16')}
+              ${themeCfg.logoRightIcon}
             </div>
-            <div class="sm:col-span-7">
-              <span class="block mb-1">Tim Pengembang:</span>
-              <div class="text-slate-800 font-bold leading-relaxed space-y-0.5">
-                ${devRows}
+
+            <div>${themeCfg.ribbonTag}</div>
+
+            <span class="text-[10px] sm:text-xs font-black tracking-widest uppercase text-red-700 block">UNIVERSITAS PENDIDIKAN INDONESIA • KAMPUS DI CIBIRU</span>
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-slate-800 tracking-tight font-title">SERTIFIKAT PENGHARGAAN</h2>
+
+            <div class="flex items-center justify-center gap-2" aria-hidden="true">
+              <span class="h-0.5 w-10 sm:w-20 ${themeCfg.dividerLineClass} rounded-full"></span>
+              ${themeCfg.dividerBadge}
+              <span class="h-0.5 w-10 sm:w-20 ${themeCfg.dividerLineClass} rounded-full"></span>
+            </div>
+          </div>
+
+          <!-- Bagian Tengah: Nama Penerima & Deskripsi Prestasi -->
+          <div class="space-y-1 sm:space-y-2 py-0.5">
+            <p class="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">Diberikan Dengan Penuh Rasa Bangga Kepada:</p>
+            
+            <div class="py-1 ${themeCfg.nameWrapClass} max-w-xl mx-auto">
+              <h3 id="cert-student-name" class="text-2xl sm:text-3xl md:text-4xl font-black ${themeCfg.nameTextClass} font-title tracking-wide">${safeStudentName}</h3>
+            </div>
+
+            <p class="text-slate-600 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed font-medium">
+              Telah berhasil menyelesaikan seluruh tahapan pembelajaran <strong>Model DHETIK</strong> pada materi <em>Bab 5: Bijak Berbelanja Kebutuhan</em>, cermat membedakan kebutuhan dan keinginan, menabung di celengan, serta dinobatkan sebagai:
+            </p>
+
+            <div class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full ${themeCfg.awardPillClass} font-black text-xs sm:text-sm shadow-md mt-1">
+              <span class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0">${themeCfg.awardLeftMini}</span>
+              <span>ANAK HEBAT BIJAK BERBELANJA</span>
+              <span class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0">${themeCfg.awardRightMini}</span>
+            </div>
+          </div>
+
+          <!-- Bagian Bawah: 3 Kolom Seimbang (Tanggal, Stempel Resmi, Tim Pengembang) -->
+          <div class="pt-2 sm:pt-3 border-t ${themeCfg.footerBorderClass} grid grid-cols-12 gap-2 sm:gap-4 items-center text-xs">
+            <!-- Kolom 1: Tanggal Terbit & Status -->
+            <div class="col-span-4 text-left space-y-1 pl-1 sm:pl-3">
+              <span class="block text-[10px] text-slate-500 font-bold uppercase tracking-wider">Tanggal Terbit:</span>
+              <strong class="text-slate-800 text-xs sm:text-sm font-black block">${issueDate}</strong>
+              <span class="text-[10px] text-emerald-800 font-bold bg-emerald-100/90 px-2 py-0.5 rounded-md inline-flex items-center gap-1">
+                <span>✅</span> Terverifikasi Resmi
+              </span>
+            </div>
+
+            <!-- Kolom 2: Stempel Digital Resmi UPI Cibiru 2026 -->
+            <div class="col-span-3 flex flex-col items-center justify-center">
+              <div class="w-13 h-13 sm:w-16 sm:h-16 rounded-full border-2 border-dashed border-red-500/90 p-1 bg-white/90 shadow-2xs flex flex-col items-center justify-center text-center -rotate-6">
+                <span class="text-[8px] font-black text-red-700 uppercase tracking-tighter">UPI CIBIRU</span>
+                <span class="text-xs">⭐</span>
+                <span class="text-[7.5px] font-black text-red-600 tracking-tighter">SAH 2026</span>
+              </div>
+              <span class="text-[9px] text-slate-500 font-semibold mt-0.5">Segel Pembelajaran</span>
+            </div>
+
+            <!-- Kolom 3: Tim Pengembang -->
+            <div class="col-span-5 text-right space-y-1 pr-1 sm:pr-3">
+              <span class="block text-[10px] text-slate-500 font-bold uppercase tracking-wider">Tim Pengembang:</span>
+              <div class="text-slate-800 font-bold text-[10px] sm:text-[11px] leading-tight space-y-0.5">
+                ${devGrid}
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -5398,9 +5680,20 @@ function initVideoView() {}
 function renderKuisView() {
   return `
     <div class="space-y-6 sm:space-y-8 animate-fade-in">
+      <!-- Tombol Navigasi Kembali ke Tahap I (Ikat Konsep) -->
+      <div class="flex items-center justify-between gap-2 pb-1">
+        <button type="button" onclick="switchTab('i')" class="btn-playful inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border-2 border-slate-200 hover:bg-rose-50 hover:border-rose-300 text-slate-800 text-xs font-bold transition-all shadow-2xs">
+          <span>⬅️ Kembali ke Halaman Ikat Konsep (Tahap I)</span>
+        </button>
+        <span class="text-xs text-slate-500 font-semibold hidden sm:inline">Bab 5 • Kuis Evaluasi Interaktif 10 Soal</span>
+      </div>
+
       <div class="rounded-3xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-600 p-4 sm:p-6 md:p-8 text-white shadow-lg flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
         <div class="space-y-2 text-center md:text-left">
-          <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">Uji Pemahaman</span>
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">Uji Pemahaman</span>
+            <span class="text-xs text-amber-100 font-semibold hidden md:inline">Terhubung dari Tahap I</span>
+          </div>
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-black mt-2">Kuis Interaktif IPAS Kelas 3 SD</h1>
           <p class="text-amber-100 text-sm md:text-base font-medium max-w-xl">
             Jawab 10 soal pilihan ganda tentang uang rupiah dan bijak berbelanja untuk mendapatkan Bintang & Skor Tertinggi!
@@ -5465,11 +5758,11 @@ function renderCurrentQuizQuestion() {
           ${score >= 80 ? 'Kamu sudah memahami materi jenis uang, fungsi uang, dan bijak berbelanja dengan sangat baik!' : 'Jangan menyerah! Kamu bisa mengulang kuis untuk mendapatkan nilai 100!'}
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 pt-4">
-          <button onclick="initKuisView()" class="btn-playful w-full sm:w-auto px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl text-sm flex items-center justify-center gap-2">
-            🔄 Ulangi Kuis
+          <button onclick="switchTab('i')" class="btn-playful w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 hover:from-rose-600 hover:to-pink-700 text-white font-black rounded-2xl text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-rose-200">
+            <span>⬅️ Kembali ke Halaman Ikat Konsep (Tahap I)</span>
           </button>
-          <button onclick="switchTab('beranda')" class="btn-playful w-full sm:w-auto px-6 py-3 bg-white border-2 border-slate-200 text-slate-700 font-bold rounded-2xl text-sm flex items-center justify-center gap-2">
-            Kembali ke Materi
+          <button onclick="initKuisView()" class="btn-playful w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-2xl text-sm flex items-center justify-center gap-2 shadow-md">
+            <span>🔄 Ulangi Kuis</span>
           </button>
         </div>
       </div>
@@ -5517,6 +5810,13 @@ function renderCurrentQuizQuestion() {
         <button onclick="nextQuizQuestion()" class="btn-playful w-full sm:w-auto px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2">
           <span>Soal Selanjutnya ➔</span>
         </button>
+      </div>
+
+      <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
+        <button type="button" onclick="switchTab('i')" class="text-rose-600 hover:text-rose-800 font-bold hover:underline flex items-center gap-1">
+          <span>⬅️ Kembali ke Halaman Ikat Konsep</span>
+        </button>
+        <span class="text-slate-400 font-medium">Pilih salah satu jawaban yang benar</span>
       </div>
     </div>
   `;
