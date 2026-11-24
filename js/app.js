@@ -4960,9 +4960,6 @@ function renderCertificateCard(theme = 'emas') {
     "Nur Afifah Handayani",
     "Zidna Syifanadia Impian Pragita Mariannisa"
   ];
-  const devGrid = devList.map(dev => 
-    `<span class="truncate block text-[10px] sm:text-[11px] font-bold text-slate-800">• ${dev}</span>`
-  ).join('');
 
   let themeCfg;
   if (isBlue) {
@@ -5228,20 +5225,24 @@ function renderCertificateCard(theme = 'emas') {
           
           <!-- Bagian Atas: Logo UPI & Judul Penghargaan -->
           <div class="space-y-1 sm:space-y-1.5 pt-1">
-            <div class="flex items-center justify-center gap-3 sm:gap-6 mb-0.5">
+            <div class="flex items-center justify-center gap-3 sm:gap-6 mb-1">
               ${themeCfg.logoLeftIcon}
-              ${RBC_ICONS.upiLogo('w-12 h-12 sm:w-16 sm:h-16')}
+              <div class="rounded-full bg-white p-1.5 shadow-md border-2 border-red-200 ring-2 ring-amber-200/60 inline-flex items-center justify-center flex-shrink-0" style="width: 3cm; height: 3cm; min-width: 3cm; min-height: 3cm;">
+                <img src="assets/images/logo.png" alt="Logo UPI" class="w-full h-full object-contain" />
+              </div>
               ${themeCfg.logoRightIcon}
             </div>
 
-            <div>${themeCfg.ribbonTag}</div>
+            <div class="space-y-0.5">
+              <span class="text-xs sm:text-sm font-black tracking-widest uppercase text-red-700 block font-title">UNIVERSITAS PENDIDIKAN INDONESIA</span>
+              <span class="text-[11px] sm:text-xs font-black tracking-wider uppercase text-slate-700 block">KAMPUS UPI CIBIRU</span>
+            </div>
 
-            <span class="text-[10px] sm:text-xs font-black tracking-widest uppercase text-red-700 block">UNIVERSITAS PENDIDIKAN INDONESIA • KAMPUS DI CIBIRU</span>
-            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-slate-800 tracking-tight font-title">SERTIFIKAT PENGHARGAAN</h2>
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-black text-slate-800 tracking-tight font-title mt-1">SERTIFIKAT PENGHARGAAN</h2>
 
             <div class="flex items-center justify-center gap-2" aria-hidden="true">
               <span class="h-0.5 w-10 sm:w-20 ${themeCfg.dividerLineClass} rounded-full"></span>
-              ${themeCfg.dividerBadge}
+              ${themeCfg.ribbonTag}
               <span class="h-0.5 w-10 sm:w-20 ${themeCfg.dividerLineClass} rounded-full"></span>
             </div>
           </div>
@@ -5265,32 +5266,24 @@ function renderCertificateCard(theme = 'emas') {
             </div>
           </div>
 
-          <!-- Bagian Bawah: 3 Kolom Seimbang (Tanggal, Stempel Resmi, Tim Pengembang) -->
-          <div class="pt-2 sm:pt-3 border-t ${themeCfg.footerBorderClass} grid grid-cols-12 gap-2 sm:gap-4 items-center text-xs">
-            <!-- Kolom 1: Tanggal Terbit & Status -->
-            <div class="col-span-4 text-left space-y-1 pl-1 sm:pl-3">
-              <span class="block text-[10px] text-slate-500 font-bold uppercase tracking-wider">Tanggal Terbit:</span>
+          <!-- Bagian Bawah: Tanggal Terbit & Tim Pengembang -->
+          <div class="pt-2 sm:pt-3 border-t ${themeCfg.footerBorderClass} flex flex-col sm:flex-row items-center justify-between gap-3 text-xs px-2 sm:px-4">
+            <!-- Kolom 1: Tanggal Terbit Saja (Tanpa Terverifikasi Resmi) -->
+            <div class="text-left space-y-0.5">
+              <span class="block text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider">Tanggal Terbit:</span>
               <strong class="text-slate-800 text-xs sm:text-sm font-black block">${issueDate}</strong>
-              <span class="text-[10px] text-emerald-800 font-bold bg-emerald-100/90 px-2 py-0.5 rounded-md inline-flex items-center gap-1">
-                <span>✅</span> Terverifikasi Resmi
-              </span>
             </div>
 
-            <!-- Kolom 2: Stempel Digital Resmi UPI Cibiru 2026 -->
-            <div class="col-span-3 flex flex-col items-center justify-center">
-              <div class="w-13 h-13 sm:w-16 sm:h-16 rounded-full border-2 border-dashed border-red-500/90 p-1 bg-white/90 shadow-2xs flex flex-col items-center justify-center text-center -rotate-6">
-                <span class="text-[8px] font-black text-red-700 uppercase tracking-tighter">UPI CIBIRU</span>
-                <span class="text-xs">⭐</span>
-                <span class="text-[7.5px] font-black text-red-600 tracking-tighter">SAH 2026</span>
-              </div>
-              <span class="text-[9px] text-slate-500 font-semibold mt-0.5">Segel Pembelajaran</span>
-            </div>
-
-            <!-- Kolom 3: Tim Pengembang -->
-            <div class="col-span-5 text-right space-y-1 pr-1 sm:pr-3">
-              <span class="block text-[10px] text-slate-500 font-bold uppercase tracking-wider">Tim Pengembang:</span>
-              <div class="text-slate-800 font-bold text-[10px] sm:text-[11px] leading-tight space-y-0.5">
-                ${devGrid}
+            <!-- Kolom 2: Tim Pengembang Dirapihkan (Grid 2 Kolom Bersih) -->
+            <div class="text-left sm:text-right space-y-1">
+              <span class="block text-[10px] sm:text-[11px] text-slate-500 font-bold uppercase tracking-wider">Tim Pengembang:</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-1 text-left bg-white/85 backdrop-blur-xs px-3.5 py-1.5 rounded-xl border border-slate-200/90 shadow-2xs">
+                ${devList.map(dev => `
+                  <div class="text-[10px] sm:text-[11px] font-bold text-slate-800 flex items-center gap-1.5 leading-snug">
+                    <span class="w-1.5 h-1.5 rounded-full bg-red-600 flex-shrink-0"></span>
+                    <span class="whitespace-nowrap sm:whitespace-normal">${dev}</span>
+                  </div>
+                `).join('')}
               </div>
             </div>
           </div>
