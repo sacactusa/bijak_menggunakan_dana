@@ -151,6 +151,15 @@ const RBC_DATA = {
   // Videos Data
   videos: [
     {
+      id: "vid-panduan",
+      title: "Video Panduan Pembelajaran Ruang Belajar Ceria",
+      category: "Panduan Belajar",
+      youtubeId: "gAToM7rFPMY",
+      url: "https://youtube.com/watch?v=gAToM7rFPMY&feature=shared",
+      duration: "Panduan",
+      desc: "Panduan lengkap penggunaan media pembelajaran digital Ruang Belajar Ceria berbasis Model DHETIK untuk siswa sekolah dasar."
+    },
+    {
       id: "vid-coin",
       title: "Mengenal Uang Koin / Logam Rupiah",
       category: "Tahap D - Dekatkan",

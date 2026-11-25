@@ -813,6 +813,39 @@ function renderBerandaView() {
         </div>
       </section>
 
+      <!-- Video Panduan Pembelajaran (Sebelum Tujuan Pembelajaran) -->
+      <section class="card-pastel p-4 sm:p-6 md:p-8 border-2 border-amber-200 bg-gradient-to-br from-amber-50/70 via-yellow-50/40 to-sky-50/70 shadow-md space-y-4 sm:space-y-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 pb-3 sm:pb-4 border-b border-amber-200/70">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-amber-400 to-yellow-400 text-white flex items-center justify-center text-xl sm:text-2xl font-bold flex-shrink-0 shadow-sm">
+              🎬
+            </div>
+            <div>
+              <span class="text-[10px] sm:text-xs font-bold text-amber-700 uppercase tracking-wider block">Panduan Penggunaan Media</span>
+              <h2 class="text-xl sm:text-2xl font-black text-slate-800">Video Panduan Belajar</h2>
+            </div>
+          </div>
+          <span class="px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 text-[11px] sm:text-xs font-bold flex items-center gap-1.5 shadow-2xs">
+            <span>📺</span> Tonton Sebelum Belajar
+          </span>
+        </div>
+
+        <p class="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed font-medium">
+          Ayo simak video panduan di bawah ini untuk memahami alur belajar, menjelajahi setiap tahap Model DHETIK, dan memanfaatkan seluruh fitur ceria yang ada:
+        </p>
+
+        <div class="max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-slate-900 ring-2 ring-amber-200/80">
+          <div class="video-responsive">
+            <iframe 
+              src="https://www.youtube.com/embed/gAToM7rFPMY" 
+              title="Video Panduan Pembelajaran Ruang Belajar Ceria" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
       <!-- Learning Objectives Accordion & Info -->
       <section class="card-pastel p-4 sm:p-6 md:p-8 border-2 border-sky-100">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
