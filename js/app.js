@@ -7046,6 +7046,24 @@ function renderTentangView() {
         </p>
       </div>
 
+      <!-- Dosen Pengampu & Pembimbing -->
+      <div class="card-pastel p-6 md:p-8 border-2 border-amber-200 bg-gradient-to-br from-amber-50/80 via-yellow-50/50 to-orange-50/60 shadow-sm space-y-3">
+        <div class="flex items-center gap-3 pb-3 border-b border-amber-200">
+          <span class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-yellow-400 text-white flex items-center justify-center text-2xl shadow-sm">👨‍🏫</span>
+          <div>
+            <span class="text-xs font-bold uppercase text-amber-800 tracking-wider">Dosen Pengampu Mata Kuliah</span>
+            <h2 class="text-xl sm:text-2xl font-black text-slate-900">Dr. Dede Trie Kurniawan, S.Si., M.Pd.</h2>
+          </div>
+        </div>
+        <div class="text-xs sm:text-sm text-slate-700 space-y-1">
+          <p class="font-bold text-slate-800">Universitas Pendidikan Indonesia (UPI) — Kampus di Cibiru</p>
+          <p class="text-slate-600">Program Studi Pendidikan Guru Sekolah Dasar (PGSD)</p>
+          <p class="text-slate-500 text-xs flex items-center gap-1.5 pt-1">
+            <span>📍</span> <span>Jl. Pendidikan No. 15, Cibiru Wetan, Kec. Cileunyi, Kabupaten Bandung, Jawa Barat 40625</span>
+          </p>
+        </div>
+      </div>
+
       <!-- Tim Pengembang -->
       <div class="card-pastel p-6 md:p-8 border-2 border-sky-100">
         <div class="flex items-center gap-3 mb-6">
@@ -7058,13 +7076,13 @@ function renderTentangView() {
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           ${RBC_DATA.appInfo.developers.map((dev, idx) => `
-            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3">
+            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3 hover:border-sky-300 transition-colors">
               <span class="w-10 h-10 rounded-full bg-sky-200 text-sky-900 font-bold text-sm flex items-center justify-center flex-shrink-0">
                 ${idx + 1}
               </span>
               <div>
                 <h4 class="font-bold text-slate-800 text-sm md:text-base">${dev}</h4>
-                <p class="text-xs text-slate-500">PGSD Kampus UPI di Cibiru</p>
+                <p class="text-xs text-slate-500">Mahasiswa PGSD Kampus UPI di Cibiru</p>
               </div>
             </div>
           `).join('')}
@@ -7166,7 +7184,7 @@ function renderKontakView() {
             <div class="text-xs text-slate-600 space-y-2 leading-relaxed">
               <p><strong>Universitas Pendidikan Indonesia (UPI)</strong></p>
               <p>Kampus Daerah di Cibiru - Program Studi PGSD</p>
-              <p>Jl. Mayor Abdurachman No. 211, Sumedang / Cibiru, Jawa Barat</p>
+              <p>Jl. Pendidikan No. 15, Cibiru Wetan, Kec. Cileunyi, Kabupaten Bandung, Jawa Barat 40625</p>
             </div>
             
             <div class="pt-3 border-t border-slate-100 text-xs space-y-2">
@@ -7179,14 +7197,21 @@ function renderKontakView() {
             </div>
           </div>
 
-          <div class="card-pastel p-6 border-2 border-amber-100 space-y-2">
-            <h4 class="font-bold text-slate-800 text-sm">Tim Pengembang:</h4>
-            <ul class="text-xs text-slate-600 space-y-1 list-disc pl-4">
-              <li>Ines Khairunisa</li>
-              <li>Nasrun Nurhakim</li>
-              <li>Nur Afifah Handayani</li>
-              <li>Zidna Syifanadia Impian Pragita Mariannisa</li>
-            </ul>
+          <div class="card-pastel p-6 border-2 border-amber-100 space-y-3">
+            <div>
+              <span class="text-[10px] font-bold text-amber-800 uppercase tracking-wider block">Dosen Pengampu:</span>
+              <h4 class="font-black text-slate-800 text-sm">Dr. Dede Trie Kurniawan, S.Si., M.Pd.</h4>
+              <p class="text-[11px] text-slate-500">Dosen Pengampu PGSD Kampus UPI di Cibiru</p>
+            </div>
+            <div class="pt-2 border-t border-amber-200/60">
+              <span class="text-[10px] font-bold text-amber-800 uppercase tracking-wider block mb-1">Tim Pengembang Mahasiswa:</span>
+              <ul class="text-xs text-slate-600 space-y-1 list-disc pl-4">
+                <li>Ines Khairunisa</li>
+                <li>Nasrun Nurhakim</li>
+                <li>Nur Afifah Handayani</li>
+                <li>Zidna Syifanadia Impian Pragita Mariannisa</li>
+              </ul>
+            </div>
           </div>
         </div>
 

@@ -11,6 +11,8 @@ const RBC_DATA = {
     topic: "Bab 5: Bijak Berbelanja Kebutuhan",
     institution: "Universitas Pendidikan Indonesia - Kampus UPI di Cibiru",
     program: "PGSD UPI CIBIRU 2026 (#dHeTik)",
+    address: "Jl. Pendidikan No. 15, Cibiru Wetan, Kec. Cileunyi, Kabupaten Bandung, Jawa Barat 40625",
+    lecturer: "Dr. Dede Trie Kurniawan, S.Si., M.Pd.",
     developers: [
       "Ines Khairunisa",
       "Nasrun Nurhakim",
