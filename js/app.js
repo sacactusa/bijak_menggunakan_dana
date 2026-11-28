@@ -898,30 +898,14 @@ function renderBerandaView() {
         </div>
       </section>
 
-      <!-- LKPD Digital Preview Highlight -->
-      <section class="p-5 sm:p-8 rounded-3xl bg-gradient-to-r from-violet-100 via-fuchsia-50 to-pink-100 border-3 border-violet-200">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
-          <div class="lg:col-span-7 space-y-3 sm:space-y-4">
-            <span class="px-3.5 py-1 rounded-full bg-violet-200 text-violet-900 text-xs font-bold uppercase">
-              Lembar Kerja Interaktif
-            </span>
-            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800">LKPD IPAS Digital Kelas 3 SD</h2>
-            <p class="text-slate-600 leading-relaxed text-sm md:text-base font-medium">
-              Kerjakan aktivitas menarik seperti mengelompokkan uang rupiah, misi belanja kantin, dan detektif kebutuhan vs keinginan langsung di website ini!
-            </p>
-            <div class="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3 pt-2">
-              <button onclick="switchTab('e')" class="btn-playful w-full sm:w-auto px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-2xl text-sm flex items-center justify-center gap-2">
-                <span>Buka LKPD di Tahap Eksplorasi ➔</span>
-              </button>
-              <button onclick="switchTab('kuis')" class="btn-playful w-full sm:w-auto px-5 py-3 bg-white text-violet-700 border-2 border-violet-300 font-bold rounded-2xl text-sm flex items-center justify-center gap-2">
-                <span>Coba Kuis Interaktif 🎯</span>
-              </button>
-            </div>
-          </div>
-          <div class="lg:col-span-5 flex justify-center">
-            <img src="assets/images/lkpd-cover.jpg" alt="LKPD Cover" class="w-44 sm:w-64 rounded-2xl shadow-xl border-4 border-white transform hover:rotate-1 transition-transform" onerror="this.src='docx_media/image3.jpg'"/>
-          </div>
-        </div>
+      <!-- Tombol Aksi di Paling Bawah Beranda -->
+      <section class="text-center pt-4 sm:pt-6 pb-2">
+        <button onclick="switchTab('d')" class="btn-playful inline-flex items-center justify-center gap-3 px-8 sm:px-12 py-4 sm:py-5 bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-600 hover:from-emerald-600 hover:to-sky-700 text-white font-black text-base sm:text-xl rounded-2xl shadow-xl shadow-emerald-500/25 transition-all transform hover:-translate-y-1 active:scale-95 group">
+          <span class="text-2xl animate-bounce">🚀</span>
+          <span>Ayo Mulai Belajar Sekarang!</span>
+          <span class="text-xl transition-transform group-hover:translate-x-1">➔</span>
+        </button>
+        <p class="text-xs text-slate-500 mt-2.5 font-medium">Klik untuk melangkah ke Tahap 1: Dekatkan (D)</p>
       </section>
     </div>
   `;
